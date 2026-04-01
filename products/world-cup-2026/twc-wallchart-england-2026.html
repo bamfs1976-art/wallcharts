@@ -345,14 +345,14 @@ let state = {
 
 function loadState(){
   try{
-    const s = localStorage.getItem('twc_wc2026');
+    const s = localStorage.getItem('twc_wc2026_eng');
     if(s) state = {...state,...JSON.parse(s)};
   }catch(e){}
 }
 
 function saveState(){
   try{
-    localStorage.setItem('twc_wc2026', JSON.stringify(state));
+    localStorage.setItem('twc_wc2026_eng', JSON.stringify(state));
     updateProgress();
   }catch(e){}
 }

@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Six Nations Championship 2026 | The Wall Chart Co</title>
-<meta name="description" content="Interactive Six Nations 2026 Wall Chart - Track all 15 matches, standings, try scorers and more. A premium digital download from The Wall Chart Co.">
+<title>Six Nations Championship 2027 | The Wall Chart Co</title>
+<meta name="description" content="Interactive Six Nations 2027 Wall Chart - Track all 15 matches, standings, try scorers and more. A premium digital download from The Wall Chart Co.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -593,9 +593,9 @@ table.stat-table tbody tr:hover td { background: var(--cream); }
 <!-- ========== TOURNAMENT BANNER ========== -->
 <section class="tournament-banner" aria-label="Tournament information">
   <div class="container">
-    <h1 class="tournament-title">Six Nations Championship <span>2026</span></h1>
+    <h1 class="tournament-title">Six Nations Championship <span>2027</span></h1>
     <p class="tournament-year">Championship Edition</p>
-    <p class="tournament-dates">1st February &ndash; 14th March 2026 &bull; 15 Matches &bull; 5 Rounds</p>
+    <p class="tournament-dates">6th February &ndash; 20th March 2027 &bull; 15 Matches &bull; 5 Rounds</p>
     <div class="tournament-flags" aria-label="Competing nations">
       <img src="https://flagcdn.com/w40/gb-eng.png" alt="England" title="England" width="40" height="30" loading="eager">
       <img src="https://flagcdn.com/w40/fr.png" alt="France" title="France" width="40" height="30" loading="eager">
@@ -775,12 +775,12 @@ table.stat-table tbody tr:hover td { background: var(--cream); }
   <p class="footer-disclaimer">
     This is an unofficial fan product and is not affiliated with, endorsed by, or connected to Six Nations Rugby or any participating national rugby union. All team names and tournament references are used for identification purposes only.
   </p>
-  <p class="footer-copyright">&copy; 2026 The Wall Chart Co. All rights reserved. Digital download &mdash; not for resale.</p>
+  <p class="footer-copyright">&copy; 2027 The Wall Chart Co. All rights reserved. Digital download &mdash; not for resale.</p>
 </footer>
 
 <script>
 /* ================================================================
-   SIX NATIONS 2026 INTERACTIVE WALL CHART
+   SIX NATIONS 2027 INTERACTIVE WALL CHART
    The Wall Chart Co - Production Build
    ================================================================ */
 
@@ -788,7 +788,7 @@ table.stat-table tbody tr:hover td { background: var(--cream); }
 'use strict';
 
 /* ---------- CONSTANTS ---------- */
-const STORAGE_KEY = 'twc-six-nations-2026';
+const STORAGE_KEY = 'twc-six-nations-2027';
 
 const TEAMS = {
   England:  { code: 'gb-eng', short: 'ENG', homeNation: true },
@@ -809,26 +809,26 @@ const VENUES = {
 };
 
 const FIXTURES = [
-  // Round 1 - 1 Feb 2026
-  { id: 'R1M1', round: 1, date: '2026-02-01', home: 'France',   away: 'Italy',    venue: 'Paris',      time: '14:15', label: 'Round 1' },
-  { id: 'R1M2', round: 1, date: '2026-02-01', home: 'Scotland', away: 'Wales',    venue: 'Edinburgh',  time: '16:45', label: 'Round 1' },
-  { id: 'R1M3', round: 1, date: '2026-02-01', home: 'Ireland',  away: 'England',  venue: 'Dublin',     time: '17:00', label: 'Round 1' },
-  // Round 2 - 8 Feb 2026
-  { id: 'R2M1', round: 2, date: '2026-02-08', home: 'Italy',    away: 'Ireland',  venue: 'Rome',       time: '14:15', label: 'Round 2' },
-  { id: 'R2M2', round: 2, date: '2026-02-08', home: 'England',  away: 'Scotland', venue: 'Twickenham', time: '16:45', label: 'Round 2' },
-  { id: 'R2M3', round: 2, date: '2026-02-08', home: 'Wales',    away: 'France',   venue: 'Cardiff',    time: '17:00', label: 'Round 2' },
-  // Round 3 - 22 Feb 2026
-  { id: 'R3M1', round: 3, date: '2026-02-22', home: 'Scotland', away: 'Ireland',  venue: 'Edinburgh',  time: '14:15', label: 'Round 3' },
-  { id: 'R3M2', round: 3, date: '2026-02-22', home: 'England',  away: 'Italy',    venue: 'Twickenham', time: '16:45', label: 'Round 3' },
-  { id: 'R3M3', round: 3, date: '2026-02-22', home: 'France',   away: 'Wales',    venue: 'Paris',      time: '17:00', label: 'Round 3' },
-  // Round 4 - 8 Mar 2026
-  { id: 'R4M1', round: 4, date: '2026-03-08', home: 'Italy',    away: 'Scotland', venue: 'Rome',       time: '14:15', label: 'Round 4' },
-  { id: 'R4M2', round: 4, date: '2026-03-08', home: 'Wales',    away: 'England',  venue: 'Cardiff',    time: '16:45', label: 'Round 4' },
-  { id: 'R4M3', round: 4, date: '2026-03-08', home: 'Ireland',  away: 'France',   venue: 'Dublin',     time: '17:00', label: 'Round 4' },
-  // Round 5 - 14 Mar 2026 (Super Saturday)
-  { id: 'R5M1', round: 5, date: '2026-03-14', home: 'Scotland', away: 'Italy',    venue: 'Edinburgh',  time: '14:15', label: 'Round 5 \u2013 Super Saturday' },
-  { id: 'R5M2', round: 5, date: '2026-03-14', home: 'Wales',    away: 'Ireland',  venue: 'Cardiff',    time: '16:45', label: 'Round 5 \u2013 Super Saturday' },
-  { id: 'R5M3', round: 5, date: '2026-03-14', home: 'England',  away: 'France',   venue: 'Twickenham', time: '17:00', label: 'Round 5 \u2013 Super Saturday' }
+  // Round 1 - 6 Feb 2027
+  { id: 'R1M1', round: 1, date: '2027-02-06', home: 'Italy',    away: 'France',   venue: 'Rome',       time: '14:15', label: 'Round 1' },
+  { id: 'R1M2', round: 1, date: '2027-02-06', home: 'Wales',    away: 'Scotland', venue: 'Cardiff',    time: '16:45', label: 'Round 1' },
+  { id: 'R1M3', round: 1, date: '2027-02-06', home: 'England',  away: 'Ireland',  venue: 'Twickenham', time: '17:00', label: 'Round 1' },
+  // Round 2 - 13 Feb 2027
+  { id: 'R2M1', round: 2, date: '2027-02-13', home: 'Ireland',  away: 'Italy',    venue: 'Dublin',     time: '14:15', label: 'Round 2' },
+  { id: 'R2M2', round: 2, date: '2027-02-13', home: 'Scotland', away: 'England',  venue: 'Edinburgh',  time: '16:45', label: 'Round 2' },
+  { id: 'R2M3', round: 2, date: '2027-02-13', home: 'France',   away: 'Wales',    venue: 'Paris',      time: '17:00', label: 'Round 2' },
+  // Round 3 - 27 Feb 2027
+  { id: 'R3M1', round: 3, date: '2027-02-27', home: 'Ireland',  away: 'Scotland', venue: 'Dublin',     time: '14:15', label: 'Round 3' },
+  { id: 'R3M2', round: 3, date: '2027-02-27', home: 'Italy',    away: 'England',  venue: 'Rome',       time: '16:45', label: 'Round 3' },
+  { id: 'R3M3', round: 3, date: '2027-02-27', home: 'Wales',    away: 'France',   venue: 'Cardiff',    time: '17:00', label: 'Round 3' },
+  // Round 4 - 13 Mar 2027
+  { id: 'R4M1', round: 4, date: '2027-03-13', home: 'Scotland', away: 'Italy',    venue: 'Edinburgh',  time: '14:15', label: 'Round 4' },
+  { id: 'R4M2', round: 4, date: '2027-03-13', home: 'England',  away: 'Wales',    venue: 'Twickenham', time: '16:45', label: 'Round 4' },
+  { id: 'R4M3', round: 4, date: '2027-03-13', home: 'France',   away: 'Ireland',  venue: 'Paris',      time: '17:00', label: 'Round 4' },
+  // Round 5 - 20 Mar 2027 (Super Saturday)
+  { id: 'R5M1', round: 5, date: '2027-03-20', home: 'Italy',    away: 'Scotland', venue: 'Rome',       time: '14:15', label: 'Round 5 \u2013 Super Saturday' },
+  { id: 'R5M2', round: 5, date: '2027-03-20', home: 'Ireland',  away: 'Wales',    venue: 'Dublin',     time: '16:45', label: 'Round 5 \u2013 Super Saturday' },
+  { id: 'R5M3', round: 5, date: '2027-03-20', home: 'France',   away: 'England',  venue: 'Paris',      time: '17:00', label: 'Round 5 \u2013 Super Saturday' }
 ];
 
 const HOME_NATIONS = ['England', 'Ireland', 'Scotland', 'Wales'];
@@ -879,7 +879,7 @@ window.exportData = function() {
   const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
-  a.href = url; a.download = 'twc-six-nations-2026-save.json';
+  a.href = url; a.download = 'twc-six-nations-2027-save.json';
   document.body.appendChild(a); a.click();
   document.body.removeChild(a); URL.revokeObjectURL(url);
 };

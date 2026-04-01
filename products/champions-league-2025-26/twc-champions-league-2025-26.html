@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UEFA Champions League 2025/26 Interactive Wall Chart | The Wall Chart Co</title>
+<title>Champions League 2025/26 Interactive Wall Chart | The Wall Chart Co</title>
 <meta name="description" content="Premium interactive Champions League 2025/26 wall chart tracker. Track the league phase, knockout rounds, and final in Munich.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -792,7 +792,7 @@ body {
 
 <!-- ====== TOURNAMENT BANNER ====== -->
 <section class="tournament-banner" aria-label="Tournament title">
-  <h1 class="tournament-title">UEFA Champions League 2025/26</h1>
+  <h1 class="tournament-title">Champions League 2025/26</h1>
   <p class="tournament-subtitle">Interactive Wall Chart &mdash; Swiss-Model League Phase &amp; Knockout Rounds</p>
 </section>
 
@@ -874,7 +874,7 @@ body {
     <div class="footer-brand-logo" aria-hidden="true">TWC</div>
     <span class="footer-brand-name">THE WALL CHART CO</span>
   </div>
-  <p>&copy; 2025&ndash;2026 The Wall Chart Co. All rights reserved.</p>
+  <p>&copy; 2026 The Wall Chart Co. All rights reserved.</p>
   <p class="footer-disclaimer">
     This is an unofficial product and is not associated with, endorsed by, or affiliated with UEFA or the UEFA Champions League.
     All team names, logos, and trademarks are the property of their respective owners. For personal use only.
@@ -1012,13 +1012,13 @@ function loadState() {
       const saved = JSON.parse(raw);
       state = { ...state, ...saved };
     }
-  } catch(e) { console.warn('Failed to load state', e); }
+  } catch(e) { /* storage unavailable */ }
 }
 
 function saveState() {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-  } catch(e) { console.warn('Failed to save state', e); }
+  } catch(e) { /* storage unavailable */ }
 }
 
 function exportData() {

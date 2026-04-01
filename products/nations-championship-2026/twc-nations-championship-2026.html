@@ -1,0 +1,1708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nations Championship 2026 Interactive Wall Chart | The Wall Chart Co</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0B1E3D;
+  --red: #C8502A;
+  --gold: #C8A94A;
+  --cream: #F7F5EE;
+  --white: #FFFFFF;
+  --bg: var(--cream);
+  --surface: var(--white);
+  --text: var(--navy);
+  --text-secondary: #5a6a7e;
+  --border: #d8d4cc;
+  --promotion: #1a7a3a;
+  --promotion-bg: #e8f5ed;
+  --relegation: #b52020;
+  --relegation-bg: #fde8e8;
+  --highlight-bg: #fdf6e3;
+  --radius: 8px;
+  --shadow: 0 2px 8px rgba(11,30,61,0.08);
+  --shadow-lg: 0 4px 20px rgba(11,30,61,0.12);
+  --transition: 0.2s ease;
+}
+
+[data-theme="northern-navy"] {
+  --bg: #0e2442;
+  --surface: #14325a;
+  --text: #e8edf4;
+  --text-secondary: #8fa4c0;
+  --border: #1e4070;
+  --shadow: 0 2px 8px rgba(0,0,0,0.3);
+  --shadow-lg: 0 4px 20px rgba(0,0,0,0.4);
+  --highlight-bg: #1a3a60;
+  --promotion-bg: #0e3320;
+  --relegation-bg: #3a1212;
+}
+
+[data-theme="southern-green"] {
+  --bg: #f0f7f2;
+  --surface: #ffffff;
+  --text: #1a3a2a;
+  --text-secondary: #4a6a5a;
+  --border: #c0d8c8;
+  --gold: #2a8a4a;
+  --highlight-bg: #e0f0e4;
+}
+
+[data-theme="dark"] {
+  --bg: #121212;
+  --surface: #1e1e1e;
+  --text: #e0e0e0;
+  --text-secondary: #999;
+  --border: #333;
+  --shadow: 0 2px 8px rgba(0,0,0,0.4);
+  --shadow-lg: 0 4px 20px rgba(0,0,0,0.5);
+  --highlight-bg: #2a2a1a;
+  --promotion-bg: #0e2a16;
+  --relegation-bg: #2a0e0e;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5 { font-family: 'EB Garamond', serif; }
+
+/* Header */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--navy);
+  color: var(--white);
+}
+
+.header-stripe {
+  height: 4px;
+  background: linear-gradient(90deg, var(--red) 33%, var(--white) 33% 66%, var(--navy) 66%);
+}
+
+.header-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--white);
+}
+
+.brand-logo {
+  width: 42px;
+  height: 42px;
+  background: var(--gold);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--navy);
+  letter-spacing: 1px;
+  flex-shrink: 0;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-name {
+  font-family: 'EB Garamond', serif;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+.brand-tagline {
+  font-size: 10px;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 500;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.theme-picker {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.theme-picker label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--gold);
+  font-weight: 500;
+}
+
+.theme-picker select {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: var(--white);
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+}
+
+.theme-picker select option { color: #333; background: #fff; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.btn-gold {
+  background: var(--gold);
+  color: var(--navy);
+}
+
+.btn-gold:hover { filter: brightness(1.1); }
+
+.btn-outline {
+  background: transparent;
+  color: var(--white);
+  border: 1px solid rgba(255,255,255,0.3);
+}
+
+.btn-outline:hover { background: rgba(255,255,255,0.1); }
+
+.btn-sm { padding: 6px 12px; font-size: 11px; }
+
+/* Title Bar */
+.title-bar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 24px;
+  text-align: center;
+}
+
+.title-bar h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.title-bar .subtitle {
+  font-family: 'EB Garamond', serif;
+  font-size: 16px;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.title-bar .year-badge {
+  display: inline-block;
+  background: var(--gold);
+  color: var(--navy);
+  padding: 2px 12px;
+  border-radius: 3px;
+  font-weight: 700;
+  font-size: 14px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+/* Tab Navigation */
+.tab-nav {
+  display: flex;
+  background: var(--surface);
+  border-bottom: 2px solid var(--border);
+  overflow-x: auto;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 16px;
+  gap: 0;
+}
+
+.tab-btn {
+  padding: 14px 20px;
+  border: none;
+  background: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  white-space: nowrap;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  transition: all var(--transition);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.tab-btn:hover { color: var(--text); }
+
+.tab-btn.active {
+  color: var(--gold);
+  border-bottom-color: var(--gold);
+}
+
+/* Main Content */
+.main { max-width: 1400px; margin: 0 auto; padding: 24px; }
+
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* Standings Table */
+.standings-section {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.section-header h2 {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.section-header .badge {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 3px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badge-gold { background: rgba(200,169,74,0.15); color: var(--gold); }
+.badge-navy { background: rgba(11,30,61,0.1); color: var(--navy); }
+
+.table-wrap { overflow-x: auto; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+thead th {
+  background: var(--navy);
+  color: var(--white);
+  padding: 10px 12px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  position: sticky;
+  top: 0;
+}
+
+thead th:first-child, thead th:nth-child(2) { text-align: left; }
+
+tbody td {
+  padding: 10px 12px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+tbody td:first-child {
+  text-align: center;
+  font-weight: 700;
+  width: 40px;
+}
+
+tbody td:nth-child(2) { text-align: left; }
+
+tbody tr:hover { background: rgba(200,169,74,0.05); }
+
+.team-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.team-flag {
+  width: 24px;
+  height: 16px;
+  border-radius: 2px;
+  object-fit: cover;
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.team-name { font-weight: 600; }
+
+.hemisphere-badge {
+  font-size: 9px;
+  padding: 1px 5px;
+  border-radius: 2px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-left: 4px;
+}
+
+.nh-badge { background: #e0e8f4; color: #2a4a7a; }
+.sh-badge { background: #ddf0e0; color: #1a5a2a; }
+
+[data-theme="northern-navy"] .nh-badge { background: #1a3a60; color: #8ab4e8; }
+[data-theme="northern-navy"] .sh-badge { background: #0e3320; color: #6ec08a; }
+[data-theme="dark"] .nh-badge { background: #1a2a40; color: #6a9ad0; }
+[data-theme="dark"] .sh-badge { background: #0e2a16; color: #5aaa6a; }
+
+.pos-top { background: var(--highlight-bg); }
+.pos-top td:first-child { color: var(--gold); }
+
+.pos-relegation { background: var(--relegation-bg); }
+.pos-relegation td:first-child { color: var(--relegation); }
+
+.pos-promotion { background: var(--promotion-bg); }
+.pos-promotion td:first-child { color: var(--promotion); }
+
+.pts-cell { font-weight: 700; font-size: 15px; color: var(--gold); }
+
+.legend {
+  display: flex;
+  gap: 20px;
+  padding: 12px 20px;
+  border-top: 1px solid var(--border);
+  font-size: 11px;
+  color: var(--text-secondary);
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend-swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+}
+
+/* Fixture Cards */
+.window-header {
+  text-align: center;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.window-header h2 { font-size: 24px; margin-bottom: 4px; }
+.window-header p { color: var(--text-secondary); font-size: 14px; }
+
+.round-section { margin-bottom: 32px; }
+
+.round-title {
+  font-family: 'EB Garamond', serif;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--gold);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.round-date {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.fixtures-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 16px;
+}
+
+.fixture-card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  transition: box-shadow var(--transition);
+}
+
+.fixture-card:hover { box-shadow: var(--shadow-lg); }
+
+.fixture-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  background: var(--navy);
+  color: var(--white);
+  font-size: 11px;
+}
+
+.fixture-venue { font-weight: 500; }
+.fixture-time { color: var(--gold); font-weight: 600; }
+
+.fixture-body { padding: 16px; }
+
+.fixture-teams {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.fixture-team {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  text-align: center;
+}
+
+.fixture-team-flag {
+  width: 48px;
+  height: 32px;
+  border-radius: 3px;
+  object-fit: cover;
+  border: 1px solid var(--border);
+}
+
+.fixture-team-name {
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.fixture-vs {
+  font-family: 'EB Garamond', serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.score-inputs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.score-input {
+  width: 52px;
+  height: 40px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+  border: 2px solid var(--border);
+  border-radius: 4px;
+  background: var(--surface);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  transition: border-color var(--transition);
+}
+
+.score-input:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+
+.score-dash {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.score-breakdown {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  font-size: 11px;
+}
+
+.breakdown-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  padding: 3px 8px;
+  background: rgba(11,30,61,0.03);
+  border-radius: 3px;
+}
+
+[data-theme="northern-navy"] .breakdown-row,
+[data-theme="dark"] .breakdown-row { background: rgba(255,255,255,0.04); }
+
+.breakdown-row label {
+  font-size: 10px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  font-weight: 500;
+}
+
+.breakdown-input {
+  width: 32px;
+  height: 22px;
+  text-align: center;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  font-size: 12px;
+  font-weight: 600;
+  background: var(--surface);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+}
+
+.breakdown-input:focus { outline: none; border-color: var(--gold); }
+
+/* Overall Standings */
+.editable-input {
+  width: 48px;
+  height: 26px;
+  text-align: center;
+  border: 1px dashed var(--border);
+  border-radius: 3px;
+  font-size: 12px;
+  font-weight: 600;
+  background: transparent;
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+}
+
+.editable-input:focus { outline: none; border-color: var(--gold); background: var(--highlight-bg); }
+
+/* Statistics Tab */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(440px, 1fr));
+  gap: 20px;
+}
+
+.stat-card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.stat-card-header {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.stat-card-header h3 { font-size: 17px; }
+
+.stat-card-body { padding: 16px; }
+
+.stat-add-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.stat-add-row input, .stat-add-row select {
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-size: 12px;
+  font-family: 'Inter', sans-serif;
+  background: var(--surface);
+  color: var(--text);
+  flex: 1;
+  min-width: 80px;
+}
+
+.stat-add-row select { min-width: 120px; }
+
+.stat-table { width: 100%; }
+.stat-table th { font-size: 10px; padding: 6px 8px; }
+.stat-table td { padding: 6px 8px; font-size: 12px; }
+
+.stat-table .remove-btn {
+  background: none;
+  border: none;
+  color: var(--relegation);
+  cursor: pointer;
+  font-size: 14px;
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+
+.stat-table .remove-btn:hover { background: var(--relegation-bg); }
+
+/* Data Management */
+.data-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  font-size: 11px;
+  color: var(--text-secondary);
+  flex-wrap: wrap;
+  gap: 8px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.data-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+/* Footer */
+.footer {
+  background: var(--navy);
+  color: rgba(255,255,255,0.6);
+  text-align: center;
+  padding: 24px;
+  font-size: 12px;
+  margin-top: 40px;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.footer-brand .brand-logo { width: 32px; height: 32px; font-size: 11px; }
+
+.footer-brand .brand-name {
+  font-family: 'EB Garamond', serif;
+  font-size: 14px;
+  letter-spacing: 2px;
+  color: var(--white);
+}
+
+.footer p { margin-bottom: 4px; }
+.footer .disclaimer { font-size: 10px; font-style: italic; color: rgba(255,255,255,0.4); max-width: 600px; margin: 8px auto 0; }
+
+/* Print Styles */
+@media print {
+  .header, .tab-nav, .data-bar, .btn, .theme-picker, .score-input, .breakdown-input, .editable-input, .stat-add-row, .remove-btn, .header-actions { display: none !important; }
+  .tab-content { display: block !important; page-break-inside: avoid; margin-bottom: 24px; }
+  body { background: white; color: #000; font-size: 11px; }
+  .main { padding: 10px; max-width: 100%; }
+  .title-bar { padding: 16px; }
+  .fixture-card { break-inside: avoid; }
+  .standings-section { box-shadow: none; border: 1px solid #ccc; }
+  table { font-size: 10px; }
+  thead th { background: #333 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .footer { background: #333 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .header-main { padding: 10px 16px; }
+  .brand-name { font-size: 12px; letter-spacing: 1px; }
+  .brand-tagline { font-size: 9px; }
+  .title-bar h1 { font-size: 20px; }
+  .main { padding: 16px; }
+  .fixtures-grid { grid-template-columns: 1fr; }
+  .stats-grid { grid-template-columns: 1fr; }
+  .tab-btn { padding: 10px 14px; font-size: 11px; }
+  .fixture-team-flag { width: 36px; height: 24px; }
+}
+
+@media (max-width: 480px) {
+  .brand-text { display: none; }
+  .header-actions { gap: 6px; }
+  .theme-picker label { display: none; }
+  .tab-btn { padding: 8px 10px; font-size: 10px; }
+}
+
+/* Sortable */
+th.sortable { cursor: pointer; user-select: none; }
+th.sortable:hover { background: #14325a; }
+th.sortable::after { content: ' \25B4\25BE'; font-size: 8px; opacity: 0.5; }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+  <div class="header-stripe"></div>
+  <div class="header-main">
+    <a class="brand" href="#">
+      <div class="brand-logo">TWC</div>
+      <div class="brand-text">
+        <span class="brand-name">The Wall Chart Co</span>
+        <span class="brand-tagline">Premium Tournament Downloads</span>
+      </div>
+    </a>
+    <div class="header-actions">
+      <div class="theme-picker">
+        <label>Theme</label>
+        <select id="themePicker" onchange="setTheme(this.value)">
+          <option value="default">Championship Gold</option>
+          <option value="northern-navy">Northern Navy</option>
+          <option value="southern-green">Southern Green</option>
+          <option value="dark">Dark</option>
+        </select>
+      </div>
+      <button class="btn btn-outline btn-sm" onclick="exportData()">Export</button>
+      <button class="btn btn-outline btn-sm" onclick="document.getElementById('importFile').click()">Import</button>
+      <input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)">
+      <button class="btn btn-gold btn-sm" onclick="window.print()">Print / Save PDF</button>
+    </div>
+  </div>
+</header>
+
+<!-- Title Bar -->
+<div class="title-bar">
+  <h1>Nations Championship <span class="year-badge">2026</span></h1>
+  <p class="subtitle">The Historic Inaugural Season &mdash; Interactive Wall Chart</p>
+</div>
+
+<!-- Tab Navigation -->
+<nav class="tab-nav">
+  <button class="tab-btn active" onclick="switchTab('div1')">Division 1</button>
+  <button class="tab-btn" onclick="switchTab('div2')">Division 2</button>
+  <button class="tab-btn" onclick="switchTab('july')">July Window</button>
+  <button class="tab-btn" onclick="switchTab('november')">November Window</button>
+  <button class="tab-btn" onclick="switchTab('overall')">Overall Standings</button>
+  <button class="tab-btn" onclick="switchTab('stats')">Statistics</button>
+</nav>
+
+<!-- Main Content -->
+<main class="main">
+
+  <!-- Division 1 Tab -->
+  <section id="tab-div1" class="tab-content active">
+    <div class="standings-section">
+      <div class="section-header">
+        <h2>Division 1 Standings</h2>
+        <span class="badge badge-gold">Top Tier &bull; 12 Nations</span>
+      </div>
+      <div class="table-wrap">
+        <table id="div1Table">
+          <thead>
+            <tr>
+              <th>Pos</th>
+              <th>Team</th>
+              <th class="sortable" onclick="sortTable('div1Table',2)">P</th>
+              <th class="sortable" onclick="sortTable('div1Table',3)">W</th>
+              <th>D</th>
+              <th>L</th>
+              <th>PF</th>
+              <th>PA</th>
+              <th>PD</th>
+              <th>BP</th>
+              <th class="sortable" onclick="sortTable('div1Table',10)">Pts</th>
+            </tr>
+          </thead>
+          <tbody id="div1Body"></tbody>
+        </table>
+      </div>
+      <div class="legend">
+        <div class="legend-item"><div class="legend-swatch" style="background:var(--gold);opacity:0.3"></div> Top 2 &mdash; Championship contenders</div>
+        <div class="legend-item"><div class="legend-swatch" style="background:var(--relegation);opacity:0.3"></div> Bottom 2 &mdash; Relegation zone</div>
+        <div class="legend-item" style="margin-left:auto; font-style:italic">BP = Try bonus (4+ tries) + Losing bonus (within 7 pts)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Division 2 Tab -->
+  <section id="tab-div2" class="tab-content">
+    <div class="standings-section">
+      <div class="section-header">
+        <h2>Division 2 Standings</h2>
+        <span class="badge badge-navy">Development Tier &bull; 12 Nations</span>
+      </div>
+      <div class="table-wrap">
+        <table id="div2Table">
+          <thead>
+            <tr>
+              <th>Pos</th>
+              <th>Team</th>
+              <th>P</th>
+              <th>W</th>
+              <th>D</th>
+              <th>L</th>
+              <th>PF</th>
+              <th>PA</th>
+              <th>PD</th>
+              <th>BP</th>
+              <th>Pts</th>
+            </tr>
+          </thead>
+          <tbody id="div2Body"></tbody>
+        </table>
+      </div>
+      <div class="legend">
+        <div class="legend-item"><div class="legend-swatch" style="background:var(--promotion);opacity:0.3"></div> Top 2 &mdash; Promotion zone</div>
+        <div class="legend-item" style="margin-left:auto; font-style:italic">Competing for a place in Division 1</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- July Window Tab -->
+  <section id="tab-july" class="tab-content">
+    <div class="window-header">
+      <h2>July Test Window 2026</h2>
+      <p>Northern Hemisphere teams touring the Southern Hemisphere</p>
+    </div>
+    <div id="julyFixtures"></div>
+  </section>
+
+  <!-- November Window Tab -->
+  <section id="tab-november" class="tab-content">
+    <div class="window-header">
+      <h2>November Test Window 2026</h2>
+      <p>Southern Hemisphere teams touring the Northern Hemisphere</p>
+    </div>
+    <div id="novemberFixtures"></div>
+  </section>
+
+  <!-- Overall Standings Tab -->
+  <section id="tab-overall" class="tab-content">
+    <div class="standings-section">
+      <div class="section-header">
+        <h2>Overall Nations Championship Standings</h2>
+        <span class="badge badge-gold">Combined Six Nations / Rugby Championship + Cross-Hemisphere</span>
+      </div>
+      <div class="table-wrap">
+        <table id="overallTable">
+          <thead>
+            <tr>
+              <th>Pos</th>
+              <th>Team</th>
+              <th>Hem.</th>
+              <th>Cross P</th>
+              <th>Cross W</th>
+              <th>Cross D</th>
+              <th>Cross L</th>
+              <th>Cross Pts</th>
+              <th>6N/RC Pts</th>
+              <th class="sortable" onclick="sortOverall()">Total Pts</th>
+            </tr>
+          </thead>
+          <tbody id="overallBody"></tbody>
+        </table>
+      </div>
+      <div class="legend">
+        <div class="legend-item" style="font-style:italic">6N/RC Pts column is manually editable &mdash; enter points from the Six Nations or Rugby Championship</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Statistics Tab -->
+  <section id="tab-stats" class="tab-content">
+    <div class="stats-grid">
+      <!-- Try Scorers -->
+      <div class="stat-card">
+        <div class="stat-card-header">
+          <h3>Try Scorers</h3>
+        </div>
+        <div class="stat-card-body">
+          <div class="stat-add-row">
+            <input type="text" id="tryPlayer" placeholder="Player name">
+            <select id="tryTeam"></select>
+            <input type="number" id="tryCount" placeholder="Tries" min="1" value="1" style="max-width:60px">
+            <button class="btn btn-gold btn-sm" onclick="addTryScorer()">Add</button>
+          </div>
+          <div class="table-wrap">
+            <table class="stat-table">
+              <thead><tr><th>Player</th><th>Team</th><th>Tries</th><th></th></tr></thead>
+              <tbody id="tryScorerBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!-- Points Scorers -->
+      <div class="stat-card">
+        <div class="stat-card-header">
+          <h3>Points Scorers</h3>
+        </div>
+        <div class="stat-card-body">
+          <div class="stat-add-row">
+            <input type="text" id="ptsPlayer" placeholder="Player name">
+            <select id="ptsTeam"></select>
+            <input type="number" id="ptsCount" placeholder="Points" min="1" value="3" style="max-width:60px">
+            <button class="btn btn-gold btn-sm" onclick="addPointsScorer()">Add</button>
+          </div>
+          <div class="table-wrap">
+            <table class="stat-table">
+              <thead><tr><th>Player</th><th>Team</th><th>Points</th><th></th></tr></thead>
+              <tbody id="pointsScorerBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!-- Cards -->
+      <div class="stat-card">
+        <div class="stat-card-header">
+          <h3>Disciplinary Record</h3>
+        </div>
+        <div class="stat-card-body">
+          <div class="stat-add-row">
+            <input type="text" id="cardPlayer" placeholder="Player name">
+            <select id="cardTeam"></select>
+            <select id="cardType" style="max-width:90px">
+              <option value="yellow">Yellow</option>
+              <option value="red">Red</option>
+            </select>
+            <button class="btn btn-gold btn-sm" onclick="addCard()">Add</button>
+          </div>
+          <div class="table-wrap">
+            <table class="stat-table">
+              <thead><tr><th>Player</th><th>Team</th><th>Card</th><th></th></tr></thead>
+              <tbody id="cardBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!-- Cross-Hemisphere Records -->
+      <div class="stat-card">
+        <div class="stat-card-header">
+          <h3>Best Cross-Hemisphere Record</h3>
+        </div>
+        <div class="stat-card-body">
+          <div class="table-wrap">
+            <table class="stat-table">
+              <thead><tr><th>Pos</th><th>Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>Win %</th></tr></thead>
+              <tbody id="crossRecordBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- Data Bar -->
+<div class="data-bar">
+  <span id="lastSaved">Auto-save: Not yet saved</span>
+  <div class="data-actions">
+    <button class="btn btn-sm" style="background:var(--border);color:var(--text)" onclick="resetAll()">Reset All Data</button>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-brand">
+    <div class="brand-logo" style="width:32px;height:32px;font-size:10px">TWC</div>
+    <span class="brand-name">The Wall Chart Co</span>
+  </div>
+  <p>&copy; 2026 The Wall Chart Co. All rights reserved.</p>
+  <p>Available exclusively on our Etsy store.</p>
+  <p class="disclaimer">This is an unofficial fan-made wall chart. Not affiliated with, endorsed by, or connected to World Rugby or any participating union. All team names and competition references are used for identification purposes only. World Rugby and the Nations Championship are trademarks of World Rugby Limited. For personal use only.</p>
+</footer>
+
+<script>
+// ========================================
+// DATA MODEL
+// ========================================
+
+const STORAGE_KEY = 'twc-nations-championship-2026';
+
+const DIV1_TEAMS = [
+  { name: 'England',      code: 'gb-eng', hemisphere: 'NH' },
+  { name: 'France',       code: 'fr',     hemisphere: 'NH' },
+  { name: 'Ireland',      code: 'ie',     hemisphere: 'NH' },
+  { name: 'Italy',        code: 'it',     hemisphere: 'NH' },
+  { name: 'Scotland',     code: 'gb-sct', hemisphere: 'NH' },
+  { name: 'Wales',        code: 'gb-wls', hemisphere: 'NH' },
+  { name: 'New Zealand',  code: 'nz',     hemisphere: 'SH' },
+  { name: 'Australia',    code: 'au',     hemisphere: 'SH' },
+  { name: 'South Africa', code: 'za',     hemisphere: 'SH' },
+  { name: 'Argentina',    code: 'ar',     hemisphere: 'SH' },
+  { name: 'Fiji',         code: 'fj',     hemisphere: 'SH' },
+  { name: 'Japan',        code: 'jp',     hemisphere: 'SH' }
+];
+
+const DIV2_TEAMS = [
+  { name: 'Georgia',        code: 'ge', hemisphere: 'NH' },
+  { name: 'Samoa',          code: 'ws', hemisphere: 'SH' },
+  { name: 'Tonga',          code: 'to', hemisphere: 'SH' },
+  { name: 'Romania',        code: 'ro', hemisphere: 'NH' },
+  { name: 'Portugal',       code: 'pt', hemisphere: 'NH' },
+  { name: 'Spain',          code: 'es', hemisphere: 'NH' },
+  { name: 'Uruguay',        code: 'uy', hemisphere: 'SH' },
+  { name: 'USA',            code: 'us', hemisphere: 'NH' },
+  { name: 'Canada',         code: 'ca', hemisphere: 'NH' },
+  { name: 'Namibia',        code: 'na', hemisphere: 'SH' },
+  { name: 'Chile',          code: 'cl', hemisphere: 'SH' },
+  { name: 'Hong Kong China',code: 'hk', hemisphere: 'SH' }
+];
+
+const ALL_DIV1_TEAMS = DIV1_TEAMS;
+
+const JULY_FIXTURES = [
+  {
+    round: 'Week 1', date: '4 July 2026',
+    matches: [
+      { home: 'New Zealand',  away: 'England',  venue: 'Eden Park, Auckland',         time: '19:35 NZST / 06:35 GMT' },
+      { home: 'Australia',    away: 'Wales',     venue: 'Stadium Australia, Sydney',   time: '17:00 AEST / 07:00 GMT' },
+      { home: 'South Africa', away: 'Ireland',   venue: 'DHL Stadium, Cape Town',      time: '17:00 SAST / 15:00 GMT' },
+      { home: 'Argentina',    away: 'Scotland',  venue: 'Estadio Monumental, Buenos Aires', time: '16:10 ART / 19:10 GMT' },
+      { home: 'Japan',        away: 'France',    venue: 'National Stadium, Tokyo',     time: '14:15 JST / 05:15 GMT' },
+      { home: 'Fiji',         away: 'Italy',     venue: 'HFC Bank Stadium, Suva',      time: '15:00 FJT / 03:00 GMT' }
+    ]
+  },
+  {
+    round: 'Week 2', date: '11 July 2026',
+    matches: [
+      { home: 'New Zealand',  away: 'Scotland',  venue: 'Sky Stadium, Wellington',     time: '19:35 NZST / 06:35 GMT' },
+      { home: 'Australia',    away: 'Ireland',    venue: 'AAMI Park, Melbourne',        time: '17:00 AEST / 07:00 GMT' },
+      { home: 'South Africa', away: 'Wales',      venue: 'Loftus Versfeld, Pretoria',   time: '17:00 SAST / 15:00 GMT' },
+      { home: 'Argentina',    away: 'England',    venue: 'Estadio Unico, La Plata',     time: '16:10 ART / 19:10 GMT' },
+      { home: 'Japan',        away: 'Italy',      venue: 'Sapporo Dome, Sapporo',       time: '14:15 JST / 05:15 GMT' },
+      { home: 'Fiji',         away: 'France',     venue: 'HFC Bank Stadium, Suva',      time: '15:00 FJT / 03:00 GMT' }
+    ]
+  }
+];
+
+const NOVEMBER_FIXTURES = [
+  {
+    round: 'Week 1', date: '7 November 2026',
+    matches: [
+      { home: 'England',  away: 'New Zealand',  venue: 'Twickenham, London',       time: '15:15 GMT' },
+      { home: 'France',   away: 'South Africa',  venue: 'Stade de France, Paris',   time: '21:00 CET / 20:00 GMT' },
+      { home: 'Ireland',  away: 'Australia',      venue: 'Aviva Stadium, Dublin',    time: '15:15 GMT' },
+      { home: 'Scotland', away: 'Japan',          venue: 'Murrayfield, Edinburgh',   time: '17:30 GMT' },
+      { home: 'Wales',    away: 'Argentina',      venue: 'Principality Stadium, Cardiff', time: '17:30 GMT' },
+      { home: 'Italy',    away: 'Fiji',           venue: 'Stadio Olimpico, Rome',    time: '14:00 CET / 13:00 GMT' }
+    ]
+  },
+  {
+    round: 'Week 2', date: '14 November 2026',
+    matches: [
+      { home: 'England',  away: 'Australia',      venue: 'Twickenham, London',       time: '15:15 GMT' },
+      { home: 'France',   away: 'New Zealand',    venue: 'Stade de France, Paris',   time: '21:00 CET / 20:00 GMT' },
+      { home: 'Ireland',  away: 'South Africa',   venue: 'Aviva Stadium, Dublin',    time: '17:30 GMT' },
+      { home: 'Scotland', away: 'Argentina',      venue: 'Murrayfield, Edinburgh',   time: '15:15 GMT' },
+      { home: 'Wales',    away: 'Japan',          venue: 'Principality Stadium, Cardiff', time: '17:30 GMT' },
+      { home: 'Italy',    away: 'Fiji',           venue: 'Stadio Olimpico, Rome',    time: '14:00 CET / 13:00 GMT' }
+    ]
+  },
+  {
+    round: 'Week 3', date: '21 November 2026',
+    matches: [
+      { home: 'England',  away: 'South Africa',   venue: 'Twickenham, London',       time: '17:30 GMT' },
+      { home: 'France',   away: 'Argentina',      venue: 'Stade de France, Paris',   time: '21:00 CET / 20:00 GMT' },
+      { home: 'Ireland',  away: 'New Zealand',    venue: 'Aviva Stadium, Dublin',    time: '15:15 GMT' },
+      { home: 'Scotland', away: 'Fiji',           venue: 'Murrayfield, Edinburgh',   time: '15:15 GMT' },
+      { home: 'Wales',    away: 'Australia',      venue: 'Principality Stadium, Cardiff', time: '17:30 GMT' },
+      { home: 'Italy',    away: 'Japan',          venue: 'Stadio Olimpico, Rome',    time: '14:00 CET / 13:00 GMT' }
+    ]
+  }
+];
+
+// State
+let state = {
+  theme: 'default',
+  scores: {},       // key: 'july-0-0' or 'november-1-2' => { homeScore, awayScore, homeTries, homeConv, homePen, homeDG, awayTries, awayConv, awayPen, awayDG }
+  div2Standings: {},// key: teamName => { p,w,d,l,pf,pa,bp }
+  sixNationsRC: {}, // key: teamName => points (number)
+  tryScorers: [],   // { player, team, tries }
+  pointsScorers: [],
+  cards: [],        // { player, team, cardType }
+};
+
+// ========================================
+// HELPERS
+// ========================================
+
+function getTeamByName(name) {
+  return [...DIV1_TEAMS, ...DIV2_TEAMS].find(t => t.name === name);
+}
+
+function flagUrl(code) {
+  return `https://flagcdn.com/w40/${code}.png`;
+}
+
+function teamCell(team) {
+  const hemClass = team.hemisphere === 'NH' ? 'nh-badge' : 'sh-badge';
+  return `<div class="team-cell">
+    <img class="team-flag" src="${flagUrl(team.code)}" alt="${team.name}" loading="lazy" onerror="this.style.display='none'">
+    <span class="team-name">${team.name}</span>
+    <span class="hemisphere-badge ${hemClass}">${team.hemisphere}</span>
+  </div>`;
+}
+
+function scoreKey(window, roundIdx, matchIdx) {
+  return `${window}-${roundIdx}-${matchIdx}`;
+}
+
+function getScore(key) {
+  return state.scores[key] || { homeScore:'', awayScore:'', homeTries:'', homeConv:'', homePen:'', homeDG:'', awayTries:'', awayConv:'', awayPen:'', awayDG:'' };
+}
+
+// ========================================
+// STANDINGS CALCULATION
+// ========================================
+
+function calculateDiv1Standings() {
+  const teams = {};
+  DIV1_TEAMS.forEach(t => {
+    teams[t.name] = { team: t, p:0, w:0, d:0, l:0, pf:0, pa:0, bp:0, pts:0 };
+  });
+
+  function processFixtures(fixtureRounds, windowName) {
+    fixtureRounds.forEach((round, ri) => {
+      round.matches.forEach((match, mi) => {
+        const key = scoreKey(windowName, ri, mi);
+        const s = getScore(key);
+        const hs = parseInt(s.homeScore);
+        const as = parseInt(s.awayScore);
+        if (isNaN(hs) || isNaN(as)) return;
+
+        const home = teams[match.home];
+        const away = teams[match.away];
+        if (!home || !away) return;
+
+        home.p++; away.p++;
+        home.pf += hs; home.pa += as;
+        away.pf += as; away.pa += hs;
+
+        const homeTries = parseInt(s.homeTries) || 0;
+        const awayTries = parseInt(s.awayTries) || 0;
+
+        if (hs > as) {
+          home.w++; away.l++;
+          home.pts += 4;
+          if (as >= hs - 7) away.bp++;  // losing bonus
+          if (as >= hs - 7) away.pts += 1;
+        } else if (as > hs) {
+          away.w++; home.l++;
+          away.pts += 4;
+          if (hs >= as - 7) home.bp++;
+          if (hs >= as - 7) home.pts += 1;
+        } else {
+          home.d++; away.d++;
+          home.pts += 2; away.pts += 2;
+        }
+
+        // Try bonus
+        if (homeTries >= 4) { home.bp++; home.pts += 1; }
+        if (awayTries >= 4) { away.bp++; away.pts += 1; }
+      });
+    });
+  }
+
+  processFixtures(JULY_FIXTURES, 'july');
+  processFixtures(NOVEMBER_FIXTURES, 'november');
+
+  return Object.values(teams).sort((a, b) => {
+    if (b.pts !== a.pts) return b.pts - a.pts;
+    const pdA = a.pf - a.pa, pdB = b.pf - b.pa;
+    if (pdB !== pdA) return pdB - pdA;
+    return b.pf - a.pf;
+  });
+}
+
+function renderDiv1() {
+  const standings = calculateDiv1Standings();
+  const tbody = document.getElementById('div1Body');
+  tbody.innerHTML = standings.map((row, i) => {
+    let cls = '';
+    if (i < 2) cls = 'pos-top';
+    else if (i >= 10) cls = 'pos-relegation';
+    const pd = row.pf - row.pa;
+    return `<tr class="${cls}">
+      <td>${i+1}</td>
+      <td>${teamCell(row.team)}</td>
+      <td>${row.p}</td><td>${row.w}</td><td>${row.d}</td><td>${row.l}</td>
+      <td>${row.pf}</td><td>${row.pa}</td><td>${pd > 0 ? '+' : ''}${pd}</td>
+      <td>${row.bp}</td>
+      <td class="pts-cell">${row.pts}</td>
+    </tr>`;
+  }).join('');
+}
+
+function renderDiv2() {
+  const standings = DIV2_TEAMS.map(t => {
+    const s = state.div2Standings[t.name] || { p:0,w:0,d:0,l:0,pf:0,pa:0,bp:0 };
+    const pts = (s.w * 4) + (s.d * 2) + (s.bp || 0);
+    return { team: t, ...s, pts, pd: s.pf - s.pa };
+  }).sort((a, b) => {
+    if (b.pts !== a.pts) return b.pts - a.pts;
+    if (b.pd !== a.pd) return b.pd - a.pd;
+    return b.pf - a.pf;
+  });
+
+  const tbody = document.getElementById('div2Body');
+  tbody.innerHTML = standings.map((row, i) => {
+    let cls = i < 2 ? 'pos-promotion' : '';
+    return `<tr class="${cls}">
+      <td>${i+1}</td>
+      <td>${teamCell(row.team)}</td>
+      <td>${row.p}</td><td>${row.w}</td><td>${row.d}</td><td>${row.l}</td>
+      <td>${row.pf}</td><td>${row.pa}</td><td>${row.pd > 0 ? '+' : ''}${row.pd}</td>
+      <td>${row.bp}</td>
+      <td class="pts-cell">${row.pts}</td>
+    </tr>`;
+  }).join('');
+}
+
+// ========================================
+// FIXTURES RENDERING
+// ========================================
+
+function renderFixtures(rounds, windowName, containerId) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = rounds.map((round, ri) => {
+    return `<div class="round-section">
+      <h3 class="round-title">${round.round} <span class="round-date">${round.date}</span></h3>
+      <div class="fixtures-grid">
+        ${round.matches.map((match, mi) => {
+          const key = scoreKey(windowName, ri, mi);
+          const s = getScore(key);
+          const homeTeam = getTeamByName(match.home);
+          const awayTeam = getTeamByName(match.away);
+          return `<div class="fixture-card">
+            <div class="fixture-card-header">
+              <span class="fixture-venue">${match.venue}</span>
+              <span class="fixture-time">${match.time}</span>
+            </div>
+            <div class="fixture-body">
+              <div class="fixture-teams">
+                <div class="fixture-team">
+                  <img class="fixture-team-flag" src="${flagUrl(homeTeam.code)}" alt="${match.home}" loading="lazy" onerror="this.style.display='none'">
+                  <span class="fixture-team-name">${match.home}</span>
+                </div>
+                <span class="fixture-vs">v</span>
+                <div class="fixture-team">
+                  <img class="fixture-team-flag" src="${flagUrl(awayTeam.code)}" alt="${match.away}" loading="lazy" onerror="this.style.display='none'">
+                  <span class="fixture-team-name">${match.away}</span>
+                </div>
+              </div>
+              <div class="score-inputs">
+                <input class="score-input" type="number" min="0" value="${s.homeScore}" data-key="${key}" data-field="homeScore" onchange="updateScore(this)" placeholder="-">
+                <span class="score-dash">&ndash;</span>
+                <input class="score-input" type="number" min="0" value="${s.awayScore}" data-key="${key}" data-field="awayScore" onchange="updateScore(this)" placeholder="-">
+              </div>
+              <div class="score-breakdown">
+                <div class="breakdown-row"><label>Tries</label><input class="breakdown-input" type="number" min="0" value="${s.homeTries}" data-key="${key}" data-field="homeTries" onchange="updateScore(this)"></div>
+                <div class="breakdown-row"><label>Tries</label><input class="breakdown-input" type="number" min="0" value="${s.awayTries}" data-key="${key}" data-field="awayTries" onchange="updateScore(this)"></div>
+                <div class="breakdown-row"><label>Conv</label><input class="breakdown-input" type="number" min="0" value="${s.homeConv}" data-key="${key}" data-field="homeConv" onchange="updateScore(this)"></div>
+                <div class="breakdown-row"><label>Conv</label><input class="breakdown-input" type="number" min="0" value="${s.awayConv}" data-key="${key}" data-field="awayConv" onchange="updateScore(this)"></div>
+                <div class="breakdown-row"><label>Pens</label><input class="breakdown-input" type="number" min="0" value="${s.homePen}" data-key="${key}" data-field="homePen" onchange="updateScore(this)"></div>
+                <div class="breakdown-row"><label>Pens</label><input class="breakdown-input" type="number" min="0" value="${s.awayPen}" data-key="${key}" data-field="awayPen" onchange="updateScore(this)"></div>
+                <div class="breakdown-row"><label>Drop</label><input class="breakdown-input" type="number" min="0" value="${s.homeDG}" data-key="${key}" data-field="homeDG" onchange="updateScore(this)"></div>
+                <div class="breakdown-row"><label>Drop</label><input class="breakdown-input" type="number" min="0" value="${s.awayDG}" data-key="${key}" data-field="awayDG" onchange="updateScore(this)"></div>
+              </div>
+            </div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function updateScore(el) {
+  const key = el.dataset.key;
+  const field = el.dataset.field;
+  if (!state.scores[key]) {
+    state.scores[key] = { homeScore:'', awayScore:'', homeTries:'', homeConv:'', homePen:'', homeDG:'', awayTries:'', awayConv:'', awayPen:'', awayDG:'' };
+  }
+  state.scores[key][field] = el.value;
+  saveState();
+  renderDiv1();
+  renderOverall();
+  renderCrossRecords();
+}
+
+// ========================================
+// OVERALL STANDINGS
+// ========================================
+
+function renderOverall() {
+  const crossStandings = {};
+  DIV1_TEAMS.forEach(t => {
+    crossStandings[t.name] = { team: t, p:0, w:0, d:0, l:0, pts:0 };
+  });
+
+  function processCross(fixtureRounds, windowName) {
+    fixtureRounds.forEach((round, ri) => {
+      round.matches.forEach((match, mi) => {
+        const key = scoreKey(windowName, ri, mi);
+        const s = getScore(key);
+        const hs = parseInt(s.homeScore);
+        const as = parseInt(s.awayScore);
+        if (isNaN(hs) || isNaN(as)) return;
+        const home = crossStandings[match.home];
+        const away = crossStandings[match.away];
+        if (!home || !away) return;
+        home.p++; away.p++;
+        const homeTries = parseInt(s.homeTries) || 0;
+        const awayTries = parseInt(s.awayTries) || 0;
+        if (hs > as) {
+          home.w++; away.l++;
+          home.pts += 4;
+          if (as >= hs - 7) away.pts += 1;
+        } else if (as > hs) {
+          away.w++; home.l++;
+          away.pts += 4;
+          if (hs >= as - 7) home.pts += 1;
+        } else {
+          home.d++; away.d++;
+          home.pts += 2; away.pts += 2;
+        }
+        if (homeTries >= 4) home.pts += 1;
+        if (awayTries >= 4) away.pts += 1;
+      });
+    });
+  }
+
+  processCross(JULY_FIXTURES, 'july');
+  processCross(NOVEMBER_FIXTURES, 'november');
+
+  const rows = DIV1_TEAMS.map(t => {
+    const c = crossStandings[t.name];
+    const sixNRC = state.sixNationsRC[t.name] || 0;
+    const total = c.pts + parseInt(sixNRC) || c.pts;
+    return { team: t, ...c, sixNRC, total };
+  }).sort((a, b) => b.total - a.total);
+
+  const tbody = document.getElementById('overallBody');
+  tbody.innerHTML = rows.map((row, i) => {
+    let cls = '';
+    if (i < 2) cls = 'pos-top';
+    else if (i >= 10) cls = 'pos-relegation';
+    const hemClass = row.team.hemisphere === 'NH' ? 'nh-badge' : 'sh-badge';
+    return `<tr class="${cls}">
+      <td>${i+1}</td>
+      <td>${teamCell(row.team)}</td>
+      <td><span class="hemisphere-badge ${hemClass}">${row.team.hemisphere}</span></td>
+      <td>${row.p}</td><td>${row.w}</td><td>${row.d}</td><td>${row.l}</td>
+      <td class="pts-cell">${row.pts}</td>
+      <td><input class="editable-input" type="number" min="0" value="${row.sixNRC}" data-team="${row.team.name}" onchange="updateSixNRC(this)"></td>
+      <td class="pts-cell">${row.total}</td>
+    </tr>`;
+  }).join('');
+}
+
+function updateSixNRC(el) {
+  state.sixNationsRC[el.dataset.team] = parseInt(el.value) || 0;
+  saveState();
+  renderOverall();
+}
+
+function sortOverall() {
+  renderOverall();
+}
+
+// ========================================
+// STATISTICS
+// ========================================
+
+function populateTeamSelects() {
+  const allTeams = [...DIV1_TEAMS, ...DIV2_TEAMS];
+  const html = allTeams.map(t => `<option value="${t.name}">${t.name}</option>`).join('');
+  ['tryTeam','ptsTeam','cardTeam'].forEach(id => {
+    document.getElementById(id).innerHTML = html;
+  });
+}
+
+function addTryScorer() {
+  const player = document.getElementById('tryPlayer').value.trim();
+  const team = document.getElementById('tryTeam').value;
+  const tries = parseInt(document.getElementById('tryCount').value) || 1;
+  if (!player) return;
+  state.tryScorers.push({ player, team, tries });
+  state.tryScorers.sort((a, b) => b.tries - a.tries);
+  document.getElementById('tryPlayer').value = '';
+  saveState();
+  renderTryScorers();
+}
+
+function renderTryScorers() {
+  const tbody = document.getElementById('tryScorerBody');
+  tbody.innerHTML = state.tryScorers.map((s, i) => {
+    const t = getTeamByName(s.team);
+    return `<tr>
+      <td style="text-align:left;font-weight:600">${s.player}</td>
+      <td><div class="team-cell"><img class="team-flag" src="${flagUrl(t?.code||'xx')}" alt="" loading="lazy" onerror="this.style.display='none'"> ${s.team}</div></td>
+      <td style="font-weight:700;color:var(--gold)">${s.tries}</td>
+      <td><button class="remove-btn" onclick="state.tryScorers.splice(${i},1);saveState();renderTryScorers();">&times;</button></td>
+    </tr>`;
+  }).join('');
+}
+
+function addPointsScorer() {
+  const player = document.getElementById('ptsPlayer').value.trim();
+  const team = document.getElementById('ptsTeam').value;
+  const points = parseInt(document.getElementById('ptsCount').value) || 0;
+  if (!player) return;
+  state.pointsScorers.push({ player, team, points });
+  state.pointsScorers.sort((a, b) => b.points - a.points);
+  document.getElementById('ptsPlayer').value = '';
+  saveState();
+  renderPointsScorers();
+}
+
+function renderPointsScorers() {
+  const tbody = document.getElementById('pointsScorerBody');
+  tbody.innerHTML = state.pointsScorers.map((s, i) => {
+    const t = getTeamByName(s.team);
+    return `<tr>
+      <td style="text-align:left;font-weight:600">${s.player}</td>
+      <td><div class="team-cell"><img class="team-flag" src="${flagUrl(t?.code||'xx')}" alt="" loading="lazy" onerror="this.style.display='none'"> ${s.team}</div></td>
+      <td style="font-weight:700;color:var(--gold)">${s.points}</td>
+      <td><button class="remove-btn" onclick="state.pointsScorers.splice(${i},1);saveState();renderPointsScorers();">&times;</button></td>
+    </tr>`;
+  }).join('');
+}
+
+function addCard() {
+  const player = document.getElementById('cardPlayer').value.trim();
+  const team = document.getElementById('cardTeam').value;
+  const cardType = document.getElementById('cardType').value;
+  if (!player) return;
+  state.cards.push({ player, team, cardType });
+  document.getElementById('cardPlayer').value = '';
+  saveState();
+  renderCards();
+}
+
+function renderCards() {
+  const tbody = document.getElementById('cardBody');
+  tbody.innerHTML = state.cards.map((s, i) => {
+    const t = getTeamByName(s.team);
+    const cardColor = s.cardType === 'red' ? '#c0392b' : '#f1c40f';
+    const cardLabel = s.cardType === 'red' ? 'Red' : 'Yellow';
+    return `<tr>
+      <td style="text-align:left;font-weight:600">${s.player}</td>
+      <td><div class="team-cell"><img class="team-flag" src="${flagUrl(t?.code||'xx')}" alt="" loading="lazy" onerror="this.style.display='none'"> ${s.team}</div></td>
+      <td><span style="display:inline-block;width:14px;height:18px;background:${cardColor};border-radius:2px;vertical-align:middle;margin-right:4px;border:1px solid rgba(0,0,0,0.15)"></span> ${cardLabel}</td>
+      <td><button class="remove-btn" onclick="state.cards.splice(${i},1);saveState();renderCards();">&times;</button></td>
+    </tr>`;
+  }).join('');
+}
+
+function renderCrossRecords() {
+  const crossStandings = {};
+  DIV1_TEAMS.forEach(t => {
+    crossStandings[t.name] = { team: t, p:0, w:0, d:0, l:0 };
+  });
+  function processCross(fixtureRounds, windowName) {
+    fixtureRounds.forEach((round, ri) => {
+      round.matches.forEach((match, mi) => {
+        const key = scoreKey(windowName, ri, mi);
+        const s = getScore(key);
+        const hs = parseInt(s.homeScore);
+        const as = parseInt(s.awayScore);
+        if (isNaN(hs) || isNaN(as)) return;
+        const home = crossStandings[match.home];
+        const away = crossStandings[match.away];
+        if (!home || !away) return;
+        home.p++; away.p++;
+        if (hs > as) { home.w++; away.l++; }
+        else if (as > hs) { away.w++; home.l++; }
+        else { home.d++; away.d++; }
+      });
+    });
+  }
+  processCross(JULY_FIXTURES, 'july');
+  processCross(NOVEMBER_FIXTURES, 'november');
+
+  const rows = Object.values(crossStandings).filter(r => r.p > 0).sort((a, b) => {
+    const winPctA = a.p > 0 ? (a.w / a.p) : 0;
+    const winPctB = b.p > 0 ? (b.w / b.p) : 0;
+    return winPctB - winPctA;
+  });
+
+  const tbody = document.getElementById('crossRecordBody');
+  tbody.innerHTML = rows.map((row, i) => {
+    const winPct = row.p > 0 ? ((row.w / row.p) * 100).toFixed(0) : '-';
+    return `<tr>
+      <td>${i+1}</td>
+      <td>${teamCell(row.team)}</td>
+      <td>${row.p}</td><td>${row.w}</td><td>${row.d}</td><td>${row.l}</td>
+      <td style="font-weight:700;color:var(--gold)">${winPct}%</td>
+    </tr>`;
+  }).join('');
+}
+
+// ========================================
+// TAB NAVIGATION
+// ========================================
+
+function switchTab(tabId) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById('tab-' + tabId).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ========================================
+// THEME
+// ========================================
+
+function setTheme(theme) {
+  if (theme === 'default') {
+    document.documentElement.removeAttribute('data-theme');
+  } else {
+    document.documentElement.setAttribute('data-theme', theme);
+  }
+  state.theme = theme;
+  saveState();
+}
+
+// ========================================
+// PERSISTENCE
+// ========================================
+
+function saveState() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    document.getElementById('lastSaved').textContent = 'Auto-save: ' + new Date().toLocaleTimeString();
+  } catch(e) { console.warn('Save failed:', e); }
+}
+
+function loadState() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      state = { ...state, ...parsed };
+    }
+  } catch(e) { console.warn('Load failed:', e); }
+}
+
+function exportData() {
+  const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'twc-nations-championship-2026-save.json';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function importData(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const imported = JSON.parse(e.target.result);
+      state = { ...state, ...imported };
+      saveState();
+      renderAll();
+      alert('Data imported successfully.');
+    } catch(err) {
+      alert('Invalid file. Please select a valid JSON save file.');
+    }
+  };
+  reader.readAsText(file);
+  event.target.value = '';
+}
+
+function resetAll() {
+  if (!confirm('Are you sure you want to reset all data? This cannot be undone.')) return;
+  state = { theme: state.theme, scores: {}, div2Standings: {}, sixNationsRC: {}, tryScorers: [], pointsScorers: [], cards: [] };
+  saveState();
+  renderAll();
+}
+
+// ========================================
+// SORT
+// ========================================
+
+function sortTable(tableId, colIdx) {
+  // Simple re-render with sort (standings already sorted by pts)
+  if (tableId === 'div1Table') renderDiv1();
+}
+
+// ========================================
+// RENDER ALL
+// ========================================
+
+function renderAll() {
+  // Apply theme
+  if (state.theme && state.theme !== 'default') {
+    document.documentElement.setAttribute('data-theme', state.theme);
+  }
+  document.getElementById('themePicker').value = state.theme || 'default';
+
+  renderDiv1();
+  renderDiv2();
+  renderFixtures(JULY_FIXTURES, 'july', 'julyFixtures');
+  renderFixtures(NOVEMBER_FIXTURES, 'november', 'novemberFixtures');
+  renderOverall();
+  populateTeamSelects();
+  renderTryScorers();
+  renderPointsScorers();
+  renderCards();
+  renderCrossRecords();
+}
+
+// ========================================
+// INIT
+// ========================================
+
+loadState();
+renderAll();
+</script>
+
+</body>
+</html>

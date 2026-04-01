@@ -854,6 +854,7 @@ body {
       </div>
       <button class="btn btn-outline btn-sm" onclick="openModal('export')">&#8599; Export</button>
       <button class="btn btn-outline btn-sm" onclick="openModal('import')">&#8601; Import</button>
+      <button class="btn btn-outline btn-sm" onclick="resetAll()">Reset All</button>
       <button class="btn btn-gold btn-sm" onclick="window.print()">&#9113; Print / PDF</button>
     </div>
   </div>
@@ -979,9 +980,10 @@ body {
       <span class="footer-brand-name">The Wall Chart Co</span>
     </div>
     <div class="footer-text">
-      &copy; 2025 The Wall Chart Co. All rights reserved.<br>
+      &copy; 2026 The Wall Chart Co. All rights reserved.<br>
       This is an unofficial product and is not endorsed by or affiliated with the Premier League.<br>
       All team names and competition names are trademarks of their respective owners.<br>
+      For personal use only.<br>
       <a href="#">thewallchartco.etsy.com</a>
     </div>
   </div>
@@ -1000,7 +1002,7 @@ const TEAMS = [
   { id: 'BOU', name: 'Bournemouth',       color: '#DA291C' },
   { id: 'BRE', name: 'Brentford',         color: '#E30613' },
   { id: 'BHA', name: 'Brighton',          color: '#0057B8' },
-  { id: 'BUR', name: 'Burnley',           color: '#6C1D45' },
+  { id: 'WOL', name: 'Wolves',            color: '#FDB913' },
   { id: 'CHE', name: 'Chelsea',           color: '#034694' },
   { id: 'CRY', name: 'Crystal Palace',    color: '#1B458F' },
   { id: 'EVE', name: 'Everton',           color: '#003399' },
@@ -1513,6 +1515,15 @@ function handleModalAction() {
       showToast('Invalid JSON data');
     }
   }
+}
+
+// === RESET ===
+function resetAll() {
+  if (!confirm('Are you sure you want to reset all scores? This cannot be undone.')) return;
+  const theme = state.theme || 'default';
+  state = { scores: {}, scorers: [], theme: theme };
+  saveState();
+  renderAll();
 }
 
 // === TOAST ===

@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>World Cup 2026 Sweepstake Kit — The Wall Chart Co</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ─── VARIABLES ───────────────────────────────────────────────────── */
+:root {
+  --navy:   #0B1E3D;
+  --red:    #C8502A;
+  --gold:   #C8A94A;
+  --cream:  #F7F5EE;
+  --white:  #FFFFFF;
+  --ink:    #1A2744;
+  --mid:    #4A5568;
+  --light:  #E8E4D9;
+  --border: #D1CBB8;
+  --shadow: rgba(11,30,61,0.10);
+  --radius: 10px;
+  --font-head: 'EB Garamond', Georgia, serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* ─── RESET ───────────────────────────────────────────────────────── */
+*{margin:0;padding:0;box-sizing:border-box;}
+html{font-size:15px;}
+body{background:var(--cream);color:var(--ink);font-family:var(--font-body);min-height:100vh;line-height:1.5;}
+button{font-family:var(--font-body);cursor:pointer;}
+input{font-family:var(--font-body);}
+a{color:var(--navy);}
+img{display:inline-block;}
+
+/* ─── SCREENS ─────────────────────────────────────────────────────── */
+.screen{display:none;}
+.screen.active{display:block;}
+
+/* ─── HEADER ──────────────────────────────────────────────────────── */
+.site-header{background:var(--navy);color:var(--white);}
+.header-stripe{height:4px;background:linear-gradient(90deg,var(--red) 33%,var(--white) 33%,var(--white) 66%,var(--gold) 66%);}
+.header-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;gap:12px;flex-wrap:wrap;}
+.logo-wrap{display:flex;align-items:center;gap:10px;}
+.logo-badge{width:42px;height:42px;border-radius:6px;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:14px;font-weight:700;color:var(--navy);flex-shrink:0;letter-spacing:0.02em;}
+.logo-text{display:flex;flex-direction:column;}
+.logo-name{font-family:var(--font-head);font-size:18px;font-weight:700;color:var(--white);letter-spacing:0.06em;text-transform:uppercase;line-height:1.1;}
+.logo-sub{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(200,169,74,0.85);margin-top:3px;}
+.header-title{font-family:var(--font-head);font-size:17px;font-weight:600;color:var(--gold);letter-spacing:0.03em;text-align:right;}
+.header-title small{display:block;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.55);font-family:var(--font-body);font-weight:400;margin-top:2px;}
+
+/* ─── STEP INDICATOR ──────────────────────────────────────────────── */
+.steps{display:flex;align-items:center;justify-content:center;gap:0;padding:20px 24px;background:var(--white);border-bottom:1px solid var(--border);}
+.step-item{display:flex;align-items:center;gap:8px;flex:1;max-width:180px;}
+.step-num{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;border:2px solid var(--border);background:var(--white);color:var(--mid);transition:all 0.3s;}
+.step-label{font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--mid);transition:color 0.3s;}
+.step-item.active .step-num{background:var(--navy);border-color:var(--navy);color:var(--gold);}
+.step-item.active .step-label{color:var(--navy);}
+.step-item.done .step-num{background:var(--gold);border-color:var(--gold);color:var(--navy);}
+.step-item.done .step-label{color:var(--ink);}
+.step-connector{flex:1;height:2px;background:var(--border);max-width:60px;margin:0 4px;}
+.step-connector.done{background:var(--gold);}
+
+/* ─── LAYOUT ──────────────────────────────────────────────────────── */
+.page-wrap{max-width:760px;margin:0 auto;padding:28px 20px 60px;}
+.page-title{font-family:var(--font-head);font-size:32px;font-weight:700;color:var(--navy);margin-bottom:6px;line-height:1.15;}
+.page-sub{font-size:14px;color:var(--mid);margin-bottom:28px;}
+
+/* ─── CARDS ───────────────────────────────────────────────────────── */
+.card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;overflow:hidden;}
+.card-head{padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;}
+.card-head h2{font-family:var(--font-head);font-size:18px;font-weight:700;color:var(--navy);}
+.card-icon{font-size:18px;}
+.card-body{padding:20px;}
+
+/* ─── FORM ────────────────────────────────────────────────────────── */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:520px){.form-grid{grid-template-columns:1fr;}}
+.form-group{display:flex;flex-direction:column;gap:6px;}
+.form-group.full{grid-column:1/-1;}
+label{font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--mid);}
+input[type="text"],input[type="number"],input[type="date"]{
+  padding:10px 14px;border:1.5px solid var(--border);border-radius:7px;font-size:14px;
+  color:var(--ink);background:var(--white);transition:border-color 0.2s;width:100%;
+}
+input[type="text"]:focus,input[type="number"]:focus,input[type="date"]:focus{
+  outline:none;border-color:var(--navy);box-shadow:0 0 0 3px rgba(11,30,61,0.07);
+}
+.input-row{display:flex;gap:8px;}
+.input-row input{flex:1;}
+
+/* ─── BUTTONS ─────────────────────────────────────────────────────── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:10px 20px;border-radius:7px;font-size:13px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;border:none;cursor:pointer;transition:all 0.15s;}
+.btn:focus{outline:3px solid var(--gold);outline-offset:2px;}
+.btn:disabled{opacity:0.4;cursor:not-allowed;}
+.btn-primary{background:var(--navy);color:var(--gold);}
+.btn-primary:hover:not(:disabled){background:#0f2a50;}
+.btn-gold{background:var(--gold);color:var(--navy);}
+.btn-gold:hover:not(:disabled){background:#d4b55a;}
+.btn-red{background:var(--red);color:var(--white);}
+.btn-red:hover:not(:disabled){background:#b34422;}
+.btn-outline{background:transparent;color:var(--navy);border:1.5px solid var(--border);}
+.btn-outline:hover:not(:disabled){border-color:var(--navy);background:rgba(11,30,61,0.04);}
+.btn-ghost{background:transparent;color:var(--mid);border:none;padding:6px 10px;font-size:12px;letter-spacing:0;text-transform:none;}
+.btn-ghost:hover{color:var(--red);}
+.btn-sm{padding:7px 14px;font-size:11px;}
+.btn-lg{padding:14px 32px;font-size:15px;}
+
+/* ─── PARTICIPANT LIST ────────────────────────────────────────────── */
+.participant-list{list-style:none;margin-top:14px;display:flex;flex-direction:column;gap:6px;}
+.participant-item{display:flex;align-items:center;gap:10px;padding:9px 14px;background:var(--cream);border:1px solid var(--border);border-radius:7px;}
+.participant-num{width:22px;height:22px;border-radius:50%;background:var(--navy);color:var(--gold);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.participant-name{flex:1;font-size:14px;font-weight:500;color:var(--ink);}
+.participant-remove{background:none;border:none;color:var(--mid);font-size:16px;cursor:pointer;padding:2px 4px;border-radius:4px;line-height:1;}
+.participant-remove:hover{color:var(--red);}
+.participant-empty{text-align:center;padding:24px;color:var(--mid);font-size:13px;font-style:italic;}
+
+/* ─── DISTRIBUTION INFO ───────────────────────────────────────────── */
+.dist-info{display:flex;align-items:center;gap:10px;padding:12px 16px;background:rgba(200,169,74,0.1);border:1px solid rgba(200,169,74,0.4);border-radius:8px;margin-top:12px;}
+.dist-info-icon{font-size:18px;}
+.dist-info-text{font-size:13px;color:var(--ink);line-height:1.4;}
+.dist-info-text strong{color:var(--navy);}
+
+/* ─── OPTIONS ─────────────────────────────────────────────────────── */
+.option-row{display:flex;align-items:flex-start;gap:12px;padding:14px;border:1.5px solid var(--border);border-radius:8px;cursor:pointer;transition:border-color 0.15s;}
+.option-row:hover{border-color:var(--navy);}
+.option-row input[type="checkbox"]{width:18px;height:18px;flex-shrink:0;margin-top:1px;accent-color:var(--navy);}
+.option-row label{cursor:pointer;font-size:13px;color:var(--ink);text-transform:none;letter-spacing:0;font-weight:400;}
+.option-row label strong{font-weight:700;display:block;margin-bottom:2px;color:var(--ink);}
+.option-row label span{color:var(--mid);font-size:12px;}
+
+/* ─── CTA AREA ────────────────────────────────────────────────────── */
+.cta-area{text-align:center;padding:28px 0 0;}
+.cta-note{font-size:12px;color:var(--mid);margin-top:10px;}
+
+/* ─── DRAW SCREEN ─────────────────────────────────────────────────── */
+#screen-draw{background:var(--navy);color:var(--white);min-height:100vh;}
+.draw-header{background:rgba(0,0,0,0.2);border-bottom:1px solid rgba(255,255,255,0.1);}
+.draw-wrap{max-width:900px;margin:0 auto;padding:32px 20px 60px;}
+.draw-title{font-family:var(--font-head);font-size:36px;font-weight:700;color:var(--gold);text-align:center;margin-bottom:6px;}
+.draw-sub{text-align:center;font-size:14px;color:rgba(255,255,255,0.55);margin-bottom:32px;letter-spacing:0.05em;}
+.draw-progress{text-align:center;margin-bottom:24px;}
+.draw-progress-bar{height:4px;background:rgba(255,255,255,0.1);border-radius:2px;margin:10px auto;max-width:400px;overflow:hidden;}
+.draw-progress-fill{height:100%;background:var(--gold);border-radius:2px;width:0%;transition:width 0.4s;}
+.draw-progress-text{font-size:12px;color:rgba(255,255,255,0.5);letter-spacing:0.1em;text-transform:uppercase;}
+
+/* ─── RESULT CARDS GRID ───────────────────────────────────────────── */
+.results-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;}
+
+/* ─── CARD FLIP ───────────────────────────────────────────────────── */
+.flip-card{height:160px;perspective:800px;}
+.flip-card-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform 0.55s cubic-bezier(0.4,0.2,0.2,1);}
+.flip-card.revealed .flip-card-inner{transform:rotateY(180deg);}
+.flip-front,.flip-back{position:absolute;inset:0;border-radius:10px;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.flip-front{background:rgba(255,255,255,0.06);border:1.5px solid rgba(200,169,74,0.3);}
+.flip-front-icon{font-size:36px;color:rgba(200,169,74,0.5);margin-bottom:8px;}
+.flip-front-num{font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.3);}
+.flip-back{background:var(--white);border:1.5px solid var(--border);transform:rotateY(180deg);padding:14px;text-align:center;gap:6px;}
+.flip-back-name{font-size:13px;font-weight:700;color:var(--navy);line-height:1.2;text-align:center;width:100%;}
+.flip-back-divider{width:30px;height:1.5px;background:var(--gold);}
+.flip-back-teams{display:flex;flex-direction:column;align-items:center;gap:4px;width:100%;}
+.flip-back-team{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:var(--ink);}
+.flip-back-team .fi{width:16px;height:11px;object-fit:cover;border-radius:1px;}
+.flip-back-badge{font-size:9px;background:rgba(200,169,74,0.15);color:var(--navy);padding:1px 6px;border-radius:10px;font-weight:700;letter-spacing:0.08em;}
+
+.draw-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:28px;}
+
+/* ─── COMPLETE BANNER ─────────────────────────────────────────────── */
+.complete-banner{background:linear-gradient(135deg,rgba(200,169,74,0.15),rgba(200,169,74,0.05));border:1.5px solid rgba(200,169,74,0.4);border-radius:12px;padding:24px;text-align:center;margin-bottom:28px;}
+.complete-icon{font-size:40px;margin-bottom:10px;}
+.complete-title{font-family:var(--font-head);font-size:26px;font-weight:700;color:var(--gold);}
+.complete-sub{font-size:13px;color:rgba(255,255,255,0.55);margin-top:4px;}
+.pot-display{display:inline-block;background:rgba(200,169,74,0.15);border:1px solid rgba(200,169,74,0.3);border-radius:8px;padding:10px 24px;margin-top:12px;font-size:22px;font-weight:700;color:var(--gold);font-family:var(--font-head);}
+.pot-label{font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.45);font-family:var(--font-body);font-weight:600;display:block;margin-top:2px;}
+
+/* ─── RESULTS TABLE SCREEN ────────────────────────────────────────── */
+.results-table{width:100%;border-collapse:collapse;font-size:13px;}
+.results-table th{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--mid);padding:8px 14px 6px;text-align:left;border-bottom:2px solid var(--border);}
+.results-table td{padding:10px 14px;border-bottom:1px solid rgba(209,203,184,0.4);}
+.results-table tr:last-child td{border-bottom:none;}
+.results-table tr:hover td{background:rgba(200,169,74,0.05);}
+.td-num{width:36px;text-align:center;}
+.td-pos-badge{width:26px;height:26px;border-radius:50%;background:var(--navy);color:var(--gold);font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;}
+.td-name{font-weight:600;color:var(--navy);}
+.td-teams{display:flex;flex-direction:column;gap:4px;}
+.td-team-row{display:flex;align-items:center;gap:7px;}
+.td-team-row .fi{width:18px;height:12px;object-fit:cover;border-radius:1px;}
+.td-team-name{font-size:13px;color:var(--ink);}
+.td-group-badge{font-size:9px;background:var(--light);color:var(--mid);padding:1px 6px;border-radius:10px;font-weight:700;letter-spacing:0.05em;}
+.host-star{color:var(--gold);font-size:10px;margin-left:2px;}
+
+/* ─── PRINT CONTROLS ──────────────────────────────────────────────── */
+.print-controls{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:24px;padding:16px;background:rgba(200,169,74,0.07);border:1px solid rgba(200,169,74,0.25);border-radius:8px;align-items:center;}
+.print-controls span{font-size:13px;font-weight:600;color:var(--navy);flex:1;}
+.import-export{display:flex;gap:8px;flex-wrap:wrap;padding-top:12px;border-top:1px solid var(--border);margin-top:4px;}
+
+/* ─── TAGS ────────────────────────────────────────────────────────── */
+.tag{display:inline-block;padding:2px 9px;border-radius:20px;font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;}
+.tag-navy{background:var(--navy);color:var(--gold);}
+.tag-gold{background:var(--gold);color:var(--navy);}
+.tag-red{background:var(--red);color:var(--white);}
+.tag-light{background:var(--light);color:var(--mid);}
+
+/* ─── TOAST ───────────────────────────────────────────────────────── */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--navy);color:var(--white);padding:11px 22px;border-radius:8px;font-size:13px;font-weight:600;letter-spacing:0.04em;opacity:0;transition:all 0.3s;z-index:9999;pointer-events:none;white-space:nowrap;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* ─── FOOTER ──────────────────────────────────────────────────────── */
+.site-footer{background:var(--navy);color:rgba(255,255,255,0.4);text-align:center;padding:18px 20px;font-size:11px;letter-spacing:0.05em;line-height:1.7;}
+.site-footer a{color:rgba(200,169,74,0.7);text-decoration:none;}
+
+/* ─── PRINT STYLES ────────────────────────────────────────────────── */
+@media print {
+  body{background:var(--white)!important;color:var(--ink)!important;}
+  .site-header,.site-footer,.steps,.cta-area,.print-controls,.draw-actions,.import-export,
+  .btn,#screen-setup,#screen-draw,.no-print{display:none!important;}
+  #screen-results{display:block!important;}
+  .card{border:1px solid var(--border);box-shadow:none;}
+
+  /* Print: Full Sheet mode */
+  body.print-sheet .slip-container{display:none!important;}
+  body.print-sheet .sheet-container{display:block!important;}
+
+  /* Print: Slips mode */
+  body.print-slips .sheet-container{display:none!important;}
+  body.print-slips .slip-container{display:block!important;}
+  body.print-slips .card{display:none!important;}
+  body.print-slips .page-title,body.print-slips .page-sub{display:none!important;}
+
+  @page{size:A4 portrait;margin:10mm;}
+}
+
+/* ─── SLIP LAYOUT ─────────────────────────────────────────────────── */
+.slip-container{display:none;}
+.slips-page{display:grid;grid-template-columns:1fr 1fr;gap:0;page-break-after:always;}
+.slips-page:last-child{page-break-after:auto;}
+.slip{border:1.5px dashed var(--border);padding:14px 16px;min-height:130mm;display:flex;flex-direction:column;justify-content:space-between;}
+.slip-header{display:flex;align-items:center;gap:8px;border-bottom:2px solid var(--navy);padding-bottom:8px;margin-bottom:10px;}
+.slip-logo{font-family:var(--font-head);font-size:11px;font-weight:700;color:var(--white);background:var(--navy);padding:3px 7px;border-radius:3px;letter-spacing:0.05em;text-transform:uppercase;}
+.slip-event{font-size:10px;color:var(--mid);font-weight:500;flex:1;text-align:right;line-height:1.3;}
+.slip-participant{font-family:var(--font-head);font-size:20px;font-weight:700;color:var(--navy);margin-bottom:4px;line-height:1.1;}
+.slip-tag{font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--mid);font-weight:600;margin-bottom:10px;}
+.slip-teams{display:flex;flex-direction:column;gap:6px;flex:1;}
+.slip-team-row{display:flex;align-items:center;gap:8px;padding:5px 8px;background:var(--cream);border-radius:4px;}
+.slip-team-row .fi{width:18px;height:12px;object-fit:cover;border-radius:1px;}
+.slip-team-name{font-size:12px;font-weight:600;color:var(--navy);}
+.slip-team-group{font-size:9px;color:var(--mid);font-weight:700;letter-spacing:0.06em;margin-left:auto;}
+.slip-footer{margin-top:10px;padding-top:8px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
+.slip-footer-brand{font-size:8px;color:var(--mid);letter-spacing:0.08em;text-transform:uppercase;}
+.slip-footer-date{font-size:8px;color:var(--mid);}
+.slip-host-note{font-size:8px;color:var(--gold);font-weight:600;}
+
+/* ─── SHEET CONTAINER ─────────────────────────────────────────────── */
+.sheet-container{display:none;}
+@media print {
+  .sheet-container{display:block;}
+  .slip-container{display:none;}
+}
+.sheet-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:18px;padding-bottom:14px;border-bottom:3px solid var(--navy);}
+.sheet-logo{font-family:var(--font-head);font-size:22px;font-weight:700;color:var(--navy);}
+.sheet-logo small{display:block;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--mid);font-family:var(--font-body);font-weight:400;margin-top:2px;}
+.sheet-event{text-align:right;}
+.sheet-event-name{font-family:var(--font-head);font-size:16px;font-weight:700;color:var(--navy);}
+.sheet-event-date{font-size:10px;color:var(--mid);margin-top:2px;}
+.sheet-pot{font-size:12px;font-weight:700;color:var(--red);margin-top:4px;}
+.sheet-table{width:100%;border-collapse:collapse;font-size:11px;}
+.sheet-table th{background:var(--navy);color:var(--gold);padding:7px 10px;text-align:left;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;font-weight:700;}
+.sheet-table td{padding:7px 10px;border-bottom:0.5px solid var(--border);vertical-align:top;}
+.sheet-table tr:nth-child(even) td{background:rgba(247,245,238,0.6);}
+.sheet-td-pos{width:28px;text-align:center;font-size:10px;font-weight:700;color:var(--navy);}
+.sheet-td-name{font-weight:700;color:var(--navy);font-size:12px;}
+.sheet-td-teams{display:flex;flex-direction:column;gap:3px;}
+.sheet-team-item{display:flex;align-items:center;gap:5px;}
+.sheet-team-item .fi{width:14px;height:10px;object-fit:cover;border-radius:1px;}
+.sheet-team-item span{font-size:10px;color:var(--ink);}
+.sheet-group{font-size:8px;color:var(--mid);font-weight:700;letter-spacing:0.06em;margin-left:2px;}
+.sheet-footer{margin-top:14px;padding-top:10px;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:8px;color:var(--mid);letter-spacing:0.06em;}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════
+     SITE HEADER
+═══════════════════════════════════════════════════════ -->
+<header class="site-header no-print">
+  <div class="header-stripe"></div>
+  <div class="header-inner">
+    <div class="logo-wrap">
+      <div class="logo-badge">TWC</div>
+      <div class="logo-text">
+        <span class="logo-name">The Wall Chart Co</span>
+        <span class="logo-sub">Premium Tournament Downloads</span>
+      </div>
+    </div>
+    <div class="header-title">
+      World Cup 2026 Sweepstake Kit
+      <small>Digital Edition · All 48 Teams</small>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════════════════
+     STEP INDICATORS
+═══════════════════════════════════════════════════════ -->
+<div class="steps no-print" id="step-indicators">
+  <div class="step-item active" id="step1">
+    <div class="step-num">1</div>
+    <div class="step-label">Setup</div>
+  </div>
+  <div class="step-connector" id="conn1"></div>
+  <div class="step-item" id="step2">
+    <div class="step-num">2</div>
+    <div class="step-label">Draw</div>
+  </div>
+  <div class="step-connector" id="conn2"></div>
+  <div class="step-item" id="step3">
+    <div class="step-num">3</div>
+    <div class="step-label">Results</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     SCREEN 1: SETUP
+═══════════════════════════════════════════════════════ -->
+<div id="screen-setup" class="screen active">
+  <div class="page-wrap">
+    <div class="page-title">Set Up Your Sweepstake</div>
+    <p class="page-sub">Enter your event details and participants, then run the draw. All 48 teams will be randomly assigned.</p>
+
+    <!-- Event Details -->
+    <div class="card">
+      <div class="card-head">
+        <span class="card-icon">🏆</span>
+        <h2>Event Details</h2>
+      </div>
+      <div class="card-body">
+        <div class="form-grid">
+          <div class="form-group full">
+            <label for="event-name">Event Name</label>
+            <input type="text" id="event-name" placeholder="e.g. The Office World Cup Sweepstake 2026" maxlength="80">
+          </div>
+          <div class="form-group">
+            <label for="organiser-name">Organiser Name</label>
+            <input type="text" id="organiser-name" placeholder="e.g. Alex Smith" maxlength="50">
+          </div>
+          <div class="form-group">
+            <label for="event-date">Date of Draw</label>
+            <input type="date" id="event-date">
+          </div>
+          <div class="form-group">
+            <label for="entry-fee">Entry Fee (optional)</label>
+            <input type="number" id="entry-fee" placeholder="e.g. 5.00" min="0" max="9999" step="0.01">
+          </div>
+          <div class="form-group">
+            <label for="currency">Currency Symbol</label>
+            <input type="text" id="currency" placeholder="£" maxlength="3" value="£">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Participants -->
+    <div class="card">
+      <div class="card-head">
+        <span class="card-icon">👥</span>
+        <h2>Participants</h2>
+        <span style="margin-left:auto;" id="participant-count-badge" class="tag tag-navy">0 / 48</span>
+      </div>
+      <div class="card-body">
+        <div class="input-row">
+          <input type="text" id="new-participant" placeholder="Enter participant name…" maxlength="50" autocomplete="off">
+          <button class="btn btn-primary" onclick="addParticipant()" id="add-btn">Add</button>
+        </div>
+        <ul class="participant-list" id="participant-list">
+          <li class="participant-empty" id="participant-empty">No participants added yet. Enter a name above to get started.</li>
+        </ul>
+        <div id="dist-info-wrap"></div>
+      </div>
+    </div>
+
+    <!-- Options -->
+    <div class="card">
+      <div class="card-head">
+        <span class="card-icon">⚙️</span>
+        <h2>Draw Options</h2>
+      </div>
+      <div class="card-body" style="display:flex;flex-direction:column;gap:10px;">
+        <div class="option-row" onclick="toggleOption('opt-all-teams')">
+          <input type="checkbox" id="opt-all-teams" checked onchange="updateDistInfo()">
+          <label for="opt-all-teams">
+            <strong>Include all 48 teams</strong>
+            <span>Distribute all 48 World Cup teams. Participants with fewer than 48 entries will receive multiple teams each.</span>
+          </label>
+        </div>
+        <div class="option-row" onclick="toggleOption('opt-animate')">
+          <input type="checkbox" id="opt-animate" checked>
+          <label for="opt-animate">
+            <strong>Animated reveal</strong>
+            <span>Teams are revealed one by one with a card-flip animation during the draw. Uncheck for instant reveal.</span>
+          </label>
+        </div>
+        <div class="option-row" onclick="toggleOption('opt-shuffle-names')">
+          <input type="checkbox" id="opt-shuffle-names">
+          <label for="opt-shuffle-names">
+            <strong>Randomise participant order in results</strong>
+            <span>Shuffle the display order of participants in the results table. Useful if everyone's watching.</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-area">
+      <button class="btn btn-gold btn-lg" id="run-draw-btn" onclick="goToDraw()" disabled>
+        🎲 Run the Draw!
+      </button>
+      <p class="cta-note" id="cta-note">Add at least 2 participants to run the draw.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     SCREEN 2: DRAW
+═══════════════════════════════════════════════════════ -->
+<div id="screen-draw" class="screen">
+  <div class="draw-header no-print">
+    <div class="header-inner">
+      <div class="logo-wrap">
+        <div class="logo-badge">TWC</div>
+        <div class="logo-text">
+          <span class="logo-name">The Wall Chart Co</span>
+          <span class="logo-sub">World Cup 2026 Sweepstake</span>
+        </div>
+      </div>
+    </div>
+    <div class="header-stripe"></div>
+  </div>
+  <div class="draw-wrap">
+    <div class="draw-title" id="draw-event-title">World Cup 2026 Sweepstake</div>
+    <p class="draw-sub" id="draw-sub-text">The draw is underway…</p>
+    <div class="draw-progress">
+      <div class="draw-progress-text" id="draw-progress-text">Revealing teams…</div>
+      <div class="draw-progress-bar"><div class="draw-progress-fill" id="draw-progress-fill"></div></div>
+    </div>
+    <div class="results-grid" id="draw-cards-grid"></div>
+    <div class="draw-actions" id="draw-actions" style="display:none;">
+      <button class="btn btn-outline" style="color:#fff;border-color:rgba(255,255,255,0.3);" onclick="revealAll()">👁 Reveal All</button>
+      <button class="btn btn-outline" style="color:#fff;border-color:rgba(255,255,255,0.3);" onclick="goToSetup()">← Back to Setup</button>
+      <button class="btn btn-gold btn-lg" onclick="goToResults()">View Full Results →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     SCREEN 3: RESULTS
+═══════════════════════════════════════════════════════ -->
+<div id="screen-results" class="screen">
+  <div class="page-wrap">
+    <div class="page-title" id="results-title">Draw Results</div>
+    <p class="page-sub" id="results-sub">World Cup 2026 Sweepstake · The Wall Chart Co</p>
+
+    <!-- Print Controls (no-print) -->
+    <div class="print-controls no-print">
+      <span>🖨️ Print your draw:</span>
+      <button class="btn btn-primary btn-sm" onclick="printSheet()">📄 Full Results Sheet</button>
+      <button class="btn btn-outline btn-sm" onclick="printSlips()">✂️ Individual Slips</button>
+    </div>
+    <div class="import-export no-print" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;">
+      <button class="btn btn-outline btn-sm" onclick="exportDraw()">⬇ Export Draw</button>
+      <button class="btn btn-outline btn-sm" onclick="document.getElementById('import-file').click()">⬆ Import Draw</button>
+      <input type="file" id="import-file" accept=".json" style="display:none;" onchange="importDraw(event)">
+      <button class="btn btn-outline btn-sm" onclick="goToDraw()">🎲 Re-run Draw</button>
+      <button class="btn btn-ghost btn-sm" onclick="resetAll()">↺ Start Over</button>
+    </div>
+
+    <!-- Complete banner (on-screen) -->
+    <div class="complete-banner no-print" id="complete-banner" style="display:none;">
+      <div class="complete-icon">🏆</div>
+      <div class="complete-title" id="complete-event-name">Draw Complete!</div>
+      <div class="complete-sub" id="complete-info"></div>
+      <div id="pot-wrap" style="display:none;">
+        <div class="pot-display" id="pot-amount"></div>
+        <div class="pot-label">Total Prize Pot</div>
+      </div>
+    </div>
+
+    <!-- Results Table (on-screen) -->
+    <div class="card no-print">
+      <div class="card-head">
+        <span class="card-icon">📋</span>
+        <h2>Full Draw Results</h2>
+        <span style="margin-left:auto;" id="results-count-badge" class="tag tag-navy"></span>
+      </div>
+      <div class="card-body" style="padding:0;overflow-x:auto;">
+        <table class="results-table" id="results-table">
+          <thead>
+            <tr>
+              <th class="td-num">#</th>
+              <th>Participant</th>
+              <th>Team(s) Drawn</th>
+            </tr>
+          </thead>
+          <tbody id="results-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Print: Full Sheet -->
+    <div class="sheet-container" id="sheet-container">
+      <div class="sheet-header">
+        <div class="sheet-logo">
+          The Wall Chart Co
+          <small>World Cup 2026 Sweepstake Kit</small>
+        </div>
+        <div class="sheet-event">
+          <div class="sheet-event-name" id="sheet-event-name"></div>
+          <div class="sheet-event-date" id="sheet-event-date"></div>
+          <div class="sheet-pot" id="sheet-pot" style="display:none;"></div>
+        </div>
+      </div>
+      <table class="sheet-table" id="sheet-table">
+        <thead>
+          <tr>
+            <th class="sheet-td-pos">#</th>
+            <th style="width:180px;">Participant</th>
+            <th>Team(s) Drawn</th>
+            <th style="width:80px;text-align:right;">Sign</th>
+          </tr>
+        </thead>
+        <tbody id="sheet-tbody"></tbody>
+      </table>
+      <div class="sheet-footer">
+        <span>Generated by The Wall Chart Co · theWallChartCo · World Cup 2026 Sweepstake Kit</span>
+        <span id="sheet-footer-date"></span>
+      </div>
+    </div>
+
+    <!-- Print: Slips -->
+    <div class="slip-container" id="slip-container"></div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- ═══════════════════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════════════════ -->
+<footer class="site-footer no-print">
+  <p>© 2026 The Wall Chart Co · Personal &amp; office use only · Not affiliated with or endorsed by FIFA, any national team or governing body</p>
+  <p style="margin-top:4px;"><a href="#">TheWallChartCo on Etsy</a> · Made in Swansea, Wales</p>
+</footer>
+
+<script>
+/* ═══════════════════════════════════════════════════════════
+   DATA
+═══════════════════════════════════════════════════════════ */
+const STORAGE_KEY = 'twc-sweepstake-2026';
+
+const TEAMS = [
+  {name:"Mexico",       flag:"mx",     group:"A", host:true},
+  {name:"South Africa", flag:"za",     group:"A"},
+  {name:"South Korea",  flag:"kr",     group:"A"},
+  {name:"Czechia",      flag:"cz",     group:"A"},
+  {name:"Canada",       flag:"ca",     group:"B", host:true},
+  {name:"Bosnia & Herzegovina", flag:"ba", group:"B"},
+  {name:"Qatar",        flag:"qa",     group:"B"},
+  {name:"Switzerland",  flag:"ch",     group:"B"},
+  {name:"Haiti",        flag:"ht",     group:"C"},
+  {name:"Scotland",     flag:"gb-sct", group:"C"},
+  {name:"Brazil",       flag:"br",     group:"C"},
+  {name:"Morocco",      flag:"ma",     group:"C"},
+  {name:"USA",          flag:"us",     group:"D", host:true},
+  {name:"Paraguay",     flag:"py",     group:"D"},
+  {name:"Australia",    flag:"au",     group:"D"},
+  {name:"Turkey",       flag:"tr",     group:"D"},
+  {name:"Ivory Coast",  flag:"ci",     group:"E"},
+  {name:"Ecuador",      flag:"ec",     group:"E"},
+  {name:"Germany",      flag:"de",     group:"E"},
+  {name:"Curacao",      flag:"cw",     group:"E"},
+  {name:"Netherlands",  flag:"nl",     group:"F"},
+  {name:"Japan",        flag:"jp",     group:"F"},
+  {name:"Sweden",       flag:"se",     group:"F"},
+  {name:"Tunisia",      flag:"tn",     group:"F"},
+  {name:"Iran",         flag:"ir",     group:"G"},
+  {name:"New Zealand",  flag:"nz",     group:"G"},
+  {name:"Belgium",      flag:"be",     group:"G"},
+  {name:"Egypt",        flag:"eg",     group:"G"},
+  {name:"Saudi Arabia", flag:"sa",     group:"H"},
+  {name:"Uruguay",      flag:"uy",     group:"H"},
+  {name:"Spain",        flag:"es",     group:"H"},
+  {name:"Cabo Verde",   flag:"cv",     group:"H"},
+  {name:"France",       flag:"fr",     group:"I"},
+  {name:"Senegal",      flag:"sn",     group:"I"},
+  {name:"Iraq",         flag:"iq",     group:"I"},
+  {name:"Norway",       flag:"no",     group:"I"},
+  {name:"Argentina",    flag:"ar",     group:"J"},
+  {name:"Algeria",      flag:"dz",     group:"J"},
+  {name:"Austria",      flag:"at",     group:"J"},
+  {name:"Jordan",       flag:"jo",     group:"J"},
+  {name:"Portugal",     flag:"pt",     group:"K"},
+  {name:"DR Congo",     flag:"cd",     group:"K"},
+  {name:"Uzbekistan",   flag:"uz",     group:"K"},
+  {name:"Colombia",     flag:"co",     group:"K"},
+  {name:"Ghana",        flag:"gh",     group:"L"},
+  {name:"Panama",       flag:"pa",     group:"L"},
+  {name:"England",      flag:"gb-eng", group:"L"},
+  {name:"Croatia",      flag:"hr",     group:"L"},
+];
+
+/* ═══════════════════════════════════════════════════════════
+   STATE
+═══════════════════════════════════════════════════════════ */
+let participants = [];
+let drawResults  = [];   // [{name, teams:[{...}]}]
+let currentScreen = 'setup';
+let revealTimer = null;
+
+/* ═══════════════════════════════════════════════════════════
+   SECURITY HELPERS
+═══════════════════════════════════════════════════════════ */
+function escapeHtml(str) {
+  if (!str) return '';
+  var d = document.createElement('div');
+  d.textContent = String(str);
+  return d.innerHTML;
+}
+
+function safeText(str, maxLen) {
+  if (!str) return '';
+  return String(str).trim().slice(0, maxLen || 100);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   INIT
+═══════════════════════════════════════════════════════════ */
+(function init() {
+  // Set today's date
+  var today = new Date().toISOString().split('T')[0];
+  document.getElementById('event-date').value = today;
+
+  // Load saved state
+  try {
+    var saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      var data = JSON.parse(saved);
+      if (Array.isArray(data.participants)) {
+        participants = data.participants.filter(function(p){ return typeof p === 'string'; }).slice(0, 48);
+      }
+      if (Array.isArray(data.drawResults)) {
+        drawResults = data.drawResults;
+      }
+      if (data.eventName)     document.getElementById('event-name').value    = safeText(data.eventName, 80);
+      if (data.organiserName) document.getElementById('organiser-name').value = safeText(data.organiserName, 50);
+      if (data.eventDate)     document.getElementById('event-date').value    = safeText(data.eventDate, 10);
+      if (data.entryFee)      document.getElementById('entry-fee').value     = parseFloat(data.entryFee) || '';
+      if (data.currency)      document.getElementById('currency').value      = safeText(data.currency, 3);
+    }
+  } catch(e) { /* ignore */ }
+
+  renderParticipantList();
+  updateDistInfo();
+  updateRunBtn();
+
+  // Keyboard: Enter adds participant
+  document.getElementById('new-participant').addEventListener('keydown', function(e){
+    if (e.key === 'Enter') addParticipant();
+  });
+})();
+
+/* ═══════════════════════════════════════════════════════════
+   SAVE
+═══════════════════════════════════════════════════════════ */
+function saveState() {
+  try {
+    var data = {
+      participants:   participants,
+      drawResults:    drawResults,
+      eventName:      safeText(document.getElementById('event-name').value, 80),
+      organiserName:  safeText(document.getElementById('organiser-name').value, 50),
+      eventDate:      safeText(document.getElementById('event-date').value, 10),
+      entryFee:       parseFloat(document.getElementById('entry-fee').value) || 0,
+      currency:       safeText(document.getElementById('currency').value, 3)
+    };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  } catch(e) { /* storage full or private mode */ }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   PARTICIPANTS
+═══════════════════════════════════════════════════════════ */
+function addParticipant() {
+  var inp = document.getElementById('new-participant');
+  var name = safeText(inp.value, 50);
+  if (!name) { showToast('Please enter a name.'); return; }
+  if (participants.length >= 48) { showToast('Maximum 48 participants.'); return; }
+  if (participants.map(function(p){return p.toLowerCase();}).indexOf(name.toLowerCase()) > -1) {
+    showToast('That name is already in the list.'); return;
+  }
+  participants.push(name);
+  inp.value = '';
+  inp.focus();
+  renderParticipantList();
+  updateDistInfo();
+  updateRunBtn();
+  saveState();
+}
+
+function removeParticipant(idx) {
+  participants.splice(idx, 1);
+  renderParticipantList();
+  updateDistInfo();
+  updateRunBtn();
+  saveState();
+}
+
+function renderParticipantList() {
+  var list  = document.getElementById('participant-list');
+  var empty = document.getElementById('participant-empty');
+  var badge = document.getElementById('participant-count-badge');
+
+  badge.textContent = participants.length + ' / 48';
+
+  if (participants.length === 0) {
+    empty.style.display = '';
+    while (list.childNodes.length > 1) list.removeChild(list.lastChild);
+    return;
+  }
+  empty.style.display = 'none';
+  // Rebuild list (keep empty item)
+  while (list.children.length > 1) list.removeChild(list.lastChild);
+
+  participants.forEach(function(name, i) {
+    var li = document.createElement('li');
+    li.className = 'participant-item';
+    li.innerHTML =
+      '<div class="participant-num">' + (i + 1) + '</div>' +
+      '<div class="participant-name">' + escapeHtml(name) + '</div>' +
+      '<button class="participant-remove" title="Remove" onclick="removeParticipant(' + i + ')">×</button>';
+    list.appendChild(li);
+  });
+}
+
+function updateDistInfo() {
+  var wrap    = document.getElementById('dist-info-wrap');
+  var n       = participants.length;
+  var allTeams = document.getElementById('opt-all-teams').checked;
+  if (n < 1) { wrap.innerHTML = ''; return; }
+
+  var teamsUsed, perPerson, extra, msg;
+  if (allTeams) {
+    teamsUsed = 48;
+    perPerson = Math.floor(48 / n);
+    extra     = 48 % n;
+    if (extra === 0) {
+      msg = '<strong>' + n + ' participants · ' + perPerson + ' team' + (perPerson > 1 ? 's' : '') + ' each</strong> — all 48 teams distributed evenly.';
+    } else {
+      msg = '<strong>' + n + ' participants · ' + perPerson + ' team' + (perPerson > 1 ? 's' : '') + ' each</strong> — first ' + extra + ' participant' + (extra > 1 ? 's' : '') + ' get' + (extra === 1 ? 's' : '') + ' an extra team.';
+    }
+  } else {
+    teamsUsed = n;
+    msg = '<strong>' + n + ' participants · 1 team each</strong> — ' + (48 - n) + ' teams will not be included in the draw.';
+  }
+
+  wrap.innerHTML =
+    '<div class="dist-info">' +
+    '<span class="dist-info-icon">⚽</span>' +
+    '<span class="dist-info-text">' + msg + '</span>' +
+    '</div>';
+}
+
+function updateRunBtn() {
+  var btn  = document.getElementById('run-draw-btn');
+  var note = document.getElementById('cta-note');
+  var n    = participants.length;
+  btn.disabled = n < 2;
+  if (n < 2) {
+    note.textContent = 'Add at least 2 participants to run the draw.';
+  } else {
+    note.textContent = n + ' participants ready. Good luck!';
+  }
+}
+
+function toggleOption(id) {
+  var el = document.getElementById(id);
+  el.checked = !el.checked;
+  if (id === 'opt-all-teams') updateDistInfo();
+}
+
+/* ═══════════════════════════════════════════════════════════
+   FISHER-YATES SHUFFLE
+═══════════════════════════════════════════════════════════ */
+function shuffle(arr) {
+  var a = arr.slice();
+  for (var i = a.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+  }
+  return a;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   DRAW LOGIC
+═══════════════════════════════════════════════════════════ */
+function runDraw() {
+  var n        = participants.length;
+  var allTeams = document.getElementById('opt-all-teams').checked;
+  var shuffNames = document.getElementById('opt-shuffle-names').checked;
+
+  // Shuffle teams
+  var shuffledTeams = shuffle(TEAMS);
+  var teamsToUse    = allTeams ? shuffledTeams : shuffledTeams.slice(0, n);
+
+  // Build participant order
+  var names = shuffNames ? shuffle(participants) : participants.slice();
+
+  // Build result objects
+  drawResults = names.map(function(name) {
+    return { name: name, teams: [] };
+  });
+
+  // Distribute teams round-robin
+  teamsToUse.forEach(function(team, i) {
+    drawResults[i % n].teams.push(team);
+  });
+
+  saveState();
+}
+
+/* ═══════════════════════════════════════════════════════════
+   NAVIGATION
+═══════════════════════════════════════════════════════════ */
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(function(s){ s.classList.remove('active'); });
+  document.getElementById(id).classList.add('active');
+  currentScreen = id;
+  window.scrollTo(0, 0);
+}
+
+function setStep(n) {
+  for (var i = 1; i <= 3; i++) {
+    var el  = document.getElementById('step' + i);
+    var con = document.getElementById('conn' + i);
+    el.className = 'step-item' + (i < n ? ' done' : i === n ? ' active' : '');
+    if (con) con.className = 'step-connector' + (i < n ? ' done' : '');
+  }
+}
+
+function goToSetup() {
+  if (revealTimer) { clearTimeout(revealTimer); revealTimer = null; }
+  setStep(1);
+  showScreen('screen-setup');
+}
+
+function goToDraw() {
+  saveState();
+  runDraw();
+  buildDrawCards();
+  setStep(2);
+  showScreen('screen-draw');
+  startReveal();
+}
+
+function goToResults() {
+  if (revealTimer) { clearTimeout(revealTimer); revealTimer = null; }
+  buildResults();
+  setStep(3);
+  showScreen('screen-results');
+}
+
+/* ═══════════════════════════════════════════════════════════
+   DRAW CARDS
+═══════════════════════════════════════════════════════════ */
+function flagImg(team) {
+  return '<img src="https://flagcdn.com/w40/' + escapeHtml(team.flag) + '.png" ' +
+    'srcset="https://flagcdn.com/w80/' + escapeHtml(team.flag) + '.png 2x" ' +
+    'width="16" height="11" alt="' + escapeHtml(team.name) + '" class="fi">';
+}
+
+function buildDrawCards() {
+  var grid     = document.getElementById('draw-cards-grid');
+  var title    = document.getElementById('draw-event-title');
+  var subText  = document.getElementById('draw-sub-text');
+  var actions  = document.getElementById('draw-actions');
+  var progText = document.getElementById('draw-progress-text');
+  var progFill = document.getElementById('draw-progress-fill');
+
+  var evName = safeText(document.getElementById('event-name').value, 80) || 'World Cup 2026 Sweepstake';
+  title.textContent = evName;
+  subText.textContent = 'The draw is underway…';
+  actions.style.display = 'none';
+  progText.textContent = 'Revealing teams…';
+  progFill.style.width = '0%';
+
+  grid.innerHTML = '';
+  drawResults.forEach(function(r, i) {
+    var card = document.createElement('div');
+    card.className = 'flip-card';
+    card.id = 'flip-' + i;
+
+    var teamsHtml = r.teams.map(function(t) {
+      return '<div class="flip-back-team">' + flagImg(t) + escapeHtml(t.name) + (t.host ? ' <span class="flip-back-badge">HOST</span>' : '') + '</div>';
+    }).join('');
+
+    card.innerHTML =
+      '<div class="flip-card-inner">' +
+        '<div class="flip-front">' +
+          '<div class="flip-front-icon">⚽</div>' +
+          '<div class="flip-front-num">' + escapeHtml(r.name) + '</div>' +
+        '</div>' +
+        '<div class="flip-back">' +
+          '<div class="flip-back-name">' + escapeHtml(r.name) + '</div>' +
+          '<div class="flip-back-divider"></div>' +
+          '<div class="flip-back-teams">' + teamsHtml + '</div>' +
+        '</div>' +
+      '</div>';
+    grid.appendChild(card);
+  });
+}
+
+function startReveal() {
+  var animate = document.getElementById('opt-animate').checked;
+  var n       = drawResults.length;
+  var progFill = document.getElementById('draw-progress-fill');
+  var progText = document.getElementById('draw-progress-text');
+  var actions  = document.getElementById('draw-actions');
+
+  if (!animate) {
+    revealAll();
+    return;
+  }
+
+  var idx = 0;
+  function revealNext() {
+    if (idx >= n) {
+      progFill.style.width = '100%';
+      progText.textContent = 'Draw complete! ' + n + ' participants assigned.';
+      actions.style.display = 'flex';
+      document.getElementById('draw-sub-text').textContent = 'All teams have been drawn!';
+      return;
+    }
+    var card = document.getElementById('flip-' + idx);
+    if (card) card.classList.add('revealed');
+    idx++;
+    progFill.style.width = Math.round((idx / n) * 100) + '%';
+    progText.textContent = idx + ' of ' + n + ' revealed…';
+    revealTimer = setTimeout(revealNext, Math.max(200, Math.min(700, Math.floor(4000 / n))));
+  }
+  revealNext();
+}
+
+function revealAll() {
+  if (revealTimer) { clearTimeout(revealTimer); revealTimer = null; }
+  var n = drawResults.length;
+  for (var i = 0; i < n; i++) {
+    var card = document.getElementById('flip-' + i);
+    if (card) card.classList.add('revealed');
+  }
+  document.getElementById('draw-progress-fill').style.width = '100%';
+  document.getElementById('draw-progress-text').textContent = 'Draw complete! ' + n + ' participants assigned.';
+  document.getElementById('draw-actions').style.display = 'flex';
+  document.getElementById('draw-sub-text').textContent = 'All teams have been drawn!';
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RESULTS
+═══════════════════════════════════════════════════════════ */
+function buildResults() {
+  var evName  = safeText(document.getElementById('event-name').value, 80) || 'World Cup 2026 Sweepstake';
+  var evDate  = document.getElementById('event-date').value;
+  var fee     = parseFloat(document.getElementById('entry-fee').value) || 0;
+  var cur     = safeText(document.getElementById('currency').value, 3) || '£';
+  var n       = drawResults.length;
+
+  // Page title
+  document.getElementById('results-title').textContent = evName;
+  document.getElementById('results-sub').textContent   = 'World Cup 2026 Sweepstake · ' + n + ' participants · The Wall Chart Co';
+  document.getElementById('results-count-badge').textContent = n + ' participants';
+
+  // Complete banner
+  var banner = document.getElementById('complete-banner');
+  banner.style.display = '';
+  document.getElementById('complete-event-name').textContent = evName;
+  document.getElementById('complete-info').textContent =
+    n + ' participants · ' + TEAMS.length + ' teams · Draw completed ' + formatDate(evDate);
+
+  var potWrap = document.getElementById('pot-wrap');
+  if (fee > 0) {
+    potWrap.style.display = '';
+    document.getElementById('pot-amount').textContent = cur + (fee * n).toFixed(2);
+  } else {
+    potWrap.style.display = 'none';
+  }
+
+  // Results table (on-screen)
+  var tbody = document.getElementById('results-tbody');
+  tbody.innerHTML = '';
+  drawResults.forEach(function(r, i) {
+    var teamsHtml = r.teams.map(function(t) {
+      return '<div class="td-team-row">' +
+        flagImg(t) +
+        '<span class="td-team-name">' + escapeHtml(t.name) + '</span>' +
+        (t.host ? '<span class="host-star" title="Host nation">★</span>' : '') +
+        '<span class="td-group-badge">Grp ' + t.group + '</span>' +
+        '</div>';
+    }).join('');
+    var tr = document.createElement('tr');
+    tr.innerHTML =
+      '<td class="td-num"><div class="td-pos-badge">' + (i+1) + '</div></td>' +
+      '<td class="td-name">' + escapeHtml(r.name) + '</td>' +
+      '<td><div class="td-teams">' + teamsHtml + '</div></td>';
+    tbody.appendChild(tr);
+  });
+
+  buildPrintSheet(evName, evDate, fee, cur);
+  buildPrintSlips(evName, evDate);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   PRINT: FULL SHEET
+═══════════════════════════════════════════════════════════ */
+function buildPrintSheet(evName, evDate, fee, cur) {
+  document.getElementById('sheet-event-name').textContent = evName;
+  document.getElementById('sheet-event-date').textContent = 'Draw date: ' + formatDate(evDate);
+
+  var sheetPot = document.getElementById('sheet-pot');
+  if (fee > 0) {
+    sheetPot.style.display = '';
+    sheetPot.textContent   = 'Prize Pot: ' + cur + (fee * drawResults.length).toFixed(2);
+  } else {
+    sheetPot.style.display = 'none';
+  }
+
+  document.getElementById('sheet-footer-date').textContent = 'Generated ' + formatDate(new Date().toISOString().split('T')[0]);
+
+  var tbody = document.getElementById('sheet-tbody');
+  tbody.innerHTML = '';
+  drawResults.forEach(function(r, i) {
+    var teamsHtml = r.teams.map(function(t) {
+      return '<div class="sheet-team-item">' +
+        '<img src="https://flagcdn.com/w20/' + escapeHtml(t.flag) + '.png" width="14" height="10" alt="' + escapeHtml(t.name) + '" class="fi" style="width:14px;height:10px;">' +
+        '<span>' + escapeHtml(t.name) + (t.host ? ' ★' : '') + '</span>' +
+        '<span class="sheet-group">Grp ' + t.group + '</span>' +
+        '</div>';
+    }).join('');
+    var tr = document.createElement('tr');
+    tr.innerHTML =
+      '<td class="sheet-td-pos">' + (i+1) + '</td>' +
+      '<td class="sheet-td-name">' + escapeHtml(r.name) + '</td>' +
+      '<td><div class="sheet-td-teams">' + teamsHtml + '</div></td>' +
+      '<td style="border-bottom:0.5px solid #D1CBB8;"></td>';
+    tbody.appendChild(tr);
+  });
+}
+
+/* ═══════════════════════════════════════════════════════════
+   PRINT: SLIPS
+═══════════════════════════════════════════════════════════ */
+function buildPrintSlips(evName, evDate) {
+  var container = document.getElementById('slip-container');
+  container.innerHTML = '';
+
+  var slipsPerPage = 2;
+  var pages = Math.ceil(drawResults.length / slipsPerPage);
+
+  for (var p = 0; p < pages; p++) {
+    var page = document.createElement('div');
+    page.className = 'slips-page';
+
+    for (var s = 0; s < slipsPerPage; s++) {
+      var idx = p * slipsPerPage + s;
+      var slip = document.createElement('div');
+      slip.className = 'slip';
+
+      if (idx < drawResults.length) {
+        var r = drawResults[idx];
+        var teamsHtml = r.teams.map(function(t) {
+          return '<div class="slip-team-row">' +
+            '<img src="https://flagcdn.com/w20/' + escapeHtml(t.flag) + '.png" width="18" height="12" alt="' + escapeHtml(t.name) + '" class="fi">' +
+            '<span class="slip-team-name">' + escapeHtml(t.name) + (t.host ? ' ★' : '') + '</span>' +
+            '<span class="slip-team-group">Grp ' + t.group + '</span>' +
+            '</div>';
+        }).join('');
+
+        slip.innerHTML =
+          '<div>' +
+            '<div class="slip-header">' +
+              '<span class="slip-logo">TWC</span>' +
+              '<span class="slip-event">' + escapeHtml(evName) + '<br>' + formatDate(evDate) + '</span>' +
+            '</div>' +
+            '<div class="slip-participant">' + escapeHtml(r.name) + '</div>' +
+            '<div class="slip-tag">World Cup 2026 Sweepstake</div>' +
+            '<div class="slip-teams">' + teamsHtml + '</div>' +
+          '</div>' +
+          '<div class="slip-footer">' +
+            '<span class="slip-footer-brand">The Wall Chart Co · theWallChartCo</span>' +
+            (r.teams.some(function(t){return t.host;}) ? '<span class="slip-host-note">★ Host nation</span>' : '<span></span>') +
+          '</div>';
+      } else {
+        slip.innerHTML = ''; // blank slip
+      }
+
+      page.appendChild(slip);
+    }
+    container.appendChild(page);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   PRINT TRIGGERS
+═══════════════════════════════════════════════════════════ */
+function printSheet() {
+  document.body.classList.remove('print-slips');
+  document.body.classList.add('print-sheet');
+  window.print();
+  setTimeout(function(){ document.body.classList.remove('print-sheet'); }, 500);
+}
+
+function printSlips() {
+  document.body.classList.remove('print-sheet');
+  document.body.classList.add('print-slips');
+  window.print();
+  setTimeout(function(){ document.body.classList.remove('print-slips'); }, 500);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   EXPORT / IMPORT
+═══════════════════════════════════════════════════════════ */
+function exportDraw() {
+  var data = {
+    product:      'TWC World Cup 2026 Sweepstake Kit',
+    version:      '1.0',
+    eventName:    safeText(document.getElementById('event-name').value, 80),
+    organiser:    safeText(document.getElementById('organiser-name').value, 50),
+    eventDate:    document.getElementById('event-date').value,
+    participants: participants,
+    drawResults:  drawResults.map(function(r){
+      return { name: r.name, teams: r.teams.map(function(t){ return { name: t.name, flag: t.flag, group: t.group, host: !!t.host }; }) };
+    }),
+    exported:     new Date().toISOString()
+  };
+  var blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  var url  = URL.createObjectURL(blob);
+  var a    = document.createElement('a');
+  a.href     = url;
+  a.download = 'twc-sweepstake-2026.json';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast('Draw exported!');
+}
+
+function importDraw(e) {
+  var file = e.target.files && e.target.files[0];
+  if (!file) return;
+  if (file.size > 200000) { showToast('File too large.'); return; }
+
+  var reader = new FileReader();
+  reader.onload = function(ev) {
+    try {
+      var data = JSON.parse(ev.target.result);
+      // Validate structure
+      if (!Array.isArray(data.participants) || !Array.isArray(data.drawResults)) {
+        throw new Error('Invalid format');
+      }
+      // Sanitise participants
+      var newParticipants = data.participants
+        .filter(function(p){ return typeof p === 'string'; })
+        .map(function(p){ return safeText(p, 50); })
+        .slice(0, 48);
+
+      // Sanitise drawResults — only allow known TEAM names
+      var validTeamNames = TEAMS.map(function(t){ return t.name; });
+      var newResults = [];
+      if (Array.isArray(data.drawResults)) {
+        data.drawResults.slice(0, 48).forEach(function(r) {
+          if (typeof r.name !== 'string') return;
+          var teams = [];
+          if (Array.isArray(r.teams)) {
+            r.teams.forEach(function(t) {
+              var match = TEAMS.filter(function(tm){ return tm.name === t.name; })[0];
+              if (match) teams.push(match);
+            });
+          }
+          newResults.push({ name: safeText(r.name, 50), teams: teams });
+        });
+      }
+
+      participants = newParticipants;
+      drawResults  = newResults;
+
+      if (data.eventName)  document.getElementById('event-name').value    = safeText(data.eventName, 80);
+      if (data.organiser)  document.getElementById('organiser-name').value = safeText(data.organiser, 50);
+      if (data.eventDate)  document.getElementById('event-date').value    = safeText(data.eventDate, 10);
+
+      saveState();
+      renderParticipantList();
+      updateDistInfo();
+      updateRunBtn();
+
+      if (newResults.length > 0) {
+        buildResults();
+        setStep(3);
+        showScreen('screen-results');
+      } else {
+        goToSetup();
+      }
+      showToast('Draw imported successfully!');
+    } catch(err) {
+      showToast('Could not import file — invalid format.');
+    }
+  };
+  reader.readAsText(file);
+  e.target.value = '';
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RESET
+═══════════════════════════════════════════════════════════ */
+function resetAll() {
+  if (!confirm('Start over? This will clear all participants and draw results.')) return;
+  participants = [];
+  drawResults  = [];
+  document.getElementById('event-name').value    = '';
+  document.getElementById('organiser-name').value = '';
+  document.getElementById('entry-fee').value      = '';
+  document.getElementById('currency').value       = '£';
+  document.getElementById('event-date').value     = new Date().toISOString().split('T')[0];
+  try { localStorage.removeItem(STORAGE_KEY); } catch(e){}
+  renderParticipantList();
+  updateDistInfo();
+  updateRunBtn();
+  goToSetup();
+  showToast('Reset complete.');
+}
+
+/* ═══════════════════════════════════════════════════════════
+   HELPERS
+═══════════════════════════════════════════════════════════ */
+function formatDate(iso) {
+  if (!iso) return '';
+  try {
+    var d = new Date(iso + 'T12:00:00');
+    return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+  } catch(e) { return iso; }
+}
+
+function showToast(msg) {
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(function(){ t.classList.remove('show'); }, 2800);
+}
+</script>
+</body>
+</html>

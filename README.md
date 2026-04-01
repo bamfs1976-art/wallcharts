@@ -8,36 +8,46 @@ Premium digital downloads for football and rugby fans. Every product is a single
 
 ## Product Range
 
-### Football
+### Football — World Cup 2026 (7 products)
 
 | Product | Price | File |
 |---------|-------|------|
 | **World Cup 2026 Interactive Wall Chart** | £5.99 | `products/world-cup-2026/twc-wallchart-2026.html` |
 | **England World Cup 2026 Fan Edition** | £5.99 | `products/world-cup-2026/twc-wallchart-england-2026.html` |
-| **World Cup 2026 Fixture Calendar (A3)** | £3.49 | `products/world-cup-2026/twc-fixture-calendar-2026.html` |
+| **World Cup 2026 Fixture Calendar (A3 Printable)** | £3.49 | `products/world-cup-2026/twc-fixture-calendar-2026.html` |
 | **World Cup 2026 Knockout Bracket Poster** | £2.99 | `products/world-cup-2026/twc-bracket-poster-2026.html` |
-| **World Cup 2026 Team Guide (48 teams)** | £5.99 | `products/world-cup-2026/twc-team-guide-2026.html` |
-| **World Cup 2026 Team Guide (Official Squads)** | £5.99 | `products/world-cup-2026/twc-team-guide-official-squads-2026.html` |
+| **World Cup 2026 Team Guide (48 Teams)** | £5.99 | `products/world-cup-2026/twc-team-guide-2026.html` |
+| **World Cup 2026 Team Guide (Confirmed Squads)** | £5.99 | `products/world-cup-2026/twc-team-guide-official-squads-2026.html` |
 | **World Cup 2026 Office Sweepstake Kit** | £2.99 | `products/world-cup-2026/twc-sweepstake-2026.html` |
+
+### Football — Other (3 products)
+
+| Product | Price | File |
+|---------|-------|------|
 | **Champions League 2025/26 Wall Chart** | £4.99 | `products/champions-league-2025-26/twc-champions-league-2025-26.html` |
 | **Premier League 2025/26 Tracker** | £4.99 | `products/premier-league-2025-26/twc-premier-league-2025-26.html` |
 | **Euro 2028 Qualifiers Tracker** | £4.99 | `products/euro-2028-qualifiers/twc-euro-2028-qualifiers.html` |
 
-### Rugby
+### Rugby (4 products)
 
 | Product | Price | File |
 |---------|-------|------|
 | **Six Nations 2026 Wall Chart** | £3.99 | `products/six-nations-2026/twc-six-nations-2026.html` |
+| **Six Nations 2027 Wall Chart** | £3.99 | `products/six-nations-2027/twc-six-nations-2027.html` |
+| **Nations Championship 2026 Tracker** | £3.99 | `products/nations-championship-2026/twc-nations-championship-2026.html` |
 | **Rugby World Cup 2027 Wall Chart** | £5.99 | `products/rugby-world-cup-2027/twc-rugby-world-cup-2027.html` |
 
-### Bundles
+**Total: 14 individual products**
 
-| Bundle | Price | Contents |
-|--------|-------|----------|
-| **World Cup 2026 Complete** | £11.99 | Wall Chart + Fixture Poster + Team Guide |
-| **Football Fan Bundle** | £14.99 | World Cup + Champions League + Premier League |
-| **Rugby Fan Bundle** | £8.99 | Six Nations + Rugby World Cup 2027 |
-| **Ultimate Sports Bundle** | £29.99 | All 11 products |
+### Bundles (5 bundles)
+
+| Bundle | Price | Contents | Saving |
+|--------|-------|----------|--------|
+| **World Cup 2026 Complete** | £11.99 | WC Wall Chart + Fixture Calendar + Team Guide | Save £3.48 |
+| **Football Fan Bundle** | £14.99 | World Cup + Champions League + Premier League | Convenience |
+| **Rugby Fan Bundle** | £8.99 | Six Nations 2026 + Rugby World Cup 2027 | Save £0.99 |
+| **Rugby Complete Collection** | £13.99 | Six Nations 2026 & 2027 + Nations Championship + RWC 2027 | Save £4.00 |
+| **Ultimate Sports Bundle** | £34.99 | All 14 products | Save £31+ |
 
 ---
 
@@ -56,15 +66,17 @@ Premium digital downloads for football and rugby fans. Every product is a single
 ```
 wallcharts/
 ├── products/
-│   ├── world-cup-2026/          # 6 World Cup products (flagship)
-│   ├── champions-league-2025-26/ # UCL league phase + knockouts
-│   ├── premier-league-2025-26/   # Full 380-match season tracker
-│   ├── euro-2028-qualifiers/     # Qualifying group tracker
-│   ├── six-nations-2026/         # Rugby championship tracker
-│   └── rugby-world-cup-2027/     # RWC Australia tracker
-├── etsy-listings/                # Etsy listing copy (titles, descriptions, tags)
-├── branding/                     # Brand guide, colour palette, typography
-└── strategy/                     # Etsy launch strategy & sales plan
+│   ├── world-cup-2026/              # 7 World Cup products (flagship range)
+│   ├── champions-league-2025-26/   # UCL league phase + knockouts
+│   ├── premier-league-2025-26/     # Full 380-match season tracker
+│   ├── euro-2028-qualifiers/       # Qualifying group tracker
+│   ├── six-nations-2026/           # Six Nations 2026 tracker
+│   ├── six-nations-2027/           # Six Nations 2027 tracker
+│   ├── nations-championship-2026/  # Inaugural Nations Championship
+│   └── rugby-world-cup-2027/       # RWC Australia tracker
+├── etsy-listings/                  # Etsy listing copy (titles, descriptions, tags)
+├── branding/                       # Brand guide, colour palette, typography
+└── strategy/                       # Etsy launch strategy & sales plan
 ```
 
 ---

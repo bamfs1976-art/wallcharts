@@ -961,7 +961,7 @@ th.sortable::after { content: ' \25B4\25BE'; font-size: 8px; opacity: 0.5; }
         </div>
         <div class="stat-card-body">
           <div class="stat-add-row">
-            <input type="text" id="tryPlayer" placeholder="Player name">
+            <input type="text" id="tryPlayer" placeholder="Player name" maxlength="60">
             <select id="tryTeam"></select>
             <input type="number" id="tryCount" placeholder="Tries" min="1" value="1" style="max-width:60px">
             <button class="btn btn-gold btn-sm" onclick="addTryScorer()">Add</button>
@@ -981,7 +981,7 @@ th.sortable::after { content: ' \25B4\25BE'; font-size: 8px; opacity: 0.5; }
         </div>
         <div class="stat-card-body">
           <div class="stat-add-row">
-            <input type="text" id="ptsPlayer" placeholder="Player name">
+            <input type="text" id="ptsPlayer" placeholder="Player name" maxlength="60">
             <select id="ptsTeam"></select>
             <input type="number" id="ptsCount" placeholder="Points" min="1" value="3" style="max-width:60px">
             <button class="btn btn-gold btn-sm" onclick="addPointsScorer()">Add</button>
@@ -1001,7 +1001,7 @@ th.sortable::after { content: ' \25B4\25BE'; font-size: 8px; opacity: 0.5; }
         </div>
         <div class="stat-card-body">
           <div class="stat-add-row">
-            <input type="text" id="cardPlayer" placeholder="Player name">
+            <input type="text" id="cardPlayer" placeholder="Player name" maxlength="60">
             <select id="cardTeam"></select>
             <select id="cardType" style="max-width:90px">
               <option value="yellow">Yellow</option>
@@ -1170,6 +1170,13 @@ let state = {
 // HELPERS
 // ========================================
 
+function escapeHtml(str) {
+  if (!str) return '';
+  var d = document.createElement('div');
+  d.textContent = str;
+  return d.innerHTML;
+}
+
 function getTeamByName(name) {
   return [...DIV1_TEAMS, ...DIV2_TEAMS].find(t => t.name === name);
 }
@@ -1335,19 +1342,19 @@ function renderFixtures(rounds, windowName, containerId) {
                 </div>
               </div>
               <div class="score-inputs">
-                <input class="score-input" type="number" min="0" value="${s.homeScore}" data-key="${key}" data-field="homeScore" onchange="updateScore(this)" placeholder="-">
+                <input class="score-input" type="number" min="0" max="99" value="${s.homeScore}" data-key="${key}" data-field="homeScore" onchange="updateScore(this)" placeholder="-">
                 <span class="score-dash">&ndash;</span>
-                <input class="score-input" type="number" min="0" value="${s.awayScore}" data-key="${key}" data-field="awayScore" onchange="updateScore(this)" placeholder="-">
+                <input class="score-input" type="number" min="0" max="99" value="${s.awayScore}" data-key="${key}" data-field="awayScore" onchange="updateScore(this)" placeholder="-">
               </div>
               <div class="score-breakdown">
-                <div class="breakdown-row"><label>Tries</label><input class="breakdown-input" type="number" min="0" value="${s.homeTries}" data-key="${key}" data-field="homeTries" onchange="updateScore(this)"></div>
-                <div class="breakdown-row"><label>Tries</label><input class="breakdown-input" type="number" min="0" value="${s.awayTries}" data-key="${key}" data-field="awayTries" onchange="updateScore(this)"></div>
-                <div class="breakdown-row"><label>Conv</label><input class="breakdown-input" type="number" min="0" value="${s.homeConv}" data-key="${key}" data-field="homeConv" onchange="updateScore(this)"></div>
-                <div class="breakdown-row"><label>Conv</label><input class="breakdown-input" type="number" min="0" value="${s.awayConv}" data-key="${key}" data-field="awayConv" onchange="updateScore(this)"></div>
-                <div class="breakdown-row"><label>Pens</label><input class="breakdown-input" type="number" min="0" value="${s.homePen}" data-key="${key}" data-field="homePen" onchange="updateScore(this)"></div>
-                <div class="breakdown-row"><label>Pens</label><input class="breakdown-input" type="number" min="0" value="${s.awayPen}" data-key="${key}" data-field="awayPen" onchange="updateScore(this)"></div>
-                <div class="breakdown-row"><label>Drop</label><input class="breakdown-input" type="number" min="0" value="${s.homeDG}" data-key="${key}" data-field="homeDG" onchange="updateScore(this)"></div>
-                <div class="breakdown-row"><label>Drop</label><input class="breakdown-input" type="number" min="0" value="${s.awayDG}" data-key="${key}" data-field="awayDG" onchange="updateScore(this)"></div>
+                <div class="breakdown-row"><label>Tries</label><input class="breakdown-input" type="number" min="0" max="99" value="${s.homeTries}" data-key="${key}" data-field="homeTries" onchange="updateScore(this)"></div>
+                <div class="breakdown-row"><label>Tries</label><input class="breakdown-input" type="number" min="0" max="99" value="${s.awayTries}" data-key="${key}" data-field="awayTries" onchange="updateScore(this)"></div>
+                <div class="breakdown-row"><label>Conv</label><input class="breakdown-input" type="number" min="0" max="99" value="${s.homeConv}" data-key="${key}" data-field="homeConv" onchange="updateScore(this)"></div>
+                <div class="breakdown-row"><label>Conv</label><input class="breakdown-input" type="number" min="0" max="99" value="${s.awayConv}" data-key="${key}" data-field="awayConv" onchange="updateScore(this)"></div>
+                <div class="breakdown-row"><label>Pens</label><input class="breakdown-input" type="number" min="0" max="99" value="${s.homePen}" data-key="${key}" data-field="homePen" onchange="updateScore(this)"></div>
+                <div class="breakdown-row"><label>Pens</label><input class="breakdown-input" type="number" min="0" max="99" value="${s.awayPen}" data-key="${key}" data-field="awayPen" onchange="updateScore(this)"></div>
+                <div class="breakdown-row"><label>Drop</label><input class="breakdown-input" type="number" min="0" max="99" value="${s.homeDG}" data-key="${key}" data-field="homeDG" onchange="updateScore(this)"></div>
+                <div class="breakdown-row"><label>Drop</label><input class="breakdown-input" type="number" min="0" max="99" value="${s.awayDG}" data-key="${key}" data-field="awayDG" onchange="updateScore(this)"></div>
               </div>
             </div>
           </div>`;
@@ -1479,7 +1486,7 @@ function renderTryScorers() {
   tbody.innerHTML = state.tryScorers.map((s, i) => {
     const t = getTeamByName(s.team);
     return `<tr>
-      <td style="text-align:left;font-weight:600">${s.player}</td>
+      <td style="text-align:left;font-weight:600">${escapeHtml(s.player)}</td>
       <td><div class="team-cell"><img class="team-flag" src="${flagUrl(t?.code||'xx')}" alt="" loading="lazy" onerror="this.style.display='none'"> ${s.team}</div></td>
       <td style="font-weight:700;color:var(--gold)">${s.tries}</td>
       <td><button class="remove-btn" onclick="state.tryScorers.splice(${i},1);saveState();renderTryScorers();">&times;</button></td>
@@ -1504,7 +1511,7 @@ function renderPointsScorers() {
   tbody.innerHTML = state.pointsScorers.map((s, i) => {
     const t = getTeamByName(s.team);
     return `<tr>
-      <td style="text-align:left;font-weight:600">${s.player}</td>
+      <td style="text-align:left;font-weight:600">${escapeHtml(s.player)}</td>
       <td><div class="team-cell"><img class="team-flag" src="${flagUrl(t?.code||'xx')}" alt="" loading="lazy" onerror="this.style.display='none'"> ${s.team}</div></td>
       <td style="font-weight:700;color:var(--gold)">${s.points}</td>
       <td><button class="remove-btn" onclick="state.pointsScorers.splice(${i},1);saveState();renderPointsScorers();">&times;</button></td>
@@ -1530,7 +1537,7 @@ function renderCards() {
     const cardColor = s.cardType === 'red' ? '#c0392b' : '#f1c40f';
     const cardLabel = s.cardType === 'red' ? 'Red' : 'Yellow';
     return `<tr>
-      <td style="text-align:left;font-weight:600">${s.player}</td>
+      <td style="text-align:left;font-weight:600">${escapeHtml(s.player)}</td>
       <td><div class="team-cell"><img class="team-flag" src="${flagUrl(t?.code||'xx')}" alt="" loading="lazy" onerror="this.style.display='none'"> ${s.team}</div></td>
       <td><span style="display:inline-block;width:14px;height:18px;background:${cardColor};border-radius:2px;vertical-align:middle;margin-right:4px;border:1px solid rgba(0,0,0,0.15)"></span> ${cardLabel}</td>
       <td><button class="remove-btn" onclick="state.cards.splice(${i},1);saveState();renderCards();">&times;</button></td>
@@ -1623,7 +1630,13 @@ function loadState() {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved) {
       const parsed = JSON.parse(saved);
-      state = { ...state, ...parsed };
+      if (parsed.scores && typeof parsed.scores === 'object') state.scores = parsed.scores;
+      if (parsed.theme && typeof parsed.theme === 'string') state.theme = parsed.theme;
+      if (parsed.div2Standings && typeof parsed.div2Standings === 'object') state.div2Standings = parsed.div2Standings;
+      if (parsed.sixNationsRC && typeof parsed.sixNationsRC === 'object') state.sixNationsRC = parsed.sixNationsRC;
+      if (Array.isArray(parsed.tryScorers)) state.tryScorers = parsed.tryScorers;
+      if (Array.isArray(parsed.pointsScorers)) state.pointsScorers = parsed.pointsScorers;
+      if (Array.isArray(parsed.cards)) state.cards = parsed.cards;
     }
   } catch(e) { console.warn('Load failed:', e); }
 }
@@ -1645,7 +1658,13 @@ function importData(event) {
   reader.onload = function(e) {
     try {
       const imported = JSON.parse(e.target.result);
-      state = { ...state, ...imported };
+      if (imported.scores && typeof imported.scores === 'object') state.scores = imported.scores;
+      if (imported.theme && typeof imported.theme === 'string') state.theme = imported.theme;
+      if (imported.div2Standings && typeof imported.div2Standings === 'object') state.div2Standings = imported.div2Standings;
+      if (imported.sixNationsRC && typeof imported.sixNationsRC === 'object') state.sixNationsRC = imported.sixNationsRC;
+      if (Array.isArray(imported.tryScorers)) state.tryScorers = imported.tryScorers;
+      if (Array.isArray(imported.pointsScorers)) state.pointsScorers = imported.pointsScorers;
+      if (Array.isArray(imported.cards)) state.cards = imported.cards;
       saveState();
       renderAll();
       alert('Data imported successfully.');

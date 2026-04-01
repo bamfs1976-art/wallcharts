@@ -699,7 +699,7 @@ table.stat-table tbody tr:hover td { background: var(--cream); }
         </div>
         <div class="stat-card-body">
           <div class="add-row-form" id="add-try-form">
-            <input type="text" id="try-player" placeholder="Player name" aria-label="Player name">
+            <input type="text" id="try-player" placeholder="Player name" aria-label="Player name" maxlength="60">
             <select id="try-team" aria-label="Team">
               <option value="">Team</option>
               <option value="England">England</option>
@@ -727,7 +727,7 @@ table.stat-table tbody tr:hover td { background: var(--cream); }
         </div>
         <div class="stat-card-body">
           <div class="add-row-form" id="add-pts-form">
-            <input type="text" id="pts-player" placeholder="Player name" aria-label="Player name">
+            <input type="text" id="pts-player" placeholder="Player name" aria-label="Player name" maxlength="60">
             <select id="pts-team" aria-label="Team">
               <option value="">Team</option>
               <option value="England">England</option>
@@ -843,6 +843,13 @@ let state = {
 };
 
 /* ---------- HELPERS ---------- */
+function escapeHtml(str) {
+  if (!str) return '';
+  var d = document.createElement('div');
+  d.textContent = str;
+  return d.innerHTML;
+}
+
 function flagUrl(code, width) {
   return `https://flagcdn.com/w${width || 40}/${code}.png`;
 }
@@ -871,7 +878,11 @@ function loadState() {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (raw) {
       const loaded = JSON.parse(raw);
-      state = { ...state, ...loaded };
+      if (loaded.scores && typeof loaded.scores === 'object') state.scores = loaded.scores;
+      if (loaded.theme && typeof loaded.theme === 'string') state.theme = loaded.theme;
+      if (Array.isArray(loaded.tryScorers)) state.tryScorers = loaded.tryScorers;
+      if (Array.isArray(loaded.ptsScorers)) state.ptsScorers = loaded.ptsScorers;
+      if (loaded.motr && typeof loaded.motr === 'object') state.motr = loaded.motr;
     }
   } catch(e) { /* corrupt data */ }
 }
@@ -890,7 +901,11 @@ window.importData = function(event) {
   reader.onload = function(e) {
     try {
       const imported = JSON.parse(e.target.result);
-      state = { ...state, ...imported };
+      if (imported.scores && typeof imported.scores === 'object') state.scores = imported.scores;
+      if (imported.theme && typeof imported.theme === 'string') state.theme = imported.theme;
+      if (Array.isArray(imported.tryScorers)) state.tryScorers = imported.tryScorers;
+      if (Array.isArray(imported.ptsScorers)) state.ptsScorers = imported.ptsScorers;
+      if (imported.motr && typeof imported.motr === 'object') state.motr = imported.motr;
       saveState();
       renderAll();
       alert('Data imported successfully.');
@@ -1370,10 +1385,10 @@ function renderTryScorers() {
     totalTries += s.tries;
     html += `<tr>
       <td style="font-weight:700;color:var(--grey-400);">${i + 1}</td>
-      <td style="font-weight:600;">${s.player}</td>
+      <td style="font-weight:600;">${escapeHtml(s.player)}</td>
       <td><img src="${flagUrl(TEAMS[s.team].code, 24)}" alt="" width="18" height="13" style="display:inline;vertical-align:middle;margin-right:4px;border-radius:1px;">${TEAMS[s.team].short}</td>
       <td style="font-weight:700;">${s.tries}</td>
-      <td><button class="delete-btn" onclick="removeTryScorer(${i})" aria-label="Remove ${s.player}">&times;</button></td>
+      <td><button class="delete-btn" onclick="removeTryScorer(${i})" aria-label="Remove ${escapeHtml(s.player)}">&times;</button></td>
     </tr>`;
   });
   tbody.innerHTML = html;
@@ -1422,10 +1437,10 @@ function renderPtsScorers() {
     totalPts += s.points;
     html += `<tr>
       <td style="font-weight:700;color:var(--grey-400);">${i + 1}</td>
-      <td style="font-weight:600;">${s.player}</td>
+      <td style="font-weight:600;">${escapeHtml(s.player)}</td>
       <td><img src="${flagUrl(TEAMS[s.team].code, 24)}" alt="" width="18" height="13" style="display:inline;vertical-align:middle;margin-right:4px;border-radius:1px;">${TEAMS[s.team].short}</td>
       <td style="font-weight:700;">${s.points}</td>
-      <td><button class="delete-btn" onclick="removePtsScorer(${i})" aria-label="Remove ${s.player}">&times;</button></td>
+      <td><button class="delete-btn" onclick="removePtsScorer(${i})" aria-label="Remove ${escapeHtml(s.player)}">&times;</button></td>
     </tr>`;
   });
   tbody.innerHTML = html;

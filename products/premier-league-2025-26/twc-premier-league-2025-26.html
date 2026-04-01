@@ -933,7 +933,7 @@ body {
   <!-- TOP SCORERS -->
   <section class="tab-panel" id="panel-scorers">
     <div class="scorers-controls">
-      <input type="text" id="scorerName" placeholder="Player name">
+      <input type="text" id="scorerName" placeholder="Player name" maxlength="60">
       <select id="scorerTeam"></select>
       <input type="number" id="scorerGoals" placeholder="Goals" min="0" style="max-width:100px">
       <button class="btn btn-gold" onclick="addScorer()">+ Add Player</button>
@@ -1018,6 +1018,13 @@ const TEAMS = [
   { id: 'TOT', name: 'Tottenham',         color: '#132257' },
   { id: 'WHU', name: 'West Ham',          color: '#7A263A' },
 ];
+
+function escapeHtml(str) {
+  if (!str) return '';
+  var d = document.createElement('div');
+  d.textContent = str;
+  return d.innerHTML;
+}
 
 const FLAG_URL = 'https://flagcdn.com/w40/gb-eng.png';
 const STORAGE_KEY = 'twc-pl-2526';
@@ -1360,7 +1367,7 @@ function renderScorers() {
     const boot = i === 0 && s.goals > 0 ? '<span class="golden-boot" title="Golden Boot leader">&#9733;</span>' : '';
     html += `<tr>
       <td>${i + 1}</td>
-      <td>${boot} ${s.name}</td>
+      <td>${boot} ${escapeHtml(s.name)}</td>
       <td><div class="team-cell">
         <span class="team-badge" style="background:${teamColor(s.teamId)}"></span>
         ${teamName(s.teamId)}

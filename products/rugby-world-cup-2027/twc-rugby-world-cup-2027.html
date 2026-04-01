@@ -588,7 +588,7 @@ h1, h2, h3, h4, h5 { font-family: 'EB Garamond', Georgia, serif; font-weight: 60
       <div class="card-header"><h3>Try Scorers</h3></div>
       <div class="card-body">
         <div class="stat-add-form">
-          <div class="form-group"><label>Player</label><input type="text" id="tryPlayer" placeholder="Player name"></div>
+          <div class="form-group"><label>Player</label><input type="text" id="tryPlayer" placeholder="Player name" maxlength="60"></div>
           <div class="form-group"><label>Team</label><select id="tryTeam"></select></div>
           <div class="form-group"><label>Tries</label><input type="number" id="tryCount" value="1" min="1" style="width:60px"></div>
           <button class="btn btn-sm" onclick="addTryScorer()">Add</button>
@@ -605,7 +605,7 @@ h1, h2, h3, h4, h5 { font-family: 'EB Garamond', Georgia, serif; font-weight: 60
       <div class="card-header"><h3>Points Scorers</h3></div>
       <div class="card-body">
         <div class="stat-add-form">
-          <div class="form-group"><label>Player</label><input type="text" id="ptsPlayer" placeholder="Player name"></div>
+          <div class="form-group"><label>Player</label><input type="text" id="ptsPlayer" placeholder="Player name" maxlength="60"></div>
           <div class="form-group"><label>Team</label><select id="ptsTeam"></select></div>
           <div class="form-group"><label>Points</label><input type="number" id="ptsCount" value="5" min="1" style="width:60px"></div>
           <button class="btn btn-sm" onclick="addPointsScorer()">Add</button>
@@ -622,7 +622,7 @@ h1, h2, h3, h4, h5 { font-family: 'EB Garamond', Georgia, serif; font-weight: 60
       <div class="card-header"><h3>Disciplinary Record</h3></div>
       <div class="card-body">
         <div class="stat-add-form">
-          <div class="form-group"><label>Player</label><input type="text" id="cardPlayer" placeholder="Player name"></div>
+          <div class="form-group"><label>Player</label><input type="text" id="cardPlayer" placeholder="Player name" maxlength="60"></div>
           <div class="form-group"><label>Team</label><select id="cardTeam"></select></div>
           <div class="form-group"><label>Card</label>
             <select id="cardType"><option value="yellow">Yellow</option><option value="red">Red</option></select>
@@ -850,7 +850,17 @@ function defaultState() {
 function loadState() {
   try {
     const s = localStorage.getItem('twc_rwc2027');
-    if (s) return JSON.parse(s);
+    if (s) {
+      const parsed = JSON.parse(s);
+      const fresh = defaultState();
+      if (parsed.scores && typeof parsed.scores === 'object') fresh.scores = parsed.scores;
+      if (parsed.knockout && typeof parsed.knockout === 'object') fresh.knockout = parsed.knockout;
+      if (parsed.theme && typeof parsed.theme === 'string') fresh.theme = parsed.theme;
+      if (Array.isArray(parsed.tryScorers)) fresh.tryScorers = parsed.tryScorers;
+      if (Array.isArray(parsed.pointsScorers)) fresh.pointsScorers = parsed.pointsScorers;
+      if (Array.isArray(parsed.cards)) fresh.cards = parsed.cards;
+      return fresh;
+    }
   } catch(e) {}
   return defaultState();
 }
@@ -862,6 +872,13 @@ function saveState() {
 // ======================================================================
 // HELPERS
 // ======================================================================
+function escapeHtml(str) {
+  if (!str) return '';
+  var d = document.createElement('div');
+  d.textContent = str;
+  return d.innerHTML;
+}
+
 function flagImg(teamName) {
   const t = TEAMS[teamName];
   if (!t || !t.code) return '';
@@ -1007,19 +1024,19 @@ function renderPoolMatches() {
         <div class="match-score-inputs">
           <div>
             <div class="score-input-group">
-              <div style="text-align:center"><div class="score-label">T</div><input class="score-input" type="number" min="0" value="${num(s.homeT)}" data-match="${f.num}" data-field="homeT"></div>
-              <div style="text-align:center"><div class="score-label">C</div><input class="score-input" type="number" min="0" value="${num(s.homeC)}" data-match="${f.num}" data-field="homeC"></div>
-              <div style="text-align:center"><div class="score-label">P</div><input class="score-input" type="number" min="0" value="${num(s.homeP)}" data-match="${f.num}" data-field="homeP"></div>
-              <div style="text-align:center"><div class="score-label">D</div><input class="score-input" type="number" min="0" value="${num(s.homeD)}" data-match="${f.num}" data-field="homeD"></div>
+              <div style="text-align:center"><div class="score-label">T</div><input class="score-input" type="number" min="0" max="99" value="${num(s.homeT)}" data-match="${f.num}" data-field="homeT"></div>
+              <div style="text-align:center"><div class="score-label">C</div><input class="score-input" type="number" min="0" max="99" value="${num(s.homeC)}" data-match="${f.num}" data-field="homeC"></div>
+              <div style="text-align:center"><div class="score-label">P</div><input class="score-input" type="number" min="0" max="99" value="${num(s.homeP)}" data-match="${f.num}" data-field="homeP"></div>
+              <div style="text-align:center"><div class="score-label">D</div><input class="score-input" type="number" min="0" max="99" value="${num(s.homeD)}" data-match="${f.num}" data-field="homeD"></div>
             </div>
           </div>
           <div class="score-total">${homeTotal} &ndash; ${awayTotal}</div>
           <div>
             <div class="score-input-group away">
-              <div style="text-align:center"><div class="score-label">T</div><input class="score-input" type="number" min="0" value="${num(s.awayT)}" data-match="${f.num}" data-field="awayT"></div>
-              <div style="text-align:center"><div class="score-label">C</div><input class="score-input" type="number" min="0" value="${num(s.awayC)}" data-match="${f.num}" data-field="awayC"></div>
-              <div style="text-align:center"><div class="score-label">P</div><input class="score-input" type="number" min="0" value="${num(s.awayP)}" data-match="${f.num}" data-field="awayP"></div>
-              <div style="text-align:center"><div class="score-label">D</div><input class="score-input" type="number" min="0" value="${num(s.awayD)}" data-match="${f.num}" data-field="awayD"></div>
+              <div style="text-align:center"><div class="score-label">T</div><input class="score-input" type="number" min="0" max="99" value="${num(s.awayT)}" data-match="${f.num}" data-field="awayT"></div>
+              <div style="text-align:center"><div class="score-label">C</div><input class="score-input" type="number" min="0" max="99" value="${num(s.awayC)}" data-match="${f.num}" data-field="awayC"></div>
+              <div style="text-align:center"><div class="score-label">P</div><input class="score-input" type="number" min="0" max="99" value="${num(s.awayP)}" data-match="${f.num}" data-field="awayP"></div>
+              <div style="text-align:center"><div class="score-label">D</div><input class="score-input" type="number" min="0" max="99" value="${num(s.awayD)}" data-match="${f.num}" data-field="awayD"></div>
             </div>
           </div>
         </div>
@@ -1104,7 +1121,7 @@ function renderBracket() {
       <div class="bracket-team-row">
         ${teamName ? flagImg(teamName) : '<span style="width:20px;height:14px;display:inline-block;background:var(--border);border-radius:2px;"></span>'}
         ${teamName ? `<span class="team-name">${teamName}</span>` : `<span class="team-placeholder">${placeholder}</span>`}
-        <input class="bracket-score" type="number" min="0" value="${scoreVal}" data-ko="${matchId}" data-side="${side}" placeholder="&ndash;">
+        <input class="bracket-score" type="number" min="0" max="99" value="${scoreVal}" data-ko="${matchId}" data-side="${side}" placeholder="&ndash;">
       </div>
     `;
   }
@@ -1293,7 +1310,7 @@ function renderTryScorers() {
   body.innerHTML = state.tryScorers.map((s, i) => `
     <tr>
       <td>${i+1}</td>
-      <td style="font-weight:500">${s.player}</td>
+      <td style="font-weight:500">${escapeHtml(s.player)}</td>
       <td><span style="display:flex;align-items:center;gap:4px">${flagImg(s.team)} ${TEAMS[s.team]?.abbr || s.team}</span></td>
       <td style="font-weight:700;color:var(--accent)">${s.tries}</td>
       <td><button class="remove-btn" onclick="removeTryScorer(${i})">&times;</button></td>
@@ -1321,7 +1338,7 @@ function renderPointsScorers() {
   body.innerHTML = state.pointsScorers.map((s, i) => `
     <tr>
       <td>${i+1}</td>
-      <td style="font-weight:500">${s.player}</td>
+      <td style="font-weight:500">${escapeHtml(s.player)}</td>
       <td><span style="display:flex;align-items:center;gap:4px">${flagImg(s.team)} ${TEAMS[s.team]?.abbr || s.team}</span></td>
       <td style="font-weight:700;color:var(--accent)">${s.points}</td>
       <td><button class="remove-btn" onclick="removePointsScorer(${i})">&times;</button></td>
@@ -1347,7 +1364,7 @@ function renderCards() {
   body.innerHTML = state.cards.map((s, i) => `
     <tr>
       <td>${i+1}</td>
-      <td style="font-weight:500">${s.player}</td>
+      <td style="font-weight:500">${escapeHtml(s.player)}</td>
       <td><span style="display:flex;align-items:center;gap:4px">${flagImg(s.team)} ${TEAMS[s.team]?.abbr || s.team}</span></td>
       <td><span style="display:inline-block;width:16px;height:20px;border-radius:2px;background:${s.cardType === 'red' ? '#c8502a' : '#e6c828'};vertical-align:middle;"></span> ${s.cardType === 'red' ? 'Red' : 'Yellow'}</td>
       <td><button class="remove-btn" onclick="removeCard(${i})">&times;</button></td>
@@ -1405,7 +1422,14 @@ function closeImportModal() { document.getElementById('importModal').classList.r
 function importData() {
   try {
     const data = JSON.parse(document.getElementById('importArea').value);
-    state = { ...defaultState(), ...data };
+    const fresh = defaultState();
+    if (data.scores && typeof data.scores === 'object') fresh.scores = data.scores;
+    if (data.knockout && typeof data.knockout === 'object') fresh.knockout = data.knockout;
+    if (data.theme && typeof data.theme === 'string') fresh.theme = data.theme;
+    if (Array.isArray(data.tryScorers)) fresh.tryScorers = data.tryScorers;
+    if (Array.isArray(data.pointsScorers)) fresh.pointsScorers = data.pointsScorers;
+    if (Array.isArray(data.cards)) fresh.cards = data.cards;
+    state = fresh;
     saveState();
     closeImportModal();
     renderAll();

@@ -1,0 +1,2431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TWC Product Cards — Screenshot Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0B1E3D;
+    --red: #C8502A;
+    --gold: #C8A94A;
+    --cream: #F7F5EE;
+    --white: #FFFFFF;
+    --dark-bg: #0a0f1e;
+    --gold-light: #e0c46a;
+    --navy-mid: #132845;
+    --navy-light: #1a3460;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--dark-bg);
+    font-family: 'Inter', sans-serif;
+    color: var(--white);
+    padding: 40px 20px;
+  }
+  .page-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 30px;
+    background: #111827;
+    border-radius: 12px;
+    border: 1px solid #2a3a5c;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .page-header h1 {
+    font-family: 'EB Garamond', serif;
+    font-size: 28px;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .page-header p {
+    font-size: 14px;
+    color: #9ca3af;
+    line-height: 1.6;
+    margin-bottom: 8px;
+  }
+  .print-btn {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 10px 28px;
+    background: var(--gold);
+    color: var(--navy);
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+  }
+  .print-btn:hover { background: var(--gold-light); }
+  .card-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+  .card-label {
+    font-size: 13px;
+    color: #6b7280;
+    margin-bottom: 10px;
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+  }
+  .card-label strong { color: #9ca3af; }
+
+  /* ===================== BASE CARD ===================== */
+  .card {
+    width: 1200px;
+    height: 1200px;
+    background: var(--navy);
+    border: 2px solid var(--gold);
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .card-landscape {
+    width: 1200px;
+    height: 630px;
+    background: var(--navy);
+    border: 2px solid var(--gold);
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  /* Background texture */
+  .card::before, .card-landscape::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 10%, rgba(200,169,74,0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 90%, rgba(11,30,61,0.8) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  /* ===================== CARD INNER LAYOUT ===================== */
+  .card-inner {
+    position: absolute;
+    inset: 0;
+    padding: 44px 48px 36px;
+    display: flex;
+    flex-direction: column;
+  }
+  .card-landscape .card-inner {
+    padding: 32px 48px 28px;
+  }
+
+  /* ===================== TOP BAR ===================== */
+  .card-topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 28px;
+  }
+
+  /* TWC Logo Badge */
+  .twc-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .twc-box {
+    width: 48px;
+    height: 48px;
+    background: var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+  }
+  .twc-box span {
+    font-family: 'EB Garamond', serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--navy);
+    letter-spacing: 1px;
+  }
+  .twc-text {
+    display: flex;
+    flex-direction: column;
+  }
+  .twc-text .brand-name {
+    font-family: 'EB Garamond', serif;
+    font-size: 16px;
+    color: var(--cream);
+    letter-spacing: 0.5px;
+    line-height: 1.2;
+  }
+  .twc-text .brand-tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    color: var(--gold);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-top: 1px;
+  }
+
+  /* Sport Badge */
+  .sport-badge {
+    background: rgba(200,169,74,0.15);
+    border: 1px solid rgba(200,169,74,0.5);
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  /* ===================== PRODUCT TITLE AREA ===================== */
+  .card-title-area {
+    margin-bottom: 20px;
+  }
+  .card-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--red);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  .card-title {
+    font-family: 'EB Garamond', serif;
+    font-size: 52px;
+    line-height: 1.1;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 14px;
+  }
+  .card-title.white { color: var(--white); }
+  .card-title.sm { font-size: 44px; }
+  .card-title.xs { font-size: 38px; }
+
+  /* Price + Divider row */
+  .card-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  .price-badge {
+    background: var(--gold);
+    color: var(--navy);
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    padding: 7px 22px;
+    border-radius: 30px;
+    letter-spacing: 0.5px;
+  }
+  .divider-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, rgba(200,169,74,0.4), transparent);
+  }
+
+  /* ===================== FEATURES ===================== */
+  .features-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 7px 24px;
+    margin-bottom: 20px;
+  }
+  .feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: var(--white);
+    line-height: 1.4;
+  }
+  .feature-item .tick {
+    color: var(--gold);
+    font-size: 14px;
+    margin-top: 1px;
+    flex-shrink: 0;
+    font-weight: 700;
+  }
+
+  /* ===================== MOCKUP AREA ===================== */
+  .mockup-area {
+    flex: 1;
+    background: rgba(0,0,0,0.35);
+    border-radius: 12px;
+    border: 1px solid rgba(200,169,74,0.2);
+    padding: 16px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  .mockup-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    color: rgba(200,169,74,0.6);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  /* ===================== FOOTER ===================== */
+  .card-footer {
+    margin-top: 12px;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: rgba(247,245,238,0.4);
+    letter-spacing: 0.5px;
+  }
+  .card-footer span { margin: 0 8px; }
+
+  /* ===================== MOCKUP: GROUP TABLE ===================== */
+  .mock-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .mock-table thead tr {
+    border-bottom: 1px solid rgba(200,169,74,0.3);
+  }
+  .mock-table th {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    color: var(--gold);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 4px 6px;
+    text-align: center;
+    font-weight: 600;
+  }
+  .mock-table th:first-child { text-align: left; padding-left: 8px; }
+  .mock-table td {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: var(--white);
+    padding: 7px 6px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .mock-table td:first-child { text-align: left; padding-left: 8px; }
+  .mock-table tr:last-child td { border-bottom: none; }
+  .mock-table tr.highlight td { background: rgba(200,80,42,0.2); }
+  .mock-table tr.highlight td:first-child { border-left: 3px solid var(--red); }
+  .score-input {
+    display: inline-block;
+    width: 28px;
+    height: 22px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(200,169,74,0.4);
+    border-radius: 3px;
+    color: var(--gold);
+    font-size: 12px;
+    text-align: center;
+    line-height: 22px;
+    font-weight: 700;
+  }
+  .score-dash { color: rgba(255,255,255,0.3); margin: 0 2px; }
+  .team-flag {
+    display: inline-block;
+    width: 20px;
+    height: 14px;
+    border-radius: 2px;
+    margin-right: 6px;
+    vertical-align: middle;
+    position: relative;
+    overflow: hidden;
+  }
+  .pts-cell { color: var(--gold); font-weight: 700; }
+  .pos-cell { color: rgba(255,255,255,0.4); font-size: 12px; }
+  .group-header {
+    font-family: 'EB Garamond', serif;
+    font-size: 14px;
+    color: var(--gold);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid rgba(200,169,74,0.2);
+  }
+
+  /* Form dots */
+  .form-dots { display: flex; gap: 3px; justify-content: center; }
+  .form-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    display: inline-block;
+  }
+  .form-dot.w { background: #22c55e; }
+  .form-dot.d { background: #eab308; }
+  .form-dot.l { background: #ef4444; }
+  .form-dot.e { background: rgba(255,255,255,0.2); }
+
+  /* ===================== MOCKUP: BRACKET ===================== */
+  .bracket-wrap {
+    display: flex;
+    gap: 0;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+  .bracket-side {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+  }
+  .bracket-round {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: stretch;
+  }
+  .bracket-match {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .bracket-slot {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(200,169,74,0.25);
+    border-radius: 3px;
+    padding: 4px 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: rgba(255,255,255,0.7);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .bracket-slot.filled { color: var(--white); background: rgba(200,169,74,0.12); }
+  .bracket-slot.winner { color: var(--gold); font-weight: 700; background: rgba(200,169,74,0.2); }
+  .bracket-centre {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 0 12px;
+    flex-shrink: 0;
+  }
+  .bracket-final-label {
+    font-family: 'EB Garamond', serif;
+    font-size: 13px;
+    color: var(--gold);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    margin: 0 4px;
+  }
+  .final-slot {
+    background: rgba(200,169,74,0.2);
+    border: 1px solid var(--gold);
+    border-radius: 4px;
+    padding: 6px 12px;
+    text-align: center;
+    font-size: 11px;
+    color: var(--gold);
+    font-family: 'Inter', sans-serif;
+    white-space: nowrap;
+  }
+
+  /* ===================== MOCKUP: CALENDAR ===================== */
+  .cal-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 3px;
+  }
+  .cal-day-header {
+    font-family: 'Inter', sans-serif;
+    font-size: 9px;
+    color: var(--gold);
+    text-align: center;
+    letter-spacing: 0.5px;
+    padding: 3px 0;
+    text-transform: uppercase;
+  }
+  .cal-cell {
+    background: rgba(255,255,255,0.05);
+    border-radius: 3px;
+    padding: 5px 4px;
+    min-height: 44px;
+    font-family: 'Inter', sans-serif;
+    font-size: 9px;
+    color: rgba(255,255,255,0.5);
+  }
+  .cal-cell .day-num {
+    font-size: 11px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 2px;
+  }
+  .cal-cell.has-match { background: rgba(200,169,74,0.1); border: 1px solid rgba(200,169,74,0.25); }
+  .cal-cell.has-match .day-num { color: var(--gold); }
+  .cal-match-tag {
+    display: block;
+    background: rgba(200,80,42,0.7);
+    border-radius: 2px;
+    padding: 1px 3px;
+    color: white;
+    font-size: 8px;
+    margin-top: 2px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .cal-match-tag.g { background: rgba(200,80,42,0.7); }
+  .cal-match-tag.ko { background: rgba(200,169,74,0.7); color: var(--navy); }
+  .cal-empty { background: transparent; }
+
+  /* ===================== MOCKUP: TEAM CARD ===================== */
+  .team-card-mock {
+    display: flex;
+    gap: 14px;
+    height: 100%;
+  }
+  .team-flag-lg {
+    width: 90px;
+    min-width: 90px;
+    border-radius: 6px;
+    background: linear-gradient(135deg, #1a3460 0%, #0B1E3D 100%);
+    border: 1px solid rgba(200,169,74,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+  }
+  .team-card-info { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+  .team-card-name {
+    font-family: 'EB Garamond', serif;
+    font-size: 20px;
+    color: var(--white);
+    border-bottom: 1px solid rgba(200,169,74,0.2);
+    padding-bottom: 6px;
+  }
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: rgba(255,255,255,0.7);
+  }
+  .stat-row span { color: var(--gold); font-weight: 600; }
+  .stat-bar-wrap { margin-top: 2px; }
+  .stat-bar-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 3px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .stat-bar {
+    height: 5px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 3px;
+    margin-bottom: 5px;
+    overflow: hidden;
+  }
+  .stat-bar-fill { height: 100%; border-radius: 3px; background: var(--gold); }
+  .player-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 6px;
+    border-radius: 3px;
+    background: rgba(255,255,255,0.04);
+    margin-bottom: 3px;
+  }
+  .player-num {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--gold);
+    font-weight: 700;
+    width: 18px;
+    text-align: center;
+  }
+  .player-name {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--white);
+  }
+  .player-pos {
+    margin-left: auto;
+    font-size: 9px;
+    color: rgba(255,255,255,0.4);
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.5px;
+  }
+
+  /* ===================== MOCKUP: SWEEPSTAKE ===================== */
+  .sweep-grid {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    height: 100%;
+  }
+  .sweep-card {
+    width: 130px;
+    height: 150px;
+    border-radius: 8px;
+    border: 1px solid rgba(200,169,74,0.35);
+    background: rgba(255,255,255,0.06);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    position: relative;
+  }
+  .sweep-card.face-down {
+    background: linear-gradient(135deg, #132845, #0B1E3D);
+    border-color: rgba(200,169,74,0.5);
+  }
+  .sweep-card .question {
+    font-size: 36px;
+    color: rgba(200,169,74,0.5);
+    font-family: 'EB Garamond', serif;
+  }
+  .sweep-card .participant {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.5px;
+  }
+  .sweep-card.revealed {
+    background: rgba(200,169,74,0.12);
+    border-color: var(--gold);
+  }
+  .sweep-card .team-name {
+    font-family: 'EB Garamond', serif;
+    font-size: 15px;
+    color: var(--white);
+    text-align: center;
+    line-height: 1.2;
+  }
+  .sweep-card .team-emoji { font-size: 28px; }
+  .sweep-card .person-name {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--gold);
+    font-weight: 600;
+  }
+
+  /* ===================== MOCKUP: STANDINGS (UCL / PL) ===================== */
+  .standings-header {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .standings-badge {
+    width: 28px; height: 28px;
+    background: var(--gold);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+  }
+  .standings-title {
+    font-family: 'EB Garamond', serif;
+    font-size: 16px;
+    color: var(--white);
+  }
+  .zone-indicator {
+    display: inline-block;
+    width: 4px;
+    height: 22px;
+    border-radius: 2px;
+    margin-right: 6px;
+    vertical-align: middle;
+    flex-shrink: 0;
+  }
+  .zone-cl { background: #1d4ed8; }
+  .zone-el { background: #ea580c; }
+  .zone-rel { background: #dc2626; }
+  .zone-none { background: transparent; }
+
+  /* ===================== MOCKUP: SIX NATIONS ===================== */
+  .six-nations-badge {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 8px;
+  }
+  .nation-dot {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+
+  /* ===================== MOCKUP: POOLS ===================== */
+  .pools-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+    height: 100%;
+  }
+  .pool-block {
+    background: rgba(0,0,0,0.3);
+    border-radius: 6px;
+    border: 1px solid rgba(200,169,74,0.2);
+    padding: 8px;
+  }
+  .pool-title {
+    font-family: 'EB Garamond', serif;
+    font-size: 13px;
+    color: var(--gold);
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    text-align: center;
+    border-bottom: 1px solid rgba(200,169,74,0.2);
+    padding-bottom: 4px;
+  }
+  .pool-team {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 4px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--white);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .pool-team:last-child { border-bottom: none; }
+  .pool-team .flag { font-size: 14px; }
+  .qual-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+  .qual-dot.q { background: #22c55e; }
+  .qual-dot.e { background: #ef4444; }
+  .qual-dot.n { background: rgba(255,255,255,0.15); }
+
+  /* ===================== LANDSCAPE CARD SPECIFICS ===================== */
+  .landscape-inner {
+    display: flex;
+    gap: 32px;
+    height: 100%;
+  }
+  .landscape-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .landscape-right {
+    flex: 1.4;
+    display: flex;
+    flex-direction: column;
+  }
+  .landscape-title {
+    font-family: 'EB Garamond', serif;
+    font-size: 36px;
+    color: var(--gold);
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+  .landscape-sub {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: rgba(247,245,238,0.6);
+    line-height: 1.5;
+    margin-bottom: 14px;
+  }
+  .feature-highlight {
+    background: rgba(200,169,74,0.1);
+    border: 1px solid rgba(200,169,74,0.3);
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--gold);
+    letter-spacing: 0.5px;
+  }
+
+  @media print {
+    body { background: white; padding: 0; }
+    .page-header, .card-label, .print-btn { display: none !important; }
+    .card-wrapper { page-break-after: always; margin: 0; padding: 0; }
+    .card, .card-landscape { border: 1px solid #ccc; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>TWC Product Cards — Screenshot Guide</h1>
+  <p>18 cards total: 14 square (1200×1200px) + 4 landscape feature cards (1200×630px)</p>
+  <p>To capture each card: scroll to the card, use <strong>Windows Snipping Tool (Win+Shift+S)</strong> and select the exact card area. Each card has a thin gold border to guide your selection.</p>
+  <button class="print-btn" onclick="window.print()">Print All Cards</button>
+</div>
+
+<!-- ============================================================ -->
+<!-- CARD 1: World Cup 2026 Interactive Wall Chart -->
+<!-- ============================================================ -->
+<div class="card-wrapper">
+  <div class="card-label"><strong>Card 1 of 18</strong> · World Cup 2026 Interactive Wall Chart · 1200×1200px</div>
+  <div class="card" id="card-1">
+    <div class="card-inner">
+      <div class="card-topbar">
+        <div class="twc-logo">
+          <div class="twc-box"><span>TWC</span></div>
+          <div class="twc-text">
+            <span class="brand-name">The Wall Chart Co</span>
+            <span class="brand-tag">Premium Tournament Downloads</span>
+          </div>
+        </div>
+        <div class="sport-badge">⚽ Football</div>
+      </div>
+      <div class="card-title-area">
+        <div class="card-eyebrow">Interactive Wall Chart</div>
+        <div class="card-title">World Cup 2026</div>
+      </div>
+      <div class="card-meta-row">
+        <div class="price-badge">£5.99</div>
+        <div class="divider-line"></div>
+      </div>
+      <div class="features-grid">
+        <div class="feature-item"><span class="tick">✓</span>All 104 matches tracked</div>
+        <div class="feature-item"><span class="tick">✓</span>12 groups + full knockout</div>
+        <div class="feature-item"><span class="tick">✓</span>48 teams with flags</div>
+        <div class="feature-item"><span class="tick">✓</span>5 colour themes</div>
+        <div class="feature-item"><span class="tick">✓</span>Auto-saves progress</div>
+        <div class="feature-item"><span class="tick">✓</span>Export &amp; import your save</div>
+        <div class="feature-item"><span class="tick">✓</span>Works on any device</div>
+        <div class="feature-item"><span class="tick">✓</span>Print-friendly layout</div>
+      </div>
+      <div class="mockup-area">
+        <div class="mockup-label">Product Preview — Group Stage</div>
+        <div class="group-header">Group A</div>
+        <table class="mock-table">
+          <thead>
+            <tr>
+              <th style="width:30px">#</th>
+              <th style="text-align:left;padding-left:8px">Team</th>
+              <th>P</th><th>W</th><th>D</th><th>L</th><th>GD</th><th class="pts-cell">Pts</th>
+              <th>Match 1</th><th>Match 2</th><th>Match 3</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="pos-cell">1</td>
+              <td><span class="team-flag" style="background:linear-gradient(to bottom,#006847 33%,#fff 33%,#fff 66%,#ce1126 66%)"></span>Mexico</td>
+              <td>2</td><td>1</td><td>1</td><td>0</td><td>+2</td><td class="pts-cell">4</td>
+              <td><span class="score-input">2</span><span class="score-dash">–</span><span class="score-input">1</span></td>
+              <td><span class="score-input">1</span><span class="score-dash">–</span><span class="score-input">1</span></td>
+              <td><span class="score-input" style="background:rgba(200,169,74,0.05);color:rgba(200,169,74,0.4)">·</span><span class="score-dash">–</span><span class="score-input" style="background:rgba(200,169,74,0.05);color:rgba(200,169,74,0.4)">·</span></td>
+            </tr>
+            <tr>
+              <td class="pos-cell">2</td>
+              <td><span class="team-flag" style="background:linear-gradient(to right,#007A4D 25%,#FFB81C 25%,#FFB81C 40%,#007A4D 40%,#007A4D 60%,#FFB81C 60%,#FFB81C 75%,#007A4D 75%)"></span>South Africa</td>
+              <td>2</td><td>1</td><td>1</td><td>0</td><td>+1</td><td class="pts-cell">4</td>
+              <td><span class="score-input">1</span><span class="score-dash">–</span><span class="score-input">2</span></td>
+              <td><span class="score-input" style="background:rgba(200,169,74,0.05);color:rgba(200,169,74,0.4)">·</span><span class="score-dash">–</span><span class="score-input" style="background:rgba(200,169,74,0.05);color:rgba(200,169,74,0.4)">·</span></td>
+              <td><span class="score-input">2</span><span class="score-dash">–</span><span class="score-input">0</span></td>
+            </tr>
+            <tr>
+              <td class="pos-cell">3</td>
+              <td><span class="team-flag" style="background:linear-gradient(to bottom,#003478 50%,#CD2E3A 50%)"></span>South Korea</td>
+              <td>2</td><td>0</td><td>1</td><td>1</td><td>–1</td><td class="pts-cell">1</td>
+              <td><span class="score-input" style="background:rgba(200,169,74,0.05);color:rgba(200,169,74,0.4)">·</span><span class="score-dash">–</span><span class="score-input" style="background:rgba(200,169,74,0.05);color:rgba(200,169,74,0.4)">·</span></td>
+              <td><span class="score-input">1</span><span class="score-dash">–</span><span class="score-input">1</span></td>
+              <td><span class="score-input">0</span><span class="score-dash">–</span><span class="score-input">2</span></td>
+            </tr>
+            <tr>
+              <td class="pos-cell">4</td>
+              <td><span class="team-flag" style="background:linear-gradient(to bottom,#d7141a 33%,#fff 33%,#fff 66%,#11457e 66%)"></span>Czechia</td>
+              <td>2</td><td>0</td><td>1</td><td>1</td><td>–2</td><td class="pts-cell">1</td>
+              <td><span class="score-input">1</span><span class="score-dash">–</span><span class="score-input">1</span></td>
+              <td><span class="score-input">0</span><span class="score-dash">–</span><span class="score-input">2</span></td>
+              <td><span class="score-input" style="background:rgba(200,169,74,0.05);color:rgba(200,169,74,0.4)">·</span><span class="score-dash">–</span><span class="score-input" style="background:rgba(200,169,74,0.05);color:rgba(200,169,74,0.4)">·</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <div style="margin-top:10px;display:flex;gap:8px;align-items:center;">
+          <div style="display:flex;align-items:center;gap:4px;font-size:10px;color:rgba(255,255,255,0.4);font-family:'Inter',sans-serif;">
+            <div style="width:10px;height:10px;background:#22c55e;border-radius:2px"></div> Qualify
+          </div>
+          <div style="display:flex;align-items:center;gap:4px;font-size:10px;color:rgba(255,255,255,0.4);font-family:'Inter',sans-serif;">
+            <div style="width:10px;height:10px;background:rgba(255,255,255,0.1);border-radius:2px;border:1px solid rgba(200,169,74,0.4)"></div> Score inputs
+          </div>
+          <div style="margin-left:auto;font-size:10px;color:rgba(200,169,74,0.5);font-family:'Inter',sans-serif;letter-spacing:0.5px;">12 GROUPS · 48 TEAMS · 104 MATCHES</div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <span>Digital Download</span>·<span>Opens in any browser</span>·<span>No app needed</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- CARD 2: England World Cup 2026 Fan Edition -->
+<!-- ============================================================ -->
+<div class="card-wrapper">
+  <div class="card-label"><strong>Card 2 of 18</strong> · England World Cup 2026 Fan Edition · 1200×1200px</div>
+  <div class="card" id="card-2">
+    <div class="card-inner">
+      <div class="card-topbar">
+        <div class="twc-logo">
+          <div class="twc-box"><span>TWC</span></div>
+          <div class="twc-text">
+            <span class="brand-name">The Wall Chart Co</span>
+            <span class="brand-tag">Premium Tournament Downloads</span>
+          </div>
+        </div>
+        <div class="sport-badge">🏴󠁧󠁢󠁥󠁮󠁧󠁿 England</div>
+      </div>
+      <div class="card-title-area">
+        <div class="card-eyebrow">Fan Edition · Wall Chart</div>
+        <div class="card-title" style="color:#fff">England<br><span style="color:var(--gold)">World Cup 2026</span></div>
+      </div>
+      <div class="card-meta-row">
+        <div class="price-badge">£5.99</div>
+        <div class="divider-line"></div>
+      </div>
+      <div class="features-grid">
+        <div class="feature-item"><span class="tick">✓</span>England-themed design</div>
+        <div class="feature-item"><span class="tick">✓</span>Group L highlighted</div>
+        <div class="feature-item"><span class="tick">✓</span>Full tournament tracker</div>
+        <div class="feature-item"><span class="tick">✓</span>Three Lions colour scheme</div>
+        <div class="feature-item"><span class="tick">✓</span>All 104 matches</div>
+        <div class="feature-item"><span class="tick">✓</span>Auto-saves progress</div>
+        <div class="feature-item"><span class="tick">✓</span>Flag icons all 48 nations</div>
+        <div class="feature-item"><span class="tick">✓</span>Works on any device</div>
+      </div>
+      <div class="mockup-area" style="border-color:rgba(200,80,42,0.3)">
+        <div class="mockup-label">Product Preview — Group L (England's Group)</div>
+        <div class="group-header" style="color:var(--red);border-color:rgba(200,80,42,0.3)">Group L — England's Group</div>
+        <table class="mock-table">
+          <thead>
+            <tr>
+              <th style="width:30px">#</th>
+              <th style="text-align:left;padding-left:8px">Team</th>
+              <th>P</th><th>W</th><th>D</th><th>L</th><th>GD</th><th class="pts-cell">Pts</th>
+              <th>Match 1</th><th>Match 2</th><th>Match 3</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="highlight">
+              <td class="pos-cell">1</td>
+              <td><span class="team-flag" style="background:white;position:relative"><span style="position:absolute;top:3px;left:3px;right:3px;bottom:3px;background:#CF091B;clip-path:polygon(42% 0,58% 0,58% 42%,100% 42%,100% 58%,58% 58%,58% 100%,42% 100%,42% 58%,0 58%,0 42%,42% 42%)"></span></span>England</td>
+              <td>2</td><td>2</td><td>0</td><td>0</td><td>+4</td><td class="pts-cell" style="color:var(--red)">6</td>
+              <td><span class="score-input">3</span><span class="score-dash">–</span><span class="score-input">0</span></td>
+              <td><span class="score-input">2</span><span class="score-dash">–</span><span class="score-input">1</span></td>
+              <td><span class="score-input" style="background:rgba(200,169,74,0.05);color:rgba(200,169,74,0.4)">·</span><span class="score-dash">–</span><span class="score-input" style="background:rgba(200,169,74,0.05);color:rgba(200,169,74,0.4)">·</span></td>
+            </tr>
+            <tr>
+              <td class="pos-cell">2</td>
+              <td><span class="team-flag" style="background:linear-gradient(to right,#006B3F 33%,#FCD116 33%,#FCD116 66%,#CE1126 66%)"></span>Ghana</td>
+              <td>2</td><td>1</td><td>0</td><td>1</td><td>+1</td><td class="pts-cell">3</td>
+              <td><span class="score-input">0</span><span class="score-dash">–</span><span class="score-input">3</span></td>
+              <td><span class="score-input" style="background:rgba(200,169,74,0.05);color:rgba(200,169,74,0.4)">·</span><span class="score-dash">–</span><span class="score-input" style="background:rgba(200,169,74,0.05);color:rgba(200,169,74,0.4)">·</span></td>
+              <td><span class="score-input">2</span><span class="score-dash">–</span><span class="score-input">1</span></td>
+            </tr>
+            <tr>
+              <td class="pos-cell">3</td>
+              <td><span class="team-flag" style="background:linear-gradient(to bottom,#003087 50%,#CF091B 50%)"></span>Panama</td>
+              <td>2</td><td>0</td><td>1</td><td>1</td><td>–2</td><td class="pts-cell">1</td>
+              <td><span class="score-input" style="background:rgba(200,169,74,0.05);color:rgba(200,169,74,0.4)">·</span><span class="score-dash">–</span><span class="score-input" style="background:rgba(200,169,74,0.05);color:rgba(200,169,74,0.4)">·</span></td>
+              <td><span class="score-input">1</span><span class="score-dash">–</span><span class="score-input">2</span></td>
+              <td><span class="score-input">1</span><span class="score-dash">–</span><span class="score-input">1</span></td>
+            </tr>
+            <tr>
+              <td class="pos-cell">4</td>
+              <td><span class="team-flag" style="background:linear-gradient(to bottom,#FF0000 33%,#fff 33%,#fff 66%,#003DA5 66%)"></span>Croatia</td>
+              <td>2</td><td>0</td><td>1</td><td>1</td><td>–3</td><td class="pts-cell">1</td>
+              <td><span class="score-input">1</span><span class="score-dash">–</span><span class="score-input">1</span></td>
+              <td><span class="score-input">1</span><span class="score-dash">–</span><span class="score-input">2</span></td>
+              <td><span class="score-input" style="background:rgba(200,169,74,0.05);color:rgba(200,169,74,0.4)">·</span><span class="score-dash">–</span><span class="score-input" style="background:rgba(200,169,74,0.05);color:rgba(200,169,74,0.4)">·</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <div style="margin-top:10px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+          <div style="display:flex;align-items:center;gap:5px;font-size:10px;color:rgba(255,255,255,0.4);font-family:'Inter',sans-serif;">
+            <div style="width:12px;height:12px;background:rgba(200,80,42,0.3);border-radius:2px;border-left:3px solid var(--red)"></div> England row highlighted
+          </div>
+          <div style="margin-left:auto;font-size:10px;color:rgba(200,80,42,0.6);font-family:'Inter',sans-serif;letter-spacing:0.5px;font-weight:600;">⚡ THREE LIONS EDITION</div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <span>Digital Download</span>·<span>Opens in any browser</span>·<span>No app needed</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- CARD 3: World Cup 2026 Fixture Calendar -->
+<!-- ============================================================ -->
+<div class="card-wrapper">
+  <div class="card-label"><strong>Card 3 of 18</strong> · World Cup 2026 Fixture Calendar (A3 Printable) · 1200×1200px</div>
+  <div class="card" id="card-3">
+    <div class="card-inner">
+      <div class="card-topbar">
+        <div class="twc-logo">
+          <div class="twc-box"><span>TWC</span></div>
+          <div class="twc-text">
+            <span class="brand-name">The Wall Chart Co</span>
+            <span class="brand-tag">Premium Tournament Downloads</span>
+          </div>
+        </div>
+        <div class="sport-badge">⚽ Football</div>
+      </div>
+      <div class="card-title-area">
+        <div class="card-eyebrow">A3 Printable · Fixture Calendar</div>
+        <div class="card-title xs">World Cup 2026<br><span style="color:var(--white);font-size:36px">Fixture Calendar</span></div>
+      </div>
+      <div class="card-meta-row">
+        <div class="price-badge">£3.49</div>
+        <div class="divider-line"></div>
+      </div>
+      <div class="features-grid">
+        <div class="feature-item"><span class="tick">✓</span>All 104 fixtures by date</div>
+        <div class="feature-item"><span class="tick">✓</span>A3 landscape format</div>
+        <div class="feature-item"><span class="tick">✓</span>Print at home or office</div>
+        <div class="feature-item"><span class="tick">✓</span>Clean minimal design</div>
+        <div class="feature-item"><span class="tick">✓</span>Every match, venue &amp; time</div>
+        <div class="feature-item"><span class="tick">✓</span>Group stage + knockout</div>
+        <div class="feature-item"><span class="tick">✓</span>Dates from 11 Jun–19 Jul</div>
+        <div class="feature-item"><span class="tick">✓</span>Print-ready PDF quality</div>
+      </div>
+      <div class="mockup-area">
+        <div class="mockup-label">Product Preview — June 2026 Calendar View</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+          <div style="font-family:'EB Garamond',serif;font-size:15px;color:var(--gold)">June 2026</div>
+          <div style="font-size:10px;color:rgba(255,255,255,0.3);font-family:'Inter',sans-serif;letter-spacing:0.5px">WORLD CUP · 11 JUN – 19 JUL</div>
+        </div>
+        <div class="cal-grid">
+          <div class="cal-day-header">Mon</div><div class="cal-day-header">Tue</div><div class="cal-day-header">Wed</div><div class="cal-day-header">Thu</div><div class="cal-day-header">Fri</div><div class="cal-day-header">Sat</div><div class="cal-day-header">Sun</div>
+          <div class="cal-cell cal-empty"></div><div class="cal-cell cal-empty"></div><div class="cal-cell cal-empty"></div><div class="cal-cell cal-empty"></div><div class="cal-cell cal-empty"></div><div class="cal-cell cal-empty"></div><div class="cal-cell"><div class="day-num">1</div></div>
+          <div class="cal-cell"><div class="day-num">2</div></div><div class="cal-cell"><div class="day-num">3</div></div><div class="cal-cell"><div class="day-num">4</div></div><div class="cal-cell"><div class="day-num">5</div></div><div class="cal-cell"><div class="day-num">6</div></div><div class="cal-cell"><div class="day-num">7</div></div><div class="cal-cell"><div class="day-num">8</div></div>
+          <div class="cal-cell"><div class="day-num">9</div></div><div class="cal-cell"><div class="day-num">10</div></div>
+          <div class="cal-cell has-match"><div class="day-num">11</div><span class="cal-match-tag g">MEX v ZAF</span><span class="cal-match-tag g">USA v CAN</span></div>
+          <div class="cal-cell has-match"><div class="day-num">12</div><span class="cal-match-tag g">BRA v SRB</span><span class="cal-match-tag g">ARG v MAR</span></div>
+          <div class="cal-cell has-match"><div class="day-num">13</div><span class="cal-match-tag g">ENG v PAN</span><span class="cal-match-tag g">GER v POR</span></div>
+          <div class="cal-cell has-match"><div class="day-num">14</div><span class="cal-match-tag g">FRA v URU</span><span class="cal-match-tag g">ESP v NED</span></div>
+          <div class="cal-cell has-match"><div class="day-num">15</div><span class="cal-match-tag g">JPN v KOR</span><span class="cal-match-tag g">AUS v NGA</span></div>
+          <div class="cal-cell has-match"><div class="day-num">16</div><span class="cal-match-tag g">ITA v CRO</span><span class="cal-match-tag g">CHI v COL</span></div>
+          <div class="cal-cell has-match"><div class="day-num">17</div><span class="cal-match-tag g">MEX v KOR</span></div>
+          <div class="cal-cell has-match"><div class="day-num">18</div><span class="cal-match-tag g">ENG v GHA</span></div>
+          <div class="cal-cell has-match"><div class="day-num">19</div><span class="cal-match-tag g">BRA v ARG</span></div>
+          <div class="cal-cell has-match"><div class="day-num">20</div><span class="cal-match-tag g">ESP v ITA</span></div>
+          <div class="cal-cell has-match"><div class="day-num">21</div><span class="cal-match-tag g">GER v FRA</span></div>
+          <div class="cal-cell has-match"><div class="day-num">22</div><span class="cal-match-tag g">ENG v CRO</span></div>
+          <div class="cal-cell has-match"><div class="day-num">27</div><span class="cal-match-tag ko" style="background:rgba(200,169,74,0.7);color:#0B1E3D">R32 ×4</span></div>
+          <div class="cal-cell has-match"><div class="day-num">28</div><span class="cal-match-tag ko" style="background:rgba(200,169,74,0.7);color:#0B1E3D">R32 ×4</span></div>
+          <div class="cal-cell has-match"><div class="day-num">29</div><span class="cal-match-tag ko" style="background:rgba(200,169,74,0.7);color:#0B1E3D">R32 ×4</span></div>
+          <div class="cal-cell has-match"><div class="day-num">30</div><span class="cal-match-tag ko" style="background:rgba(200,169,74,0.7);color:#0B1E3D">R32 ×4</span></div>
+        </div>
+        <div style="margin-top:8px;display:flex;gap:10px;">
+          <div style="display:flex;align-items:center;gap:4px;font-size:9px;color:rgba(255,255,255,0.4);font-family:'Inter',sans-serif;"><div style="width:8px;height:8px;background:rgba(200,80,42,0.7);border-radius:1px"></div>Group stage</div>
+          <div style="display:flex;align-items:center;gap:4px;font-size:9px;color:rgba(255,255,255,0.4);font-family:'Inter',sans-serif;"><div style="width:8px;height:8px;background:rgba(200,169,74,0.7);border-radius:1px"></div>Knockout</div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <span>Digital Download</span>·<span>Opens in any browser</span>·<span>No app needed</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- CARD 4: World Cup 2026 Knockout Bracket Poster -->
+<!-- ============================================================ -->
+<div class="card-wrapper">
+  <div class="card-label"><strong>Card 4 of 18</strong> · World Cup 2026 Knockout Bracket Poster · 1200×1200px</div>
+  <div class="card" id="card-4">
+    <div class="card-inner">
+      <div class="card-topbar">
+        <div class="twc-logo">
+          <div class="twc-box"><span>TWC</span></div>
+          <div class="twc-text">
+            <span class="brand-name">The Wall Chart Co</span>
+            <span class="brand-tag">Premium Tournament Downloads</span>
+          </div>
+        </div>
+        <div class="sport-badge">⚽ Football</div>
+      </div>
+      <div class="card-title-area">
+        <div class="card-eyebrow">Printable Poster · Bracket</div>
+        <div class="card-title xs">World Cup 2026<br><span style="color:var(--white);font-size:34px">Knockout Bracket Poster</span></div>
+      </div>
+      <div class="card-meta-row">
+        <div class="price-badge">£2.99</div>
+        <div class="divider-line"></div>
+      </div>
+      <div class="features-grid">
+        <div class="feature-item"><span class="tick">✓</span>Fill-in bracket from R32 to Final</div>
+        <div class="feature-item"><span class="tick">✓</span>16 × Round of 32 slots</div>
+        <div class="feature-item"><span class="tick">✓</span>Quarter-finals to Final</div>
+        <div class="feature-item"><span class="tick">✓</span>Blank for manual completion</div>
+        <div class="feature-item"><span class="tick">✓</span>Print and display</div>
+        <div class="feature-item"><span class="tick">✓</span>Clean landscape design</div>
+        <div class="feature-item"><span class="tick">✓</span>Works digitally too</div>
+        <div class="feature-item"><span class="tick">✓</span>A3/A2 print sizes</div>
+      </div>
+      <div class="mockup-area">
+        <div class="mockup-label">Product Preview — Knockout Bracket</div>
+        <div class="bracket-wrap" style="align-items:flex-start;gap:4px;">
+          <!-- Left side: R32 → QF → SF -->
+          <div style="display:flex;gap:4px;align-items:center;flex:1;">
+            <div style="display:flex;flex-direction:column;gap:6px;flex:1;">
+              <div style="font-size:9px;color:var(--gold);font-family:'Inter',sans-serif;letter-spacing:1px;text-align:center;margin-bottom:2px;">R32</div>
+              <div class="bracket-match"><div class="bracket-slot">A1 · Mexico</div><div class="bracket-slot">B2 · Poland</div></div>
+              <div class="bracket-match"><div class="bracket-slot">C1 · France</div><div class="bracket-slot">D2 · Japan</div></div>
+              <div class="bracket-match"><div class="bracket-slot">E1 · England</div><div class="bracket-slot">F2 · Colombia</div></div>
+              <div class="bracket-match"><div class="bracket-slot">G1 · Brazil</div><div class="bracket-slot">H2 · Morocco</div></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:20px;flex:0.8;margin-top:20px;">
+              <div style="font-size:9px;color:var(--gold);font-family:'Inter',sans-serif;letter-spacing:1px;text-align:center;margin-bottom:2px;">QF</div>
+              <div class="bracket-match"><div class="bracket-slot filled">Mexico</div><div class="bracket-slot">__________</div></div>
+              <div class="bracket-match"><div class="bracket-slot filled">England</div><div class="bracket-slot">__________</div></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:40px;flex:0.7;margin-top:40px;">
+              <div style="font-size:9px;color:var(--gold);font-family:'Inter',sans-serif;letter-spacing:1px;text-align:center;margin-bottom:2px;">SF</div>
+              <div class="bracket-match" style="margin-top:14px;"><div class="bracket-slot">__________</div><div class="bracket-slot">__________</div></div>
+            </div>
+          </div>
+          <!-- Centre Final -->
+          <div class="bracket-centre" style="margin-top:80px;">
+            <div style="background:rgba(200,169,74,0.2);border:1px solid var(--gold);border-radius:6px;padding:8px 10px;text-align:center;">
+              <div style="font-family:'EB Garamond',serif;font-size:11px;color:var(--gold);letter-spacing:1px;margin-bottom:4px;">FINAL</div>
+              <div class="bracket-slot" style="border:1px solid rgba(200,169,74,0.6);background:rgba(200,169,74,0.05);margin-bottom:3px;width:90px;text-align:center;">TBD</div>
+              <div style="font-size:9px;color:rgba(255,255,255,0.3);font-family:'Inter',sans-serif;margin:2px 0">vs</div>
+              <div class="bracket-slot" style="border:1px solid rgba(200,169,74,0.6);background:rgba(200,169,74,0.05);width:90px;text-align:center;">TBD</div>
+              <div style="margin-top:8px;padding:4px;background:var(--gold);border-radius:3px;font-family:'Inter',sans-serif;font-size:9px;color:var(--navy);font-weight:700;letter-spacing:1px;">🏆 CHAMPION</div>
+            </div>
+          </div>
+          <!-- Right side: R32 → QF → SF -->
+          <div style="display:flex;gap:4px;align-items:center;flex:1;">
+            <div style="display:flex;flex-direction:column;gap:40px;flex:0.7;margin-top:40px;">
+              <div style="font-size:9px;color:var(--gold);font-family:'Inter',sans-serif;letter-spacing:1px;text-align:center;margin-bottom:2px;">SF</div>
+              <div class="bracket-match" style="margin-top:14px;"><div class="bracket-slot">__________</div><div class="bracket-slot">__________</div></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:20px;flex:0.8;margin-top:20px;">
+              <div style="font-size:9px;color:var(--gold);font-family:'Inter',sans-serif;letter-spacing:1px;text-align:center;margin-bottom:2px;">QF</div>
+              <div class="bracket-match"><div class="bracket-slot filled">Argentina</div><div class="bracket-slot">__________</div></div>
+              <div class="bracket-match"><div class="bracket-slot">__________</div><div class="bracket-slot">__________</div></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px;flex:1;">
+              <div style="font-size:9px;color:var(--gold);font-family:'Inter',sans-serif;letter-spacing:1px;text-align:center;margin-bottom:2px;">R32</div>
+              <div class="bracket-match"><div class="bracket-slot">I1 · Germany</div><div class="bracket-slot">J2 · Ecuador</div></div>
+              <div class="bracket-match"><div class="bracket-slot">K1 · Spain</div><div class="bracket-slot">L2 · Ghana</div></div>
+              <div class="bracket-match"><div class="bracket-slot">M1 · Argentina</div><div class="bracket-slot">N2 · Senegal</div></div>
+              <div class="bracket-match"><div class="bracket-slot">O1 · Portugal</div><div class="bracket-slot">P2 · Canada</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <span>Digital Download</span>·<span>Opens in any browser</span>·<span>No app needed</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- CARD 5: World Cup 2026 Team Guide (48 Teams) -->
+<!-- ============================================================ -->
+<div class="card-wrapper">
+  <div class="card-label"><strong>Card 5 of 18</strong> · World Cup 2026 Team Guide (48 Teams) · 1200×1200px</div>
+  <div class="card" id="card-5">
+    <div class="card-inner">
+      <div class="card-topbar">
+        <div class="twc-logo">
+          <div class="twc-box"><span>TWC</span></div>
+          <div class="twc-text">
+            <span class="brand-name">The Wall Chart Co</span>
+            <span class="brand-tag">Premium Tournament Downloads</span>
+          </div>
+        </div>
+        <div class="sport-badge">⚽ Football</div>
+      </div>
+      <div class="card-title-area">
+        <div class="card-eyebrow">Team Guide · 48 Nations</div>
+        <div class="card-title xs">World Cup 2026<br><span style="color:var(--white);font-size:34px">Complete Team Guide</span></div>
+      </div>
+      <div class="card-meta-row">
+        <div class="price-badge">£5.99</div>
+        <div class="divider-line"></div>
+      </div>
+      <div class="features-grid">
+        <div class="feature-item"><span class="tick">✓</span>All 48 nations profiled</div>
+        <div class="feature-item"><span class="tick">✓</span>Key players listed</div>
+        <div class="feature-item"><span class="tick">✓</span>Group &amp; pool info</div>
+        <div class="feature-item"><span class="tick">✓</span>Previous World Cup history</div>
+        <div class="feature-item"><span class="tick">✓</span>Coach &amp; formation notes</div>
+        <div class="feature-item"><span class="tick">✓</span>Playing style notes</div>
+        <div class="feature-item"><span class="tick">✓</span>Printable team pages</div>
+        <div class="feature-item"><span class="tick">✓</span>Stats &amp; fun facts</div>
+      </div>
+      <div class="mockup-area">
+        <div class="mockup-label">Product Preview — Team Profile Card</div>
+        <div class="team-card-mock">
+          <div style="display:flex;flex-direction:column;gap:8px;min-width:110px;">
+            <div class="team-flag-lg">🏴󠁧󠁢󠁥󠁮󠁧󠁿</div>
+            <div style="background:rgba(200,80,42,0.2);border:1px solid rgba(200,80,42,0.4);border-radius:4px;padding:6px 8px;text-align:center;">
+              <div style="font-family:'EB Garamond',serif;font-size:11px;color:var(--red);letter-spacing:1px;text-transform:uppercase;margin-bottom:2px;">Group L</div>
+              <div style="font-family:'Inter',sans-serif;font-size:10px;color:rgba(255,255,255,0.5);">Pot 1 Seed</div>
+            </div>
+            <div style="background:rgba(200,169,74,0.1);border:1px solid rgba(200,169,74,0.2);border-radius:4px;padding:6px 8px;text-align:center;">
+              <div style="font-family:'Inter',sans-serif;font-size:9px;color:var(--gold);letter-spacing:0.5px;margin-bottom:2px;">BEST RESULT</div>
+              <div style="font-family:'EB Garamond',serif;font-size:13px;color:var(--white);">🏆 Winners<br><span style="font-size:10px;color:rgba(255,255,255,0.5)">1966</span></div>
+            </div>
+          </div>
+          <div class="team-card-info">
+            <div class="team-card-name">England<span style="font-size:14px;color:rgba(255,255,255,0.4);font-family:'Inter',sans-serif;margin-left:8px;">4-3-3</span></div>
+            <div class="stat-row">Coach: <span>Gareth Southgate</span></div>
+            <div class="stat-row">FIFA Rank: <span>#5</span></div>
+            <div style="margin-top:4px;">
+              <div class="stat-bar-label"><span>Attack</span><span style="color:var(--gold)">85</span></div>
+              <div class="stat-bar"><div class="stat-bar-fill" style="width:85%"></div></div>
+              <div class="stat-bar-label"><span>Defence</span><span style="color:var(--gold)">78</span></div>
+              <div class="stat-bar"><div class="stat-bar-fill" style="width:78%;background:var(--red)"></div></div>
+              <div class="stat-bar-label"><span>Midfield</span><span style="color:var(--gold)">82</span></div>
+              <div class="stat-bar"><div class="stat-bar-fill" style="width:82%;background:#4ade80"></div></div>
+            </div>
+            <div style="margin-top:6px;border-top:1px solid rgba(200,169,74,0.15);padding-top:6px;">
+              <div style="font-family:'Inter',sans-serif;font-size:10px;color:var(--gold);letter-spacing:0.5px;margin-bottom:5px;text-transform:uppercase;">Key Players</div>
+              <div class="player-row"><span class="player-num">10</span><span class="player-name">J. Bellingham</span><span class="player-pos">MID</span></div>
+              <div class="player-row"><span class="player-num">9</span><span class="player-name">H. Kane</span><span class="player-pos">FWD</span></div>
+              <div class="player-row"><span class="player-num">7</span><span class="player-name">B. Saka</span><span class="player-pos">FWD</span></div>
+              <div class="player-row"><span class="player-num">1</span><span class="player-name">J. Pickford</span><span class="player-pos">GK</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <span>Digital Download</span>·<span>Opens in any browser</span>·<span>No app needed</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- CARD 6: World Cup 2026 Team Guide (Confirmed Squads) -->
+<!-- ============================================================ -->
+<div class="card-wrapper">
+  <div class="card-label"><strong>Card 6 of 18</strong> · World Cup 2026 Team Guide (Confirmed Squads) · 1200×1200px</div>
+  <div class="card" id="card-6">
+    <div class="card-inner">
+      <div class="card-topbar">
+        <div class="twc-logo">
+          <div class="twc-box"><span>TWC</span></div>
+          <div class="twc-text">
+            <span class="brand-name">The Wall Chart Co</span>
+            <span class="brand-tag">Premium Tournament Downloads</span>
+          </div>
+        </div>
+        <div class="sport-badge">⚽ Football</div>
+      </div>
+      <div class="card-title-area">
+        <div class="card-eyebrow">Team Guide · Confirmed Squads</div>
+        <div class="card-title xs">World Cup 2026<br><span style="color:var(--white);font-size:32px">Confirmed Squad Guide</span></div>
+      </div>
+      <div class="card-meta-row">
+        <div class="price-badge">£5.99</div>
+        <div class="divider-line"></div>
+      </div>
+      <div class="features-grid">
+        <div class="feature-item"><span class="tick">✓</span>Confirmed squad lists</div>
+        <div class="feature-item"><span class="tick">✓</span>Player names &amp; numbers</div>
+        <div class="feature-item"><span class="tick">✓</span>Position breakdown</div>
+        <div class="feature-item"><span class="tick">✓</span>Coach confirmed lineup</div>
+        <div class="feature-item"><span class="tick">✓</span>Updated when squads announced</div>
+        <div class="feature-item"><span class="tick">✓</span>All 48 nations</div>
+        <div class="feature-item"><span class="tick">✓</span>Printable format</div>
+        <div class="feature-item"><span class="tick">✓</span>GK · DEF · MID · FWD split</div>
+      </div>
+      <div class="mockup-area">
+        <div class="mockup-label">Product Preview — Full Squad Card</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;height:100%;">
+          <div style="background:rgba(0,0,0,0.3);border-radius:6px;border:1px solid rgba(200,169,74,0.2);padding:10px;overflow:hidden;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;border-bottom:1px solid rgba(200,169,74,0.2);padding-bottom:6px;">
+              <span style="font-size:20px;">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span>
+              <div>
+                <div style="font-family:'EB Garamond',serif;font-size:16px;color:var(--white)">England</div>
+                <div style="font-family:'Inter',sans-serif;font-size:9px;color:var(--gold);letter-spacing:0.5px">SQUAD · 26 PLAYERS</div>
+              </div>
+              <div style="margin-left:auto;font-size:9px;color:rgba(255,255,255,0.3);font-family:'Inter',sans-serif;">Group L</div>
+            </div>
+            <div style="font-family:'Inter',sans-serif;font-size:9px;color:var(--gold);letter-spacing:1px;margin-bottom:4px;text-transform:uppercase;">Goalkeepers</div>
+            <div class="player-row" style="padding:3px 4px;"><span class="player-num" style="font-size:10px">1</span><span class="player-name" style="font-size:11px">J. Pickford</span><span class="player-pos" style="font-size:8px">GK</span></div>
+            <div class="player-row" style="padding:3px 4px;"><span class="player-num" style="font-size:10px">13</span><span class="player-name" style="font-size:11px">A. Ramsdale</span><span class="player-pos" style="font-size:8px">GK</span></div>
+            <div style="font-family:'Inter',sans-serif;font-size:9px;color:var(--gold);letter-spacing:1px;margin:5px 0 3px;text-transform:uppercase;">Defenders</div>
+            <div class="player-row" style="padding:3px 4px;"><span class="player-num" style="font-size:10px">2</span><span class="player-name" style="font-size:11px">K. Walker</span><span class="player-pos" style="font-size:8px">RB</span></div>
+            <div class="player-row" style="padding:3px 4px;"><span class="player-num" style="font-size:10px">5</span><span class="player-name" style="font-size:11px">H. Maguire</span><span class="player-pos" style="font-size:8px">CB</span></div>
+            <div class="player-row" style="padding:3px 4px;"><span class="player-num" style="font-size:10px">6</span><span class="player-name" style="font-size:11px">M. Guehi</span><span class="player-pos" style="font-size:8px">CB</span></div>
+            <div class="player-row" style="padding:3px 4px;"><span class="player-num" style="font-size:10px">3</span><span class="player-name" style="font-size:11px">L. Shaw</span><span class="player-pos" style="font-size:8px">LB</span></div>
+          </div>
+          <div style="background:rgba(0,0,0,0.3);border-radius:6px;border:1px solid rgba(200,169,74,0.2);padding:10px;overflow:hidden;">
+            <div style="font-family:'Inter',sans-serif;font-size:9px;color:var(--gold);letter-spacing:1px;margin-bottom:4px;text-transform:uppercase;">Midfielders</div>
+            <div class="player-row" style="padding:3px 4px;"><span class="player-num" style="font-size:10px">4</span><span class="player-name" style="font-size:11px">D. Rice</span><span class="player-pos" style="font-size:8px">CDM</span></div>
+            <div class="player-row" style="padding:3px 4px;"><span class="player-num" style="font-size:10px">8</span><span class="player-name" style="font-size:11px">K. Phillips</span><span class="player-pos" style="font-size:8px">CM</span></div>
+            <div class="player-row" style="padding:3px 4px;"><span class="player-num" style="font-size:10px">10</span><span class="player-name" style="font-size:11px">J. Bellingham</span><span class="player-pos" style="font-size:8px">CAM</span></div>
+            <div class="player-row" style="padding:3px 4px;"><span class="player-num" style="font-size:10px">16</span><span class="player-name" style="font-size:11px">T. Gallagher</span><span class="player-pos" style="font-size:8px">CM</span></div>
+            <div style="font-family:'Inter',sans-serif;font-size:9px;color:var(--gold);letter-spacing:1px;margin:5px 0 3px;text-transform:uppercase;">Forwards</div>
+            <div class="player-row" style="padding:3px 4px;"><span class="player-num" style="font-size:10px">9</span><span class="player-name" style="font-size:11px">H. Kane</span><span class="player-pos" style="font-size:8px">ST</span></div>
+            <div class="player-row" style="padding:3px 4px;"><span class="player-num" style="font-size:10px">7</span><span class="player-name" style="font-size:11px">B. Saka</span><span class="player-pos" style="font-size:8px">RW</span></div>
+            <div class="player-row" style="padding:3px 4px;"><span class="player-num" style="font-size:10px">11</span><span class="player-name" style="font-size:11px">M. Rashford</span><span class="player-pos" style="font-size:8px">LW</span></div>
+            <div class="player-row" style="padding:3px 4px;"><span class="player-num" style="font-size:10px">19</span><span class="player-name" style="font-size:11px">O. Watkins</span><span class="player-pos" style="font-size:8px">ST</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <span>Digital Download</span>·<span>Opens in any browser</span>·<span>No app needed</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- CARD 7: World Cup 2026 Office Sweepstake Kit -->
+<!-- ============================================================ -->
+<div class="card-wrapper">
+  <div class="card-label"><strong>Card 7 of 18</strong> · World Cup 2026 Office Sweepstake Kit · 1200×1200px</div>
+  <div class="card" id="card-7">
+    <div class="card-inner">
+      <div class="card-topbar">
+        <div class="twc-logo">
+          <div class="twc-box"><span>TWC</span></div>
+          <div class="twc-text">
+            <span class="brand-name">The Wall Chart Co</span>
+            <span class="brand-tag">Premium Tournament Downloads</span>
+          </div>
+        </div>
+        <div class="sport-badge">⚽ Football</div>
+      </div>
+      <div class="card-title-area">
+        <div class="card-eyebrow">Office Sweepstake Kit</div>
+        <div class="card-title xs">World Cup 2026<br><span style="color:var(--white);font-size:34px">Sweepstake Generator</span></div>
+      </div>
+      <div class="card-meta-row">
+        <div class="price-badge">£2.99</div>
+        <div class="divider-line"></div>
+      </div>
+      <div class="features-grid">
+        <div class="feature-item"><span class="tick">✓</span>Add up to 48 participants</div>
+        <div class="feature-item"><span class="tick">✓</span>Animated random draw</div>
+        <div class="feature-item"><span class="tick">✓</span>All 48 teams assigned</div>
+        <div class="feature-item"><span class="tick">✓</span>Prize pot calculator</div>
+        <div class="feature-item"><span class="tick">✓</span>Print individual slips</div>
+        <div class="feature-item"><span class="tick">✓</span>Print full results sheet</div>
+        <div class="feature-item"><span class="tick">✓</span>Export &amp; import draw</div>
+        <div class="feature-item"><span class="tick">✓</span>Free re-runs</div>
+      </div>
+      <div class="mockup-area">
+        <div class="mockup-label">Product Preview — The Draw</div>
+        <div style="display:flex;flex-direction:column;gap:10px;height:100%;">
+          <div style="display:flex;gap:12px;justify-content:center;flex:1;align-items:center;">
+            <!-- Face-down cards -->
+            <div class="sweep-card face-down">
+              <div class="question">?</div>
+              <div class="participant">Dave R.</div>
+            </div>
+            <div class="sweep-card face-down">
+              <div class="question">?</div>
+              <div class="participant">Sarah T.</div>
+            </div>
+            <!-- Revealed card -->
+            <div class="sweep-card revealed">
+              <div class="team-emoji">🏴󠁧󠁢󠁥󠁮󠁧󠁿</div>
+              <div class="team-name">England</div>
+              <div class="person-name">Mike B.</div>
+            </div>
+            <div class="sweep-card face-down">
+              <div class="question">?</div>
+              <div class="participant">Lucy W.</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:8px;justify-content:center;align-items:center;padding:8px;background:rgba(0,0,0,0.2);border-radius:6px;border:1px solid rgba(200,169,74,0.15);">
+            <div style="background:var(--red);border-radius:5px;padding:6px 18px;font-family:'Inter',sans-serif;font-size:12px;color:white;font-weight:700;letter-spacing:0.5px;">🎲 DRAW</div>
+            <div style="background:rgba(255,255,255,0.08);border-radius:5px;padding:6px 14px;font-family:'Inter',sans-serif;font-size:12px;color:rgba(255,255,255,0.6);">🖨 Print Slips</div>
+            <div style="background:rgba(255,255,255,0.08);border-radius:5px;padding:6px 14px;font-family:'Inter',sans-serif;font-size:12px;color:rgba(255,255,255,0.6);">💰 Prize Pot</div>
+            <div style="margin-left:auto;font-family:'Inter',sans-serif;font-size:11px;color:rgba(200,169,74,0.7);">4 / 48 drawn</div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <span>Digital Download</span>·<span>Opens in any browser</span>·<span>No app needed</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- CARD 8: Champions League 2025/26 Wall Chart -->
+<!-- ============================================================ -->
+<div class="card-wrapper">
+  <div class="card-label"><strong>Card 8 of 18</strong> · Champions League 2025/26 Wall Chart · 1200×1200px</div>
+  <div class="card" id="card-8">
+    <div class="card-inner">
+      <div class="card-topbar">
+        <div class="twc-logo">
+          <div class="twc-box"><span>TWC</span></div>
+          <div class="twc-text">
+            <span class="brand-name">The Wall Chart Co</span>
+            <span class="brand-tag">Premium Tournament Downloads</span>
+          </div>
+        </div>
+        <div class="sport-badge">⭐ UCL</div>
+      </div>
+      <div class="card-title-area">
+        <div class="card-eyebrow">Interactive Wall Chart · 2025/26</div>
+        <div class="card-title sm">Champions League<br><span style="font-size:32px;color:var(--white)">Wall Chart</span></div>
+      </div>
+      <div class="card-meta-row">
+        <div class="price-badge">£4.99</div>
+        <div class="divider-line"></div>
+      </div>
+      <div class="features-grid">
+        <div class="feature-item"><span class="tick">✓</span>All 36 teams tracked</div>
+        <div class="feature-item"><span class="tick">✓</span>Swiss-model league phase</div>
+        <div class="feature-item"><span class="tick">✓</span>Full knockout bracket</div>
+        <div class="feature-item"><span class="tick">✓</span>R16 to Munich Final</div>
+        <div class="feature-item"><span class="tick">✓</span>Auto-sorting standings</div>
+        <div class="feature-item"><span class="tick">✓</span>All fixtures &amp; matchdays</div>
+        <div class="feature-item"><span class="tick">✓</span>3 colour themes</div>
+        <div class="feature-item"><span class="tick">✓</span>Auto-saves progress</div>
+      </div>
+      <div class="mockup-area">
+        <div class="mockup-label">Product Preview — League Phase Standings</div>
+        <div class="standings-header">
+          <div class="standings-badge">⭐</div>
+          <div class="standings-title">UEFA Champions League 2025/26 — League Phase</div>
+        </div>
+        <table class="mock-table">
+          <thead>
+            <tr>
+              <th style="width:28px">#</th>
+              <th style="width:4px"></th>
+              <th style="text-align:left;padding-left:8px">Club</th>
+              <th>P</th><th>W</th><th>D</th><th>L</th><th>GF</th><th>GA</th><th>GD</th><th class="pts-cell">Pts</th>
+              <th>Form</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="pos-cell">1</td>
+              <td><div class="zone-indicator zone-cl"></div></td>
+              <td style="text-align:left;padding-left:8px">Liverpool</td>
+              <td>7</td><td>5</td><td>2</td><td>0</td><td>16</td><td>4</td><td>+12</td><td class="pts-cell">17</td>
+              <td><div class="form-dots"><span class="form-dot w"></span><span class="form-dot w"></span><span class="form-dot d"></span><span class="form-dot w"></span><span class="form-dot w"></span></div></td>
+            </tr>
+            <tr>
+              <td class="pos-cell">2</td>
+              <td><div class="zone-indicator zone-cl"></div></td>
+              <td style="text-align:left;padding-left:8px">Barcelona</td>
+              <td>7</td><td>5</td><td>1</td><td>1</td><td>14</td><td>6</td><td>+8</td><td class="pts-cell">16</td>
+              <td><div class="form-dots"><span class="form-dot w"></span><span class="form-dot w"></span><span class="form-dot w"></span><span class="form-dot l"></span><span class="form-dot w"></span></div></td>
+            </tr>
+            <tr>
+              <td class="pos-cell">3</td>
+              <td><div class="zone-indicator zone-cl"></div></td>
+              <td style="text-align:left;padding-left:8px">Arsenal</td>
+              <td>7</td><td>4</td><td>2</td><td>1</td><td>11</td><td>5</td><td>+6</td><td class="pts-cell">14</td>
+              <td><div class="form-dots"><span class="form-dot w"></span><span class="form-dot d"></span><span class="form-dot w"></span><span class="form-dot w"></span><span class="form-dot d"></span></div></td>
+            </tr>
+            <tr>
+              <td class="pos-cell">4</td>
+              <td><div class="zone-indicator zone-cl"></div></td>
+              <td style="text-align:left;padding-left:8px">Man City</td>
+              <td>7</td><td>4</td><td>1</td><td>2</td><td>10</td><td>7</td><td>+3</td><td class="pts-cell">13</td>
+              <td><div class="form-dots"><span class="form-dot l"></span><span class="form-dot w"></span><span class="form-dot w"></span><span class="form-dot d"></span><span class="form-dot w"></span></div></td>
+            </tr>
+            <tr>
+              <td class="pos-cell">5</td>
+              <td><div class="zone-indicator" style="background:#7c3aed"></div></td>
+              <td style="text-align:left;padding-left:8px">Real Madrid</td>
+              <td>7</td><td>3</td><td>2</td><td>2</td><td>9</td><td>8</td><td>+1</td><td class="pts-cell">11</td>
+              <td><div class="form-dots"><span class="form-dot w"></span><span class="form-dot l"></span><span class="form-dot d"></span><span class="form-dot w"></span><span class="form-dot d"></span></div></td>
+            </tr>
+          </tbody>
+        </table>
+        <div style="margin-top:10px;display:flex;gap:12px;flex-wrap:wrap;">
+          <div style="display:flex;align-items:center;gap:4px;font-size:9px;color:rgba(255,255,255,0.4);font-family:'Inter',sans-serif;"><div style="width:4px;height:14px;background:#1d4ed8;border-radius:2px"></div>Auto-qualify R16</div>
+          <div style="display:flex;align-items:center;gap:4px;font-size:9px;color:rgba(255,255,255,0.4);font-family:'Inter',sans-serif;"><div style="width:4px;height:14px;background:#7c3aed;border-radius:2px"></div>Play-off</div>
+          <div style="margin-left:auto;font-size:10px;color:rgba(200,169,74,0.5);font-family:'Inter',sans-serif;letter-spacing:0.5px;">36 TEAMS · 8 MATCHDAYS · MUNICH FINAL</div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <span>Digital Download</span>·<span>Opens in any browser</span>·<span>No app needed</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- CARD 9: Premier League 2025/26 Tracker -->
+<!-- ============================================================ -->
+<div class="card-wrapper">
+  <div class="card-label"><strong>Card 9 of 18</strong> · Premier League 2025/26 Tracker · 1200×1200px</div>
+  <div class="card" id="card-9">
+    <div class="card-inner">
+      <div class="card-topbar">
+        <div class="twc-logo">
+          <div class="twc-box"><span>TWC</span></div>
+          <div class="twc-text">
+            <span class="brand-name">The Wall Chart Co</span>
+            <span class="brand-tag">Premium Tournament Downloads</span>
+          </div>
+        </div>
+        <div class="sport-badge">⚽ Premier League</div>
+      </div>
+      <div class="card-title-area">
+        <div class="card-eyebrow">Interactive Tracker · 2025/26</div>
+        <div class="card-title sm">Premier League<br><span style="font-size:32px;color:var(--white)">Season Tracker</span></div>
+      </div>
+      <div class="card-meta-row">
+        <div class="price-badge">£4.99</div>
+        <div class="divider-line"></div>
+      </div>
+      <div class="features-grid">
+        <div class="feature-item"><span class="tick">✓</span>All 380 matches</div>
+        <div class="feature-item"><span class="tick">✓</span>38 gameweeks</div>
+        <div class="feature-item"><span class="tick">✓</span>Full 20-team table</div>
+        <div class="feature-item"><span class="tick">✓</span>Live form guide (last 5)</div>
+        <div class="feature-item"><span class="tick">✓</span>Competition zone indicators</div>
+        <div class="feature-item"><span class="tick">✓</span>Top scorers tracker</div>
+        <div class="feature-item"><span class="tick">✓</span>Auto-saves progress</div>
+        <div class="feature-item"><span class="tick">✓</span>3 themes</div>
+      </div>
+      <div class="mockup-area">
+        <div class="mockup-label">Product Preview — League Table (GW 28)</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+          <div style="font-family:'EB Garamond',serif;font-size:15px;color:var(--gold)">Premier League 2025/26</div>
+          <div style="font-family:'Inter',sans-serif;font-size:10px;color:rgba(255,255,255,0.4);letter-spacing:0.5px;">Gameweek 28 of 38</div>
+        </div>
+        <table class="mock-table">
+          <thead>
+            <tr>
+              <th style="width:28px">#</th>
+              <th style="width:4px"></th>
+              <th style="text-align:left;padding-left:8px">Club</th>
+              <th>P</th><th>W</th><th>D</th><th>L</th><th>GD</th><th class="pts-cell">Pts</th>
+              <th>Form</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="pos-cell">1</td>
+              <td><div class="zone-indicator zone-cl"></div></td>
+              <td style="text-align:left;padding-left:8px"><span style="font-size:14px;">🔴</span> Liverpool</td>
+              <td>28</td><td>18</td><td>6</td><td>4</td><td>+36</td><td class="pts-cell">60</td>
+              <td><div class="form-dots"><span class="form-dot w"></span><span class="form-dot w"></span><span class="form-dot d"></span><span class="form-dot w"></span><span class="form-dot w"></span></div></td>
+            </tr>
+            <tr>
+              <td class="pos-cell">2</td>
+              <td><div class="zone-indicator zone-cl"></div></td>
+              <td style="text-align:left;padding-left:8px"><span style="font-size:14px;">🔴</span> Arsenal</td>
+              <td>28</td><td>17</td><td>6</td><td>5</td><td>+24</td><td class="pts-cell">57</td>
+              <td><div class="form-dots"><span class="form-dot w"></span><span class="form-dot d"></span><span class="form-dot w"></span><span class="form-dot w"></span><span class="form-dot l"></span></div></td>
+            </tr>
+            <tr>
+              <td class="pos-cell">3</td>
+              <td><div class="zone-indicator zone-cl"></div></td>
+              <td style="text-align:left;padding-left:8px"><span style="font-size:14px;">🔵</span> Man City</td>
+              <td>28</td><td>16</td><td>5</td><td>7</td><td>+19</td><td class="pts-cell">53</td>
+              <td><div class="form-dots"><span class="form-dot l"></span><span class="form-dot w"></span><span class="form-dot w"></span><span class="form-dot d"></span><span class="form-dot w"></span></div></td>
+            </tr>
+            <tr>
+              <td class="pos-cell">4</td>
+              <td><div class="zone-indicator zone-cl"></div></td>
+              <td style="text-align:left;padding-left:8px"><span style="font-size:14px;">🔵</span> Chelsea</td>
+              <td>28</td><td>15</td><td>7</td><td>6</td><td>+14</td><td class="pts-cell">52</td>
+              <td><div class="form-dots"><span class="form-dot w"></span><span class="form-dot w"></span><span class="form-dot d"></span><span class="form-dot l"></span><span class="form-dot w"></span></div></td>
+            </tr>
+            <tr>
+              <td class="pos-cell">5</td>
+              <td><div class="zone-indicator" style="background:#ea580c"></div></td>
+              <td style="text-align:left;padding-left:8px"><span style="font-size:14px;">⚪</span> Spurs</td>
+              <td>28</td><td>14</td><td>6</td><td>8</td><td>+7</td><td class="pts-cell">48</td>
+              <td><div class="form-dots"><span class="form-dot d"></span><span class="form-dot w"></span><span class="form-dot l"></span><span class="form-dot w"></span><span class="form-dot w"></span></div></td>
+            </tr>
+          </tbody>
+        </table>
+        <div style="margin-top:10px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+          <div style="display:flex;align-items:center;gap:4px;font-size:9px;color:rgba(255,255,255,0.4);font-family:'Inter',sans-serif;"><div style="width:4px;height:14px;background:#1d4ed8;border-radius:2px"></div>Champions League</div>
+          <div style="display:flex;align-items:center;gap:4px;font-size:9px;color:rgba(255,255,255,0.4);font-family:'Inter',sans-serif;"><div style="width:4px;height:14px;background:#ea580c;border-radius:2px"></div>Europa League</div>
+          <div style="display:flex;align-items:center;gap:4px;font-size:9px;color:rgba(255,255,255,0.4);font-family:'Inter',sans-serif;"><div style="width:4px;height:14px;background:#dc2626;border-radius:2px"></div>Relegation</div>
+          <div style="margin-left:auto;font-size:10px;color:rgba(200,169,74,0.5);font-family:'Inter',sans-serif;letter-spacing:0.5px;">380 MATCHES · 20 CLUBS · 38 GWs</div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <span>Digital Download</span>·<span>Opens in any browser</span>·<span>No app needed</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- CARD 10: Euro 2028 Qualifiers Tracker -->
+<!-- ============================================================ -->
+<div class="card-wrapper">
+  <div class="card-label"><strong>Card 10 of 18</strong> · Euro 2028 Qualifiers Tracker · 1200×1200px</div>
+  <div class="card" id="card-10">
+    <div class="card-inner">
+      <div class="card-topbar">
+        <div class="twc-logo">
+          <div class="twc-box"><span>TWC</span></div>
+          <div class="twc-text">
+            <span class="brand-name">The Wall Chart Co</span>
+            <span class="brand-tag">Premium Tournament Downloads</span>
+          </div>
+        </div>
+        <div class="sport-badge">⚽ Football</div>
+      </div>
+      <div class="card-title-area">
+        <div class="card-eyebrow">Qualifying Tracker · 2026–2027</div>
+        <div class="card-title xs">Euro 2028<br><span style="color:var(--white);font-size:34px">Qualifiers Tracker</span></div>
+      </div>
+      <div class="card-meta-row">
+        <div class="price-badge">£4.99</div>
+        <div class="divider-line"></div>
+      </div>
+      <div class="features-grid">
+        <div class="feature-item"><span class="tick">✓</span>All qualifying groups</div>
+        <div class="feature-item"><span class="tick">✓</span>Every matchday fixture</div>
+        <div class="feature-item"><span class="tick">✓</span>Qualification status tracker</div>
+        <div class="feature-item"><span class="tick">✓</span>5 UK/Ireland hosts pre-qualified</div>
+        <div class="feature-item"><span class="tick">✓</span>Auto-updating standings</div>
+        <div class="feature-item"><span class="tick">✓</span>March 2026–March 2027</div>
+        <div class="feature-item"><span class="tick">✓</span>Auto-saves progress</div>
+        <div class="feature-item"><span class="tick">✓</span>Works on any device</div>
+      </div>
+      <div class="mockup-area">
+        <div class="mockup-label">Product Preview — Qualifying Group Stage</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;height:100%;">
+          <div>
+            <div class="group-header">Group A</div>
+            <table class="mock-table">
+              <thead><tr><th style="width:28px">#</th><th style="text-align:left;padding-left:4px">Team</th><th>P</th><th>Pts</th><th style="width:16px"></th></tr></thead>
+              <tbody>
+                <tr><td class="pos-cell">1</td><td style="text-align:left;padding-left:4px">🇩🇪 Germany</td><td>6</td><td class="pts-cell">16</td><td><div class="qual-dot q"></div></td></tr>
+                <tr><td class="pos-cell">2</td><td style="text-align:left;padding-left:4px">🇵🇱 Poland</td><td>6</td><td class="pts-cell">11</td><td><div class="qual-dot n"></div></td></tr>
+                <tr><td class="pos-cell">3</td><td style="text-align:left;padding-left:4px">🇷🇴 Romania</td><td>6</td><td class="pts-cell">7</td><td><div class="qual-dot n"></div></td></tr>
+                <tr><td class="pos-cell">4</td><td style="text-align:left;padding-left:4px">🇦🇹 Austria</td><td>6</td><td class="pts-cell">5</td><td><div class="qual-dot n"></div></td></tr>
+                <tr><td class="pos-cell">5</td><td style="text-align:left;padding-left:4px">🇱🇺 Luxembourg</td><td>6</td><td class="pts-cell">1</td><td><div class="qual-dot e"></div></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <div class="group-header">Group B</div>
+            <table class="mock-table">
+              <thead><tr><th style="width:28px">#</th><th style="text-align:left;padding-left:4px">Team</th><th>P</th><th>Pts</th><th style="width:16px"></th></tr></thead>
+              <tbody>
+                <tr><td class="pos-cell">1</td><td style="text-align:left;padding-left:4px">🇫🇷 France</td><td>6</td><td class="pts-cell">15</td><td><div class="qual-dot q"></div></td></tr>
+                <tr><td class="pos-cell">2</td><td style="text-align:left;padding-left:4px">🇧🇪 Belgium</td><td>6</td><td class="pts-cell">12</td><td><div class="qual-dot n"></div></td></tr>
+                <tr><td class="pos-cell">3</td><td style="text-align:left;padding-left:4px">🇳🇱 Netherlands</td><td>6</td><td class="pts-cell">9</td><td><div class="qual-dot n"></div></td></tr>
+                <tr><td class="pos-cell">4</td><td style="text-align:left;padding-left:4px">🇬🇷 Greece</td><td>6</td><td class="pts-cell">4</td><td><div class="qual-dot n"></div></td></tr>
+                <tr><td class="pos-cell">5</td><td style="text-align:left;padding-left:4px">🇬🇮 Gibraltar</td><td>6</td><td class="pts-cell">0</td><td><div class="qual-dot e"></div></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div style="margin-top:8px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+          <div style="display:flex;align-items:center;gap:4px;font-size:9px;color:rgba(255,255,255,0.4);font-family:'Inter',sans-serif;"><div class="qual-dot q" style="width:10px;height:10px;"></div>Qualified</div>
+          <div style="display:flex;align-items:center;gap:4px;font-size:9px;color:rgba(255,255,255,0.4);font-family:'Inter',sans-serif;"><div class="qual-dot e" style="width:10px;height:10px;"></div>Eliminated</div>
+          <div style="margin-left:auto;font-size:10px;color:rgba(200,169,74,0.5);font-family:'Inter',sans-serif;letter-spacing:0.5px;">ENG · SCO · WAL · NIR · IRL — HOST NATIONS</div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <span>Digital Download</span>·<span>Opens in any browser</span>·<span>No app needed</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- CARD 11: Six Nations 2026 Wall Chart -->
+<!-- ============================================================ -->
+<div class="card-wrapper">
+  <div class="card-label"><strong>Card 11 of 18</strong> · Six Nations 2026 Wall Chart · 1200×1200px</div>
+  <div class="card" id="card-11">
+    <div class="card-inner">
+      <div class="card-topbar">
+        <div class="twc-logo">
+          <div class="twc-box"><span>TWC</span></div>
+          <div class="twc-text">
+            <span class="brand-name">The Wall Chart Co</span>
+            <span class="brand-tag">Premium Tournament Downloads</span>
+          </div>
+        </div>
+        <div class="sport-badge">🏉 Rugby</div>
+      </div>
+      <div class="card-title-area">
+        <div class="card-eyebrow">Interactive Wall Chart · Rugby Union</div>
+        <div class="card-title">Six Nations 2026</div>
+      </div>
+      <div class="card-meta-row">
+        <div class="price-badge">£3.99</div>
+        <div class="divider-line"></div>
+      </div>
+      <div class="features-grid">
+        <div class="feature-item"><span class="tick">✓</span>All 15 matches, 5 rounds</div>
+        <div class="feature-item"><span class="tick">✓</span>Full rugby bonus point scoring</div>
+        <div class="feature-item"><span class="tick">✓</span>Grand Slam tracker</div>
+        <div class="feature-item"><span class="tick">✓</span>Triple Crown tracker</div>
+        <div class="feature-item"><span class="tick">✓</span>Calcutta Cup &amp; trophies</div>
+        <div class="feature-item"><span class="tick">✓</span>Try &amp; points scorers</div>
+        <div class="feature-item"><span class="tick">✓</span>Feb–Mar 2026</div>
+        <div class="feature-item"><span class="tick">✓</span>Auto-saves progress</div>
+      </div>
+      <div class="mockup-area">
+        <div class="mockup-label">Product Preview — Six Nations 2026 Table</div>
+        <table class="mock-table">
+          <thead>
+            <tr>
+              <th style="width:28px">#</th>
+              <th style="text-align:left;padding-left:8px">Nation</th>
+              <th>P</th><th>W</th><th>L</th><th>PF</th><th>PA</th>
+              <th title="Try Bonus">TB</th>
+              <th title="Losing Bonus">LB</th>
+              <th class="pts-cell">Pts</th>
+              <th>GS</th><th>TC</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="pos-cell">1</td>
+              <td style="text-align:left;padding-left:8px">🏴󠁧󠁢󠁩󠁲󠁬󠁿 Ireland</td>
+              <td>4</td><td>4</td><td>0</td><td>112</td><td>56</td>
+              <td style="color:var(--gold)">3</td><td style="color:rgba(255,255,255,0.4)">0</td>
+              <td class="pts-cell">19</td>
+              <td style="color:#22c55e;font-size:11px">●</td><td style="color:#22c55e;font-size:11px">●</td>
+            </tr>
+            <tr>
+              <td class="pos-cell">2</td>
+              <td style="text-align:left;padding-left:8px">🇫🇷 France</td>
+              <td>4</td><td>3</td><td>1</td><td>98</td><td>67</td>
+              <td style="color:var(--gold)">2</td><td style="color:rgba(255,255,255,0.4)">1</td>
+              <td class="pts-cell">15</td>
+              <td style="color:rgba(255,255,255,0.15);font-size:11px">○</td><td style="color:rgba(255,255,255,0.15);font-size:11px">○</td>
+            </tr>
+            <tr>
+              <td class="pos-cell">3</td>
+              <td style="text-align:left;padding-left:8px">🏴󠁧󠁢󠁥󠁮󠁧󠁿 England</td>
+              <td>4</td><td>2</td><td>2</td><td>78</td><td>79</td>
+              <td style="color:var(--gold)">1</td><td style="color:rgba(255,255,255,0.4)">1</td>
+              <td class="pts-cell">10</td>
+              <td style="color:rgba(255,255,255,0.15);font-size:11px">○</td><td style="color:rgba(255,255,255,0.15);font-size:11px">○</td>
+            </tr>
+            <tr>
+              <td class="pos-cell">4</td>
+              <td style="text-align:left;padding-left:8px">🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland</td>
+              <td>4</td><td>2</td><td>2</td><td>72</td><td>84</td>
+              <td style="color:var(--gold)">1</td><td style="color:rgba(255,255,255,0.4)">0</td>
+              <td class="pts-cell">9</td>
+              <td style="color:rgba(255,255,255,0.15);font-size:11px">○</td><td style="color:rgba(255,255,255,0.15);font-size:11px">○</td>
+            </tr>
+            <tr>
+              <td class="pos-cell">5</td>
+              <td style="text-align:left;padding-left:8px">🏴󠁧󠁢󠁷󠁬󠁳󠁿 Wales</td>
+              <td>4</td><td>1</td><td>3</td><td>65</td><td>94</td>
+              <td style="color:var(--gold)">1</td><td style="color:rgba(255,255,255,0.4)">1</td>
+              <td class="pts-cell">6</td>
+              <td style="color:rgba(255,255,255,0.15);font-size:11px">○</td><td style="color:rgba(255,255,255,0.15);font-size:11px">○</td>
+            </tr>
+            <tr>
+              <td class="pos-cell">6</td>
+              <td style="text-align:left;padding-left:8px">🇮🇹 Italy</td>
+              <td>4</td><td>0</td><td>4</td><td>52</td><td>97</td>
+              <td style="color:var(--gold)">0</td><td style="color:rgba(255,255,255,0.4)">2</td>
+              <td class="pts-cell">2</td>
+              <td style="color:rgba(255,255,255,0.15);font-size:11px">○</td><td style="color:rgba(255,255,255,0.15);font-size:11px">○</td>
+            </tr>
+          </tbody>
+        </table>
+        <div style="margin-top:10px;display:flex;gap:14px;flex-wrap:wrap;align-items:center;">
+          <div style="font-size:9px;color:rgba(255,255,255,0.4);font-family:'Inter',sans-serif;">TB = Try Bonus · LB = Losing Bonus</div>
+          <div style="font-size:9px;color:rgba(255,255,255,0.4);font-family:'Inter',sans-serif;">GS = Grand Slam · TC = Triple Crown</div>
+          <div style="margin-left:auto;font-size:10px;color:rgba(200,169,74,0.5);font-family:'Inter',sans-serif;letter-spacing:0.5px;">15 MATCHES · 5 ROUNDS · FEB–MAR 2026</div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <span>Digital Download</span>·<span>Opens in any browser</span>·<span>No app needed</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- CARD 12: Six Nations 2027 Wall Chart -->
+<!-- ============================================================ -->
+<div class="card-wrapper">
+  <div class="card-label"><strong>Card 12 of 18</strong> · Six Nations 2027 Wall Chart · 1200×1200px</div>
+  <div class="card" id="card-12">
+    <div class="card-inner">
+      <div class="card-topbar">
+        <div class="twc-logo">
+          <div class="twc-box"><span>TWC</span></div>
+          <div class="twc-text">
+            <span class="brand-name">The Wall Chart Co</span>
+            <span class="brand-tag">Premium Tournament Downloads</span>
+          </div>
+        </div>
+        <div class="sport-badge">🏉 Rugby</div>
+      </div>
+      <div class="card-title-area">
+        <div class="card-eyebrow">Interactive Wall Chart · Rugby Union</div>
+        <div class="card-title">Six Nations 2027</div>
+      </div>
+      <div class="card-meta-row">
+        <div class="price-badge">£3.99</div>
+        <div class="divider-line"></div>
+      </div>
+      <div class="features-grid">
+        <div class="feature-item"><span class="tick">✓</span>All 15 matches, 5 rounds</div>
+        <div class="feature-item"><span class="tick">✓</span>2027 home/away fixtures</div>
+        <div class="feature-item"><span class="tick">✓</span>Full bonus point scoring</div>
+        <div class="feature-item"><span class="tick">✓</span>Grand Slam &amp; Triple Crown</div>
+        <div class="feature-item"><span class="tick">✓</span>Feb–Mar 2027</div>
+        <div class="feature-item"><span class="tick">✓</span>Auto-saves progress</div>
+        <div class="feature-item"><span class="tick">✓</span>Same great format as 2026</div>
+        <div class="feature-item"><span class="tick">✓</span>Try &amp; points scorers</div>
+      </div>
+      <div class="mockup-area">
+        <div class="mockup-label">Product Preview — Six Nations 2027 Table</div>
+        <table class="mock-table">
+          <thead>
+            <tr>
+              <th style="width:28px">#</th>
+              <th style="text-align:left;padding-left:8px">Nation</th>
+              <th>P</th><th>W</th><th>L</th><th>PF</th><th>PA</th>
+              <th title="Try Bonus">TB</th>
+              <th title="Losing Bonus">LB</th>
+              <th class="pts-cell">Pts</th>
+              <th>GS</th><th>TC</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="pos-cell">1</td>
+              <td style="text-align:left;padding-left:8px">🇫🇷 France</td>
+              <td>3</td><td>3</td><td>0</td><td>87</td><td>41</td>
+              <td style="color:var(--gold)">2</td><td style="color:rgba(255,255,255,0.4)">0</td>
+              <td class="pts-cell">14</td>
+              <td style="color:#22c55e;font-size:11px">●</td><td style="color:rgba(255,255,255,0.15);font-size:11px">○</td>
+            </tr>
+            <tr>
+              <td class="pos-cell">2</td>
+              <td style="text-align:left;padding-left:8px">🏴󠁧󠁢󠁩󠁲󠁬󠁿 Ireland</td>
+              <td>3</td><td>2</td><td>1</td><td>79</td><td>52</td>
+              <td style="color:var(--gold)">3</td><td style="color:rgba(255,255,255,0.4)">0</td>
+              <td class="pts-cell">11</td>
+              <td style="color:rgba(255,255,255,0.15);font-size:11px">○</td><td style="color:#22c55e;font-size:11px">●</td>
+            </tr>
+            <tr>
+              <td class="pos-cell">3</td>
+              <td style="text-align:left;padding-left:8px">🏴󠁧󠁢󠁥󠁮󠁧󠁿 England</td>
+              <td>3</td><td>2</td><td>1</td><td>65</td><td>61</td>
+              <td style="color:var(--gold)">1</td><td style="color:rgba(255,255,255,0.4)">0</td>
+              <td class="pts-cell">9</td>
+              <td style="color:rgba(255,255,255,0.15);font-size:11px">○</td><td style="color:rgba(255,255,255,0.15);font-size:11px">○</td>
+            </tr>
+            <tr>
+              <td class="pos-cell">4</td>
+              <td style="text-align:left;padding-left:8px">🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland</td>
+              <td>3</td><td>1</td><td>2</td><td>54</td><td>72</td>
+              <td style="color:var(--gold)">1</td><td style="color:rgba(255,255,255,0.4)">1</td>
+              <td class="pts-cell">6</td>
+              <td style="color:rgba(255,255,255,0.15);font-size:11px">○</td><td style="color:rgba(255,255,255,0.15);font-size:11px">○</td>
+            </tr>
+            <tr>
+              <td class="pos-cell">5</td>
+              <td style="text-align:left;padding-left:8px">🏴󠁧󠁢󠁷󠁬󠁳󠁿 Wales</td>
+              <td>3</td><td>1</td><td>2</td><td>48</td><td>68</td>
+              <td style="color:var(--gold)">0</td><td style="color:rgba(255,255,255,0.4)">1</td>
+              <td class="pts-cell">5</td>
+              <td style="color:rgba(255,255,255,0.15);font-size:11px">○</td><td style="color:rgba(255,255,255,0.15);font-size:11px">○</td>
+            </tr>
+            <tr>
+              <td class="pos-cell">6</td>
+              <td style="text-align:left;padding-left:8px">🇮🇹 Italy</td>
+              <td>3</td><td>0</td><td>3</td><td>38</td><td>77</td>
+              <td style="color:var(--gold)">1</td><td style="color:rgba(255,255,255,0.4)">1</td>
+              <td class="pts-cell">2</td>
+              <td style="color:rgba(255,255,255,0.15);font-size:11px">○</td><td style="color:rgba(255,255,255,0.15);font-size:11px">○</td>
+            </tr>
+          </tbody>
+        </table>
+        <div style="margin-top:10px;display:flex;gap:14px;flex-wrap:wrap;align-items:center;">
+          <div style="font-size:9px;color:rgba(255,255,255,0.4);font-family:'Inter',sans-serif;">TB = Try Bonus · LB = Losing Bonus</div>
+          <div style="font-size:9px;color:rgba(255,255,255,0.4);font-family:'Inter',sans-serif;">GS = Grand Slam · TC = Triple Crown</div>
+          <div style="margin-left:auto;font-size:10px;color:rgba(200,169,74,0.5);font-family:'Inter',sans-serif;letter-spacing:0.5px;">15 MATCHES · 5 ROUNDS · FEB–MAR 2027</div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <span>Digital Download</span>·<span>Opens in any browser</span>·<span>No app needed</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- CARD 13: Nations Championship 2026 Tracker -->
+<!-- ============================================================ -->
+<div class="card-wrapper">
+  <div class="card-label"><strong>Card 13 of 18</strong> · Nations Championship 2026 Tracker · 1200×1200px</div>
+  <div class="card" id="card-13">
+    <div class="card-inner">
+      <div class="card-topbar">
+        <div class="twc-logo">
+          <div class="twc-box"><span>TWC</span></div>
+          <div class="twc-text">
+            <span class="brand-name">The Wall Chart Co</span>
+            <span class="brand-tag">Premium Tournament Downloads</span>
+          </div>
+        </div>
+        <div class="sport-badge">🏉 Rugby</div>
+      </div>
+      <div class="card-title-area">
+        <div class="card-eyebrow">Interactive Tracker · World Rugby</div>
+        <div class="card-title xs">Nations Championship<br><span style="color:var(--white);font-size:32px">2026 Tracker</span></div>
+      </div>
+      <div class="card-meta-row">
+        <div class="price-badge">£3.99</div>
+        <div class="divider-line"></div>
+      </div>
+      <div class="features-grid">
+        <div class="feature-item"><span class="tick">✓</span>Inaugural WR Nations Championship</div>
+        <div class="feature-item"><span class="tick">✓</span>12 nations, 3 pools of 4</div>
+        <div class="feature-item"><span class="tick">✓</span>Full bonus point scoring</div>
+        <div class="feature-item"><span class="tick">✓</span>Knockout semi-finals &amp; final</div>
+        <div class="feature-item"><span class="tick">✓</span>International rugby's new tournament</div>
+        <div class="feature-item"><span class="tick">✓</span>Auto-saves progress</div>
+        <div class="feature-item"><span class="tick">✓</span>Works on any device</div>
+        <div class="feature-item"><span class="tick">✓</span>All fixtures included</div>
+      </div>
+      <div class="mockup-area">
+        <div class="mockup-label">Product Preview — Pool Stage</div>
+        <div class="pools-grid">
+          <div class="pool-block">
+            <div class="pool-title">Pool 1</div>
+            <div class="pool-team"><span class="flag">🏴󠁧󠁢󠁩󠁲󠁬󠁿</span>Ireland<div class="qual-dot q" style="margin-left:auto"></div></div>
+            <div class="pool-team"><span class="flag">🇿🇦</span>S. Africa<div class="qual-dot n" style="margin-left:auto"></div></div>
+            <div class="pool-team"><span class="flag">🇫🇷</span>France<div class="qual-dot n" style="margin-left:auto"></div></div>
+            <div class="pool-team"><span class="flag">🇯🇵</span>Japan<div class="qual-dot e" style="margin-left:auto"></div></div>
+          </div>
+          <div class="pool-block">
+            <div class="pool-title">Pool 2</div>
+            <div class="pool-team"><span class="flag">🇳🇿</span>N. Zealand<div class="qual-dot q" style="margin-left:auto"></div></div>
+            <div class="pool-team"><span class="flag">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span>England<div class="qual-dot n" style="margin-left:auto"></div></div>
+            <div class="pool-team"><span class="flag">🇦🇺</span>Australia<div class="qual-dot n" style="margin-left:auto"></div></div>
+            <div class="pool-team"><span class="flag">🇦🇷</span>Argentina<div class="qual-dot e" style="margin-left:auto"></div></div>
+          </div>
+          <div class="pool-block">
+            <div class="pool-title">Pool 3</div>
+            <div class="pool-team"><span class="flag">🏴󠁧󠁢󠁳󠁣󠁴󠁿</span>Scotland<div class="qual-dot q" style="margin-left:auto"></div></div>
+            <div class="pool-team"><span class="flag">🏴󠁧󠁢󠁷󠁬󠁳󠁿</span>Wales<div class="qual-dot n" style="margin-left:auto"></div></div>
+            <div class="pool-team"><span class="flag">🇮🇹</span>Italy<div class="qual-dot n" style="margin-left:auto"></div></div>
+            <div class="pool-team"><span class="flag">🇫🇯</span>Fiji<div class="qual-dot e" style="margin-left:auto"></div></div>
+          </div>
+        </div>
+        <div style="margin-top:8px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+          <div style="display:flex;align-items:center;gap:4px;font-size:9px;color:rgba(255,255,255,0.4);font-family:'Inter',sans-serif;"><div class="qual-dot q" style="width:9px;height:9px;"></div>QF qualified</div>
+          <div style="display:flex;align-items:center;gap:4px;font-size:9px;color:rgba(255,255,255,0.4);font-family:'Inter',sans-serif;"><div class="qual-dot e" style="width:9px;height:9px;"></div>Eliminated</div>
+          <div style="margin-left:auto;font-size:10px;color:rgba(200,169,74,0.5);font-family:'Inter',sans-serif;letter-spacing:0.5px;">12 NATIONS · 3 POOLS · INAUGURAL 2026</div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <span>Digital Download</span>·<span>Opens in any browser</span>·<span>No app needed</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- CARD 14: Rugby World Cup 2027 Wall Chart -->
+<!-- ============================================================ -->
+<div class="card-wrapper">
+  <div class="card-label"><strong>Card 14 of 18</strong> · Rugby World Cup 2027 Wall Chart · 1200×1200px</div>
+  <div class="card" id="card-14">
+    <div class="card-inner">
+      <div class="card-topbar">
+        <div class="twc-logo">
+          <div class="twc-box"><span>TWC</span></div>
+          <div class="twc-text">
+            <span class="brand-name">The Wall Chart Co</span>
+            <span class="brand-tag">Premium Tournament Downloads</span>
+          </div>
+        </div>
+        <div class="sport-badge">🏉 Rugby</div>
+      </div>
+      <div class="card-title-area">
+        <div class="card-eyebrow">Interactive Wall Chart · Australia</div>
+        <div class="card-title">Rugby World Cup 2027</div>
+      </div>
+      <div class="card-meta-row">
+        <div class="price-badge">£5.99</div>
+        <div class="divider-line"></div>
+      </div>
+      <div class="features-grid">
+        <div class="feature-item"><span class="tick">✓</span>20 teams, 4 pools of 5</div>
+        <div class="feature-item"><span class="tick">✓</span>Australia host</div>
+        <div class="feature-item"><span class="tick">✓</span>Full rugby bonus points</div>
+        <div class="feature-item"><span class="tick">✓</span>Complete knockout bracket</div>
+        <div class="feature-item"><span class="tick">✓</span>AEST + UK times shown</div>
+        <div class="feature-item"><span class="tick">✓</span>Try &amp; points scorers</div>
+        <div class="feature-item"><span class="tick">✓</span>Cards tracker</div>
+        <div class="feature-item"><span class="tick">✓</span>4 colour themes</div>
+      </div>
+      <div class="mockup-area">
+        <div class="mockup-label">Product Preview — Pool Stage + Knockout</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;height:100%;">
+          <!-- Pool A table -->
+          <div>
+            <div class="group-header">Pool A</div>
+            <table class="mock-table">
+              <thead>
+                <tr><th style="width:20px">#</th><th style="text-align:left;padding-left:4px">Team</th><th>P</th><th>W</th><th>L</th><th>TB</th><th>LB</th><th class="pts-cell">Pts</th></tr>
+              </thead>
+              <tbody>
+                <tr><td class="pos-cell">1</td><td style="text-align:left;padding-left:4px">🇳🇿 N.Zealand</td><td>4</td><td>4</td><td>0</td><td style="color:var(--gold)">3</td><td>0</td><td class="pts-cell">19</td></tr>
+                <tr><td class="pos-cell">2</td><td style="text-align:left;padding-left:4px">🇫🇷 France</td><td>4</td><td>3</td><td>1</td><td style="color:var(--gold)">2</td><td>1</td><td class="pts-cell">15</td></tr>
+                <tr><td class="pos-cell">3</td><td style="text-align:left;padding-left:4px">🇮🇹 Italy</td><td>4</td><td>2</td><td>2</td><td style="color:var(--gold)">1</td><td>1</td><td class="pts-cell">10</td></tr>
+                <tr><td class="pos-cell">4</td><td style="text-align:left;padding-left:4px">🇺🇸 USA</td><td>4</td><td>1</td><td>3</td><td style="color:var(--gold)">0</td><td>1</td><td class="pts-cell">5</td></tr>
+                <tr><td class="pos-cell">5</td><td style="text-align:left;padding-left:4px">🇳🇦 Namibia</td><td>4</td><td>0</td><td>4</td><td style="color:var(--gold)">1</td><td>0</td><td class="pts-cell">1</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- Knockout mini bracket -->
+          <div style="display:flex;flex-direction:column;gap:6px;">
+            <div style="font-family:'EB Garamond',serif;font-size:13px;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;border-bottom:1px solid rgba(200,169,74,0.2);padding-bottom:4px;">Knockout Stage</div>
+            <div style="font-size:9px;color:rgba(200,169,74,0.6);font-family:'Inter',sans-serif;letter-spacing:1px;text-transform:uppercase;margin-bottom:2px;">Quarter-Finals</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-bottom:6px;">
+              <div><div class="bracket-slot filled" style="font-size:10px;padding:3px 6px;">A1 · N. Zealand</div><div class="bracket-slot" style="font-size:10px;padding:3px 6px;">B2 · ________</div></div>
+              <div><div class="bracket-slot filled" style="font-size:10px;padding:3px 6px;">C1 · S. Africa</div><div class="bracket-slot" style="font-size:10px;padding:3px 6px;">D2 · ________</div></div>
+              <div><div class="bracket-slot" style="font-size:10px;padding:3px 6px;">B1 · ________</div><div class="bracket-slot" style="font-size:10px;padding:3px 6px;">A2 · France</div></div>
+              <div><div class="bracket-slot" style="font-size:10px;padding:3px 6px;">D1 · ________</div><div class="bracket-slot" style="font-size:10px;padding:3px 6px;">C2 · ________</div></div>
+            </div>
+            <div style="font-size:9px;color:rgba(200,169,74,0.6);font-family:'Inter',sans-serif;letter-spacing:1px;text-transform:uppercase;margin-bottom:2px;">Semi-Finals</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-bottom:6px;">
+              <div><div class="bracket-slot" style="font-size:10px;padding:3px 6px;">QF1 Winner</div><div class="bracket-slot" style="font-size:10px;padding:3px 6px;">QF2 Winner</div></div>
+              <div><div class="bracket-slot" style="font-size:10px;padding:3px 6px;">QF3 Winner</div><div class="bracket-slot" style="font-size:10px;padding:3px 6px;">QF4 Winner</div></div>
+            </div>
+            <div style="background:rgba(200,169,74,0.15);border:1px solid var(--gold);border-radius:4px;padding:6px;text-align:center;">
+              <div style="font-family:'EB Garamond',serif;font-size:12px;color:var(--gold);letter-spacing:1px;margin-bottom:3px;">🏆 FINAL · Sydney</div>
+              <div style="display:flex;gap:4px;justify-content:center;">
+                <div class="bracket-slot" style="font-size:10px;padding:3px 8px;">SF1 Winner</div>
+                <div style="font-size:9px;color:rgba(255,255,255,0.3);font-family:'Inter',sans-serif;line-height:22px;">vs</div>
+                <div class="bracket-slot" style="font-size:10px;padding:3px 8px;">SF2 Winner</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <span>Digital Download</span>·<span>Opens in any browser</span>·<span>No app needed</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- SEPARATOR: LANDSCAPE FEATURE CARDS -->
+<!-- ============================================================ -->
+<div style="max-width:900px;margin:40px auto;padding:24px;background:#111827;border-radius:12px;border:1px solid #2a3a5c;text-align:center;">
+  <div style="font-family:'EB Garamond',serif;font-size:22px;color:var(--gold);margin-bottom:8px;">Landscape Feature Cards (1200×630px)</div>
+  <div style="font-family:'Inter',sans-serif;font-size:13px;color:#9ca3af;">4 close-up feature cards for flagship products — Cards 15–18</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- CARD 15 (LANDSCAPE): WC Wall Chart — Detailed Group Table Feature -->
+<!-- ============================================================ -->
+<div class="card-wrapper">
+  <div class="card-label"><strong>Card 15 of 18</strong> · WC Wall Chart — Group Table Feature Detail · 1200×630px</div>
+  <div class="card-landscape" id="card-15">
+    <div class="card-inner">
+      <div style="display:flex;gap:0;height:100%;">
+        <!-- Left column -->
+        <div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding-right:32px;border-right:1px solid rgba(200,169,74,0.15);">
+          <div class="twc-logo" style="margin-bottom:20px;">
+            <div class="twc-box"><span>TWC</span></div>
+            <div class="twc-text">
+              <span class="brand-name">The Wall Chart Co</span>
+              <span class="brand-tag">Premium Tournament Downloads</span>
+            </div>
+          </div>
+          <div style="font-family:'Inter',sans-serif;font-size:11px;color:var(--red);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;font-weight:600;">Feature Spotlight</div>
+          <div style="font-family:'EB Garamond',serif;font-size:34px;color:var(--gold);line-height:1.15;margin-bottom:12px;">Interactive Group<br>Tables with Live<br><span style="color:var(--white)">Score Entry</span></div>
+          <div style="font-family:'Inter',sans-serif;font-size:13px;color:rgba(247,245,238,0.6);line-height:1.6;margin-bottom:16px;">Click any score box to enter results — tables auto-update, standings auto-sort, and your progress saves automatically.</div>
+          <div style="background:rgba(200,169,74,0.1);border:1px solid rgba(200,169,74,0.3);border-radius:6px;padding:10px 14px;font-family:'Inter',sans-serif;font-size:12px;color:var(--gold);">
+            ✓ Click score → table updates instantly &nbsp;·&nbsp; ✓ Auto-qualifiers highlighted &nbsp;·&nbsp; ✓ Saves to browser
+          </div>
+          <div style="margin-top:16px;">
+            <div class="price-badge" style="display:inline-block;">£5.99</div>
+            <span style="font-family:'Inter',sans-serif;font-size:12px;color:rgba(255,255,255,0.4);margin-left:12px;">World Cup 2026 Interactive Wall Chart</span>
+          </div>
+        </div>
+        <!-- Right column — detailed mockup -->
+        <div style="flex:1.4;padding-left:32px;display:flex;flex-direction:column;justify-content:center;">
+          <div class="mockup-area" style="background:rgba(0,0,0,0.4);padding:14px;flex:1;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+              <div style="font-family:'EB Garamond',serif;font-size:14px;color:var(--gold);">Group A — Live Scoring</div>
+              <div style="font-family:'Inter',sans-serif;font-size:10px;color:rgba(200,169,74,0.6);letter-spacing:0.5px;">2 of 6 MATCHES PLAYED</div>
+            </div>
+            <table class="mock-table" style="font-size:12px;">
+              <thead>
+                <tr>
+                  <th style="width:26px">#</th>
+                  <th style="text-align:left;padding-left:6px">Team</th>
+                  <th>P</th><th>W</th><th>D</th><th>L</th><th>GF</th><th>GA</th><th>GD</th><th class="pts-cell">Pts</th>
+                  <th>vs B</th><th>vs C</th><th>vs D</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="background:rgba(34,197,94,0.07);">
+                  <td class="pos-cell">1</td>
+                  <td style="text-align:left;padding-left:6px"><span class="team-flag" style="background:linear-gradient(to bottom,#006847 33%,#fff 33%,#fff 66%,#ce1126 66%)"></span><strong>Mexico</strong></td>
+                  <td>2</td><td>1</td><td>1</td><td>0</td><td>3</td><td>1</td><td>+2</td><td class="pts-cell">4</td>
+                  <td><span class="score-input" style="background:rgba(34,197,94,0.15);border-color:rgba(34,197,94,0.5);color:#4ade80">2</span><span class="score-dash">–</span><span class="score-input" style="background:rgba(239,68,68,0.1);border-color:rgba(239,68,68,0.3);color:#f87171">1</span></td>
+                  <td><span class="score-input" style="background:rgba(200,169,74,0.12);border-color:rgba(200,169,74,0.4);color:var(--gold)">1</span><span class="score-dash">–</span><span class="score-input" style="background:rgba(200,169,74,0.12);border-color:rgba(200,169,74,0.4);color:var(--gold)">1</span></td>
+                  <td><span class="score-input" style="background:rgba(200,169,74,0.03);border-color:rgba(200,169,74,0.15);color:rgba(200,169,74,0.25)">·</span><span class="score-dash">–</span><span class="score-input" style="background:rgba(200,169,74,0.03);border-color:rgba(200,169,74,0.15);color:rgba(200,169,74,0.25)">·</span></td>
+                </tr>
+                <tr style="background:rgba(34,197,94,0.05);">
+                  <td class="pos-cell">2</td>
+                  <td style="text-align:left;padding-left:6px"><span class="team-flag" style="background:linear-gradient(to right,#007A4D 25%,#FFB81C 25%,#FFB81C 40%,#007A4D 40%)"></span>S. Africa</td>
+                  <td>2</td><td>1</td><td>1</td><td>0</td><td>3</td><td>2</td><td>+1</td><td class="pts-cell">4</td>
+                  <td><span class="score-input" style="background:rgba(239,68,68,0.1);border-color:rgba(239,68,68,0.3);color:#f87171">1</span><span class="score-dash">–</span><span class="score-input" style="background:rgba(34,197,94,0.15);border-color:rgba(34,197,94,0.5);color:#4ade80">2</span></td>
+                  <td><span class="score-input" style="background:rgba(200,169,74,0.03);border-color:rgba(200,169,74,0.15);color:rgba(200,169,74,0.25)">·</span><span class="score-dash">–</span><span class="score-input" style="background:rgba(200,169,74,0.03);border-color:rgba(200,169,74,0.15);color:rgba(200,169,74,0.25)">·</span></td>
+                  <td><span class="score-input" style="background:rgba(34,197,94,0.15);border-color:rgba(34,197,94,0.5);color:#4ade80">2</span><span class="score-dash">–</span><span class="score-input" style="background:rgba(239,68,68,0.1);border-color:rgba(239,68,68,0.3);color:#f87171">0</span></td>
+                </tr>
+                <tr>
+                  <td class="pos-cell">3</td>
+                  <td style="text-align:left;padding-left:6px"><span class="team-flag" style="background:linear-gradient(to bottom,#003478 50%,#CD2E3A 50%)"></span>S. Korea</td>
+                  <td>2</td><td>0</td><td>1</td><td>1</td><td>1</td><td>2</td><td>–1</td><td class="pts-cell">1</td>
+                  <td><span class="score-input" style="background:rgba(200,169,74,0.03);border-color:rgba(200,169,74,0.15);color:rgba(200,169,74,0.25)">·</span><span class="score-dash">–</span><span class="score-input" style="background:rgba(200,169,74,0.03);border-color:rgba(200,169,74,0.15);color:rgba(200,169,74,0.25)">·</span></td>
+                  <td><span class="score-input" style="background:rgba(200,169,74,0.12);border-color:rgba(200,169,74,0.4);color:var(--gold)">1</span><span class="score-dash">–</span><span class="score-input" style="background:rgba(200,169,74,0.12);border-color:rgba(200,169,74,0.4);color:var(--gold)">1</span></td>
+                  <td><span class="score-input" style="background:rgba(239,68,68,0.1);border-color:rgba(239,68,68,0.3);color:#f87171">0</span><span class="score-dash">–</span><span class="score-input" style="background:rgba(34,197,94,0.15);border-color:rgba(34,197,94,0.5);color:#4ade80">2</span></td>
+                </tr>
+                <tr>
+                  <td class="pos-cell">4</td>
+                  <td style="text-align:left;padding-left:6px"><span class="team-flag" style="background:linear-gradient(to bottom,#d7141a 33%,#fff 33%,#fff 66%,#11457e 66%)"></span>Czechia</td>
+                  <td>2</td><td>0</td><td>1</td><td>1</td><td>1</td><td>3</td><td>–2</td><td class="pts-cell">1</td>
+                  <td><span class="score-input" style="background:rgba(200,169,74,0.03);border-color:rgba(200,169,74,0.15);color:rgba(200,169,74,0.25)">·</span><span class="score-dash">–</span><span class="score-input" style="background:rgba(200,169,74,0.03);border-color:rgba(200,169,74,0.15);color:rgba(200,169,74,0.25)">·</span></td>
+                  <td><span class="score-input" style="background:rgba(239,68,68,0.1);border-color:rgba(239,68,68,0.3);color:#f87171">0</span><span class="score-dash">–</span><span class="score-input" style="background:rgba(34,197,94,0.15);border-color:rgba(34,197,94,0.5);color:#4ade80">2</span></td>
+                  <td><span class="score-input" style="background:rgba(200,169,74,0.12);border-color:rgba(200,169,74,0.4);color:var(--gold)">1</span><span class="score-dash">–</span><span class="score-input" style="background:rgba(200,169,74,0.12);border-color:rgba(200,169,74,0.4);color:var(--gold)">1</span></td>
+                </tr>
+              </tbody>
+            </table>
+            <div style="margin-top:8px;display:flex;gap:10px;flex-wrap:wrap;">
+              <div style="display:flex;align-items:center;gap:4px;font-size:9px;color:rgba(255,255,255,0.4);font-family:'Inter',sans-serif;"><span class="score-input" style="width:20px;height:16px;line-height:16px;font-size:9px;background:rgba(34,197,94,0.15);border-color:rgba(34,197,94,0.5);color:#4ade80">W</span>Win</div>
+              <div style="display:flex;align-items:center;gap:4px;font-size:9px;color:rgba(255,255,255,0.4);font-family:'Inter',sans-serif;"><span class="score-input" style="width:20px;height:16px;line-height:16px;font-size:9px;background:rgba(200,169,74,0.12);border-color:rgba(200,169,74,0.4);color:var(--gold)">D</span>Draw</div>
+              <div style="display:flex;align-items:center;gap:4px;font-size:9px;color:rgba(255,255,255,0.4);font-family:'Inter',sans-serif;"><span class="score-input" style="width:20px;height:16px;line-height:16px;font-size:9px;background:rgba(239,68,68,0.1);border-color:rgba(239,68,68,0.3);color:#f87171">L</span>Loss</div>
+              <div style="display:flex;align-items:center;gap:4px;font-size:9px;color:rgba(255,255,255,0.4);font-family:'Inter',sans-serif;"><span class="score-input" style="width:20px;height:16px;line-height:16px;font-size:9px;">·</span>Not played</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer" style="position:absolute;bottom:10px;left:0;right:0;">
+        <span>Digital Download</span>·<span>Opens in any browser</span>·<span>No app needed</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- CARD 16 (LANDSCAPE): Sweepstake — Results Screen Feature -->
+<!-- ============================================================ -->
+<div class="card-wrapper">
+  <div class="card-label"><strong>Card 16 of 18</strong> · Sweepstake Kit — Results Screen Feature · 1200×630px</div>
+  <div class="card-landscape" id="card-16">
+    <div class="card-inner">
+      <div style="display:flex;gap:0;height:100%;">
+        <div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding-right:32px;border-right:1px solid rgba(200,169,74,0.15);">
+          <div class="twc-logo" style="margin-bottom:20px;">
+            <div class="twc-box"><span>TWC</span></div>
+            <div class="twc-text">
+              <span class="brand-name">The Wall Chart Co</span>
+              <span class="brand-tag">Premium Tournament Downloads</span>
+            </div>
+          </div>
+          <div style="font-family:'Inter',sans-serif;font-size:11px;color:var(--red);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;font-weight:600;">Feature Spotlight</div>
+          <div style="font-family:'EB Garamond',serif;font-size:34px;color:var(--gold);line-height:1.15;margin-bottom:12px;">Animated Draw<br>&amp; Printable<br><span style="color:var(--white)">Results Sheet</span></div>
+          <div style="font-family:'Inter',sans-serif;font-size:13px;color:rgba(247,245,238,0.6);line-height:1.6;margin-bottom:16px;">Enter your participants, hit Draw, and watch the animated reveal. Print individual slips or the full results sheet instantly.</div>
+          <div style="background:rgba(200,169,74,0.1);border:1px solid rgba(200,169,74,0.3);border-radius:6px;padding:10px 14px;font-family:'Inter',sans-serif;font-size:12px;color:var(--gold);">
+            ✓ Up to 48 participants &nbsp;·&nbsp; ✓ Prize pot calculator &nbsp;·&nbsp; ✓ Export &amp; re-run anytime
+          </div>
+          <div style="margin-top:16px;">
+            <div class="price-badge" style="display:inline-block;">£2.99</div>
+            <span style="font-family:'Inter',sans-serif;font-size:12px;color:rgba(255,255,255,0.4);margin-left:12px;">World Cup 2026 Office Sweepstake Kit</span>
+          </div>
+        </div>
+        <div style="flex:1.4;padding-left:32px;display:flex;flex-direction:column;justify-content:center;">
+          <div class="mockup-area" style="background:rgba(0,0,0,0.4);padding:14px;flex:1;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+              <div style="font-family:'EB Garamond',serif;font-size:14px;color:var(--gold);">🎲 Draw Results — 8 Participants</div>
+              <div style="display:flex;gap:6px;">
+                <div style="background:var(--gold);border-radius:4px;padding:3px 10px;font-family:'Inter',sans-serif;font-size:10px;color:var(--navy);font-weight:700;">🖨 Print</div>
+                <div style="background:rgba(255,255,255,0.08);border-radius:4px;padding:3px 10px;font-family:'Inter',sans-serif;font-size:10px;color:rgba(255,255,255,0.6);">↺ Re-run</div>
+              </div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+              <div style="display:flex;align-items:center;gap:8px;background:rgba(200,169,74,0.08);border:1px solid rgba(200,169,74,0.25);border-radius:6px;padding:8px 10px;">
+                <span style="font-size:20px;">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span>
+                <div><div style="font-family:'EB Garamond',serif;font-size:14px;color:var(--white)">England</div><div style="font-family:'Inter',sans-serif;font-size:11px;color:var(--gold);font-weight:600;">Mike B.</div></div>
+                <div style="margin-left:auto;font-size:9px;color:rgba(255,255,255,0.3);font-family:'Inter',sans-serif;font-weight:700;">#1</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;background:rgba(200,169,74,0.08);border:1px solid rgba(200,169,74,0.25);border-radius:6px;padding:8px 10px;">
+                <span style="font-size:20px;">🇧🇷</span>
+                <div><div style="font-family:'EB Garamond',serif;font-size:14px;color:var(--white)">Brazil</div><div style="font-family:'Inter',sans-serif;font-size:11px;color:var(--gold);font-weight:600;">Sarah T.</div></div>
+                <div style="margin-left:auto;font-size:9px;color:rgba(255,255,255,0.3);font-family:'Inter',sans-serif;font-weight:700;">#2</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;background:rgba(200,169,74,0.08);border:1px solid rgba(200,169,74,0.25);border-radius:6px;padding:8px 10px;">
+                <span style="font-size:20px;">🇩🇪</span>
+                <div><div style="font-family:'EB Garamond',serif;font-size:14px;color:var(--white)">Germany</div><div style="font-family:'Inter',sans-serif;font-size:11px;color:var(--gold);font-weight:600;">Dave R.</div></div>
+                <div style="margin-left:auto;font-size:9px;color:rgba(255,255,255,0.3);font-family:'Inter',sans-serif;font-weight:700;">#3</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;background:rgba(200,169,74,0.08);border:1px solid rgba(200,169,74,0.25);border-radius:6px;padding:8px 10px;">
+                <span style="font-size:20px;">🇫🇷</span>
+                <div><div style="font-family:'EB Garamond',serif;font-size:14px;color:var(--white)">France</div><div style="font-family:'Inter',sans-serif;font-size:11px;color:var(--gold);font-weight:600;">Lucy W.</div></div>
+                <div style="margin-left:auto;font-size:9px;color:rgba(255,255,255,0.3);font-family:'Inter',sans-serif;font-weight:700;">#4</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;background:rgba(200,169,74,0.08);border:1px solid rgba(200,169,74,0.25);border-radius:6px;padding:8px 10px;">
+                <span style="font-size:20px;">🇦🇷</span>
+                <div><div style="font-family:'EB Garamond',serif;font-size:14px;color:var(--white)">Argentina</div><div style="font-family:'Inter',sans-serif;font-size:11px;color:var(--gold);font-weight:600;">James K.</div></div>
+                <div style="margin-left:auto;font-size:9px;color:rgba(255,255,255,0.3);font-family:'Inter',sans-serif;font-weight:700;">#5</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;background:rgba(200,169,74,0.08);border:1px solid rgba(200,169,74,0.25);border-radius:6px;padding:8px 10px;">
+                <span style="font-size:20px;">🇵🇹</span>
+                <div><div style="font-family:'EB Garamond',serif;font-size:14px;color:var(--white)">Portugal</div><div style="font-family:'Inter',sans-serif;font-size:11px;color:var(--gold);font-weight:600;">Emma S.</div></div>
+                <div style="margin-left:auto;font-size:9px;color:rgba(255,255,255,0.3);font-family:'Inter',sans-serif;font-weight:700;">#6</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;background:rgba(200,169,74,0.08);border:1px solid rgba(200,169,74,0.25);border-radius:6px;padding:8px 10px;">
+                <span style="font-size:20px;">🇪🇸</span>
+                <div><div style="font-family:'EB Garamond',serif;font-size:14px;color:var(--white)">Spain</div><div style="font-family:'Inter',sans-serif;font-size:11px;color:var(--gold);font-weight:600;">Tom H.</div></div>
+                <div style="margin-left:auto;font-size:9px;color:rgba(255,255,255,0.3);font-family:'Inter',sans-serif;font-weight:700;">#7</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;background:rgba(200,169,74,0.08);border:1px solid rgba(200,169,74,0.25);border-radius:6px;padding:8px 10px;">
+                <span style="font-size:20px;">🇳🇱</span>
+                <div><div style="font-family:'EB Garamond',serif;font-size:14px;color:var(--white)">Netherlands</div><div style="font-family:'Inter',sans-serif;font-size:11px;color:var(--gold);font-weight:600;">Rachel O.</div></div>
+                <div style="margin-left:auto;font-size:9px;color:rgba(255,255,255,0.3);font-family:'Inter',sans-serif;font-weight:700;">#8</div>
+              </div>
+            </div>
+            <div style="margin-top:8px;display:flex;gap:8px;align-items:center;background:rgba(200,169,74,0.05);border-radius:4px;padding:6px 10px;">
+              <div style="font-family:'Inter',sans-serif;font-size:11px;color:rgba(255,255,255,0.5);">Prize pot:</div>
+              <div style="font-family:'EB Garamond',serif;font-size:15px;color:var(--gold);font-weight:600;">£8.00</div>
+              <div style="font-size:10px;color:rgba(255,255,255,0.3);font-family:'Inter',sans-serif;">(8 × £1.00)</div>
+              <div style="margin-left:auto;font-size:10px;color:rgba(200,169,74,0.5);font-family:'Inter',sans-serif;">8 / 48 slots filled</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer" style="position:absolute;bottom:10px;left:0;right:0;">
+        <span>Digital Download</span>·<span>Opens in any browser</span>·<span>No app needed</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- CARD 17 (LANDSCAPE): UCL — Knockout Bracket Feature -->
+<!-- ============================================================ -->
+<div class="card-wrapper">
+  <div class="card-label"><strong>Card 17 of 18</strong> · Champions League — Knockout Bracket Feature · 1200×630px</div>
+  <div class="card-landscape" id="card-17">
+    <div class="card-inner">
+      <div style="display:flex;gap:0;height:100%;">
+        <div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding-right:32px;border-right:1px solid rgba(200,169,74,0.15);">
+          <div class="twc-logo" style="margin-bottom:20px;">
+            <div class="twc-box"><span>TWC</span></div>
+            <div class="twc-text">
+              <span class="brand-name">The Wall Chart Co</span>
+              <span class="brand-tag">Premium Tournament Downloads</span>
+            </div>
+          </div>
+          <div style="font-family:'Inter',sans-serif;font-size:11px;color:var(--red);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;font-weight:600;">Feature Spotlight</div>
+          <div style="font-family:'EB Garamond',serif;font-size:34px;color:var(--gold);line-height:1.15;margin-bottom:12px;">Full Knockout<br>Bracket from<br><span style="color:var(--white)">R16 to Munich</span></div>
+          <div style="font-family:'Inter',sans-serif;font-size:13px;color:rgba(247,245,238,0.6);line-height:1.6;margin-bottom:16px;">Track every two-legged tie from the Round of 16 all the way to the final at Allianz Arena, Munich.</div>
+          <div style="background:rgba(200,169,74,0.1);border:1px solid rgba(200,169,74,0.3);border-radius:6px;padding:10px 14px;font-family:'Inter',sans-serif;font-size:12px;color:var(--gold);">
+            ✓ Leg 1 + Leg 2 scores &nbsp;·&nbsp; ✓ Agg. auto-calculated &nbsp;·&nbsp; ✓ AET &amp; penalties
+          </div>
+          <div style="margin-top:16px;">
+            <div class="price-badge" style="display:inline-block;">£4.99</div>
+            <span style="font-family:'Inter',sans-serif;font-size:12px;color:rgba(255,255,255,0.4);margin-left:12px;">Champions League 2025/26 Wall Chart</span>
+          </div>
+        </div>
+        <div style="flex:1.4;padding-left:32px;display:flex;flex-direction:column;justify-content:center;">
+          <div class="mockup-area" style="background:rgba(0,0,0,0.4);padding:12px;flex:1;">
+            <div style="font-family:'EB Garamond',serif;font-size:13px;color:var(--gold);margin-bottom:8px;letter-spacing:0.5px;">⭐ UCL 2025/26 — Knockout Phase</div>
+            <div style="display:flex;gap:6px;align-items:flex-start;">
+              <!-- R16 -->
+              <div style="flex:1;">
+                <div style="font-size:9px;color:rgba(200,169,74,0.6);font-family:'Inter',sans-serif;letter-spacing:1px;text-align:center;margin-bottom:4px;text-transform:uppercase;">Round of 16</div>
+                <div style="display:flex;flex-direction:column;gap:4px;">
+                  <div style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);border-radius:3px;padding:3px 5px;font-size:10px;color:#4ade80;font-family:'Inter',sans-serif;display:flex;justify-content:space-between;"><span>Liverpool</span><span style="font-weight:700">3–1</span></div>
+                  <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:3px;padding:3px 5px;font-size:10px;color:rgba(255,255,255,0.4);font-family:'Inter',sans-serif;display:flex;justify-content:space-between;"><span>Ajax</span><span>agg</span></div>
+                  <div style="height:4px;"></div>
+                  <div style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);border-radius:3px;padding:3px 5px;font-size:10px;color:#4ade80;font-family:'Inter',sans-serif;display:flex;justify-content:space-between;"><span>Barcelona</span><span style="font-weight:700">4–2</span></div>
+                  <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:3px;padding:3px 5px;font-size:10px;color:rgba(255,255,255,0.4);font-family:'Inter',sans-serif;display:flex;justify-content:space-between;"><span>Juventus</span><span>agg</span></div>
+                  <div style="height:4px;"></div>
+                  <div style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);border-radius:3px;padding:3px 5px;font-size:10px;color:#4ade80;font-family:'Inter',sans-serif;display:flex;justify-content:space-between;"><span>Arsenal</span><span style="font-weight:700">2–0</span></div>
+                  <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:3px;padding:3px 5px;font-size:10px;color:rgba(255,255,255,0.4);font-family:'Inter',sans-serif;display:flex;justify-content:space-between;"><span>Porto</span><span>agg</span></div>
+                  <div style="height:4px;"></div>
+                  <div style="background:rgba(200,169,74,0.1);border:1px solid rgba(200,169,74,0.3);border-radius:3px;padding:3px 5px;font-size:10px;color:var(--gold);font-family:'Inter',sans-serif;display:flex;justify-content:space-between;"><span>Man City</span><span style="color:rgba(200,169,74,0.5)">vs</span></div>
+                  <div style="background:rgba(200,169,74,0.1);border:1px solid rgba(200,169,74,0.3);border-radius:3px;padding:3px 5px;font-size:10px;color:var(--gold);font-family:'Inter',sans-serif;display:flex;justify-content:space-between;"><span>Atletico</span><span style="color:rgba(200,169,74,0.5)">TBD</span></div>
+                </div>
+              </div>
+              <!-- QF -->
+              <div style="flex:0.8;margin-top:14px;">
+                <div style="font-size:9px;color:rgba(200,169,74,0.6);font-family:'Inter',sans-serif;letter-spacing:1px;text-align:center;margin-bottom:4px;text-transform:uppercase;">QF</div>
+                <div style="display:flex;flex-direction:column;gap:4px;">
+                  <div style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);border-radius:3px;padding:3px 5px;font-size:10px;color:#4ade80;font-family:'Inter',sans-serif;">Liverpool</div>
+                  <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:3px;padding:3px 5px;font-size:10px;color:rgba(255,255,255,0.4);font-family:'Inter',sans-serif;">Barcelona</div>
+                  <div style="height:14px;"></div>
+                  <div style="background:rgba(200,169,74,0.08);border:1px solid rgba(200,169,74,0.2);border-radius:3px;padding:3px 5px;font-size:10px;color:rgba(255,255,255,0.5);font-family:'Inter',sans-serif;">Arsenal</div>
+                  <div style="background:rgba(200,169,74,0.08);border:1px solid rgba(200,169,74,0.2);border-radius:3px;padding:3px 5px;font-size:10px;color:rgba(255,255,255,0.5);font-family:'Inter',sans-serif;">TBD</div>
+                </div>
+              </div>
+              <!-- SF -->
+              <div style="flex:0.7;margin-top:28px;">
+                <div style="font-size:9px;color:rgba(200,169,74,0.6);font-family:'Inter',sans-serif;letter-spacing:1px;text-align:center;margin-bottom:4px;text-transform:uppercase;">SF</div>
+                <div style="display:flex;flex-direction:column;gap:4px;margin-top:10px;">
+                  <div style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);border-radius:3px;padding:3px 5px;font-size:10px;color:#4ade80;font-family:'Inter',sans-serif;">Liverpool</div>
+                  <div style="background:rgba(200,169,74,0.08);border:1px solid rgba(200,169,74,0.2);border-radius:3px;padding:3px 5px;font-size:10px;color:rgba(255,255,255,0.5);font-family:'Inter',sans-serif;">TBD</div>
+                </div>
+              </div>
+              <!-- Final -->
+              <div style="flex:0.6;margin-top:44px;display:flex;flex-direction:column;justify-content:center;">
+                <div style="background:rgba(200,169,74,0.2);border:1px solid var(--gold);border-radius:6px;padding:8px;text-align:center;">
+                  <div style="font-family:'EB Garamond',serif;font-size:12px;color:var(--gold);letter-spacing:1px;margin-bottom:4px;">🏆 FINAL</div>
+                  <div style="font-size:9px;color:rgba(255,255,255,0.4);font-family:'Inter',sans-serif;margin-bottom:5px;">Munich · 30 May</div>
+                  <div style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);border-radius:3px;padding:2px 6px;font-size:10px;color:#4ade80;font-family:'Inter',sans-serif;margin-bottom:3px;">Liverpool</div>
+                  <div style="font-size:8px;color:rgba(255,255,255,0.3);font-family:'Inter',sans-serif;margin:2px 0;">vs</div>
+                  <div style="background:rgba(200,169,74,0.08);border:1px solid rgba(200,169,74,0.2);border-radius:3px;padding:2px 6px;font-size:10px;color:rgba(255,255,255,0.5);font-family:'Inter',sans-serif;">TBD</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer" style="position:absolute;bottom:10px;left:0;right:0;">
+        <span>Digital Download</span>·<span>Opens in any browser</span>·<span>No app needed</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- CARD 18 (LANDSCAPE): RWC 2027 — Pool Tables Feature -->
+<!-- ============================================================ -->
+<div class="card-wrapper">
+  <div class="card-label"><strong>Card 18 of 18</strong> · Rugby World Cup 2027 — Pool Tables Feature · 1200×630px</div>
+  <div class="card-landscape" id="card-18">
+    <div class="card-inner">
+      <div style="display:flex;gap:0;height:100%;">
+        <div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding-right:32px;border-right:1px solid rgba(200,169,74,0.15);">
+          <div class="twc-logo" style="margin-bottom:20px;">
+            <div class="twc-box"><span>TWC</span></div>
+            <div class="twc-text">
+              <span class="brand-name">The Wall Chart Co</span>
+              <span class="brand-tag">Premium Tournament Downloads</span>
+            </div>
+          </div>
+          <div style="font-family:'Inter',sans-serif;font-size:11px;color:var(--red);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;font-weight:600;">Feature Spotlight</div>
+          <div style="font-family:'EB Garamond',serif;font-size:34px;color:var(--gold);line-height:1.15;margin-bottom:12px;">Full Bonus Point<br>Pool Tables with<br><span style="color:var(--white)">All 4 Pools</span></div>
+          <div style="font-family:'Inter',sans-serif;font-size:13px;color:rgba(247,245,238,0.6);line-height:1.6;margin-bottom:16px;">Track all 4 pools with proper rugby bonus point scoring — try bonus, losing bonus, and automatic qualification spots highlighted.</div>
+          <div style="background:rgba(200,169,74,0.1);border:1px solid rgba(200,169,74,0.3);border-radius:6px;padding:10px 14px;font-family:'Inter',sans-serif;font-size:12px;color:var(--gold);">
+            ✓ Try bonus + Losing bonus &nbsp;·&nbsp; ✓ AEST + UK times &nbsp;·&nbsp; ✓ 20 teams tracked
+          </div>
+          <div style="margin-top:16px;">
+            <div class="price-badge" style="display:inline-block;">£5.99</div>
+            <span style="font-family:'Inter',sans-serif;font-size:12px;color:rgba(255,255,255,0.4);margin-left:12px;">Rugby World Cup 2027 Wall Chart</span>
+          </div>
+        </div>
+        <div style="flex:1.4;padding-left:32px;display:flex;flex-direction:column;justify-content:center;">
+          <div class="mockup-area" style="background:rgba(0,0,0,0.4);padding:12px;flex:1;overflow:visible;">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;height:100%;">
+              <!-- Pool A -->
+              <div>
+                <div class="group-header" style="font-size:12px;">Pool A</div>
+                <table class="mock-table" style="font-size:11px;">
+                  <thead><tr><th style="width:18px">#</th><th style="text-align:left;padding-left:4px">Team</th><th>P</th><th>W</th><th>L</th><th style="color:var(--gold);font-size:9px">TB</th><th style="color:rgba(255,255,255,0.4);font-size:9px">LB</th><th class="pts-cell">Pts</th></tr></thead>
+                  <tbody>
+                    <tr style="background:rgba(34,197,94,0.06)"><td class="pos-cell">1</td><td style="text-align:left;padding-left:4px">🇳🇿 NZL</td><td>4</td><td>4</td><td>0</td><td style="color:var(--gold)">3</td><td>0</td><td class="pts-cell">19</td></tr>
+                    <tr style="background:rgba(34,197,94,0.04)"><td class="pos-cell">2</td><td style="text-align:left;padding-left:4px">🇫🇷 FRA</td><td>4</td><td>3</td><td>1</td><td style="color:var(--gold)">2</td><td>1</td><td class="pts-cell">15</td></tr>
+                    <tr><td class="pos-cell">3</td><td style="text-align:left;padding-left:4px">🇮🇹 ITA</td><td>4</td><td>2</td><td>2</td><td style="color:var(--gold)">1</td><td>1</td><td class="pts-cell">10</td></tr>
+                    <tr><td class="pos-cell">4</td><td style="text-align:left;padding-left:4px">🇺🇸 USA</td><td>4</td><td>1</td><td>3</td><td style="color:var(--gold)">0</td><td>1</td><td class="pts-cell">5</td></tr>
+                    <tr><td class="pos-cell">5</td><td style="text-align:left;padding-left:4px">🇳🇦 NAM</td><td>4</td><td>0</td><td>4</td><td style="color:var(--gold)">1</td><td>0</td><td class="pts-cell">1</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <!-- Pool B -->
+              <div>
+                <div class="group-header" style="font-size:12px;">Pool B</div>
+                <table class="mock-table" style="font-size:11px;">
+                  <thead><tr><th style="width:18px">#</th><th style="text-align:left;padding-left:4px">Team</th><th>P</th><th>W</th><th>L</th><th style="color:var(--gold);font-size:9px">TB</th><th style="color:rgba(255,255,255,0.4);font-size:9px">LB</th><th class="pts-cell">Pts</th></tr></thead>
+                  <tbody>
+                    <tr style="background:rgba(34,197,94,0.06)"><td class="pos-cell">1</td><td style="text-align:left;padding-left:4px">🇿🇦 RSA</td><td>4</td><td>4</td><td>0</td><td style="color:var(--gold)">4</td><td>0</td><td class="pts-cell">20</td></tr>
+                    <tr style="background:rgba(34,197,94,0.04)"><td class="pos-cell">2</td><td style="text-align:left;padding-left:4px">🏴󠁧󠁢󠁩󠁲󠁬󠁿 IRL</td><td>4</td><td>3</td><td>1</td><td style="color:var(--gold)">3</td><td>0</td><td class="pts-cell">15</td></tr>
+                    <tr><td class="pos-cell">3</td><td style="text-align:left;padding-left:4px">🏴󠁧󠁢󠁳󠁣󠁴󠁿 SCO</td><td>4</td><td>2</td><td>2</td><td style="color:var(--gold)">1</td><td>2</td><td class="pts-cell">11</td></tr>
+                    <tr><td class="pos-cell">4</td><td style="text-align:left;padding-left:4px">🇯🇵 JPN</td><td>4</td><td>1</td><td>3</td><td style="color:var(--gold)">2</td><td>0</td><td class="pts-cell">6</td></tr>
+                    <tr><td class="pos-cell">5</td><td style="text-align:left;padding-left:4px">🇺🇾 URU</td><td>4</td><td>0</td><td>4</td><td style="color:var(--gold)">0</td><td>1</td><td class="pts-cell">1</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <!-- Pool C -->
+              <div>
+                <div class="group-header" style="font-size:12px;">Pool C</div>
+                <table class="mock-table" style="font-size:11px;">
+                  <thead><tr><th style="width:18px">#</th><th style="text-align:left;padding-left:4px">Team</th><th>P</th><th>W</th><th>L</th><th style="color:var(--gold);font-size:9px">TB</th><th style="color:rgba(255,255,255,0.4);font-size:9px">LB</th><th class="pts-cell">Pts</th></tr></thead>
+                  <tbody>
+                    <tr style="background:rgba(34,197,94,0.06)"><td class="pos-cell">1</td><td style="text-align:left;padding-left:4px">🏴󠁧󠁢󠁥󠁮󠁧󠁿 ENG</td><td>4</td><td>4</td><td>0</td><td style="color:var(--gold)">2</td><td>0</td><td class="pts-cell">18</td></tr>
+                    <tr style="background:rgba(34,197,94,0.04)"><td class="pos-cell">2</td><td style="text-align:left;padding-left:4px">🇦🇺 AUS</td><td>4</td><td>3</td><td>1</td><td style="color:var(--gold)">1</td><td>1</td><td class="pts-cell">14</td></tr>
+                    <tr><td class="pos-cell">3</td><td style="text-align:left;padding-left:4px">🇦🇷 ARG</td><td>4</td><td>2</td><td>2</td><td style="color:var(--gold)">2</td><td>0</td><td class="pts-cell">10</td></tr>
+                    <tr><td class="pos-cell">4</td><td style="text-align:left;padding-left:4px">🇫🇯 FIJ</td><td>4</td><td>1</td><td>3</td><td style="color:var(--gold)">1</td><td>1</td><td class="pts-cell">6</td></tr>
+                    <tr><td class="pos-cell">5</td><td style="text-align:left;padding-left:4px">🇬🇪 GEO</td><td>4</td><td>0</td><td>4</td><td style="color:var(--gold)">0</td><td>2</td><td class="pts-cell">2</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <!-- Pool D -->
+              <div>
+                <div class="group-header" style="font-size:12px;">Pool D</div>
+                <table class="mock-table" style="font-size:11px;">
+                  <thead><tr><th style="width:18px">#</th><th style="text-align:left;padding-left:4px">Team</th><th>P</th><th>W</th><th>L</th><th style="color:var(--gold);font-size:9px">TB</th><th style="color:rgba(255,255,255,0.4);font-size:9px">LB</th><th class="pts-cell">Pts</th></tr></thead>
+                  <tbody>
+                    <tr style="background:rgba(34,197,94,0.06)"><td class="pos-cell">1</td><td style="text-align:left;padding-left:4px">🏴󠁧󠁢󠁷󠁬󠁳󠁿 WAL</td><td>4</td><td>3</td><td>1</td><td style="color:var(--gold)">3</td><td>0</td><td class="pts-cell">15</td></tr>
+                    <tr style="background:rgba(34,197,94,0.04)"><td class="pos-cell">2</td><td style="text-align:left;padding-left:4px">🇷🇴 ROM</td><td>4</td><td>3</td><td>1</td><td style="color:var(--gold)">2</td><td>1</td><td class="pts-cell">15</td></tr>
+                    <tr><td class="pos-cell">3</td><td style="text-align:left;padding-left:4px">🇸🇦 SAM</td><td>4</td><td>2</td><td>2</td><td style="color:var(--gold)">1</td><td>1</td><td class="pts-cell">10</td></tr>
+                    <tr><td class="pos-cell">4</td><td style="text-align:left;padding-left:4px">🇵🇹 POR</td><td>4</td><td>1</td><td>3</td><td style="color:var(--gold)">1</td><td>0</td><td class="pts-cell">5</td></tr>
+                    <tr><td class="pos-cell">5</td><td style="text-align:left;padding-left:4px">🇿🇼 ZIM</td><td>4</td><td>0</td><td>4</td><td style="color:var(--gold)">0</td><td>1</td><td class="pts-cell">1</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer" style="position:absolute;bottom:10px;left:0;right:0;">
+        <span>Digital Download</span>·<span>Opens in any browser</span>·<span>No app needed</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
+
+
+

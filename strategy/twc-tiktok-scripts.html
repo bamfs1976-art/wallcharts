@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TWC TikTok Scripts & Storyboards</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#0a0f1a;color:#e8e4d8;line-height:1.6;padding:40px 32px;max-width:1040px;margin:0 auto}
+h1{font-family:'EB Garamond',serif;font-size:28px;color:#C8A94A;margin-bottom:4px}
+.meta{font-size:11px;color:rgba(255,255,255,0.3);letter-spacing:.15em;text-transform:uppercase;margin-bottom:48px}
+.section-head{font-family:'EB Garamond',serif;font-size:20px;color:#C8502A;border-bottom:2px solid rgba(200,80,42,.3);padding-bottom:8px;margin:52px 0 28px}
+
+/* VIDEO CARD */
+.video-card{background:#111827;border:1px solid rgba(200,169,74,.15);border-radius:12px;margin-bottom:40px;overflow:hidden}
+.video-header{background:#0B1E3D;padding:18px 24px;display:flex;align-items:center;gap:16px;justify-content:space-between;flex-wrap:wrap}
+.video-title{font-family:'EB Garamond',serif;font-size:20px;color:#C8A94A}
+.video-badges{display:flex;gap:8px;flex-wrap:wrap}
+.badge{padding:3px 10px;border-radius:20px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.badge-duration{background:rgba(200,169,74,.15);color:#C8A94A;border:1px solid rgba(200,169,74,.3)}
+.badge-product{background:rgba(200,80,42,.15);color:#e0826a;border:1px solid rgba(200,80,42,.3)}
+.badge-format{background:rgba(59,130,246,.15);color:#93c5fd;border:1px solid rgba(59,130,246,.3)}
+.video-body{padding:24px}
+
+/* STATS ROW */
+.stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:24px}
+.stat-box{background:#0a0f1a;border:1px solid rgba(200,169,74,.12);border-radius:8px;padding:12px 14px;text-align:center}
+.stat-label{font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:4px}
+.stat-val{font-size:15px;font-weight:700;color:#C8A94A}
+
+/* HOOK */
+.section-label{font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#C8502A;margin:20px 0 8px}
+.hook-box{background:#0f1825;border-left:3px solid #C8A94A;border-radius:0 8px 8px 0;padding:14px 16px;font-size:15px;font-weight:600;color:#fff;font-style:italic;line-height:1.5}
+.hook-note{font-size:11px;color:rgba(255,255,255,.35);margin-top:6px;font-style:normal}
+
+/* STORYBOARD */
+.storyboard{display:flex;flex-direction:column;gap:0}
+.scene{display:grid;grid-template-columns:52px 1fr 1fr;border-bottom:1px solid rgba(255,255,255,.05)}
+.scene:last-child{border-bottom:none}
+.scene-num{display:flex;align-items:flex-start;justify-content:center;padding:14px 0;padding-top:16px}
+.scene-num-inner{width:32px;height:32px;border-radius:50%;background:#0B1E3D;border:1.5px solid rgba(200,169,74,.4);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#C8A94A;flex-shrink:0}
+.scene-visual{padding:14px 14px 14px 8px;border-right:1px solid rgba(255,255,255,.05)}
+.scene-visual-title{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:6px}
+.scene-visual-desc{font-size:13px;color:#e8e4d8;line-height:1.5}
+.scene-timing{font-size:10px;color:#C8A94A;font-weight:700;margin-top:4px}
+.scene-copy{padding:14px}
+.scene-copy-title{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:6px}
+.overlay-text{display:inline-block;background:rgba(11,30,61,.85);border:1px solid rgba(200,169,74,.4);border-radius:4px;padding:3px 8px;font-size:12px;font-weight:600;color:#C8A94A;margin:2px 2px 2px 0;line-height:1.5}
+.spoken{font-size:13px;color:#94a3b8;font-style:italic;line-height:1.5;margin-top:6px}
+
+/* CTA BOX */
+.cta-box{background:#0B1E3D;border:1px solid rgba(200,169,74,.25);border-radius:8px;padding:14px 16px;margin-top:16px}
+.cta-box-title{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#C8502A;margin-bottom:8px}
+.cta-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;font-size:13px;color:rgba(255,255,255,.7)}
+.cta-strong{color:#C8A94A;font-weight:700}
+
+/* CAPTIONS */
+.caption-box{background:#0f1825;border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:16px;margin-top:16px}
+.caption-box-title{font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#C8502A;margin-bottom:10px}
+.caption-text{font-size:13px;color:rgba(255,255,255,.75);line-height:1.7;white-space:pre-wrap}
+
+/* HASHTAGS */
+.hashtag-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.hashtag{background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.2);border-radius:20px;padding:3px 10px;font-size:11px;color:#93c5fd}
+
+/* MUSIC */
+.music-box{display:flex;align-items:center;gap:10px;background:rgba(200,169,74,.06);border:1px solid rgba(200,169,74,.15);border-radius:8px;padding:10px 14px;margin-top:12px;font-size:12px;color:rgba(255,255,255,.6)}
+.music-icon{font-size:16px}
+.music-strong{color:#C8A94A;font-weight:600}
+
+/* TIPS */
+.tips-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px}
+@media(max-width:600px){.tips-grid{grid-template-columns:1fr}}
+.tip-card{background:#111827;border:1px solid rgba(200,169,74,.12);border-radius:10px;padding:18px}
+.tip-card h3{font-family:'EB Garamond',serif;font-size:16px;color:#C8A94A;margin-bottom:8px}
+.tip-card ul{list-style:none;display:flex;flex-direction:column;gap:6px}
+.tip-card li{font-size:13px;color:rgba(255,255,255,.65);padding-left:16px;position:relative}
+.tip-card li::before{content:"→";position:absolute;left:0;color:#C8502A;font-size:11px;top:1px}
+
+/* STORYBOARD TABLE HEADER */
+.sb-header{display:grid;grid-template-columns:52px 1fr 1fr;background:#0B1E3D;border-radius:8px 8px 0 0;overflow:hidden}
+.sb-header div{padding:8px 14px;font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:rgba(200,169,74,.7)}
+.sb-header div:first-child{text-align:center}
+.storyboard-wrap{border:1px solid rgba(255,255,255,.07);border-radius:8px;overflow:hidden;margin-top:12px}
+</style>
+</head>
+<body>
+
+<h1>The Wall Chart Co — TikTok Video Scripts</h1>
+<p class="meta">6 scripts · Full storyboards · Captions · Hashtags · Music recommendations</p>
+
+<!-- ══════════════════════════════════════════════════
+     OVERVIEW
+══════════════════════════════════════════════════ -->
+<div class="section-head">Strategy Overview</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:32px">
+  <div class="stat-box"><div class="stat-label">Target Platform</div><div class="stat-val">TikTok</div></div>
+  <div class="stat-box"><div class="stat-label">Video Format</div><div class="stat-val">9:16 Portrait</div></div>
+  <div class="stat-box"><div class="stat-label">Ideal Length</div><div class="stat-val">15–30 sec</div></div>
+  <div class="stat-box"><div class="stat-label">Target Audience</div><div class="stat-val">Football &amp; Rugby fans</div></div>
+  <div class="stat-box"><div class="stat-label">Posting Time</div><div class="stat-val">7–9pm weekday</div></div>
+  <div class="stat-box"><div class="stat-label">Videos Planned</div><div class="stat-val">6 scripts</div></div>
+</div>
+
+<p style="font-size:13px;color:rgba(255,255,255,.55);line-height:1.8;margin-bottom:20px">
+  All videos should be <strong style="color:#fff">screen recordings of the actual products</strong> in a browser window, filmed with your phone directly off a laptop/monitor screen, or exported as screen recordings. 9:16 crop works well showing the product UI top-to-bottom with overlaid text. Use the product card mockups as thumbnail images.
+</p>
+
+<div class="tips-grid" style="margin-bottom:0">
+  <div class="tip-card">
+    <h3>Recording Setup</h3>
+    <ul>
+      <li>Use Windows + G (Xbox Game Bar) for free screen recording</li>
+      <li>Or OBS Studio (free) set to 1080×1920 portrait crop</li>
+      <li>Record in a dark room — the navy UI looks great on camera</li>
+      <li>Zoom browser to 125% for better readability on TikTok</li>
+      <li>Record at 60fps if possible for smooth scroll/input animations</li>
+    </ul>
+  </div>
+  <div class="tip-card">
+    <h3>Editing in TikTok App</h3>
+    <ul>
+      <li>Trim to the right length in-app (no editor needed)</li>
+      <li>Add text overlays using TikTok's built-in text tool</li>
+      <li>Use Auto Captions for accessibility and reach</li>
+      <li>Add trending sound AFTER recording — music boosts reach</li>
+      <li>Post on Tuesday–Thursday 7–9pm for max engagement</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     VIDEO 1 — WC WALL CHART HERO
+══════════════════════════════════════════════════ -->
+<div class="section-head">Football Scripts</div>
+
+<div class="video-card">
+  <div class="video-header">
+    <div class="video-title">Video 1 — World Cup 2026 Wall Chart (Hero)</div>
+    <div class="video-badges">
+      <span class="badge badge-duration">⏱ 22 sec</span>
+      <span class="badge badge-product">⚽ World Cup 2026</span>
+      <span class="badge badge-format">📱 Screen Record</span>
+    </div>
+  </div>
+  <div class="video-body">
+    <div class="stats-row">
+      <div class="stat-box"><div class="stat-label">Product</div><div class="stat-val">WC Wall Chart</div></div>
+      <div class="stat-box"><div class="stat-label">Price</div><div class="stat-val">£5.99</div></div>
+      <div class="stat-box"><div class="stat-label">Goal</div><div class="stat-val">Awareness + Click</div></div>
+      <div class="stat-box"><div class="stat-label">Hook Type</div><div class="stat-val">Problem → Solution</div></div>
+    </div>
+
+    <div class="section-label">Hook (0–3 sec) — must stop the scroll</div>
+    <div class="hook-box">"World Cup 2026 is coming. 48 teams. 104 matches. Don't lose track."</div>
+    <p class="hook-note">Show: zoom into the TWC header with the World Cup 2026 banner on screen. Big, bold, immediate. No intro.</p>
+
+    <div class="section-label">Storyboard</div>
+    <div class="storyboard-wrap">
+      <div class="sb-header">
+        <div>#</div><div>What You Show (Screen)</div><div>Text Overlay + Voiceover</div>
+      </div>
+      <div class="storyboard">
+        <div class="scene">
+          <div class="scene-num"><div class="scene-num-inner">1</div></div>
+          <div class="scene-visual">
+            <div class="scene-visual-title">Visual</div>
+            <div class="scene-visual-desc">Open the wall chart. Zoom into the navy header with the trophy icon and "2026 World Cup Wall Chart" title. Slow zoom in.</div>
+            <div class="scene-timing">0:00 – 0:03</div>
+          </div>
+          <div class="scene-copy">
+            <div class="scene-copy-title">Overlay + Audio</div>
+            <span class="overlay-text">48 teams. 104 matches.</span>
+            <div class="spoken">Spoken: "World Cup 2026 is almost here."</div>
+          </div>
+        </div>
+        <div class="scene">
+          <div class="scene-num"><div class="scene-num-inner">2</div></div>
+          <div class="scene-visual">
+            <div class="scene-visual-title">Visual</div>
+            <div class="scene-visual-desc">Scroll down to show the 12 groups grid — flags and team names visible. Slow scroll past 3 or 4 groups.</div>
+            <div class="scene-timing">0:03 – 0:08</div>
+          </div>
+          <div class="scene-copy">
+            <div class="scene-copy-title">Overlay + Audio</div>
+            <span class="overlay-text">12 groups</span>
+            <span class="overlay-text">All 48 nations</span>
+            <div class="spoken">Spoken: "12 groups, 48 teams — including England in Group L."</div>
+          </div>
+        </div>
+        <div class="scene">
+          <div class="scene-num"><div class="scene-num-inner">3</div></div>
+          <div class="scene-visual">
+            <div class="scene-visual-title">Visual</div>
+            <div class="scene-visual-desc">Click on a score input, type a score — show the group table update live (points/GD columns change). 2–3 scores entered quickly.</div>
+            <div class="scene-timing">0:08 – 0:14</div>
+          </div>
+          <div class="scene-copy">
+            <div class="scene-copy-title">Overlay + Audio</div>
+            <span class="overlay-text">Enter scores live</span>
+            <span class="overlay-text">Table updates instantly ⚡</span>
+            <div class="spoken">Spoken: "Enter scores as they happen — the table updates instantly."</div>
+          </div>
+        </div>
+        <div class="scene">
+          <div class="scene-num"><div class="scene-num-inner">4</div></div>
+          <div class="scene-visual">
+            <div class="scene-visual-title">Visual</div>
+            <div class="scene-visual-desc">Click the Knockout tab — pan across the full bracket from R32 to Final. Highlight the Final match box in the centre.</div>
+            <div class="scene-timing">0:14 – 0:18</div>
+          </div>
+          <div class="scene-copy">
+            <div class="scene-copy-title">Overlay + Audio</div>
+            <span class="overlay-text">Full knockout bracket</span>
+            <span class="overlay-text">R32 → QF → SF → Final</span>
+            <div class="spoken">Spoken: "Plus the full knockout bracket — all the way to the Final."</div>
+          </div>
+        </div>
+        <div class="scene">
+          <div class="scene-num"><div class="scene-num-inner">5</div></div>
+          <div class="scene-visual">
+            <div class="scene-visual-title">Visual</div>
+            <div class="scene-visual-desc">Zoom out to show the full page. Switch colour theme (click theme dot) — show the England red/white theme flash on. End on it.</div>
+            <div class="scene-timing">0:18 – 0:22</div>
+          </div>
+          <div class="scene-copy">
+            <div class="scene-copy-title">Overlay + Audio</div>
+            <span class="overlay-text">£5.99 on Etsy</span>
+            <span class="overlay-text">Link in bio 👆</span>
+            <div class="spoken">Spoken: "Just £5.99 on Etsy. Link in bio."</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-box">
+      <div class="cta-box-title">Call to Action</div>
+      <div class="cta-row">
+        <span>Caption CTA:</span>
+        <span class="cta-strong">"Comment 'CHART' and I'll send you the link 🏆"</span>
+      </div>
+      <div class="cta-row" style="margin-top:6px">
+        <span>Bio CTA:</span>
+        <span class="cta-strong">Etsy shop link — TheWallChartCo</span>
+      </div>
+    </div>
+
+    <div class="caption-box">
+      <div class="caption-box-title">Full TikTok Caption (copy-paste ready)</div>
+      <div class="caption-text">World Cup 2026 interactive wall chart 🌍⚽ Track all 104 matches, 12 groups, full knockout bracket — in one browser file. No app. No install. Just open and go.
+
+£5.99 on Etsy → link in bio 🔗
+
+Comment "CHART" if you want the link! 👇</div>
+      <div class="hashtag-row">
+        <span class="hashtag">#WorldCup2026</span>
+        <span class="hashtag">#Football</span>
+        <span class="hashtag">#WorldCup</span>
+        <span class="hashtag">#FootballFan</span>
+        <span class="hashtag">#FIFA2026</span>
+        <span class="hashtag">#WallChart</span>
+        <span class="hashtag">#DigitalDownload</span>
+        <span class="hashtag">#EtsySeller</span>
+        <span class="hashtag">#FootballGift</span>
+        <span class="hashtag">#WC2026</span>
+      </div>
+    </div>
+    <div class="music-box">
+      <span class="music-icon">🎵</span>
+      <span>Music: <span class="music-strong">upbeat electronic/sport hype</span> — search "sport hype" or "stadium anthem" in TikTok sounds. Keep it under the voiceover.</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     VIDEO 2 — SWEEPSTAKE
+══════════════════════════════════════════════════ -->
+<div class="video-card">
+  <div class="video-header">
+    <div class="video-title">Video 2 — Office Sweepstake Kit (Viral Hook)</div>
+    <div class="video-badges">
+      <span class="badge badge-duration">⏱ 18 sec</span>
+      <span class="badge badge-product">🎲 Sweepstake</span>
+      <span class="badge badge-format">📱 Screen Record</span>
+    </div>
+  </div>
+  <div class="video-body">
+    <div class="stats-row">
+      <div class="stat-box"><div class="stat-label">Product</div><div class="stat-val">Sweepstake Kit</div></div>
+      <div class="stat-box"><div class="stat-label">Price</div><div class="stat-val">£2.99</div></div>
+      <div class="stat-box"><div class="stat-label">Goal</div><div class="stat-val">Shares + Saves</div></div>
+      <div class="stat-box"><div class="stat-label">Hook Type</div><div class="stat-val">Relatability</div></div>
+    </div>
+
+    <div class="section-label">Hook (0–3 sec)</div>
+    <div class="hook-box">"Your office is doing a World Cup sweepstake. Don't do it on paper."</div>
+    <p class="hook-note">Show: a paper with messy handwritten names crossed out (photograph it). Cut straight to the clean digital version.</p>
+
+    <div class="section-label">Storyboard</div>
+    <div class="storyboard-wrap">
+      <div class="sb-header">
+        <div>#</div><div>What You Show (Screen)</div><div>Text Overlay + Voiceover</div>
+      </div>
+      <div class="storyboard">
+        <div class="scene">
+          <div class="scene-num"><div class="scene-num-inner">1</div></div>
+          <div class="scene-visual">
+            <div class="scene-visual-title">Visual</div>
+            <div class="scene-visual-desc">Brief clip of scruffy paper sweepstake / hat-and-folded-paper approach. 1 second max.</div>
+            <div class="scene-timing">0:00 – 0:01</div>
+          </div>
+          <div class="scene-copy">
+            <div class="scene-copy-title">Overlay + Audio</div>
+            <span class="overlay-text">❌ The old way</span>
+            <div class="spoken">"Don't do it on paper."</div>
+          </div>
+        </div>
+        <div class="scene">
+          <div class="scene-num"><div class="scene-num-inner">2</div></div>
+          <div class="scene-visual">
+            <div class="scene-visual-title">Visual</div>
+            <div class="scene-visual-desc">Open the sweepstake kit. Show the clean setup screen — type in 5 colleague names quickly (Alice, Bob, Dave, Sarah, Mike).</div>
+            <div class="scene-timing">0:01 – 0:07</div>
+          </div>
+          <div class="scene-copy">
+            <div class="scene-copy-title">Overlay + Audio</div>
+            <span class="overlay-text">Type your colleagues in</span>
+            <span class="overlay-text">Up to 48 people</span>
+            <div class="spoken">"Type your colleagues in — up to 48."</div>
+          </div>
+        </div>
+        <div class="scene">
+          <div class="scene-num"><div class="scene-num-inner">3</div></div>
+          <div class="scene-visual">
+            <div class="scene-visual-title">Visual</div>
+            <div class="scene-visual-desc">Hit "Run the Draw!" — show the dark screen with cards face-down, then the flip animation revealing teams one by one. Let 3 or 4 cards flip.</div>
+            <div class="scene-timing">0:07 – 0:13</div>
+          </div>
+          <div class="scene-copy">
+            <div class="scene-copy-title">Overlay + Audio</div>
+            <span class="overlay-text">🎲 Hit Draw!</span>
+            <span class="overlay-text">Cards flip to reveal teams</span>
+            <div class="spoken">"Hit the draw button — every team gets randomly assigned."</div>
+          </div>
+        </div>
+        <div class="scene">
+          <div class="scene-num"><div class="scene-num-inner">4</div></div>
+          <div class="scene-visual">
+            <div class="scene-visual-title">Visual</div>
+            <div class="scene-visual-desc">Click "View Full Results" — show the results table and the £40.00 pot display. Then click "Print Slips" and show the cut-out slip layout.</div>
+            <div class="scene-timing">0:13 – 0:18</div>
+          </div>
+          <div class="scene-copy">
+            <div class="scene-copy-title">Overlay + Audio</div>
+            <span class="overlay-text">Print slips to hand out ✂️</span>
+            <span class="overlay-text">£2.99 on Etsy</span>
+            <div class="spoken">"Print slips. Hand them out. Job done. £2.99."</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="caption-box">
+      <div class="caption-box-title">Full TikTok Caption</div>
+      <div class="caption-text">Your office World Cup sweepstake sorted in 30 seconds 🎲⚽
+
+Type in your colleagues → hit draw → all 48 teams randomly assigned → print individual slips to hand out. Done.
+
+£2.99 on Etsy → link in bio 🔗
+
+Tag someone whose office needs this 👇</div>
+      <div class="hashtag-row">
+        <span class="hashtag">#OfficeSweepstake</span>
+        <span class="hashtag">#WorldCup2026</span>
+        <span class="hashtag">#OfficeLife</span>
+        <span class="hashtag">#Football</span>
+        <span class="hashtag">#Sweepstake</span>
+        <span class="hashtag">#WorkLife</span>
+        <span class="hashtag">#DigitalDownload</span>
+        <span class="hashtag">#EtsyFinds</span>
+        <span class="hashtag">#FootballFan</span>
+        <span class="hashtag">#WC2026</span>
+      </div>
+    </div>
+    <div class="music-box">
+      <span class="music-icon">🎵</span>
+      <span>Music: <span class="music-strong">fun/quirky upbeat</span> — "office comedy" style. Or use the TikTok "suspense reveal" sound during the card flip section.</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     VIDEO 3 — UCL
+══════════════════════════════════════════════════ -->
+<div class="video-card">
+  <div class="video-header">
+    <div class="video-title">Video 3 — Champions League 2025/26</div>
+    <div class="video-badges">
+      <span class="badge badge-duration">⏱ 20 sec</span>
+      <span class="badge badge-product">🏆 Champions League</span>
+      <span class="badge badge-format">📱 Screen Record</span>
+    </div>
+  </div>
+  <div class="video-body">
+
+    <div class="section-label">Hook (0–3 sec)</div>
+    <div class="hook-box">"36 teams. One file. The whole Champions League tracked."</div>
+    <p class="hook-note">Show: the UCL wall chart header with the dark theme. Instant visual impact.</p>
+
+    <div class="section-label">Storyboard</div>
+    <div class="storyboard-wrap">
+      <div class="sb-header">
+        <div>#</div><div>What You Show (Screen)</div><div>Text Overlay + Voiceover</div>
+      </div>
+      <div class="storyboard">
+        <div class="scene">
+          <div class="scene-num"><div class="scene-num-inner">1</div></div>
+          <div class="scene-visual">
+            <div class="scene-visual-title">Visual</div>
+            <div class="scene-visual-desc">Open UCL wall chart. Pan down the 36-team league phase standings table — show all the team rows with flag icons. Slow scroll.</div>
+            <div class="scene-timing">0:00 – 0:06</div>
+          </div>
+          <div class="scene-copy">
+            <div class="scene-copy-title">Overlay + Audio</div>
+            <span class="overlay-text">All 36 teams</span>
+            <span class="overlay-text">Swiss model league phase</span>
+            <div class="spoken">"All 36 teams in the Swiss model format — all tracked."</div>
+          </div>
+        </div>
+        <div class="scene">
+          <div class="scene-num"><div class="scene-num-inner">2</div></div>
+          <div class="scene-visual">
+            <div class="scene-visual-title">Visual</div>
+            <div class="scene-visual-desc">Enter a score — show the table re-sort automatically. Highlight a team moving up.</div>
+            <div class="scene-timing">0:06 – 0:11</div>
+          </div>
+          <div class="scene-copy">
+            <div class="scene-copy-title">Overlay + Audio</div>
+            <span class="overlay-text">Enter scores → table re-sorts live</span>
+            <div class="spoken">"Enter scores, the table re-sorts automatically."</div>
+          </div>
+        </div>
+        <div class="scene">
+          <div class="scene-num"><div class="scene-num-inner">3</div></div>
+          <div class="scene-visual">
+            <div class="scene-visual-title">Visual</div>
+            <div class="scene-visual-desc">Switch to the Knockout tab. Show the bracket from Playoffs through to the Munich Final box highlighted in gold.</div>
+            <div class="scene-timing">0:11 – 0:16</div>
+          </div>
+          <div class="scene-copy">
+            <div class="scene-copy-title">Overlay + Audio</div>
+            <span class="overlay-text">Full knockout bracket</span>
+            <span class="overlay-text">All the way to Munich 🏟️</span>
+            <div class="spoken">"Plus the full knockout bracket — all the way to the Final in Munich."</div>
+          </div>
+        </div>
+        <div class="scene">
+          <div class="scene-num"><div class="scene-num-inner">4</div></div>
+          <div class="scene-visual">
+            <div class="scene-visual-title">Visual</div>
+            <div class="scene-visual-desc">Show the save/export button being clicked. Show a toast notification ("Saved!"). End on the price.</div>
+            <div class="scene-timing">0:16 – 0:20</div>
+          </div>
+          <div class="scene-copy">
+            <div class="scene-copy-title">Overlay + Audio</div>
+            <span class="overlay-text">Auto-saves in your browser</span>
+            <span class="overlay-text">£4.99 on Etsy 🔗</span>
+            <div class="spoken">"Auto-saves. £4.99. Link in bio."</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="caption-box">
+      <div class="caption-box-title">Full TikTok Caption</div>
+      <div class="caption-text">Champions League 2025/26 — all 36 teams, every match, one file 🏆
+
+Swiss model league phase → knockouts → Munich Final. Track it all in your browser with no app needed.
+
+£4.99 on Etsy → link in bio 🔗
+
+#ChampionsLeague #UCL #Football #FootballFan #DigitalDownload #UCL2026 #EtsyFinds #FootballGift #ChampionsLeague2026</div>
+    </div>
+    <div class="music-box">
+      <span class="music-icon">🎵</span>
+      <span>Music: <span class="music-strong">UCL anthem remix</span> — search "Champions League anthem" in TikTok sounds. Always performs well with UCL content.</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     RUGBY SCRIPTS
+══════════════════════════════════════════════════ -->
+<div class="section-head">Rugby Scripts</div>
+
+<!-- VIDEO 4 — SIX NATIONS -->
+<div class="video-card">
+  <div class="video-header">
+    <div class="video-title">Video 4 — Six Nations 2026 &amp; 2027</div>
+    <div class="video-badges">
+      <span class="badge badge-duration">⏱ 20 sec</span>
+      <span class="badge badge-product">🏉 Six Nations</span>
+      <span class="badge badge-format">📱 Screen Record</span>
+    </div>
+  </div>
+  <div class="video-body">
+
+    <div class="section-label">Hook (0–3 sec)</div>
+    <div class="hook-box">"Every Six Nations match. Every bonus point. All tracked in one place."</div>
+    <p class="hook-note">Open on the Six Nations header. Immediately visible: England, France, Ireland, Italy, Scotland, Wales flags in the standings.</p>
+
+    <div class="section-label">Storyboard</div>
+    <div class="storyboard-wrap">
+      <div class="sb-header">
+        <div>#</div><div>What You Show (Screen)</div><div>Text Overlay + Voiceover</div>
+      </div>
+      <div class="storyboard">
+        <div class="scene">
+          <div class="scene-num"><div class="scene-num-inner">1</div></div>
+          <div class="scene-visual">
+            <div class="scene-visual-title">Visual</div>
+            <div class="scene-visual-desc">Open Six Nations 2026. Show the championship standings table — 6 teams with flag icons. Zoom in to show the P/W/D/L/TryB/LB/Pts columns.</div>
+            <div class="scene-timing">0:00 – 0:06</div>
+          </div>
+          <div class="scene-copy">
+            <div class="scene-copy-title">Overlay + Audio</div>
+            <span class="overlay-text">6 nations · 15 matches</span>
+            <span class="overlay-text">Full bonus point scoring 🏉</span>
+            <div class="spoken">"Six teams, 15 matches — with full rugby bonus point scoring."</div>
+          </div>
+        </div>
+        <div class="scene">
+          <div class="scene-num"><div class="scene-num-inner">2</div></div>
+          <div class="scene-visual">
+            <div class="scene-visual-title">Visual</div>
+            <div class="scene-visual-desc">Enter a match score + try count. Show the bonus point tick appear. Show the table update.</div>
+            <div class="scene-timing">0:06 – 0:12</div>
+          </div>
+          <div class="scene-copy">
+            <div class="scene-copy-title">Overlay + Audio</div>
+            <span class="overlay-text">Enter score + try count</span>
+            <span class="overlay-text">Bonus points auto-calculated ✓</span>
+            <div class="spoken">"Enter the score and try count — bonus points calculate automatically."</div>
+          </div>
+        </div>
+        <div class="scene">
+          <div class="scene-num"><div class="scene-num-inner">3</div></div>
+          <div class="scene-visual">
+            <div class="scene-visual-title">Visual</div>
+            <div class="scene-visual-desc">Show the Grand Slam tracker and Calcutta Cup sections. Highlight one team close to a Grand Slam.</div>
+            <div class="scene-timing">0:12 – 0:17</div>
+          </div>
+          <div class="scene-copy">
+            <div class="scene-copy-title">Overlay + Audio</div>
+            <span class="overlay-text">Grand Slam tracker 🔥</span>
+            <span class="overlay-text">Calcutta Cup · Triple Crown</span>
+            <div class="spoken">"Grand Slam tracker, Calcutta Cup, Triple Crown — all built in."</div>
+          </div>
+        </div>
+        <div class="scene">
+          <div class="scene-num"><div class="scene-num-inner">4</div></div>
+          <div class="scene-visual">
+            <div class="scene-visual-title">Visual</div>
+            <div class="scene-visual-desc">Quick cut: show the 2026 title then the 2027 version too. Both available. End on price.</div>
+            <div class="scene-timing">0:17 – 0:20</div>
+          </div>
+          <div class="scene-copy">
+            <div class="scene-copy-title">Overlay + Audio</div>
+            <span class="overlay-text">Available for 2026 &amp; 2027</span>
+            <span class="overlay-text">£3.99 each · Link in bio 🔗</span>
+            <div class="spoken">"Available for 2026 and 2027. £3.99 each on Etsy."</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="caption-box">
+      <div class="caption-box-title">Full TikTok Caption</div>
+      <div class="caption-text">Six Nations tracker with bonus points, Grand Slam tracking &amp; Calcutta Cup built in 🏉
+
+Works for 2026 AND 2027 — both editions available. Opens in any browser, no app needed.
+
+£3.99 on Etsy → link in bio 🔗
+
+#SixNations #SixNations2026 #Rugby #RugbyUnion #GrandSlam #EnglandRugby #IrishRugby #ScotlandRugby #DigitalDownload #RugbyFan</div>
+    </div>
+    <div class="music-box">
+      <span class="music-icon">🎵</span>
+      <span>Music: <span class="music-strong">Swing Low / Bread of Heaven style</span> OR any upbeat stadium chant sound. Alternatively search "rugby hype" in TikTok.</span>
+    </div>
+  </div>
+</div>
+
+<!-- VIDEO 5 — RWC 2027 -->
+<div class="video-card">
+  <div class="video-header">
+    <div class="video-title">Video 5 — Rugby World Cup 2027 Australia</div>
+    <div class="video-badges">
+      <span class="badge badge-duration">⏱ 22 sec</span>
+      <span class="badge badge-product">🏉 RWC 2027</span>
+      <span class="badge badge-format">📱 Screen Record</span>
+    </div>
+  </div>
+  <div class="video-body">
+
+    <div class="section-label">Hook (0–3 sec)</div>
+    <div class="hook-box">"Rugby World Cup 2027. Australia. 20 teams. Start tracking now."</div>
+    <p class="hook-note">Open on the RWC 2027 dark header with "Rugby World Cup 2027 — Australia" and the trophy. Strong visual.</p>
+
+    <div class="section-label">Storyboard</div>
+    <div class="storyboard-wrap">
+      <div class="sb-header">
+        <div>#</div><div>What You Show (Screen)</div><div>Text Overlay + Voiceover</div>
+      </div>
+      <div class="storyboard">
+        <div class="scene">
+          <div class="scene-num"><div class="scene-num-inner">1</div></div>
+          <div class="scene-visual">
+            <div class="scene-visual-title">Visual</div>
+            <div class="scene-visual-desc">RWC 2027 header → scroll to the 4 pool tables. Show Pool A (Australia host, England, Fiji, Georgia) with all columns visible.</div>
+            <div class="scene-timing">0:00 – 0:06</div>
+          </div>
+          <div class="scene-copy">
+            <div class="scene-copy-title">Overlay + Audio</div>
+            <span class="overlay-text">20 teams · 4 pools</span>
+            <span class="overlay-text">Australia 🇦🇺 host nation</span>
+            <div class="spoken">"Rugby World Cup 2027 — 20 teams, 4 pools, hosted in Australia."</div>
+          </div>
+        </div>
+        <div class="scene">
+          <div class="scene-num"><div class="scene-num-inner">2</div></div>
+          <div class="scene-visual">
+            <div class="scene-visual-title">Visual</div>
+            <div class="scene-visual-desc">Enter a score with tries — show the bonus point tick appear next to a team (4+ tries indicator). Columns update.</div>
+            <div class="scene-timing">0:06 – 0:12</div>
+          </div>
+          <div class="scene-copy">
+            <div class="scene-copy-title">Overlay + Audio</div>
+            <span class="overlay-text">Try bonus auto-tracked 🏉</span>
+            <span class="overlay-text">Losing bonus too</span>
+            <div class="spoken">"4-try bonus, losing bonus — all automatic."</div>
+          </div>
+        </div>
+        <div class="scene">
+          <div class="scene-num"><div class="scene-num-inner">3</div></div>
+          <div class="scene-visual">
+            <div class="scene-visual-title">Visual</div>
+            <div class="scene-visual-desc">Show the fixtures tab — dual time zones (AEST + BST). Pan across a few fixtures showing both times.</div>
+            <div class="scene-timing">0:12 – 0:16</div>
+          </div>
+          <div class="scene-copy">
+            <div class="scene-copy-title">Overlay + Audio</div>
+            <span class="overlay-text">Dual timezones · AEST + UK</span>
+            <div class="spoken">"All fixtures shown in Australian AND UK time."</div>
+          </div>
+        </div>
+        <div class="scene">
+          <div class="scene-num"><div class="scene-num-inner">4</div></div>
+          <div class="scene-visual">
+            <div class="scene-visual-title">Visual</div>
+            <div class="scene-visual-desc">Click to Knockout tab — show the QF, SF, Bronze Final, Final boxes. End on price.</div>
+            <div class="scene-timing">0:16 – 0:22</div>
+          </div>
+          <div class="scene-copy">
+            <div class="scene-copy-title">Overlay + Audio</div>
+            <span class="overlay-text">Full knockout bracket</span>
+            <span class="overlay-text">Sydney Final 🏆</span>
+            <span class="overlay-text">£5.99 · Etsy link in bio</span>
+            <div class="spoken">"Full bracket to the Sydney Final. £5.99 on Etsy."</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="caption-box">
+      <div class="caption-box-title">Full TikTok Caption</div>
+      <div class="caption-text">Rugby World Cup 2027 Australia 🏉🇦🇺
+
+Track all 20 teams, 4 pools, full knockout bracket. Bonus point scoring built in. Fixtures shown in AEST + UK time. Auto-saves in your browser.
+
+£5.99 on Etsy → link in bio 🔗
+
+#RugbyWorldCup #RWC2027 #Rugby #RugbyUnion #DigitalDownload #EnglandRugby #AllBlacks #Springboks #RugbyFan #WorldCup2027</div>
+    </div>
+    <div class="music-box">
+      <span class="music-icon">🎵</span>
+      <span>Music: <span class="music-strong">Australian/hype instrumental</span> — search "epic sport" or use a trending sound for impact. Avoid anything with singing if you're doing voiceover.</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     VIDEO 6 — BUNDLE / VALUE
+══════════════════════════════════════════════════ -->
+<div class="section-head">Value / Bundle Script</div>
+
+<div class="video-card">
+  <div class="video-header">
+    <div class="video-title">Video 6 — Ultimate Bundle (Value Stack)</div>
+    <div class="video-badges">
+      <span class="badge badge-duration">⏱ 25 sec</span>
+      <span class="badge badge-product">📦 All Products</span>
+      <span class="badge badge-format">📱 Fast-cut montage</span>
+    </div>
+  </div>
+  <div class="video-body">
+
+    <div class="section-label">Hook (0–3 sec)</div>
+    <div class="hook-box">"Every football and rugby tournament this year. One shop. All digital. All under a fiver each."</div>
+    <p class="hook-note">Fast cut through 4–5 product headers in rapid 0.5-second cuts — visual punch. Then slow down for the value stack.</p>
+
+    <div class="section-label">Storyboard</div>
+    <div class="storyboard-wrap">
+      <div class="sb-header">
+        <div>#</div><div>What You Show (Screen)</div><div>Text Overlay + Voiceover</div>
+      </div>
+      <div class="storyboard">
+        <div class="scene">
+          <div class="scene-num"><div class="scene-num-inner">1</div></div>
+          <div class="scene-visual">
+            <div class="scene-visual-title">Visual</div>
+            <div class="scene-visual-desc">Rapid cuts (0.5s each): WC wall chart → UCL → Six Nations → RWC → Sweepstake. 5 products in 2.5 seconds.</div>
+            <div class="scene-timing">0:00 – 0:04</div>
+          </div>
+          <div class="scene-copy">
+            <div class="scene-copy-title">Overlay + Audio</div>
+            <span class="overlay-text">14 products</span>
+            <span class="overlay-text">Football &amp; Rugby</span>
+            <div class="spoken">"14 digital wall charts. Football and rugby."</div>
+          </div>
+        </div>
+        <div class="scene">
+          <div class="scene-num"><div class="scene-num-inner">2</div></div>
+          <div class="scene-visual">
+            <div class="scene-visual-title">Visual</div>
+            <div class="scene-visual-desc">Slow down: show the Etsy shop page with the product listings. Scroll down past 5–6 thumbnails.</div>
+            <div class="scene-timing">0:04 – 0:10</div>
+          </div>
+          <div class="scene-copy">
+            <div class="scene-copy-title">Overlay + Audio</div>
+            <span class="overlay-text">World Cup 2026 ⚽</span>
+            <span class="overlay-text">Champions League 🏆</span>
+            <span class="overlay-text">Premier League · Six Nations 🏉</span>
+            <span class="overlay-text">Rugby World Cup 2027</span>
+            <div class="spoken">"World Cup, Champions League, Premier League, Six Nations, Rugby World Cup..."</div>
+          </div>
+        </div>
+        <div class="scene">
+          <div class="scene-num"><div class="scene-num-inner">3</div></div>
+          <div class="scene-visual">
+            <div class="scene-visual-title">Visual</div>
+            <div class="scene-visual-desc">Show one product being opened in a browser. Show the score being entered and the table updating. Hands on keyboard for authenticity.</div>
+            <div class="scene-timing">0:10 – 0:17</div>
+          </div>
+          <div class="scene-copy">
+            <div class="scene-copy-title">Overlay + Audio</div>
+            <span class="overlay-text">Opens in any browser</span>
+            <span class="overlay-text">No app. No install. Just open.</span>
+            <div class="spoken">"Every product opens straight in your browser. No app. No subscription."</div>
+          </div>
+        </div>
+        <div class="scene">
+          <div class="scene-num"><div class="scene-num-inner">4</div></div>
+          <div class="scene-visual">
+            <div class="scene-visual-title">Visual</div>
+            <div class="scene-visual-desc">Show the price list (you can use one of your product cards or just text overlay): from £2.99 per product. End on the Etsy shop name.</div>
+            <div class="scene-timing">0:17 – 0:25</div>
+          </div>
+          <div class="scene-copy">
+            <div class="scene-copy-title">Overlay + Audio</div>
+            <span class="overlay-text">From £2.99 per product</span>
+            <span class="overlay-text">Made in Swansea, Wales 🏴󠁧󠁢󠁷󠁬󠁳󠁿</span>
+            <span class="overlay-text">TheWallChartCo on Etsy 🔗</span>
+            <div class="spoken">"From £2.99 each. Made in Swansea. Find us on Etsy — The Wall Chart Co."</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="caption-box">
+      <div class="caption-box-title">Full TikTok Caption</div>
+      <div class="caption-text">14 digital wall charts for football and rugby fans 🏆🏉⚽
+
+World Cup 2026 · Champions League · Premier League · Six Nations 2026 &amp; 2027 · Nations Championship · Rugby World Cup 2027 · Sweepstake Kit
+
+All open in any browser. No app. No install. From £2.99 each.
+
+Shop: TheWallChartCo on Etsy 🔗 Link in bio
+
+Made in Swansea, Wales 🏴󠁧󠁢󠁷󠁬󠁳󠁿</div>
+      <div class="hashtag-row">
+        <span class="hashtag">#SportsFan</span>
+        <span class="hashtag">#Football</span>
+        <span class="hashtag">#Rugby</span>
+        <span class="hashtag">#WorldCup2026</span>
+        <span class="hashtag">#SixNations</span>
+        <span class="hashtag">#DigitalDownload</span>
+        <span class="hashtag">#EtsySeller</span>
+        <span class="hashtag">#EtsyFinds</span>
+        <span class="hashtag">#MadeInWales</span>
+        <span class="hashtag">#UCL</span>
+        <span class="hashtag">#PremierLeague</span>
+        <span class="hashtag">#RWC2027</span>
+      </div>
+    </div>
+    <div class="music-box">
+      <span class="music-icon">🎵</span>
+      <span>Music: <span class="music-strong">high-energy build-up</span> — something that escalates with the fast cuts then settles. "epic reveal" or "product showcase" sounds work well here.</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     POSTING SCHEDULE
+══════════════════════════════════════════════════ -->
+<div class="section-head">Recommended Posting Schedule</div>
+
+<div style="background:#111827;border:1px solid rgba(200,169,74,.15);border-radius:12px;overflow:hidden;margin-bottom:40px">
+  <table style="width:100%;border-collapse:collapse;font-size:13px">
+    <thead>
+      <tr style="background:#0B1E3D">
+        <th style="padding:12px 16px;text-align:left;color:#C8A94A;font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:700">Week</th>
+        <th style="padding:12px 16px;text-align:left;color:#C8A94A;font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:700">Video</th>
+        <th style="padding:12px 16px;text-align:left;color:#C8A94A;font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:700">Best Day/Time</th>
+        <th style="padding:12px 16px;text-align:left;color:#C8A94A;font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:700">Goal</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom:1px solid rgba(255,255,255,.05)">
+        <td style="padding:12px 16px;color:rgba(255,255,255,.5)">Week 1</td>
+        <td style="padding:12px 16px;color:#fff;font-weight:600">Video 1 — WC Wall Chart (Hero)</td>
+        <td style="padding:12px 16px;color:#C8A94A">Tuesday 7:30pm</td>
+        <td style="padding:12px 16px;color:rgba(255,255,255,.6)">Max reach, set benchmark</td>
+      </tr>
+      <tr style="border-bottom:1px solid rgba(255,255,255,.05)">
+        <td style="padding:12px 16px;color:rgba(255,255,255,.5)">Week 1</td>
+        <td style="padding:12px 16px;color:#fff;font-weight:600">Video 2 — Sweepstake (Viral)</td>
+        <td style="padding:12px 16px;color:#C8A94A">Thursday 8pm</td>
+        <td style="padding:12px 16px;color:rgba(255,255,255,.6)">Shares, tags, saves</td>
+      </tr>
+      <tr style="border-bottom:1px solid rgba(255,255,255,.05)">
+        <td style="padding:12px 16px;color:rgba(255,255,255,.5)">Week 2</td>
+        <td style="padding:12px 16px;color:#fff;font-weight:600">Video 3 — Champions League</td>
+        <td style="padding:12px 16px;color:#C8A94A">Tuesday 7pm</td>
+        <td style="padding:12px 16px;color:rgba(255,255,255,.6)">UCL match week traffic</td>
+      </tr>
+      <tr style="border-bottom:1px solid rgba(255,255,255,.05)">
+        <td style="padding:12px 16px;color:rgba(255,255,255,.5)">Week 2</td>
+        <td style="padding:12px 16px;color:#fff;font-weight:600">Video 4 — Six Nations</td>
+        <td style="padding:12px 16px;color:#C8A94A">Saturday post-match</td>
+        <td style="padding:12px 16px;color:rgba(255,255,255,.6)">Rugby audience peak</td>
+      </tr>
+      <tr style="border-bottom:1px solid rgba(255,255,255,.05)">
+        <td style="padding:12px 16px;color:rgba(255,255,255,.5)">Week 3</td>
+        <td style="padding:12px 16px;color:#fff;font-weight:600">Video 5 — RWC 2027</td>
+        <td style="padding:12px 16px;color:#C8A94A">Wednesday 7:30pm</td>
+        <td style="padding:12px 16px;color:rgba(255,255,255,.6)">Build RWC anticipation</td>
+      </tr>
+      <tr>
+        <td style="padding:12px 16px;color:rgba(255,255,255,.5)">Week 3</td>
+        <td style="padding:12px 16px;color:#fff;font-weight:600">Video 6 — Bundle/All Products</td>
+        <td style="padding:12px 16px;color:#C8A94A">Friday 8pm</td>
+        <td style="padding:12px 16px;color:rgba(255,255,255,.6)">Catalogue awareness</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="tips-grid">
+  <div class="tip-card">
+    <h3>Engagement Boosters</h3>
+    <ul>
+      <li>Reply to every comment in the first 30 minutes</li>
+      <li>Pin a "CHART" comment reply to Video 1 — drives DMs</li>
+      <li>Use polls: "Which team will win WC 2026?" in the caption</li>
+      <li>Stitch reaction videos when big results happen</li>
+      <li>Re-post after major tournament results (e.g. England win)</li>
+    </ul>
+  </div>
+  <div class="tip-card">
+    <h3>Cross-Promotion</h3>
+    <ul>
+      <li>Repost all TikToks to Instagram Reels — same content works</li>
+      <li>Post stills from the product cards file to Instagram grid</li>
+      <li>Share sweepstake draw video to Facebook groups (office/work groups)</li>
+      <li>Pin your best-performing video to your TikTok profile</li>
+      <li>Add Etsy shop link to all social bios</li>
+    </ul>
+  </div>
+</div>
+
+<div style="margin-top:40px;padding:20px;background:#0B1E3D;border-radius:10px;border:1px solid rgba(200,169,74,.2)">
+  <p style="font-size:11px;color:rgba(255,255,255,.3);letter-spacing:.08em;text-align:center">© 2026 The Wall Chart Co · These scripts are for internal use only · theWallChartCo on Etsy · Made in Swansea, Wales</p>
+</div>
+
+</body>
+</html>

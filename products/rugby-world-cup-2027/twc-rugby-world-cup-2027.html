@@ -1,0 +1,1451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rugby World Cup 2027 Australia - Interactive Wall Chart | The Wall Chart Co</title>
+<meta name="description" content="Premium interactive wall chart for the Rugby World Cup 2027 in Australia. Track every pool match, knockout fixture, try scorer and result. Digital download from The Wall Chart Co.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0B1E3D;
+  --red: #C8502A;
+  --gold: #C8A94A;
+  --cream: #F7F5EE;
+  --white: #FFFFFF;
+  --navy-light: #132d5b;
+  --navy-dark: #071328;
+  --green-dark: #1a3a2a;
+  --green-mid: #2d5a3f;
+  --black-bg: #111111;
+  --black-card: #1a1a1a;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1);
+  --radius: 8px;
+  --radius-lg: 12px;
+  /* Theme defaults */
+  --bg: var(--cream);
+  --bg-card: var(--white);
+  --text: var(--navy);
+  --text-secondary: var(--gray-600);
+  --border: var(--gray-200);
+  --accent: var(--gold);
+  --header-bg: var(--navy);
+  --header-text: var(--white);
+  --tab-active-bg: var(--gold);
+  --tab-active-text: var(--navy);
+  --input-bg: var(--white);
+  --input-border: var(--gray-300);
+  --table-header-bg: var(--navy);
+  --table-header-text: var(--white);
+  --table-stripe: rgba(11,30,61,0.03);
+  --qualify-bg: rgba(200,169,74,0.12);
+}
+[data-theme="wallaby-green"] {
+  --bg: #f0f5f1;
+  --bg-card: var(--white);
+  --text: var(--green-dark);
+  --header-bg: var(--green-dark);
+  --tab-active-bg: #3d8b5e;
+  --tab-active-text: var(--white);
+  --table-header-bg: var(--green-dark);
+  --table-stripe: rgba(45,90,63,0.05);
+  --qualify-bg: rgba(61,139,94,0.12);
+  --accent: #3d8b5e;
+}
+[data-theme="all-black"] {
+  --bg: #1a1a1a;
+  --bg-card: #222222;
+  --text: #e5e5e5;
+  --text-secondary: #999;
+  --border: #333;
+  --header-bg: #111;
+  --header-text: #e5e5e5;
+  --tab-active-bg: var(--white);
+  --tab-active-text: #111;
+  --input-bg: #2a2a2a;
+  --input-border: #444;
+  --table-header-bg: #111;
+  --table-header-text: #e5e5e5;
+  --table-stripe: rgba(255,255,255,0.03);
+  --qualify-bg: rgba(200,169,74,0.1);
+  --accent: var(--gold);
+}
+[data-theme="navy"] {
+  --bg: #0d2240;
+  --bg-card: #132d5b;
+  --text: #dde4ee;
+  --text-secondary: #8899b3;
+  --border: #1e3f6e;
+  --header-bg: #071328;
+  --tab-active-bg: var(--gold);
+  --tab-active-text: var(--navy);
+  --input-bg: #1a3660;
+  --input-border: #2a4f80;
+  --table-header-bg: #071328;
+  --table-header-text: #dde4ee;
+  --table-stripe: rgba(255,255,255,0.03);
+  --qualify-bg: rgba(200,169,74,0.1);
+  --accent: var(--gold);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, h4, h5 { font-family: 'EB Garamond', Georgia, serif; font-weight: 600; }
+
+/* HEADER */
+.site-header {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--header-bg);
+  color: var(--header-text);
+  box-shadow: var(--shadow-lg);
+}
+.tri-stripe {
+  height: 4px;
+  background: linear-gradient(to right, var(--red) 0%, var(--red) 33.33%, var(--white) 33.33%, var(--white) 66.66%, var(--navy) 66.66%, var(--navy) 100%);
+}
+.header-inner {
+  max-width: 1400px; margin: 0 auto;
+  padding: 12px 24px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; flex-wrap: wrap;
+}
+.brand { display: flex; align-items: center; gap: 14px; text-decoration: none; color: inherit; }
+.brand-logo {
+  width: 42px; height: 42px;
+  background: var(--gold); border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Inter', sans-serif; font-weight: 700; font-size: 13px;
+  color: var(--navy); letter-spacing: 0.5px; flex-shrink: 0;
+}
+.brand-text { display: flex; flex-direction: column; }
+.brand-name { font-family: 'EB Garamond', serif; font-size: 18px; font-weight: 600; letter-spacing: 1.5px; line-height: 1.2; }
+.brand-tagline { font-size: 10px; letter-spacing: 1.2px; text-transform: uppercase; opacity: 0.7; font-weight: 400; }
+.header-right { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.header-title {
+  text-align: center; flex: 1; min-width: 200px;
+}
+.header-title h1 {
+  font-family: 'EB Garamond', serif; font-size: 22px; font-weight: 600;
+  letter-spacing: 0.5px; line-height: 1.3;
+}
+.header-title .subtitle { font-size: 11px; opacity: 0.7; letter-spacing: 1px; text-transform: uppercase; font-family: 'Inter', sans-serif; font-weight: 400; }
+.theme-select, .btn {
+  font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 500;
+  border: 1px solid rgba(255,255,255,0.2); border-radius: 6px;
+  padding: 7px 14px; cursor: pointer; transition: all 0.2s;
+}
+.theme-select {
+  background: rgba(255,255,255,0.1); color: var(--header-text);
+  appearance: none; -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='white' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 10px center;
+  padding-right: 30px;
+}
+.theme-select:hover { background: rgba(255,255,255,0.2); }
+.btn {
+  background: var(--gold); color: var(--navy); border: none;
+  font-weight: 600; letter-spacing: 0.3px;
+}
+.btn:hover { background: #d4b85a; transform: translateY(-1px); }
+.btn-sm { padding: 5px 10px; font-size: 11px; }
+.btn-outline {
+  background: transparent; border: 1px solid var(--accent); color: var(--accent);
+}
+.btn-outline:hover { background: var(--accent); color: var(--navy); }
+.btn-danger { background: var(--red); color: var(--white); }
+.btn-danger:hover { background: #b5451f; }
+
+/* TABS */
+.tab-nav {
+  background: var(--header-bg);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding: 0 24px;
+}
+.tab-nav-inner {
+  max-width: 1400px; margin: 0 auto;
+  display: flex; gap: 0; overflow-x: auto;
+}
+.tab-btn {
+  font-family: 'EB Garamond', serif; font-size: 15px; font-weight: 500;
+  padding: 12px 24px; border: none; background: transparent;
+  color: rgba(255,255,255,0.6); cursor: pointer; white-space: nowrap;
+  border-bottom: 3px solid transparent; transition: all 0.2s;
+  letter-spacing: 0.5px;
+}
+.tab-btn:hover { color: rgba(255,255,255,0.85); }
+.tab-btn.active {
+  color: var(--tab-active-bg);
+  border-bottom-color: var(--tab-active-bg);
+}
+
+/* MAIN */
+.main { max-width: 1400px; margin: 0 auto; padding: 24px; }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+.section-title {
+  font-family: 'EB Garamond', serif; font-size: 26px; font-weight: 600;
+  margin-bottom: 8px; color: var(--text);
+}
+.section-subtitle {
+  font-size: 13px; color: var(--text-secondary); margin-bottom: 24px;
+  font-weight: 400;
+}
+
+/* CARDS */
+.card {
+  background: var(--bg-card); border-radius: var(--radius-lg);
+  border: 1px solid var(--border); overflow: hidden;
+  box-shadow: var(--shadow-sm); transition: box-shadow 0.2s;
+}
+.card:hover { box-shadow: var(--shadow-md); }
+.card-header {
+  background: var(--table-header-bg); color: var(--table-header-text);
+  padding: 14px 20px; display: flex; align-items: center; justify-content: space-between;
+}
+.card-header h3 {
+  font-family: 'EB Garamond', serif; font-size: 18px; font-weight: 600; letter-spacing: 0.5px;
+}
+.card-body { padding: 16px 20px; }
+
+/* POOL TABLES */
+.pools-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+@media (min-width: 1200px) { .pools-grid { grid-template-columns: 1fr 1fr; } }
+.pool-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.pool-table th {
+  padding: 8px 6px; text-align: center; font-weight: 600;
+  font-size: 10px; text-transform: uppercase; letter-spacing: 0.8px;
+  font-family: 'Inter', sans-serif;
+  background: var(--table-header-bg); color: var(--table-header-text);
+}
+.pool-table th:first-child { text-align: center; width: 32px; }
+.pool-table th:nth-child(2) { text-align: left; }
+.pool-table td {
+  padding: 8px 6px; text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+.pool-table td:nth-child(2) { text-align: left; }
+.pool-table tr:nth-child(even) { background: var(--table-stripe); }
+.pool-table tr.qualify-row { background: var(--qualify-bg); }
+.pool-table .team-cell { display: flex; align-items: center; gap: 8px; }
+.pool-table .team-cell img {
+  width: 22px; height: 15px; object-fit: cover; border-radius: 2px;
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
+}
+.pool-table .team-cell span { font-weight: 500; white-space: nowrap; }
+.pool-table td.pts-cell { font-weight: 700; color: var(--accent); font-size: 14px; }
+.pool-qualify-key {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 11px; color: var(--text-secondary); padding: 10px 20px;
+  border-top: 1px solid var(--border);
+}
+.pool-qualify-key .swatch {
+  width: 14px; height: 14px; border-radius: 3px;
+  background: var(--qualify-bg); border: 1px solid var(--border);
+}
+
+/* MATCH CARDS (for pool matches) */
+.match-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px; margin-top: 16px; }
+.match-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 14px 16px;
+  display: flex; flex-direction: column; gap: 8px;
+  transition: box-shadow 0.2s;
+}
+.match-card:hover { box-shadow: var(--shadow-md); }
+.match-meta {
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 10px; text-transform: uppercase; letter-spacing: 0.8px;
+  color: var(--text-secondary); font-weight: 500;
+}
+.match-meta .match-num { color: var(--accent); font-weight: 700; }
+.match-teams {
+  display: grid; grid-template-columns: 1fr auto 1fr; gap: 8px;
+  align-items: center;
+}
+.match-team {
+  display: flex; align-items: center; gap: 8px; font-weight: 500; font-size: 14px;
+}
+.match-team.away { justify-content: flex-end; text-align: right; }
+.match-team img { width: 24px; height: 16px; object-fit: cover; border-radius: 2px; box-shadow: 0 0 0 1px rgba(0,0,0,0.1); }
+.match-vs { font-family: 'EB Garamond', serif; font-size: 14px; color: var(--text-secondary); text-align: center; }
+.match-score-inputs {
+  display: grid; grid-template-columns: 1fr auto 1fr; gap: 8px;
+  align-items: center;
+}
+.score-input-group {
+  display: flex; gap: 4px; align-items: center;
+}
+.score-input-group.away { justify-content: flex-end; }
+.score-input {
+  width: 36px; padding: 4px 2px; text-align: center;
+  border: 1px solid var(--input-border); border-radius: 4px;
+  background: var(--input-bg); color: var(--text);
+  font-size: 12px; font-weight: 600;
+  font-family: 'Inter', sans-serif;
+}
+.score-input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 2px rgba(200,169,74,0.2); }
+.score-label { font-size: 8px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-secondary); text-align: center; width: 36px; }
+.score-total {
+  font-family: 'EB Garamond', serif; font-size: 22px; font-weight: 700;
+  text-align: center; min-width: 50px; color: var(--accent);
+}
+.match-venue {
+  font-size: 10px; color: var(--text-secondary); text-align: center;
+  letter-spacing: 0.3px;
+}
+
+/* KNOCKOUT BRACKET */
+.bracket-container { overflow-x: auto; padding: 20px 0; }
+.bracket {
+  display: flex; gap: 32px; align-items: center;
+  min-width: 1100px; padding: 20px;
+}
+.bracket-round { display: flex; flex-direction: column; gap: 24px; min-width: 220px; }
+.bracket-round-title {
+  font-family: 'EB Garamond', serif; font-size: 15px; font-weight: 600;
+  text-align: center; color: var(--accent); letter-spacing: 0.5px;
+  margin-bottom: 8px; text-transform: uppercase;
+}
+.bracket-match {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+.bracket-match-header {
+  background: var(--table-header-bg); color: var(--table-header-text);
+  padding: 6px 12px; font-size: 10px; text-transform: uppercase;
+  letter-spacing: 0.8px; font-weight: 600; text-align: center;
+}
+.bracket-team-row {
+  display: flex; align-items: center; padding: 8px 12px;
+  border-bottom: 1px solid var(--border); gap: 8px;
+}
+.bracket-team-row:last-child { border-bottom: none; }
+.bracket-team-row img { width: 20px; height: 14px; object-fit: cover; border-radius: 2px; }
+.bracket-team-row .team-name { flex: 1; font-size: 13px; font-weight: 500; }
+.bracket-team-row .team-placeholder { flex: 1; font-size: 11px; color: var(--text-secondary); font-style: italic; }
+.bracket-team-row .bracket-score {
+  width: 36px; padding: 3px; text-align: center;
+  border: 1px solid var(--input-border); border-radius: 4px;
+  background: var(--input-bg); color: var(--text);
+  font-size: 13px; font-weight: 700;
+  font-family: 'Inter', sans-serif;
+}
+.bracket-team-row .bracket-score:focus { outline: none; border-color: var(--accent); }
+.bracket-connector {
+  display: flex; flex-direction: column; justify-content: center;
+  gap: 24px; position: relative;
+}
+
+/* FIXTURES LIST */
+.fixture-list { display: flex; flex-direction: column; gap: 2px; }
+.fixture-date-header {
+  font-family: 'EB Garamond', serif; font-size: 16px; font-weight: 600;
+  padding: 16px 0 8px; color: var(--accent); letter-spacing: 0.3px;
+  border-bottom: 2px solid var(--accent);
+  margin-top: 16px;
+}
+.fixture-date-header:first-child { margin-top: 0; }
+.fixture-row {
+  display: grid;
+  grid-template-columns: 50px 1fr 80px 1fr 120px 1fr;
+  gap: 12px; align-items: center;
+  padding: 10px 16px; background: var(--bg-card);
+  border: 1px solid var(--border); border-radius: 4px;
+  font-size: 13px; margin-top: 4px;
+}
+.fixture-row .match-number { color: var(--accent); font-weight: 700; font-size: 11px; }
+.fixture-row .fixture-team { display: flex; align-items: center; gap: 6px; font-weight: 500; }
+.fixture-row .fixture-team.home { justify-content: flex-end; text-align: right; }
+.fixture-row .fixture-team img { width: 20px; height: 14px; object-fit: cover; border-radius: 2px; }
+.fixture-row .fixture-score { text-align: center; font-weight: 700; color: var(--accent); }
+.fixture-row .fixture-time { font-size: 11px; color: var(--text-secondary); text-align: center; }
+.fixture-row .fixture-venue { font-size: 11px; color: var(--text-secondary); }
+
+/* STATISTICS */
+.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+@media (max-width: 900px) { .stats-grid { grid-template-columns: 1fr; } }
+.stat-add-form {
+  display: flex; gap: 8px; align-items: flex-end; flex-wrap: wrap;
+  padding: 12px 0;
+}
+.form-group { display: flex; flex-direction: column; gap: 4px; }
+.form-group label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text-secondary); font-weight: 600; }
+.form-group input, .form-group select {
+  padding: 6px 10px; border: 1px solid var(--input-border);
+  border-radius: 4px; background: var(--input-bg); color: var(--text);
+  font-size: 12px; font-family: 'Inter', sans-serif;
+}
+.form-group input:focus, .form-group select:focus { outline: none; border-color: var(--accent); }
+.stat-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.stat-table th {
+  padding: 8px 10px; text-align: left; font-size: 10px;
+  text-transform: uppercase; letter-spacing: 0.8px;
+  background: var(--table-header-bg); color: var(--table-header-text);
+  font-family: 'Inter', sans-serif; font-weight: 600;
+}
+.stat-table td { padding: 8px 10px; border-bottom: 1px solid var(--border); }
+.stat-table tr:nth-child(even) { background: var(--table-stripe); }
+.stat-table .remove-btn {
+  background: none; border: none; color: var(--red);
+  cursor: pointer; font-size: 14px; padding: 2px 6px; border-radius: 4px;
+}
+.stat-table .remove-btn:hover { background: rgba(200,80,42,0.1); }
+
+/* RECORDS */
+.records-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px; margin-top: 16px; }
+.record-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 16px; text-align: center;
+}
+.record-card .record-value { font-family: 'EB Garamond', serif; font-size: 28px; font-weight: 700; color: var(--accent); }
+.record-card .record-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text-secondary); margin-top: 4px; }
+.record-card .record-holder { font-size: 13px; margin-top: 4px; font-weight: 500; }
+
+/* UTILITY BAR */
+.utility-bar {
+  display: flex; gap: 8px; justify-content: flex-end;
+  padding: 16px 0; flex-wrap: wrap;
+}
+
+/* FOOTER */
+.site-footer {
+  background: var(--header-bg); color: rgba(255,255,255,0.5);
+  margin-top: 48px; padding: 32px 24px;
+  text-align: center; font-size: 12px;
+}
+.site-footer .footer-inner { max-width: 1400px; margin: 0 auto; }
+.site-footer .footer-brand {
+  font-family: 'EB Garamond', serif; font-size: 16px; color: var(--gold);
+  letter-spacing: 1.5px; margin-bottom: 8px;
+}
+.site-footer p { margin: 4px 0; line-height: 1.6; }
+.site-footer .disclaimer { font-size: 10px; margin-top: 12px; opacity: 0.6; max-width: 600px; margin-left: auto; margin-right: auto; }
+
+/* MODAL */
+.modal-overlay {
+  display: none; position: fixed; inset: 0; z-index: 200;
+  background: rgba(0,0,0,0.5); justify-content: center; align-items: center;
+}
+.modal-overlay.active { display: flex; }
+.modal {
+  background: var(--bg-card); border-radius: var(--radius-lg);
+  padding: 24px; max-width: 500px; width: 90%;
+  box-shadow: var(--shadow-lg); max-height: 80vh; overflow-y: auto;
+}
+.modal h3 { font-family: 'EB Garamond', serif; font-size: 20px; margin-bottom: 16px; }
+.modal textarea {
+  width: 100%; min-height: 150px; padding: 12px; border: 1px solid var(--input-border);
+  border-radius: var(--radius); background: var(--input-bg); color: var(--text);
+  font-family: 'Inter', monospace; font-size: 12px; resize: vertical;
+}
+.modal-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 16px; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .header-inner { padding: 10px 16px; }
+  .header-title h1 { font-size: 17px; }
+  .brand-name { font-size: 15px; }
+  .main { padding: 16px; }
+  .tab-btn { padding: 10px 16px; font-size: 13px; }
+  .fixture-row { grid-template-columns: 40px 1fr 60px 1fr; font-size: 12px; }
+  .fixture-row .fixture-time, .fixture-row .fixture-venue { display: none; }
+  .match-grid { grid-template-columns: 1fr; }
+  .stats-grid { grid-template-columns: 1fr; }
+  .bracket { min-width: 900px; }
+}
+
+/* PRINT */
+@media print {
+  .site-header, .tab-nav, .utility-bar, .btn, .theme-select, .no-print { display: none !important; }
+  body { background: white !important; color: #111 !important; font-size: 11px; }
+  .main { padding: 0; max-width: 100%; }
+  .tab-content { display: block !important; page-break-inside: avoid; margin-bottom: 24px; }
+  .card { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+  .pool-table th { background: #eee !important; color: #111 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .bracket-match-header { background: #eee !important; color: #111 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .pools-grid { grid-template-columns: 1fr 1fr; }
+  .match-grid { grid-template-columns: 1fr 1fr 1fr; }
+  .score-input, .bracket-score { border: 1px solid #999; }
+  @page { margin: 1cm; }
+  .print-title {
+    display: block !important; text-align: center; margin-bottom: 16px;
+    font-family: 'EB Garamond', serif; font-size: 22px;
+  }
+}
+.print-title { display: none; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--gray-400); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--gray-500); }
+
+/* Animations */
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.tab-content.active { animation: fadeIn 0.25s ease; }
+</style>
+</head>
+<body data-theme="tournament-gold">
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="tri-stripe"></div>
+  <div class="header-inner">
+    <a href="#" class="brand">
+      <div class="brand-logo">TWC</div>
+      <div class="brand-text">
+        <span class="brand-name">THE WALL CHART CO</span>
+        <span class="brand-tagline">Premium Tournament Downloads</span>
+      </div>
+    </a>
+    <div class="header-title">
+      <h1>Rugby World Cup 2027</h1>
+      <div class="subtitle">Australia &bull; October &ndash; November 2027</div>
+    </div>
+    <div class="header-right">
+      <select class="theme-select" id="themePicker" title="Choose theme">
+        <option value="tournament-gold">Tournament Gold</option>
+        <option value="wallaby-green">Wallaby Green</option>
+        <option value="all-black">All Black</option>
+        <option value="navy">Navy</option>
+      </select>
+      <button class="btn" onclick="window.print()" title="Print or save as PDF">Print / Save PDF</button>
+    </div>
+  </div>
+  <nav class="tab-nav">
+    <div class="tab-nav-inner">
+      <button class="tab-btn active" data-tab="pools">Pools</button>
+      <button class="tab-btn" data-tab="knockout">Knockout Stage</button>
+      <button class="tab-btn" data-tab="fixtures">All Fixtures</button>
+      <button class="tab-btn" data-tab="statistics">Statistics</button>
+    </div>
+  </nav>
+</header>
+
+<div class="print-title">Rugby World Cup 2027 Australia &mdash; Interactive Wall Chart &mdash; The Wall Chart Co</div>
+
+<!-- MAIN -->
+<main class="main">
+
+<!-- POOLS TAB -->
+<div class="tab-content active" id="tab-pools">
+  <h2 class="section-title">Pool Stage</h2>
+  <p class="section-subtitle">Four pools of five. Top two from each pool advance to the quarter-finals. 4 points for a win, 2 for a draw, bonus point for 4+ tries scored, bonus point for losing within 7 points.</p>
+
+  <div class="pools-grid" id="poolTables"></div>
+
+  <h2 class="section-title" style="margin-top:40px;">Pool Matches</h2>
+  <p class="section-subtitle">Enter tries (T), conversions (C), penalties (P) and drop goals (D) for each team. Points and pool standings update automatically.</p>
+
+  <div id="poolMatches"></div>
+</div>
+
+<!-- KNOCKOUT TAB -->
+<div class="tab-content" id="tab-knockout">
+  <h2 class="section-title">Knockout Stage</h2>
+  <p class="section-subtitle">Quarter-finals through to the Final at Stadium Australia, Sydney. No draws in knockout rugby &mdash; extra time and, if needed, a kicking shootout decide the victor.</p>
+
+  <div class="bracket-container">
+    <div class="bracket" id="bracketView"></div>
+  </div>
+</div>
+
+<!-- FIXTURES TAB -->
+<div class="tab-content" id="tab-fixtures">
+  <h2 class="section-title">All Fixtures</h2>
+  <p class="section-subtitle">Every match from the opening whistle to the final scrum. Times shown in AEST (local) and GMT (UK).</p>
+  <div id="fixtureList" class="fixture-list"></div>
+</div>
+
+<!-- STATISTICS TAB -->
+<div class="tab-content" id="tab-statistics">
+  <h2 class="section-title">Tournament Statistics</h2>
+  <p class="section-subtitle">Track the leading try scorers, points accumulators and disciplinary records across the tournament.</p>
+
+  <div class="stats-grid">
+    <!-- Try Scorers -->
+    <div class="card">
+      <div class="card-header"><h3>Try Scorers</h3></div>
+      <div class="card-body">
+        <div class="stat-add-form">
+          <div class="form-group"><label>Player</label><input type="text" id="tryPlayer" placeholder="Player name"></div>
+          <div class="form-group"><label>Team</label><select id="tryTeam"></select></div>
+          <div class="form-group"><label>Tries</label><input type="number" id="tryCount" value="1" min="1" style="width:60px"></div>
+          <button class="btn btn-sm" onclick="addTryScorer()">Add</button>
+        </div>
+        <table class="stat-table">
+          <thead><tr><th>#</th><th>Player</th><th>Team</th><th>Tries</th><th></th></tr></thead>
+          <tbody id="tryScorerBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Points Scorers -->
+    <div class="card">
+      <div class="card-header"><h3>Points Scorers</h3></div>
+      <div class="card-body">
+        <div class="stat-add-form">
+          <div class="form-group"><label>Player</label><input type="text" id="ptsPlayer" placeholder="Player name"></div>
+          <div class="form-group"><label>Team</label><select id="ptsTeam"></select></div>
+          <div class="form-group"><label>Points</label><input type="number" id="ptsCount" value="5" min="1" style="width:60px"></div>
+          <button class="btn btn-sm" onclick="addPointsScorer()">Add</button>
+        </div>
+        <table class="stat-table">
+          <thead><tr><th>#</th><th>Player</th><th>Team</th><th>Points</th><th></th></tr></thead>
+          <tbody id="pointsScorerBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Cards -->
+    <div class="card">
+      <div class="card-header"><h3>Disciplinary Record</h3></div>
+      <div class="card-body">
+        <div class="stat-add-form">
+          <div class="form-group"><label>Player</label><input type="text" id="cardPlayer" placeholder="Player name"></div>
+          <div class="form-group"><label>Team</label><select id="cardTeam"></select></div>
+          <div class="form-group"><label>Card</label>
+            <select id="cardType"><option value="yellow">Yellow</option><option value="red">Red</option></select>
+          </div>
+          <button class="btn btn-sm" onclick="addCard()">Add</button>
+        </div>
+        <table class="stat-table">
+          <thead><tr><th>#</th><th>Player</th><th>Team</th><th>Card</th><th></th></tr></thead>
+          <tbody id="cardBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Records -->
+    <div class="card">
+      <div class="card-header"><h3>Tournament Records</h3></div>
+      <div class="card-body">
+        <p style="font-size:12px; color:var(--text-secondary); margin-bottom:12px;">Historical Rugby World Cup records for reference.</p>
+        <div class="records-grid">
+          <div class="record-card">
+            <div class="record-value">15</div>
+            <div class="record-label">Most Tries (Tournament)</div>
+            <div class="record-holder">Bryan Habana (2007) / Jonah Lomu (1999)</div>
+          </div>
+          <div class="record-card">
+            <div class="record-value">126</div>
+            <div class="record-label">Most Points (Tournament)</div>
+            <div class="record-holder">Grant Fox (1987)</div>
+          </div>
+          <div class="record-card">
+            <div class="record-value">145&ndash;17</div>
+            <div class="record-label">Largest Winning Margin</div>
+            <div class="record-holder">New Zealand v Japan (1995)</div>
+          </div>
+          <div class="record-card">
+            <div class="record-value">3</div>
+            <div class="record-label">Most Titles</div>
+            <div class="record-holder">New Zealand &amp; South Africa</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<!-- UTILITY BAR -->
+<div style="max-width:1400px; margin:0 auto; padding:0 24px;">
+  <div class="utility-bar">
+    <button class="btn btn-outline btn-sm" onclick="exportData()">Export Save</button>
+    <button class="btn btn-outline btn-sm" onclick="showImportModal()">Import Save</button>
+    <button class="btn btn-danger btn-sm" onclick="resetData()">Reset All</button>
+  </div>
+</div>
+
+<!-- IMPORT MODAL -->
+<div class="modal-overlay" id="importModal">
+  <div class="modal">
+    <h3>Import Saved Data</h3>
+    <p style="font-size:12px; color:var(--text-secondary); margin-bottom:12px;">Paste your previously exported save data below.</p>
+    <textarea id="importArea" placeholder="Paste exported JSON here..."></textarea>
+    <div class="modal-actions">
+      <button class="btn btn-outline btn-sm" onclick="closeImportModal()">Cancel</button>
+      <button class="btn btn-sm" onclick="importData()">Import</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">THE WALL CHART CO</div>
+    <p>Premium Tournament Downloads &bull; Digital Products on Etsy</p>
+    <p>&copy; 2027 The Wall Chart Co. All rights reserved.</p>
+    <p class="disclaimer">This is an unofficial product and is not associated with, endorsed by, or affiliated with World Rugby, the Rugby World Cup, or any participating union. All team names, logos and tournament references are used for identification purposes only. Flag images provided by flagcdn.com.</p>
+  </div>
+</footer>
+
+<script>
+// ======================================================================
+// DATA MODEL
+// ======================================================================
+const TEAMS = {
+  'Australia':       { code: 'au',     abbr: 'AUS' },
+  'England':         { code: 'gb-eng', abbr: 'ENG' },
+  'Fiji':            { code: 'fj',     abbr: 'FIJ' },
+  'Georgia':         { code: 'ge',     abbr: 'GEO' },
+  'Americas Qualifier': { code: '',    abbr: 'AMQ' },
+  'South Africa':    { code: 'za',     abbr: 'RSA' },
+  'Ireland':         { code: 'ie',     abbr: 'IRE' },
+  'Scotland':        { code: 'gb-sct', abbr: 'SCO' },
+  'Tonga':           { code: 'to',     abbr: 'TGA' },
+  'Europe Qualifier':{ code: '',       abbr: 'EUQ' },
+  'New Zealand':     { code: 'nz',     abbr: 'NZL' },
+  'France':          { code: 'fr',     abbr: 'FRA' },
+  'Italy':           { code: 'it',     abbr: 'ITA' },
+  'Uruguay':         { code: 'uy',     abbr: 'URU' },
+  'Africa Qualifier':{ code: '',       abbr: 'AFQ' },
+  'Wales':           { code: 'gb-wls', abbr: 'WAL' },
+  'Argentina':       { code: 'ar',     abbr: 'ARG' },
+  'Japan':           { code: 'jp',     abbr: 'JPN' },
+  'Samoa':           { code: 'ws',     abbr: 'SAM' },
+  'Asia/Pacific Qualifier': { code: '', abbr: 'APQ' }
+};
+
+const POOLS = {
+  A: ['Australia', 'England', 'Fiji', 'Georgia', 'Americas Qualifier'],
+  B: ['South Africa', 'Ireland', 'Scotland', 'Tonga', 'Europe Qualifier'],
+  C: ['New Zealand', 'France', 'Italy', 'Uruguay', 'Africa Qualifier'],
+  D: ['Wales', 'Argentina', 'Japan', 'Samoa', 'Asia/Pacific Qualifier']
+};
+
+const VENUES = [
+  'Stadium Australia, Sydney',
+  'Melbourne Rectangular Stadium',
+  'Suncorp Stadium, Brisbane',
+  'Adelaide Oval',
+  'Optus Stadium, Perth',
+  'WIN Stadium, Wollongong',
+  'Newcastle Stadium',
+  'Townsville Stadium',
+  'AAMI Park, Melbourne',
+  'GIO Stadium, Canberra'
+];
+
+// Generate pool match fixtures
+function generatePoolFixtures() {
+  const fixtures = [];
+  let matchNum = 1;
+  // Start date: 1 October 2027
+  const startDate = new Date(2027, 9, 1); // Month is 0-indexed
+  const pools = ['A','B','C','D'];
+  // Each pool: 10 matches (round-robin 5 teams), spread across ~5 weeks
+  // We'll interleave pools across dates
+  const poolRounds = {};
+  pools.forEach(p => {
+    const teams = POOLS[p];
+    const matches = [];
+    for (let i = 0; i < teams.length; i++) {
+      for (let j = i + 1; j < teams.length; j++) {
+        matches.push([teams[i], teams[j]]);
+      }
+    }
+    poolRounds[p] = matches;
+  });
+
+  // Interleave: 2 matches per day, cycling pools
+  let dayOffset = 0;
+  const maxMatches = 10;
+  const times = ['15:00','17:30','20:00'];
+  let timeIdx = 0;
+  let venueIdx = 0;
+
+  for (let round = 0; round < maxMatches; round++) {
+    pools.forEach((p, pi) => {
+      if (round < poolRounds[p].length) {
+        const [home, away] = poolRounds[p][round];
+        const d = new Date(startDate);
+        d.setDate(d.getDate() + dayOffset);
+        const aest = times[timeIdx % times.length];
+        const aestH = parseInt(aest.split(':')[0]);
+        const gmtH = (aestH - 11 + 24) % 24;
+        const gmt = String(gmtH).padStart(2,'0') + ':' + aest.split(':')[1];
+        fixtures.push({
+          num: matchNum++,
+          pool: p,
+          home, away,
+          date: d.toISOString().slice(0,10),
+          aest, gmt,
+          venue: VENUES[venueIdx % VENUES.length],
+          stage: 'pool'
+        });
+        timeIdx++;
+        venueIdx++;
+      }
+    });
+    dayOffset += (round % 2 === 0) ? 3 : 4;
+  }
+
+  // Sort by date, then time
+  fixtures.sort((a,b) => a.date === b.date ? a.aest.localeCompare(b.aest) : a.date.localeCompare(b.date));
+  // Re-number
+  fixtures.forEach((f,i) => f.num = i + 1);
+  return fixtures;
+}
+
+const POOL_FIXTURES = generatePoolFixtures();
+
+const KNOCKOUT_MATCHES = [
+  { id: 'QF1', label: 'Quarter-Final 1', home: 'Winner Pool A', away: 'Runner-up Pool B', date: '2027-11-01', aest: '17:00', gmt: '06:00', venue: 'Stadium Australia, Sydney', stage: 'qf' },
+  { id: 'QF2', label: 'Quarter-Final 2', home: 'Winner Pool B', away: 'Runner-up Pool A', date: '2027-11-01', aest: '20:00', gmt: '09:00', venue: 'Suncorp Stadium, Brisbane', stage: 'qf' },
+  { id: 'QF3', label: 'Quarter-Final 3', home: 'Winner Pool C', away: 'Runner-up Pool D', date: '2027-11-02', aest: '17:00', gmt: '06:00', venue: 'Melbourne Rectangular Stadium', stage: 'qf' },
+  { id: 'QF4', label: 'Quarter-Final 4', home: 'Winner Pool D', away: 'Runner-up Pool C', date: '2027-11-02', aest: '20:00', gmt: '09:00', venue: 'Optus Stadium, Perth', stage: 'qf' },
+  { id: 'SF1', label: 'Semi-Final 1', home: 'Winner QF1', away: 'Winner QF2', date: '2027-11-06', aest: '18:00', gmt: '07:00', venue: 'Stadium Australia, Sydney', stage: 'sf' },
+  { id: 'SF2', label: 'Semi-Final 2', home: 'Winner QF3', away: 'Winner QF4', date: '2027-11-07', aest: '18:00', gmt: '07:00', venue: 'Suncorp Stadium, Brisbane', stage: 'sf' },
+  { id: 'BF', label: 'Bronze Final', home: 'Loser SF1', away: 'Loser SF2', date: '2027-11-12', aest: '18:00', gmt: '07:00', venue: 'Suncorp Stadium, Brisbane', stage: 'bf' },
+  { id: 'F', label: 'The Final', home: 'Winner SF1', away: 'Winner SF2', date: '2027-11-13', aest: '19:00', gmt: '08:00', venue: 'Stadium Australia, Sydney', stage: 'final' }
+];
+
+// ======================================================================
+// STATE
+// ======================================================================
+let state = loadState();
+
+function defaultState() {
+  const scores = {};
+  POOL_FIXTURES.forEach(f => {
+    scores[f.num] = { homeT:0, homeC:0, homeP:0, homeD:0, awayT:0, awayC:0, awayP:0, awayD:0 };
+  });
+  const ko = {};
+  KNOCKOUT_MATCHES.forEach(m => {
+    ko[m.id] = { homeScore: '', awayScore: '', homeTeam: '', awayTeam: '' };
+  });
+  return {
+    scores,
+    knockout: ko,
+    tryScorers: [],
+    pointsScorers: [],
+    cards: [],
+    theme: 'tournament-gold'
+  };
+}
+
+function loadState() {
+  try {
+    const s = localStorage.getItem('twc_rwc2027');
+    if (s) return JSON.parse(s);
+  } catch(e) {}
+  return defaultState();
+}
+
+function saveState() {
+  try { localStorage.setItem('twc_rwc2027', JSON.stringify(state)); } catch(e) {}
+}
+
+// ======================================================================
+// HELPERS
+// ======================================================================
+function flagImg(teamName) {
+  const t = TEAMS[teamName];
+  if (!t || !t.code) return '';
+  return `<img src="https://flagcdn.com/w40/${t.code}.png" alt="${teamName}" loading="lazy">`;
+}
+
+function formatDate(dateStr) {
+  const d = new Date(dateStr + 'T00:00:00');
+  return d.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+}
+
+function calcScore(t, c, p, d) {
+  return (t * 5) + (c * 2) + (p * 3) + (d * 3);
+}
+
+function num(v) { return parseInt(v) || 0; }
+
+// ======================================================================
+// POOL TABLE RENDERING
+// ======================================================================
+function calcPoolStandings(poolKey) {
+  const teams = POOLS[poolKey];
+  const standings = {};
+  teams.forEach(t => {
+    standings[t] = { team: t, p:0, w:0, d:0, l:0, pf:0, pa:0, pd:0, bp:0, pts:0, tries:0 };
+  });
+
+  const poolFixtures = POOL_FIXTURES.filter(f => f.pool === poolKey);
+  poolFixtures.forEach(f => {
+    const s = state.scores[f.num];
+    if (!s) return;
+    const ht = num(s.homeT), hc = num(s.homeC), hp = num(s.homeP), hd = num(s.homeD);
+    const at = num(s.awayT), ac = num(s.awayC), ap = num(s.awayP), ad = num(s.awayD);
+    const homeTotal = calcScore(ht, hc, hp, hd);
+    const awayTotal = calcScore(at, ac, ap, ad);
+
+    if (homeTotal === 0 && awayTotal === 0 && ht === 0 && at === 0) return; // unplayed
+
+    const home = standings[f.home];
+    const away = standings[f.away];
+    if (!home || !away) return;
+
+    home.p++; away.p++;
+    home.pf += homeTotal; home.pa += awayTotal;
+    away.pf += awayTotal; away.pa += homeTotal;
+    home.pd = home.pf - home.pa;
+    away.pd = away.pf - away.pa;
+    home.tries += ht;
+    away.tries += at;
+
+    if (homeTotal > awayTotal) {
+      home.w++; home.pts += 4;
+      away.l++;
+      if (awayTotal >= homeTotal - 7) { away.bp++; away.pts += 1; }
+    } else if (awayTotal > homeTotal) {
+      away.w++; away.pts += 4;
+      home.l++;
+      if (homeTotal >= awayTotal - 7) { home.bp++; home.pts += 1; }
+    } else {
+      home.d++; away.d++;
+      home.pts += 2; away.pts += 2;
+    }
+
+    // 4+ tries bonus
+    if (ht >= 4) { home.bp++; home.pts += 1; }
+    if (at >= 4) { away.bp++; away.pts += 1; }
+  });
+
+  // Sort: pts desc, pd desc, pf desc, tries desc
+  const sorted = Object.values(standings).sort((a,b) =>
+    b.pts - a.pts || b.pd - a.pd || b.pf - a.pf || b.tries - a.tries
+  );
+  return sorted;
+}
+
+function renderPoolTables() {
+  const container = document.getElementById('poolTables');
+  container.innerHTML = '';
+  ['A','B','C','D'].forEach(poolKey => {
+    const standings = calcPoolStandings(poolKey);
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <div class="card-header">
+        <h3>Pool ${poolKey}</h3>
+        <span style="font-size:11px; opacity:0.7; font-family:Inter,sans-serif;">10 matches</span>
+      </div>
+      <table class="pool-table">
+        <thead>
+          <tr><th>Pos</th><th>Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>PF</th><th>PA</th><th>PD</th><th>BP</th><th>Pts</th></tr>
+        </thead>
+        <tbody>
+          ${standings.map((s, i) => `
+            <tr class="${i < 2 ? 'qualify-row' : ''}">
+              <td>${i + 1}</td>
+              <td><div class="team-cell">${flagImg(s.team)}<span>${s.team}</span></div></td>
+              <td>${s.p}</td><td>${s.w}</td><td>${s.d}</td><td>${s.l}</td>
+              <td>${s.pf}</td><td>${s.pa}</td><td>${s.pd > 0 ? '+' : ''}${s.pd}</td>
+              <td>${s.bp}</td><td class="pts-cell">${s.pts}</td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+      <div class="pool-qualify-key"><div class="swatch"></div> Qualifies for quarter-finals</div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+// ======================================================================
+// POOL MATCH CARDS
+// ======================================================================
+function renderPoolMatches() {
+  const container = document.getElementById('poolMatches');
+  container.innerHTML = '';
+
+  ['A','B','C','D'].forEach(poolKey => {
+    const fixtures = POOL_FIXTURES.filter(f => f.pool === poolKey);
+    const section = document.createElement('div');
+    section.style.marginBottom = '32px';
+    section.innerHTML = `<h3 style="font-family:'EB Garamond',serif; font-size:20px; margin-bottom:4px; color:var(--accent);">Pool ${poolKey}</h3>`;
+
+    const grid = document.createElement('div');
+    grid.className = 'match-grid';
+
+    fixtures.forEach(f => {
+      const s = state.scores[f.num] || { homeT:0, homeC:0, homeP:0, homeD:0, awayT:0, awayC:0, awayP:0, awayD:0 };
+      const homeTotal = calcScore(num(s.homeT), num(s.homeC), num(s.homeP), num(s.homeD));
+      const awayTotal = calcScore(num(s.awayT), num(s.awayC), num(s.awayP), num(s.awayD));
+
+      const card = document.createElement('div');
+      card.className = 'match-card';
+      card.innerHTML = `
+        <div class="match-meta">
+          <span class="match-num">Match ${f.num}</span>
+          <span>${formatDate(f.date)}</span>
+        </div>
+        <div class="match-teams">
+          <div class="match-team">${flagImg(f.home)} <span>${f.home}</span></div>
+          <div class="match-vs">v</div>
+          <div class="match-team away"><span>${f.away}</span> ${flagImg(f.away)}</div>
+        </div>
+        <div class="match-score-inputs">
+          <div>
+            <div class="score-input-group">
+              <div style="text-align:center"><div class="score-label">T</div><input class="score-input" type="number" min="0" value="${num(s.homeT)}" data-match="${f.num}" data-field="homeT"></div>
+              <div style="text-align:center"><div class="score-label">C</div><input class="score-input" type="number" min="0" value="${num(s.homeC)}" data-match="${f.num}" data-field="homeC"></div>
+              <div style="text-align:center"><div class="score-label">P</div><input class="score-input" type="number" min="0" value="${num(s.homeP)}" data-match="${f.num}" data-field="homeP"></div>
+              <div style="text-align:center"><div class="score-label">D</div><input class="score-input" type="number" min="0" value="${num(s.homeD)}" data-match="${f.num}" data-field="homeD"></div>
+            </div>
+          </div>
+          <div class="score-total">${homeTotal} &ndash; ${awayTotal}</div>
+          <div>
+            <div class="score-input-group away">
+              <div style="text-align:center"><div class="score-label">T</div><input class="score-input" type="number" min="0" value="${num(s.awayT)}" data-match="${f.num}" data-field="awayT"></div>
+              <div style="text-align:center"><div class="score-label">C</div><input class="score-input" type="number" min="0" value="${num(s.awayC)}" data-match="${f.num}" data-field="awayC"></div>
+              <div style="text-align:center"><div class="score-label">P</div><input class="score-input" type="number" min="0" value="${num(s.awayP)}" data-match="${f.num}" data-field="awayP"></div>
+              <div style="text-align:center"><div class="score-label">D</div><input class="score-input" type="number" min="0" value="${num(s.awayD)}" data-match="${f.num}" data-field="awayD"></div>
+            </div>
+          </div>
+        </div>
+        <div class="match-venue">${f.aest} AEST / ${f.gmt} GMT &bull; ${f.venue}</div>
+      `;
+      grid.appendChild(card);
+    });
+    section.appendChild(grid);
+    container.appendChild(section);
+  });
+
+  // Bind inputs
+  container.querySelectorAll('.score-input').forEach(input => {
+    input.addEventListener('change', onScoreChange);
+    input.addEventListener('input', onScoreChange);
+  });
+}
+
+function onScoreChange(e) {
+  const matchNum = e.target.dataset.match;
+  const field = e.target.dataset.field;
+  if (!state.scores[matchNum]) {
+    state.scores[matchNum] = { homeT:0, homeC:0, homeP:0, homeD:0, awayT:0, awayC:0, awayP:0, awayD:0 };
+  }
+  state.scores[matchNum][field] = num(e.target.value);
+  saveState();
+  renderPoolTables();
+  updateKnockoutPlaceholders();
+  // Update the total in this card
+  const card = e.target.closest('.match-card');
+  if (card) {
+    const s = state.scores[matchNum];
+    const ht = calcScore(num(s.homeT), num(s.homeC), num(s.homeP), num(s.homeD));
+    const at = calcScore(num(s.awayT), num(s.awayC), num(s.awayP), num(s.awayD));
+    card.querySelector('.score-total').innerHTML = `${ht} &ndash; ${at}`;
+  }
+}
+
+// ======================================================================
+// KNOCKOUT BRACKET
+// ======================================================================
+function getPoolPosition(poolKey, pos) {
+  const standings = calcPoolStandings(poolKey);
+  if (standings[pos - 1] && standings[pos - 1].p > 0) {
+    return standings[pos - 1].team;
+  }
+  return '';
+}
+
+function updateKnockoutPlaceholders() {
+  // QF placeholders from pool standings
+  const mapping = {
+    QF1: { home: ['A', 1], away: ['B', 2] },
+    QF2: { home: ['B', 1], away: ['A', 2] },
+    QF3: { home: ['C', 1], away: ['D', 2] },
+    QF4: { home: ['D', 1], away: ['C', 2] }
+  };
+  Object.keys(mapping).forEach(qf => {
+    const m = mapping[qf];
+    const homeTeam = getPoolPosition(m.home[0], m.home[1]);
+    const awayTeam = getPoolPosition(m.away[0], m.away[1]);
+    if (homeTeam) state.knockout[qf].homeTeam = homeTeam;
+    if (awayTeam) state.knockout[qf].awayTeam = awayTeam;
+  });
+  saveState();
+  renderBracket();
+}
+
+function renderBracket() {
+  const container = document.getElementById('bracketView');
+  const ko = state.knockout;
+
+  function teamRow(matchId, side) {
+    const m = ko[matchId];
+    const teamName = side === 'home' ? m.homeTeam : m.awayTeam;
+    const scoreVal = side === 'home' ? m.homeScore : m.awayScore;
+    const placeholder = side === 'home'
+      ? KNOCKOUT_MATCHES.find(x => x.id === matchId).home
+      : KNOCKOUT_MATCHES.find(x => x.id === matchId).away;
+
+    return `
+      <div class="bracket-team-row">
+        ${teamName ? flagImg(teamName) : '<span style="width:20px;height:14px;display:inline-block;background:var(--border);border-radius:2px;"></span>'}
+        ${teamName ? `<span class="team-name">${teamName}</span>` : `<span class="team-placeholder">${placeholder}</span>`}
+        <input class="bracket-score" type="number" min="0" value="${scoreVal}" data-ko="${matchId}" data-side="${side}" placeholder="&ndash;">
+      </div>
+    `;
+  }
+
+  function matchBlock(matchId) {
+    const m = KNOCKOUT_MATCHES.find(x => x.id === matchId);
+    return `
+      <div class="bracket-match">
+        <div class="bracket-match-header">${m.label}</div>
+        ${teamRow(matchId, 'home')}
+        ${teamRow(matchId, 'away')}
+        <div style="font-size:9px;color:var(--text-secondary);text-align:center;padding:4px 8px;border-top:1px solid var(--border);">
+          ${formatDate(m.date).replace(/,?\s*\d{4}$/, '')} &bull; ${m.aest} AEST &bull; ${m.venue}
+        </div>
+      </div>
+    `;
+  }
+
+  container.innerHTML = `
+    <div class="bracket-round">
+      <div class="bracket-round-title">Quarter-Finals</div>
+      ${matchBlock('QF1')}
+      ${matchBlock('QF2')}
+      ${matchBlock('QF3')}
+      ${matchBlock('QF4')}
+    </div>
+    <div class="bracket-round">
+      <div class="bracket-round-title">Semi-Finals</div>
+      <div style="margin-top:60px;">
+        ${matchBlock('SF1')}
+      </div>
+      <div style="margin-top:60px;">
+        ${matchBlock('SF2')}
+      </div>
+    </div>
+    <div class="bracket-round">
+      <div class="bracket-round-title">Bronze Final</div>
+      <div style="margin-top:100px;">
+        ${matchBlock('BF')}
+      </div>
+    </div>
+    <div class="bracket-round">
+      <div class="bracket-round-title">The Final</div>
+      <div style="margin-top:80px;">
+        ${matchBlock('F')}
+        <div style="text-align:center; margin-top:8px; font-family:'EB Garamond',serif; font-size:13px; color:var(--accent);">
+          Stadium Australia, Sydney<br>13 November 2027
+        </div>
+      </div>
+    </div>
+  `;
+
+  // Bind bracket score inputs
+  container.querySelectorAll('.bracket-score').forEach(input => {
+    input.addEventListener('change', onKoScoreChange);
+    input.addEventListener('input', onKoScoreChange);
+  });
+}
+
+function onKoScoreChange(e) {
+  const matchId = e.target.dataset.ko;
+  const side = e.target.dataset.side;
+  const val = e.target.value;
+  if (side === 'home') state.knockout[matchId].homeScore = val;
+  else state.knockout[matchId].awayScore = val;
+
+  // Propagate winners/losers
+  propagateKnockout();
+  saveState();
+  renderBracket();
+}
+
+function propagateKnockout() {
+  const ko = state.knockout;
+
+  function winner(matchId) {
+    const m = ko[matchId];
+    if (m.homeScore !== '' && m.awayScore !== '' && num(m.homeScore) !== num(m.awayScore)) {
+      return num(m.homeScore) > num(m.awayScore) ? m.homeTeam : m.awayTeam;
+    }
+    return '';
+  }
+  function loser(matchId) {
+    const m = ko[matchId];
+    if (m.homeScore !== '' && m.awayScore !== '' && num(m.homeScore) !== num(m.awayScore)) {
+      return num(m.homeScore) < num(m.awayScore) ? m.homeTeam : m.awayTeam;
+    }
+    return '';
+  }
+
+  // SF from QF
+  ko.SF1.homeTeam = winner('QF1'); ko.SF1.awayTeam = winner('QF2');
+  ko.SF2.homeTeam = winner('QF3'); ko.SF2.awayTeam = winner('QF4');
+  // BF from SF losers
+  ko.BF.homeTeam = loser('SF1'); ko.BF.awayTeam = loser('SF2');
+  // F from SF winners
+  ko.F.homeTeam = winner('SF1'); ko.F.awayTeam = winner('SF2');
+}
+
+// ======================================================================
+// FIXTURES LIST
+// ======================================================================
+function renderFixtures() {
+  const container = document.getElementById('fixtureList');
+  container.innerHTML = '';
+
+  const all = [
+    ...POOL_FIXTURES.map(f => ({
+      ...f, label: `Pool ${f.pool}`,
+      homeDisplay: f.home, awayDisplay: f.away,
+      score: (() => {
+        const s = state.scores[f.num];
+        if (!s) return '';
+        const ht = calcScore(num(s.homeT), num(s.homeC), num(s.homeP), num(s.homeD));
+        const at = calcScore(num(s.awayT), num(s.awayC), num(s.awayP), num(s.awayD));
+        return (ht || at) ? `${ht} - ${at}` : '';
+      })()
+    })),
+    ...KNOCKOUT_MATCHES.map((m, i) => ({
+      num: POOL_FIXTURES.length + i + 1,
+      pool: '',
+      home: state.knockout[m.id].homeTeam || m.home,
+      away: state.knockout[m.id].awayTeam || m.away,
+      homeDisplay: state.knockout[m.id].homeTeam || m.home,
+      awayDisplay: state.knockout[m.id].awayTeam || m.away,
+      date: m.date, aest: m.aest, gmt: m.gmt, venue: m.venue,
+      stage: m.stage, label: m.label,
+      score: (() => {
+        const k = state.knockout[m.id];
+        return (k.homeScore !== '' && k.awayScore !== '') ? `${k.homeScore} - ${k.awayScore}` : '';
+      })()
+    }))
+  ];
+
+  let lastDate = '';
+  all.forEach(f => {
+    if (f.date !== lastDate) {
+      lastDate = f.date;
+      const header = document.createElement('div');
+      header.className = 'fixture-date-header';
+      header.textContent = formatDate(f.date);
+      container.appendChild(header);
+    }
+    const row = document.createElement('div');
+    row.className = 'fixture-row';
+    const homeTeam = f.homeDisplay || f.home;
+    const awayTeam = f.awayDisplay || f.away;
+    row.innerHTML = `
+      <div class="match-number">${f.label}</div>
+      <div class="fixture-team home"><span>${homeTeam}</span>${flagImg(homeTeam)}</div>
+      <div class="fixture-score">${f.score || 'v'}</div>
+      <div class="fixture-team">${flagImg(awayTeam)}<span>${awayTeam}</span></div>
+      <div class="fixture-time">${f.aest} AEST<br>${f.gmt} GMT</div>
+      <div class="fixture-venue">${f.venue}</div>
+    `;
+    container.appendChild(row);
+  });
+}
+
+// ======================================================================
+// STATISTICS
+// ======================================================================
+function populateTeamSelects() {
+  const allTeams = Object.keys(TEAMS);
+  ['tryTeam','ptsTeam','cardTeam'].forEach(id => {
+    const sel = document.getElementById(id);
+    sel.innerHTML = allTeams.map(t => `<option value="${t}">${t}</option>`).join('');
+  });
+}
+
+function addTryScorer() {
+  const player = document.getElementById('tryPlayer').value.trim();
+  const team = document.getElementById('tryTeam').value;
+  const tries = num(document.getElementById('tryCount').value);
+  if (!player) return;
+  state.tryScorers.push({ player, team, tries });
+  state.tryScorers.sort((a,b) => b.tries - a.tries);
+  saveState();
+  renderTryScorers();
+  document.getElementById('tryPlayer').value = '';
+  document.getElementById('tryCount').value = '1';
+}
+
+function renderTryScorers() {
+  const body = document.getElementById('tryScorerBody');
+  body.innerHTML = state.tryScorers.map((s, i) => `
+    <tr>
+      <td>${i+1}</td>
+      <td style="font-weight:500">${s.player}</td>
+      <td><span style="display:flex;align-items:center;gap:4px">${flagImg(s.team)} ${TEAMS[s.team]?.abbr || s.team}</span></td>
+      <td style="font-weight:700;color:var(--accent)">${s.tries}</td>
+      <td><button class="remove-btn" onclick="removeTryScorer(${i})">&times;</button></td>
+    </tr>
+  `).join('');
+}
+
+function removeTryScorer(i) { state.tryScorers.splice(i,1); saveState(); renderTryScorers(); }
+
+function addPointsScorer() {
+  const player = document.getElementById('ptsPlayer').value.trim();
+  const team = document.getElementById('ptsTeam').value;
+  const points = num(document.getElementById('ptsCount').value);
+  if (!player) return;
+  state.pointsScorers.push({ player, team, points });
+  state.pointsScorers.sort((a,b) => b.points - a.points);
+  saveState();
+  renderPointsScorers();
+  document.getElementById('ptsPlayer').value = '';
+  document.getElementById('ptsCount').value = '5';
+}
+
+function renderPointsScorers() {
+  const body = document.getElementById('pointsScorerBody');
+  body.innerHTML = state.pointsScorers.map((s, i) => `
+    <tr>
+      <td>${i+1}</td>
+      <td style="font-weight:500">${s.player}</td>
+      <td><span style="display:flex;align-items:center;gap:4px">${flagImg(s.team)} ${TEAMS[s.team]?.abbr || s.team}</span></td>
+      <td style="font-weight:700;color:var(--accent)">${s.points}</td>
+      <td><button class="remove-btn" onclick="removePointsScorer(${i})">&times;</button></td>
+    </tr>
+  `).join('');
+}
+
+function removePointsScorer(i) { state.pointsScorers.splice(i,1); saveState(); renderPointsScorers(); }
+
+function addCard() {
+  const player = document.getElementById('cardPlayer').value.trim();
+  const team = document.getElementById('cardTeam').value;
+  const cardType = document.getElementById('cardType').value;
+  if (!player) return;
+  state.cards.push({ player, team, cardType });
+  saveState();
+  renderCards();
+  document.getElementById('cardPlayer').value = '';
+}
+
+function renderCards() {
+  const body = document.getElementById('cardBody');
+  body.innerHTML = state.cards.map((s, i) => `
+    <tr>
+      <td>${i+1}</td>
+      <td style="font-weight:500">${s.player}</td>
+      <td><span style="display:flex;align-items:center;gap:4px">${flagImg(s.team)} ${TEAMS[s.team]?.abbr || s.team}</span></td>
+      <td><span style="display:inline-block;width:16px;height:20px;border-radius:2px;background:${s.cardType === 'red' ? '#c8502a' : '#e6c828'};vertical-align:middle;"></span> ${s.cardType === 'red' ? 'Red' : 'Yellow'}</td>
+      <td><button class="remove-btn" onclick="removeCard(${i})">&times;</button></td>
+    </tr>
+  `).join('');
+}
+
+function removeCard(i) { state.cards.splice(i,1); saveState(); renderCards(); }
+
+// ======================================================================
+// THEME
+// ======================================================================
+function applyTheme(theme) {
+  document.body.setAttribute('data-theme', theme);
+  state.theme = theme;
+  saveState();
+}
+
+document.getElementById('themePicker').addEventListener('change', function() {
+  applyTheme(this.value);
+});
+
+// ======================================================================
+// TABS
+// ======================================================================
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    this.classList.add('active');
+    document.getElementById('tab-' + this.dataset.tab).classList.add('active');
+    // Re-render on tab switch
+    if (this.dataset.tab === 'knockout') { updateKnockoutPlaceholders(); }
+    if (this.dataset.tab === 'fixtures') { renderFixtures(); }
+  });
+});
+
+// ======================================================================
+// EXPORT / IMPORT / RESET
+// ======================================================================
+function exportData() {
+  const data = JSON.stringify(state, null, 2);
+  const blob = new Blob([data], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'twc-rwc2027-save.json';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function showImportModal() { document.getElementById('importModal').classList.add('active'); }
+function closeImportModal() { document.getElementById('importModal').classList.remove('active'); }
+
+function importData() {
+  try {
+    const data = JSON.parse(document.getElementById('importArea').value);
+    state = { ...defaultState(), ...data };
+    saveState();
+    closeImportModal();
+    renderAll();
+    alert('Data imported successfully.');
+  } catch(e) {
+    alert('Invalid data format. Please check your exported JSON.');
+  }
+}
+
+function resetData() {
+  if (confirm('Reset all scores, statistics and saved data? This cannot be undone.')) {
+    state = defaultState();
+    saveState();
+    renderAll();
+  }
+}
+
+// Close modal on overlay click
+document.getElementById('importModal').addEventListener('click', function(e) {
+  if (e.target === this) closeImportModal();
+});
+
+// ======================================================================
+// INIT
+// ======================================================================
+function renderAll() {
+  applyTheme(state.theme || 'tournament-gold');
+  document.getElementById('themePicker').value = state.theme || 'tournament-gold';
+  renderPoolTables();
+  renderPoolMatches();
+  renderBracket();
+  renderFixtures();
+  populateTeamSelects();
+  renderTryScorers();
+  renderPointsScorers();
+  renderCards();
+  updateKnockoutPlaceholders();
+}
+
+renderAll();
+</script>
+</body>
+</html>

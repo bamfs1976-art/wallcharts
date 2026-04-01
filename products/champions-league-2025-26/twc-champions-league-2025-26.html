@@ -1,0 +1,1352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UEFA Champions League 2025/26 Interactive Wall Chart | The Wall Chart Co</title>
+<meta name="description" content="Premium interactive Champions League 2025/26 wall chart tracker. Track the league phase, knockout rounds, and final in Munich.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   CSS CUSTOM PROPERTIES & RESET
+   ============================================================ */
+:root {
+  --navy: #0B1E3D;
+  --red: #C8502A;
+  --gold: #C8A94A;
+  --cream: #F7F5EE;
+  --white: #FFFFFF;
+  --navy-light: #132d5a;
+  --navy-dark: #071428;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+  --font-heading: 'EB Garamond', Georgia, serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --radius: 8px;
+  --radius-lg: 12px;
+  --shadow-sm: 0 1px 2px rgba(11,30,61,0.06);
+  --shadow-md: 0 4px 12px rgba(11,30,61,0.1);
+  --shadow-lg: 0 8px 24px rgba(11,30,61,0.14);
+  --transition: 0.2s ease;
+  /* Theme colours (overridden by theme classes) */
+  --bg-primary: var(--cream);
+  --bg-card: var(--white);
+  --bg-header: var(--navy);
+  --text-primary: var(--navy);
+  --text-secondary: var(--gray-600);
+  --text-on-header: var(--white);
+  --border-color: var(--gray-200);
+  --input-bg: var(--white);
+  --input-border: var(--gray-300);
+  --qualify-direct: #dcfce7;
+  --qualify-playoff: #fef9c3;
+  --eliminated: #fee2e2;
+}
+
+/* Theme: White */
+.theme-white {
+  --bg-primary: var(--white);
+  --bg-card: var(--gray-100);
+  --border-color: var(--gray-200);
+}
+
+/* Theme: Dark */
+.theme-dark {
+  --bg-primary: #0f172a;
+  --bg-card: #1e293b;
+  --bg-header: #0B1E3D;
+  --text-primary: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-on-header: var(--white);
+  --border-color: #334155;
+  --input-bg: #1e293b;
+  --input-border: #475569;
+  --qualify-direct: #052e16;
+  --qualify-playoff: #422006;
+  --eliminated: #450a0a;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  font-size: 15px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-header);
+  color: var(--text-on-header);
+  box-shadow: var(--shadow-lg);
+}
+
+.header-stripe {
+  height: 4px;
+  background: linear-gradient(to right, var(--red) 0%, var(--red) 33%, var(--white) 33%, var(--white) 66%, var(--navy-light) 66%, var(--navy-light) 100%);
+}
+
+.header-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.brand-logo {
+  width: 40px;
+  height: 40px;
+  background: var(--gold);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: var(--navy);
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-name {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  line-height: 1.2;
+}
+
+.brand-tagline {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--gold);
+  font-weight: 500;
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.theme-picker {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.theme-picker-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-right: 0.25rem;
+  opacity: 0.7;
+}
+
+.theme-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.3);
+  cursor: pointer;
+  transition: border-color var(--transition), transform var(--transition);
+}
+.theme-dot:hover { transform: scale(1.15); }
+.theme-dot.active { border-color: var(--gold); box-shadow: 0 0 0 2px var(--gold); }
+.theme-dot[data-theme="navy"] { background: var(--navy); }
+.theme-dot[data-theme="white"] { background: var(--white); }
+.theme-dot[data-theme="dark"] { background: #0f172a; }
+
+.btn {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.75px;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all var(--transition);
+  text-decoration: none;
+}
+
+.btn-gold {
+  background: var(--gold);
+  color: var(--navy);
+}
+.btn-gold:hover { background: #b89a3e; }
+
+.btn-outline {
+  background: transparent;
+  color: var(--text-on-header);
+  border: 1px solid rgba(255,255,255,0.3);
+}
+.btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+.btn-sm { padding: 0.35rem 0.7rem; font-size: 0.7rem; }
+
+/* ============================================================
+   TOURNAMENT TITLE
+   ============================================================ */
+.tournament-banner {
+  background: var(--bg-header);
+  color: var(--text-on-header);
+  text-align: center;
+  padding: 1.5rem 1rem 1rem;
+  border-bottom: 3px solid var(--gold);
+}
+
+.tournament-title {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  line-height: 1.2;
+}
+
+.tournament-subtitle {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--gold);
+  margin-top: 0.25rem;
+}
+
+/* ============================================================
+   TAB NAVIGATION
+   ============================================================ */
+.tab-nav {
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  position: sticky;
+  top: 68px;
+  z-index: 90;
+}
+
+.tab-btn {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 1rem 1.75rem;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  color: var(--text-secondary);
+  transition: all var(--transition);
+}
+.tab-btn:hover { color: var(--text-primary); }
+.tab-btn.active {
+  color: var(--navy);
+  border-bottom-color: var(--gold);
+}
+.theme-dark .tab-btn.active { color: var(--gold); }
+
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* ============================================================
+   MAIN CONTENT
+   ============================================================ */
+.main-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+/* ============================================================
+   LEAGUE PHASE TABLE
+   ============================================================ */
+.league-phase-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.section-title {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.legend {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.legend-swatch {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  box-shadow: var(--shadow-sm);
+}
+
+.league-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+
+.league-table thead th {
+  background: var(--navy);
+  color: var(--white);
+  padding: 0.6rem 0.5rem;
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: sticky;
+  top: 0;
+  white-space: nowrap;
+}
+
+.league-table thead th:nth-child(1) { text-align: center; width: 40px; }
+.league-table thead th:nth-child(2) { text-align: left; min-width: 180px; }
+
+.league-table tbody tr {
+  border-bottom: 1px solid var(--border-color);
+  transition: background var(--transition);
+}
+.league-table tbody tr:hover { background: rgba(200,169,74,0.06); }
+
+.league-table tbody td {
+  padding: 0.45rem 0.5rem;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.league-table tbody td:nth-child(1) {
+  font-weight: 700;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.league-table tbody td:nth-child(2) { text-align: left; }
+
+.team-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.team-flag {
+  width: 20px;
+  height: 14px;
+  object-fit: cover;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
+}
+
+.team-name {
+  font-weight: 500;
+}
+
+.row-qualify-direct { background: var(--qualify-direct); }
+.row-qualify-playoff { background: var(--qualify-playoff); }
+.row-eliminated { background: var(--eliminated); }
+
+/* ============================================================
+   FIXTURES LIST
+   ============================================================ */
+.matchday-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  margin-bottom: 1rem;
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.matchday-header {
+  background: var(--navy);
+  color: var(--white);
+  padding: 0.6rem 1rem;
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.matchday-date {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  color: var(--gold);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.fixture-row {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+  gap: 0.5rem;
+  font-size: 0.82rem;
+}
+.fixture-row:last-child { border-bottom: none; }
+
+.fixture-home {
+  flex: 1;
+  text-align: right;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.4rem;
+}
+
+.fixture-score {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  flex-shrink: 0;
+  min-width: 80px;
+  justify-content: center;
+}
+
+.score-input {
+  width: 32px;
+  height: 28px;
+  text-align: center;
+  border: 1px solid var(--input-border);
+  border-radius: 4px;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  background: var(--input-bg);
+  color: var(--text-primary);
+  -moz-appearance: textfield;
+}
+.score-input::-webkit-outer-spin-button,
+.score-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.score-input:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 2px rgba(200,169,74,0.25);
+}
+
+.score-separator {
+  font-weight: 700;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.fixture-away {
+  flex: 1;
+  text-align: left;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* ============================================================
+   KNOCKOUT BRACKET
+   ============================================================ */
+.knockout-wrapper {
+  overflow-x: auto;
+  padding-bottom: 1rem;
+}
+
+.bracket {
+  display: flex;
+  gap: 2rem;
+  min-width: 1100px;
+  align-items: flex-start;
+  padding: 1rem 0;
+}
+
+.bracket-round {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 220px;
+}
+
+.bracket-round-title {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--gold);
+}
+
+.bracket-match {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.bracket-match-header {
+  background: var(--navy);
+  color: var(--gold);
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 0.25rem 0.5rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.bracket-team-row {
+  display: flex;
+  align-items: center;
+  padding: 0.35rem 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+  gap: 0.35rem;
+  font-size: 0.78rem;
+}
+.bracket-team-row:last-child { border-bottom: none; }
+
+.bracket-team-name {
+  flex: 1;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bracket-team-name.tbd { color: var(--text-secondary); font-style: italic; }
+
+.bracket-score-inputs {
+  display: flex;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.bracket-score-input {
+  width: 26px;
+  height: 24px;
+  text-align: center;
+  border: 1px solid var(--input-border);
+  border-radius: 3px;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: var(--input-bg);
+  color: var(--text-primary);
+  -moz-appearance: textfield;
+}
+.bracket-score-input::-webkit-outer-spin-button,
+.bracket-score-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+.bracket-score-input:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 2px rgba(200,169,74,0.2);
+}
+
+.bracket-leg-label {
+  font-size: 0.55rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  min-width: 16px;
+  text-align: center;
+}
+
+.final-venue {
+  text-align: center;
+  font-size: 0.72rem;
+  color: var(--gold);
+  font-weight: 600;
+  margin-top: 0.35rem;
+  letter-spacing: 0.5px;
+}
+
+/* ============================================================
+   DATA MANAGEMENT BAR
+   ============================================================ */
+.data-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding: 0.75rem 0;
+  flex-wrap: wrap;
+}
+
+.data-bar .btn svg { width: 14px; height: 14px; }
+
+.autosave-indicator {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.autosave-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22c55e;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.site-footer {
+  background: var(--navy);
+  color: rgba(255,255,255,0.6);
+  text-align: center;
+  padding: 2rem 1rem;
+  margin-top: 3rem;
+  font-size: 0.75rem;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.footer-brand-logo {
+  width: 28px;
+  height: 28px;
+  background: var(--gold);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.55rem;
+  color: var(--navy);
+}
+
+.footer-brand-name {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  color: var(--white);
+  letter-spacing: 0.5px;
+}
+
+.footer-disclaimer {
+  margin-top: 0.5rem;
+  font-size: 0.65rem;
+  opacity: 0.5;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 768px) {
+  html { font-size: 14px; }
+  .header-inner { padding: 0.5rem 1rem; }
+  .brand-name { font-size: 1rem; }
+  .brand-tagline { display: none; }
+  .tournament-title { font-size: 1.4rem; }
+  .tab-btn { padding: 0.75rem 1rem; font-size: 0.7rem; letter-spacing: 0.5px; }
+  .main-content { padding: 1rem; }
+  .bracket { min-width: 900px; gap: 1rem; }
+  .bracket-round { min-width: 180px; }
+}
+
+@media (max-width: 480px) {
+  .header-controls { gap: 0.5rem; }
+  .theme-picker-label { display: none; }
+  .tab-nav { top: 60px; }
+  .tab-btn { padding: 0.6rem 0.6rem; font-size: 0.65rem; }
+}
+
+/* ============================================================
+   PRINT STYLES
+   ============================================================ */
+@media print {
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+  body { background: white !important; color: black !important; font-size: 10pt; }
+  .site-header { position: static; box-shadow: none; }
+  .header-controls, .tab-nav, .data-bar, .btn, .score-input, .bracket-score-input { display: none !important; }
+  .tab-panel { display: block !important; page-break-inside: avoid; }
+  .tab-panel + .tab-panel { margin-top: 2rem; }
+  .main-content { max-width: 100%; padding: 0.5rem; }
+  .table-wrapper { box-shadow: none; border: 1px solid #ccc; }
+  .matchday-card { box-shadow: none; break-inside: avoid; }
+  .bracket { min-width: auto; flex-wrap: wrap; }
+  .site-footer { margin-top: 1rem; }
+  .knockout-wrapper { overflow: visible; }
+}
+
+/* Hidden file input */
+#importInput { display: none; }
+</style>
+</head>
+<body>
+
+<!-- ====== HEADER ====== -->
+<header class="site-header" role="banner">
+  <div class="header-stripe" aria-hidden="true"></div>
+  <div class="header-inner">
+    <a href="#" class="brand" aria-label="The Wall Chart Co - Home">
+      <div class="brand-logo" aria-hidden="true">TWC</div>
+      <div class="brand-text">
+        <span class="brand-name">THE WALL CHART CO</span>
+        <span class="brand-tagline">Premium Tournament Downloads</span>
+      </div>
+    </a>
+    <div class="header-controls">
+      <div class="theme-picker" role="radiogroup" aria-label="Theme selector">
+        <span class="theme-picker-label">Theme</span>
+        <button class="theme-dot active" data-theme="navy" aria-label="Navy theme" role="radio" aria-checked="true" style="background:var(--navy)"></button>
+        <button class="theme-dot" data-theme="white" aria-label="White theme" role="radio" aria-checked="false" style="background:var(--white)"></button>
+        <button class="theme-dot" data-theme="dark" aria-label="Dark theme" role="radio" aria-checked="false" style="background:#0f172a"></button>
+      </div>
+      <button class="btn btn-outline btn-sm" onclick="window.print()" aria-label="Print or save as PDF">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        Print / PDF
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ====== TOURNAMENT BANNER ====== -->
+<section class="tournament-banner" aria-label="Tournament title">
+  <h1 class="tournament-title">UEFA Champions League 2025/26</h1>
+  <p class="tournament-subtitle">Interactive Wall Chart &mdash; Swiss-Model League Phase &amp; Knockout Rounds</p>
+</section>
+
+<!-- ====== TAB NAVIGATION ====== -->
+<nav class="tab-nav" role="tablist" aria-label="Tournament sections">
+  <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="panel-league" id="tab-league">League Phase</button>
+  <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-knockout" id="tab-knockout">Knockout Stage</button>
+  <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-fixtures" id="tab-fixtures">All Fixtures</button>
+</nav>
+
+<!-- ====== MAIN CONTENT ====== -->
+<main class="main-content">
+
+  <!-- Data bar -->
+  <div class="data-bar">
+    <span class="autosave-indicator"><span class="autosave-dot" aria-hidden="true"></span> Auto-saved</span>
+    <button class="btn btn-gold btn-sm" id="btnExport">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Export
+    </button>
+    <button class="btn btn-outline btn-sm" id="btnImport" style="color:var(--text-primary);border-color:var(--border-color);">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      Import
+    </button>
+    <button class="btn btn-outline btn-sm" id="btnReset" style="color:var(--red);border-color:var(--red);">Reset All</button>
+    <input type="file" id="importInput" accept=".json">
+  </div>
+
+  <!-- ====== LEAGUE PHASE PANEL ====== -->
+  <section class="tab-panel active" id="panel-league" role="tabpanel" aria-labelledby="tab-league">
+    <div class="league-phase-header">
+      <h2 class="section-title">League Phase Standings</h2>
+      <div class="legend">
+        <div class="legend-item"><span class="legend-swatch" style="background:var(--qualify-direct)"></span> Top 8 &mdash; Direct to R16</div>
+        <div class="legend-item"><span class="legend-swatch" style="background:var(--qualify-playoff)"></span> 9th&ndash;24th &mdash; Knockout Playoffs</div>
+        <div class="legend-item"><span class="legend-swatch" style="background:var(--eliminated)"></span> 25th&ndash;36th &mdash; Eliminated</div>
+      </div>
+    </div>
+    <div class="table-wrapper">
+      <table class="league-table" id="leagueTable" aria-label="League phase standings">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Team</th>
+            <th>P</th>
+            <th>W</th>
+            <th>D</th>
+            <th>L</th>
+            <th>GF</th>
+            <th>GA</th>
+            <th>GD</th>
+            <th>Pts</th>
+          </tr>
+        </thead>
+        <tbody id="leagueBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ====== KNOCKOUT PANEL ====== -->
+  <section class="tab-panel" id="panel-knockout" role="tabpanel" aria-labelledby="tab-knockout">
+    <h2 class="section-title" style="margin-bottom:1rem;">Knockout Stage</h2>
+    <div class="knockout-wrapper">
+      <div class="bracket" id="knockoutBracket"></div>
+    </div>
+  </section>
+
+  <!-- ====== FIXTURES PANEL ====== -->
+  <section class="tab-panel" id="panel-fixtures" role="tabpanel" aria-labelledby="tab-fixtures">
+    <h2 class="section-title" style="margin-bottom:1rem;">All Fixtures</h2>
+    <div id="fixturesContainer"></div>
+  </section>
+
+</main>
+
+<!-- ====== FOOTER ====== -->
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-brand">
+    <div class="footer-brand-logo" aria-hidden="true">TWC</div>
+    <span class="footer-brand-name">THE WALL CHART CO</span>
+  </div>
+  <p>&copy; 2025&ndash;2026 The Wall Chart Co. All rights reserved.</p>
+  <p class="footer-disclaimer">
+    This is an unofficial product and is not associated with, endorsed by, or affiliated with UEFA or the UEFA Champions League.
+    All team names, logos, and trademarks are the property of their respective owners. For personal use only.
+  </p>
+</footer>
+
+<script>
+/* ==============================================================
+   DATA: TEAMS
+   ============================================================== */
+const TEAMS = [
+  { id: 'real-madrid',      name: 'Real Madrid',         flag: 'es',    short: 'RMA' },
+  { id: 'barcelona',        name: 'Barcelona',           flag: 'es',    short: 'BAR' },
+  { id: 'bayern-munich',    name: 'Bayern Munich',       flag: 'de',    short: 'BAY' },
+  { id: 'man-city',         name: 'Man City',            flag: 'gb-eng',short: 'MCI' },
+  { id: 'liverpool',        name: 'Liverpool',           flag: 'gb-eng',short: 'LIV' },
+  { id: 'arsenal',          name: 'Arsenal',             flag: 'gb-eng',short: 'ARS' },
+  { id: 'psg',              name: 'PSG',                 flag: 'fr',    short: 'PSG' },
+  { id: 'inter-milan',      name: 'Inter Milan',         flag: 'it',    short: 'INT' },
+  { id: 'ac-milan',         name: 'AC Milan',            flag: 'it',    short: 'ACM' },
+  { id: 'juventus',         name: 'Juventus',            flag: 'it',    short: 'JUV' },
+  { id: 'dortmund',         name: 'Borussia Dortmund',   flag: 'de',    short: 'BVB' },
+  { id: 'atletico-madrid',  name: 'Atletico Madrid',     flag: 'es',    short: 'ATM' },
+  { id: 'benfica',          name: 'Benfica',             flag: 'pt',    short: 'BEN' },
+  { id: 'porto',            name: 'Porto',               flag: 'pt',    short: 'POR' },
+  { id: 'sporting-cp',      name: 'Sporting CP',         flag: 'pt',    short: 'SCP' },
+  { id: 'ajax',             name: 'Ajax',                flag: 'nl',    short: 'AJA' },
+  { id: 'feyenoord',        name: 'Feyenoord',           flag: 'nl',    short: 'FEY' },
+  { id: 'psv',              name: 'PSV Eindhoven',       flag: 'nl',    short: 'PSV' },
+  { id: 'celtic',           name: 'Celtic',              flag: 'gb-sct',short: 'CEL' },
+  { id: 'club-brugge',      name: 'Club Brugge',         flag: 'be',    short: 'BRU' },
+  { id: 'rb-leipzig',       name: 'RB Leipzig',          flag: 'de',    short: 'RBL' },
+  { id: 'bayer-leverkusen', name: 'Bayer Leverkusen',    flag: 'de',    short: 'B04' },
+  { id: 'napoli',           name: 'Napoli',              flag: 'it',    short: 'NAP' },
+  { id: 'atalanta',         name: 'Atalanta',            flag: 'it',    short: 'ATA' },
+  { id: 'lille',            name: 'Lille',               flag: 'fr',    short: 'LIL' },
+  { id: 'monaco',           name: 'Monaco',              flag: 'mc',    short: 'MON' },
+  { id: 'salzburg',         name: 'Salzburg',            flag: 'at',    short: 'SAL' },
+  { id: 'shakhtar',         name: 'Shakhtar Donetsk',    flag: 'ua',    short: 'SHA' },
+  { id: 'dinamo-zagreb',    name: 'Dinamo Zagreb',       flag: 'hr',    short: 'DZA' },
+  { id: 'red-star',         name: 'Red Star Belgrade',   flag: 'rs',    short: 'RSB' },
+  { id: 'young-boys',       name: 'Young Boys',          flag: 'ch',    short: 'YBB' },
+  { id: 'sturm-graz',       name: 'Sturm Graz',          flag: 'at',    short: 'STU' },
+  { id: 'girona',           name: 'Girona',              flag: 'es',    short: 'GIR' },
+  { id: 'stuttgart',        name: 'Stuttgart',           flag: 'de',    short: 'VFB' },
+  { id: 'bologna',          name: 'Bologna',             flag: 'it',    short: 'BOL' },
+  { id: 'slovan',           name: 'Slovan Bratislava',   flag: 'sk',    short: 'SLO' }
+];
+
+const teamMap = {};
+TEAMS.forEach(t => teamMap[t.id] = t);
+
+function flagUrl(code) {
+  return `https://flagcdn.com/w20/${code}.png`;
+}
+
+/* ==============================================================
+   DATA: LEAGUE PHASE FIXTURES (8 matchdays, ~18 games each = 144 total)
+   Simplified draw: each team plays 8 unique opponents.
+   ============================================================== */
+function generateLeagueFixtures() {
+  // Create a round-robin style schedule where each team plays exactly 8 matches.
+  // We use a simple deterministic pairing.
+  const ids = TEAMS.map(t => t.id);
+  const fixtures = [];
+  const counts = {};
+  ids.forEach(id => counts[id] = 0);
+
+  // Pair teams: 0-35 mapped so each gets 8 matches.
+  // 36 teams, 8 matches each = 144 match slots = 144 fixtures (since each fixture counts for both teams).
+  // Actually 36*8/2 = 144 fixtures total.
+  const pairs = [];
+
+  // Simple approach: shift-based schedule for 36 teams, take first 8 rounds
+  const n = 36;
+  for (let round = 0; round < 8; round++) {
+    const roundPairs = [];
+    const used = new Set();
+    for (let i = 0; i < n; i++) {
+      if (used.has(i)) continue;
+      let j = (i + round + 1) % n;
+      let tries = 0;
+      while ((used.has(j) || j === i) && tries < n) {
+        j = (j + 1) % n;
+        tries++;
+      }
+      if (!used.has(j) && j !== i) {
+        used.add(i);
+        used.add(j);
+        roundPairs.push([ids[i], ids[j]]);
+      }
+    }
+    pairs.push(roundPairs);
+  }
+  return pairs;
+}
+
+const MATCHDAY_DATES = [
+  'Sep 16-17, 2025',
+  'Oct 1-2, 2025',
+  'Oct 21-22, 2025',
+  'Nov 5-6, 2025',
+  'Nov 25-26, 2025',
+  'Dec 9-10, 2025',
+  'Jan 21-22, 2026',
+  'Jan 28-29, 2026'
+];
+
+const KNOCKOUT_DATES = {
+  playoffs:  { leg1: 'Feb 11-12, 2026', leg2: 'Feb 18-19, 2026' },
+  r16:       { leg1: 'Mar 3-4, 2026',   leg2: 'Mar 10-11, 2026' },
+  qf:        { leg1: 'Apr 7-8, 2026',   leg2: 'Apr 14-15, 2026' },
+  sf:        { leg1: 'Apr 28-29, 2026',  leg2: 'May 5-6, 2026' },
+  final:     { date: 'May 31, 2026' }
+};
+
+const leagueFixtures = generateLeagueFixtures();
+
+/* ==============================================================
+   STATE MANAGEMENT
+   ============================================================== */
+const STORAGE_KEY = 'twc-ucl-2025-26';
+
+let state = {
+  theme: 'navy',
+  leagueScores: {},   // key: 'matchday-home-away', val: { home: num, away: num }
+  knockoutScores: {},  // key: 'round-matchIdx-leg-team', val: num
+  version: 1
+};
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) {
+      const saved = JSON.parse(raw);
+      state = { ...state, ...saved };
+    }
+  } catch(e) { console.warn('Failed to load state', e); }
+}
+
+function saveState() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch(e) { console.warn('Failed to save state', e); }
+}
+
+function exportData() {
+  const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'twc-ucl-2025-26-save.json';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function importData(file) {
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      const imported = JSON.parse(e.target.result);
+      state = { ...state, ...imported };
+      saveState();
+      renderAll();
+    } catch(err) {
+      alert('Invalid save file.');
+    }
+  };
+  reader.readAsText(file);
+}
+
+function resetAll() {
+  if (confirm('Reset all scores and data? This cannot be undone.')) {
+    state.leagueScores = {};
+    state.knockoutScores = {};
+    saveState();
+    renderAll();
+  }
+}
+
+/* ==============================================================
+   THEME
+   ============================================================== */
+function applyTheme(theme) {
+  document.body.classList.remove('theme-white', 'theme-dark');
+  if (theme === 'white') document.body.classList.add('theme-white');
+  if (theme === 'dark') document.body.classList.add('theme-dark');
+  document.querySelectorAll('.theme-dot').forEach(d => {
+    const isActive = d.dataset.theme === theme;
+    d.classList.toggle('active', isActive);
+    d.setAttribute('aria-checked', isActive);
+  });
+  state.theme = theme;
+  saveState();
+}
+
+/* ==============================================================
+   TABS
+   ============================================================== */
+function initTabs() {
+  const tabs = document.querySelectorAll('.tab-btn');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => {
+        t.classList.remove('active');
+        t.setAttribute('aria-selected', 'false');
+      });
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
+      document.getElementById(tab.getAttribute('aria-controls')).classList.add('active');
+    });
+  });
+}
+
+/* ==============================================================
+   LEAGUE TABLE RENDERING & CALCULATION
+   ============================================================== */
+function calcLeagueStandings() {
+  const standings = {};
+  TEAMS.forEach(t => {
+    standings[t.id] = { id: t.id, p: 0, w: 0, d: 0, l: 0, gf: 0, ga: 0, gd: 0, pts: 0 };
+  });
+
+  leagueFixtures.forEach((matchday, mdIdx) => {
+    matchday.forEach(([homeId, awayId]) => {
+      const key = `${mdIdx}-${homeId}-${awayId}`;
+      const score = state.leagueScores[key];
+      if (score && score.home !== '' && score.away !== '' && score.home !== undefined && score.away !== undefined) {
+        const h = parseInt(score.home);
+        const a = parseInt(score.away);
+        if (isNaN(h) || isNaN(a)) return;
+
+        standings[homeId].p++;
+        standings[awayId].p++;
+        standings[homeId].gf += h;
+        standings[homeId].ga += a;
+        standings[awayId].gf += a;
+        standings[awayId].ga += h;
+
+        if (h > a) {
+          standings[homeId].w++;
+          standings[homeId].pts += 3;
+          standings[awayId].l++;
+        } else if (h < a) {
+          standings[awayId].w++;
+          standings[awayId].pts += 3;
+          standings[homeId].l++;
+        } else {
+          standings[homeId].d++;
+          standings[awayId].d++;
+          standings[homeId].pts += 1;
+          standings[awayId].pts += 1;
+        }
+      }
+    });
+  });
+
+  Object.values(standings).forEach(s => s.gd = s.gf - s.ga);
+
+  const sorted = Object.values(standings).sort((a, b) => {
+    if (b.pts !== a.pts) return b.pts - a.pts;
+    if (b.gd !== a.gd) return b.gd - a.gd;
+    if (b.gf !== a.gf) return b.gf - a.gf;
+    return teamMap[a.id].name.localeCompare(teamMap[b.id].name);
+  });
+
+  return sorted;
+}
+
+function renderLeagueTable() {
+  const standings = calcLeagueStandings();
+  const tbody = document.getElementById('leagueBody');
+  tbody.innerHTML = '';
+
+  standings.forEach((s, idx) => {
+    const team = teamMap[s.id];
+    const pos = idx + 1;
+    let rowClass = '';
+    if (pos <= 8) rowClass = 'row-qualify-direct';
+    else if (pos <= 24) rowClass = 'row-qualify-playoff';
+    else rowClass = 'row-eliminated';
+
+    const tr = document.createElement('tr');
+    tr.className = rowClass;
+    tr.innerHTML = `
+      <td>${pos}</td>
+      <td><div class="team-cell">
+        <img class="team-flag" src="${flagUrl(team.flag)}" alt="${team.flag}" loading="lazy" onerror="this.style.display='none'">
+        <span class="team-name">${team.name}</span>
+      </div></td>
+      <td>${s.p}</td>
+      <td>${s.w}</td>
+      <td>${s.d}</td>
+      <td>${s.l}</td>
+      <td>${s.gf}</td>
+      <td>${s.ga}</td>
+      <td>${s.gd >= 0 ? '+' : ''}${s.gd}</td>
+      <td><strong>${s.pts}</strong></td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+/* ==============================================================
+   FIXTURES RENDERING
+   ============================================================== */
+function renderFixtures() {
+  const container = document.getElementById('fixturesContainer');
+  container.innerHTML = '';
+
+  leagueFixtures.forEach((matchday, mdIdx) => {
+    const card = document.createElement('div');
+    card.className = 'matchday-card';
+
+    let html = `<div class="matchday-header">
+      <span>Matchday ${mdIdx + 1}</span>
+      <span class="matchday-date">${MATCHDAY_DATES[mdIdx]}</span>
+    </div>`;
+
+    matchday.forEach(([homeId, awayId]) => {
+      const home = teamMap[homeId];
+      const away = teamMap[awayId];
+      const key = `${mdIdx}-${homeId}-${awayId}`;
+      const score = state.leagueScores[key] || { home: '', away: '' };
+
+      html += `<div class="fixture-row">
+        <div class="fixture-home">
+          <span>${home.name}</span>
+          <img class="team-flag" src="${flagUrl(home.flag)}" alt="" loading="lazy" onerror="this.style.display='none'">
+        </div>
+        <div class="fixture-score">
+          <input type="number" class="score-input" min="0" max="99" value="${score.home}"
+            data-key="${key}" data-side="home" aria-label="${home.name} score">
+          <span class="score-separator">&ndash;</span>
+          <input type="number" class="score-input" min="0" max="99" value="${score.away}"
+            data-key="${key}" data-side="away" aria-label="${away.name} score">
+        </div>
+        <div class="fixture-away">
+          <img class="team-flag" src="${flagUrl(away.flag)}" alt="" loading="lazy" onerror="this.style.display='none'">
+          <span>${away.name}</span>
+        </div>
+      </div>`;
+    });
+
+    card.innerHTML = html;
+    container.appendChild(card);
+  });
+
+  // Attach event listeners
+  container.querySelectorAll('.score-input').forEach(input => {
+    input.addEventListener('input', (e) => {
+      const key = e.target.dataset.key;
+      const side = e.target.dataset.side;
+      if (!state.leagueScores[key]) state.leagueScores[key] = { home: '', away: '' };
+      state.leagueScores[key][side] = e.target.value;
+      saveState();
+      renderLeagueTable();
+    });
+  });
+}
+
+/* ==============================================================
+   KNOCKOUT BRACKET RENDERING
+   ============================================================== */
+const KNOCKOUT_ROUNDS = [
+  { id: 'playoffs', name: 'Knockout Playoffs', matches: 8, legs: 2 },
+  { id: 'r16',      name: 'Round of 16',       matches: 8, legs: 2 },
+  { id: 'qf',       name: 'Quarter-finals',    matches: 4, legs: 2 },
+  { id: 'sf',       name: 'Semi-finals',       matches: 2, legs: 2 },
+  { id: 'final',    name: 'Final',             matches: 1, legs: 1 }
+];
+
+function renderKnockout() {
+  const bracket = document.getElementById('knockoutBracket');
+  bracket.innerHTML = '';
+
+  KNOCKOUT_ROUNDS.forEach(round => {
+    const col = document.createElement('div');
+    col.className = 'bracket-round';
+
+    let html = `<div class="bracket-round-title">${round.name}</div>`;
+
+    for (let m = 0; m < round.matches; m++) {
+      const dates = KNOCKOUT_DATES[round.id];
+      let dateLabel = '';
+      if (round.id === 'final') {
+        dateLabel = dates.date;
+      } else {
+        dateLabel = `${dates.leg1} / ${dates.leg2}`;
+      }
+
+      html += `<div class="bracket-match">
+        <div class="bracket-match-header">${round.id === 'final' ? 'Final &mdash; Allianz Arena, Munich' : `Match ${m + 1} &mdash; ${dateLabel}`}</div>`;
+
+      for (let team = 0; team < 2; team++) {
+        const teamLabel = team === 0 ? 'Home' : 'Away';
+        html += `<div class="bracket-team-row">
+          <span class="bracket-team-name tbd" id="ko-name-${round.id}-${m}-${team}">TBD</span>
+          <div class="bracket-score-inputs">`;
+
+        if (round.legs === 2) {
+          for (let leg = 1; leg <= 2; leg++) {
+            const key = `${round.id}-${m}-${leg}-${team}`;
+            const val = state.knockoutScores[key] !== undefined ? state.knockoutScores[key] : '';
+            html += `<span class="bracket-leg-label">L${leg}</span>
+              <input type="number" class="bracket-score-input" min="0" max="99" value="${val}"
+                data-kokey="${key}" aria-label="${round.name} match ${m+1} ${teamLabel} leg ${leg} score">`;
+          }
+        } else {
+          const key = `${round.id}-${m}-1-${team}`;
+          const val = state.knockoutScores[key] !== undefined ? state.knockoutScores[key] : '';
+          html += `<input type="number" class="bracket-score-input" min="0" max="99" value="${val}"
+            data-kokey="${key}" aria-label="${round.name} match ${m+1} ${teamLabel} score">`;
+        }
+
+        html += `</div></div>`;
+      }
+
+      html += `</div>`;
+    }
+
+    if (round.id === 'final') {
+      html += `<div class="final-venue">Allianz Arena, Munich &mdash; 31 May 2026</div>`;
+    }
+
+    col.innerHTML = html;
+    bracket.appendChild(col);
+  });
+
+  // Attach knockout score listeners
+  bracket.querySelectorAll('.bracket-score-input').forEach(input => {
+    input.addEventListener('input', (e) => {
+      const key = e.target.dataset.kokey;
+      state.knockoutScores[key] = e.target.value;
+      saveState();
+    });
+  });
+}
+
+/* ==============================================================
+   RENDER ALL
+   ============================================================== */
+function renderAll() {
+  renderLeagueTable();
+  renderFixtures();
+  renderKnockout();
+}
+
+/* ==============================================================
+   INIT
+   ============================================================== */
+document.addEventListener('DOMContentLoaded', () => {
+  loadState();
+  applyTheme(state.theme);
+  initTabs();
+  renderAll();
+
+  // Theme dots
+  document.querySelectorAll('.theme-dot').forEach(dot => {
+    dot.addEventListener('click', () => applyTheme(dot.dataset.theme));
+  });
+
+  // Export / Import / Reset
+  document.getElementById('btnExport').addEventListener('click', exportData);
+  document.getElementById('btnImport').addEventListener('click', () => document.getElementById('importInput').click());
+  document.getElementById('importInput').addEventListener('change', (e) => {
+    if (e.target.files[0]) importData(e.target.files[0]);
+    e.target.value = '';
+  });
+  document.getElementById('btnReset').addEventListener('click', resetAll);
+});
+</script>
+</body>
+</html>

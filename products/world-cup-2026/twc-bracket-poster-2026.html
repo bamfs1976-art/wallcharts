@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 World Cup Knockout Bracket — The Wall Chart Co</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0B1E3D;--red:#C8502A;--gold:#C8A94A;
+  --cream:#F7F5EE;--white:#FFFFFF;
+  --text:#12121F;--text2:#4a4a68;--border:#CCCBC4;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{font-family:'Inter',sans-serif;background:#1a1a2a}
+body{background:#1a1a2a;padding:24px;display:flex;flex-direction:column;align-items:center;gap:16px}
+
+/* POSTER CONTAINER — A3 landscape proportions */
+.poster{
+  width:100%;max-width:1120px;
+  background:var(--cream);
+  font-family:'Inter',sans-serif;
+  position:relative;overflow:hidden;
+}
+.stripe{height:6px;background:linear-gradient(90deg,var(--red) 33%,var(--white) 33%,var(--white) 66%,var(--navy) 66%)}
+
+/* HEADER */
+.p-header{
+  background:var(--navy);padding:14px 24px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:2px solid var(--gold);
+}
+.h-brand{display:flex;align-items:center;gap:12px}
+.h-mono{
+  width:40px;height:40px;border-radius:5px;
+  background:var(--gold);
+  font-family:'EB Garamond',serif;font-size:13px;font-weight:700;
+  color:var(--navy);display:flex;align-items:center;justify-content:center;
+  letter-spacing:0.04em;
+}
+.h-name{font-family:'EB Garamond',serif;font-size:20px;font-weight:700;color:#fff;letter-spacing:0.04em}
+.h-sub{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-top:2px}
+.h-title{text-align:center}
+.h-main{font-family:'EB Garamond',serif;font-size:26px;font-weight:700;color:var(--gold);letter-spacing:0.04em;line-height:1}
+.h-event{font-size:10px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.7);margin-top:4px}
+.h-dates{text-align:right;color:rgba(255,255,255,0.5);font-size:11px;line-height:1.6}
+.h-dates strong{color:var(--gold)}
+
+/* BRACKET BODY */
+.bracket-body{padding:12px 20px 10px}
+
+/* TOP LABEL ROW */
+.round-labels{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr 80px 1fr 1fr 1fr;
+  gap:0;margin-bottom:8px;text-align:center;
+}
+.rl{
+  font-size:9px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--navy);padding:4px 0;
+  border-bottom:1.5px solid var(--gold);
+}
+.rl-final{color:var(--red);border-bottom-color:var(--red)}
+
+/* MATCH SLOT */
+.m{
+  border:0.75px solid var(--border);border-radius:3px;
+  background:var(--white);
+  display:flex;flex-direction:column;
+  overflow:hidden;
+  position:relative;
+}
+.m-team{
+  display:flex;align-items:center;gap:6px;
+  padding:4px 8px;
+  border-bottom:0.5px solid var(--border);
+  min-height:25px;
+}
+.m-team:last-child{border-bottom:none}
+.m-flag{width:16px;height:11px;object-fit:cover;border-radius:1px;flex-shrink:0}
+.m-name{font-size:11px;color:var(--text);flex:1;font-weight:500;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.m-score{
+  width:22px;height:22px;border:0.5px solid var(--border);border-radius:2px;
+  background:var(--cream);flex-shrink:0;
+}
+.m-num{
+  position:absolute;top:2px;right:4px;
+  font-size:7px;color:rgba(74,74,104,0.5);letter-spacing:0.05em;
+}
+.m-date{
+  background:var(--navy);padding:2px 6px;
+  font-size:7px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--gold);text-align:center;
+}
+
+/* CHAMPION */
+.champion-box{
+  background:var(--navy);border:2px solid var(--gold);border-radius:6px;
+  padding:12px 10px;text-align:center;margin:4px 2px;
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+}
+.champ-label{font-size:8px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold)}
+.champ-trophy{font-size:28px;line-height:1}
+.champ-line{
+  width:100%;height:28px;border:1px solid #aaa;border-radius:3px;
+  background:#fff;
+}
+.champ-sub{font-size:7px;color:rgba(255,255,255,0.4);letter-spacing:0.1em;text-transform:uppercase;margin-top:2px}
+
+/* CONNECTOR LINES via borders */
+.conn{position:relative}
+.conn::after{
+  content:'';position:absolute;
+  border-color:var(--border);border-style:solid;
+}
+
+/* GRID WRAPPER */
+.bracket-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr 80px 1fr 1fr 1fr;
+  gap:4px;
+  align-items:center;
+}
+.col{display:flex;flex-direction:column;gap:4px}
+
+/* PLAYOFF BADGE */
+.playoff-note{
+  font-size:7px;color:var(--text2);font-style:italic;text-align:center;
+  padding:2px 0;
+}
+
+/* FOOTER */
+.p-footer{
+  background:var(--navy);padding:8px 24px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-top:2px solid var(--gold);
+}
+.pf-copy{font-size:8px;color:rgba(255,255,255,0.45)}
+.pf-instructions{font-size:8px;color:var(--gold);font-weight:600;letter-spacing:0.08em;text-transform:uppercase}
+.pf-disclaimer{font-size:7px;color:rgba(255,255,255,0.3)}
+
+/* HOW TO USE */
+.how-to{
+  max-width:1120px;width:100%;
+  background:#131926;border:1px solid rgba(200,169,74,0.15);border-radius:8px;
+  padding:16px 20px;
+  font-size:12px;color:rgba(255,255,255,0.55);
+  line-height:1.7;
+}
+.how-to h2{font-size:12px;font-weight:600;color:#C8A94A;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px}
+
+@media print{
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+  @page{size:297mm 210mm;margin:0}
+  html,body{
+    width:297mm!important;max-width:297mm!important;
+    height:210mm!important;max-height:210mm!important;
+    margin:0!important;padding:0!important;
+    overflow:hidden!important;background:#fff
+  }
+  body>*:not(.bkt-scaler){display:none!important}
+  .how-to,.no-print{display:none!important}
+  .bkt-scaler{
+    display:block!important;
+    margin:0!important;padding:0!important;
+    transform:none!important
+  }
+  .poster{
+    width:1120px!important;max-width:1120px!important;
+    box-shadow:none!important
+  }
+}
+</style>
+</head>
+<body>
+
+<div style="background:#0d1117;padding:7px 16px;display:flex;align-items:center;gap:10px;border-bottom:2px solid #C8A94A;font-family:Inter,sans-serif;" class="no-print">
+  <div style="display:flex;align-items:center;gap:7px">
+    <div style="width:26px;height:26px;border-radius:3px;background:#C8A94A;color:#0B1E3D;font-family:'EB Garamond',serif;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center">TWC</div>
+    <span style="font-family:'EB Garamond',serif;font-size:13px;font-weight:700;color:#fff;letter-spacing:.06em;text-transform:uppercase">The Wall Chart Co</span>
+  </div>
+  <span style="width:1px;height:18px;background:rgba(255,255,255,.15)"></span>
+  <p style="font-size:10px;color:rgba(255,255,255,.4);flex:1">A4 · landscape · margins: none · background graphics: on</p>
+  <button onclick="window.print()" style="padding:5px 12px;background:#C8A94A;color:#0B1E3D;border:none;border-radius:3px;font-size:11px;font-weight:700;cursor:pointer;letter-spacing:.08em;text-transform:uppercase">Print / Save PDF</button>
+</div>
+<div class="bkt-scaler" id="bkt-scaler" style="margin:0;padding:0">
+<div class="poster" role="main" aria-label="2026 World Cup Knockout Bracket Poster">
+
+  <div class="stripe" aria-hidden="true"></div>
+
+  <div class="p-header">
+    <div class="h-brand">
+      <div class="h-mono" aria-hidden="true">TWC</div>
+      <div>
+        <div class="h-name">The Wall Chart Co</div>
+        <div class="h-sub">Premium Tournament Downloads</div>
+      </div>
+    </div>
+    <div class="h-title">
+      <div class="h-main">Knockout Bracket</div>
+      <div class="h-event">FIFA World Cup 2026 · USA · Canada · Mexico</div>
+    </div>
+    <div class="h-dates">
+      <strong>Round of 32</strong> 28 Jun – 4 Jul<br>
+      <strong>Quarter-finals</strong> 9–12 Jul<br>
+      <strong>3rd Place</strong> 18 Jul · Miami &nbsp; <strong>Final</strong> 19 Jul · MetLife, NY/NJ
+    </div>
+  </div>
+
+  <div class="bracket-body">
+
+    <!-- ROUND LABELS -->
+    <div class="round-labels" aria-hidden="true">
+      <div class="rl">Round of 32</div>
+      <div class="rl">Round of 16</div>
+      <div class="rl">Quarter-finals</div>
+      <div class="rl rl-final">&#127942; Final</div>
+      <div class="rl">Quarter-finals</div>
+      <div class="rl">Round of 16</div>
+      <div class="rl">Round of 32</div>
+    </div>
+
+    <!-- BRACKET GRID -->
+    <div class="bracket-grid">
+
+      <!-- COL 1: R32 Left (8 matches) -->
+      <div class="col" id="col-r32-left">
+        <!-- 8 R32 matches, top half -->
+        <div class="m" role="group" aria-label="Round of 32 match 1">
+          <div class="m-date">28 Jun</div>
+          <div class="m-team"><span class="m-name">1A</span><div class="m-score"></div></div>
+          <div class="m-team"><span class="m-name">2B</span><div class="m-score"></div></div>
+          <span class="m-num" aria-hidden="true">M1</span>
+        </div>
+        <div class="m" role="group" aria-label="Round of 32 match 2">
+          <div class="m-date">28 Jun</div>
+          <div class="m-team"><span class="m-name">1C</span><div class="m-score"></div></div>
+          <div class="m-team"><span class="m-name">2D</span><div class="m-score"></div></div>
+          <span class="m-num" aria-hidden="true">M2</span>
+        </div>
+        <div class="m" role="group" aria-label="Round of 32 match 3">
+          <div class="m-date">29 Jun</div>
+          <div class="m-team"><span class="m-name">1E</span><div class="m-score"></div></div>
+          <div class="m-team"><span class="m-name">2F</span><div class="m-score"></div></div>
+          <span class="m-num" aria-hidden="true">M3</span>
+        </div>
+        <div class="m" role="group" aria-label="Round of 32 match 4">
+          <div class="m-date">29 Jun</div>
+          <div class="m-team"><span class="m-name">1G</span><div class="m-score"></div></div>
+          <div class="m-team"><span class="m-name">2H</span><div class="m-score"></div></div>
+          <span class="m-num" aria-hidden="true">M4</span>
+        </div>
+        <div class="m" role="group" aria-label="Round of 32 match 5">
+          <div class="m-date">30 Jun</div>
+          <div class="m-team"><span class="m-name">1I</span><div class="m-score"></div></div>
+          <div class="m-team"><span class="m-name">2J</span><div class="m-score"></div></div>
+          <span class="m-num" aria-hidden="true">M5</span>
+        </div>
+        <div class="m" role="group" aria-label="Round of 32 match 6">
+          <div class="m-date">30 Jun</div>
+          <div class="m-team"><span class="m-name">1K</span><div class="m-score"></div></div>
+          <div class="m-team"><span class="m-name">2L</span><div class="m-score"></div></div>
+          <span class="m-num" aria-hidden="true">M6</span>
+        </div>
+        <div class="m" role="group" aria-label="Round of 32 match 7">
+          <div class="m-date">1 Jul</div>
+          <div class="m-team"><span class="m-name">3rd Best</span><div class="m-score"></div></div>
+          <div class="m-team"><span class="m-name">3rd Best</span><div class="m-score"></div></div>
+          <span class="m-num" aria-hidden="true">M7</span>
+        </div>
+        <div class="m" role="group" aria-label="Round of 32 match 8">
+          <div class="m-date">2 Jul</div>
+          <div class="m-team"><span class="m-name">3rd Best</span><div class="m-score"></div></div>
+          <div class="m-team"><span class="m-name">3rd Best</span><div class="m-score"></div></div>
+          <span class="m-num" aria-hidden="true">M8</span>
+        </div>
+      </div>
+
+      <!-- COL 2: R16 Left (4 matches) -->
+      <div class="col" id="col-r16-left" style="padding:32px 0">
+        <div class="m" role="group" aria-label="Round of 16 match 1">
+          <div class="m-date">4 Jul</div>
+          <div class="m-team"><span class="m-name">W M1</span><div class="m-score"></div></div>
+          <div class="m-team"><span class="m-name">W M2</span><div class="m-score"></div></div>
+        </div>
+        <div class="m" role="group" aria-label="Round of 16 match 2">
+          <div class="m-date">4 Jul</div>
+          <div class="m-team"><span class="m-name">W M3</span><div class="m-score"></div></div>
+          <div class="m-team"><span class="m-name">W M4</span><div class="m-score"></div></div>
+        </div>
+        <div class="m" role="group" aria-label="Round of 16 match 3">
+          <div class="m-date">5 Jul</div>
+          <div class="m-team"><span class="m-name">W M5</span><div class="m-score"></div></div>
+          <div class="m-team"><span class="m-name">W M6</span><div class="m-score"></div></div>
+        </div>
+        <div class="m" role="group" aria-label="Round of 16 match 4">
+          <div class="m-date">5 Jul</div>
+          <div class="m-team"><span class="m-name">W M7</span><div class="m-score"></div></div>
+          <div class="m-team"><span class="m-name">W M8</span><div class="m-score"></div></div>
+        </div>
+      </div>
+
+      <!-- COL 3: QF Left (2 matches) -->
+      <div class="col" id="col-qf-left" style="padding:88px 0">
+        <div class="m" role="group" aria-label="Quarter-final 1">
+          <div class="m-date">9 Jul</div>
+          <div class="m-team"><span class="m-name">W R16-1</span><div class="m-score"></div></div>
+          <div class="m-team"><span class="m-name">W R16-2</span><div class="m-score"></div></div>
+        </div>
+        <div class="m" role="group" aria-label="Quarter-final 2">
+          <div class="m-date">10 Jul</div>
+          <div class="m-team"><span class="m-name">W R16-3</span><div class="m-score"></div></div>
+          <div class="m-team"><span class="m-name">W R16-4</span><div class="m-score"></div></div>
+        </div>
+      </div>
+
+      <!-- COL CENTRE: SF + Final + Champion -->
+      <div class="col" style="gap:6px;padding:0">
+        <!-- SF Left -->
+        <div class="m" role="group" aria-label="Semi-final 1">
+          <div class="m-date">14 Jul</div>
+          <div class="m-team"><span class="m-name">W QF-1</span><div class="m-score"></div></div>
+          <div class="m-team"><span class="m-name">W QF-2</span><div class="m-score"></div></div>
+        </div>
+
+        <!-- 3RD PLACE -->
+        <div class="m" role="group" aria-label="Third place match" style="border-color:var(--red);opacity:0.8;">
+          <div class="m-date" style="background:var(--red);">18 Jul</div>
+          <div class="m-team"><span class="m-name">SF Loser 1</span><div class="m-score"></div></div>
+          <div class="m-team"><span class="m-name">SF Loser 2</span><div class="m-score"></div></div>
+          <div style="text-align:center;font-size:7px;color:var(--text2);padding:2px 6px;">Hard Rock Stadium, Miami</div>
+        </div>
+        <!-- CHAMPION -->
+        <div class="champion-box" role="group" aria-label="World Cup champion">
+          <div class="champ-label">World Cup Champion</div>
+          <div class="champ-trophy" aria-hidden="true">🏆</div>
+          <div class="champ-line" role="presentation" aria-label="Champion name field"></div>
+          <div class="champ-sub">19 Jul · MetLife Stadium · New Jersey</div>
+        </div>
+
+        <!-- SF Right -->
+        <div class="m" role="group" aria-label="Semi-final 2">
+          <div class="m-date">15 Jul</div>
+          <div class="m-team"><span class="m-name">W QF-3</span><div class="m-score"></div></div>
+          <div class="m-team"><span class="m-name">W QF-4</span><div class="m-score"></div></div>
+        </div>
+      </div>
+
+      <!-- COL 5: QF Right (2 matches) -->
+      <div class="col" id="col-qf-right" style="padding:88px 0">
+        <div class="m" role="group" aria-label="Quarter-final 3">
+          <div class="m-date">10 Jul</div>
+          <div class="m-team"><span class="m-name">W R16-5</span><div class="m-score"></div></div>
+          <div class="m-team"><span class="m-name">W R16-6</span><div class="m-score"></div></div>
+        </div>
+        <div class="m" role="group" aria-label="Quarter-final 4">
+          <div class="m-date">11 Jul</div>
+          <div class="m-team"><span class="m-name">W R16-7</span><div class="m-score"></div></div>
+          <div class="m-team"><span class="m-name">W R16-8</span><div class="m-score"></div></div>
+        </div>
+      </div>
+
+      <!-- COL 6: R16 Right (4 matches) -->
+      <div class="col" id="col-r16-right" style="padding:32px 0">
+        <div class="m" role="group" aria-label="Round of 16 match 5">
+          <div class="m-date">6 Jul</div>
+          <div class="m-team"><span class="m-name">W M9</span><div class="m-score"></div></div>
+          <div class="m-team"><span class="m-name">W M10</span><div class="m-score"></div></div>
+        </div>
+        <div class="m" role="group" aria-label="Round of 16 match 6">
+          <div class="m-date">6 Jul</div>
+          <div class="m-team"><span class="m-name">W M11</span><div class="m-score"></div></div>
+          <div class="m-team"><span class="m-name">W M12</span><div class="m-score"></div></div>
+        </div>
+        <div class="m" role="group" aria-label="Round of 16 match 7">
+          <div class="m-date">7 Jul</div>
+          <div class="m-team"><span class="m-name">W M13</span><div class="m-score"></div></div>
+          <div class="m-team"><span class="m-name">W M14</span><div class="m-score"></div></div>
+        </div>
+        <div class="m" role="group" aria-label="Round of 16 match 8">
+          <div class="m-date">7 Jul</div>
+          <div class="m-team"><span class="m-name">W M15</span><div class="m-score"></div></div>
+          <div class="m-team"><span class="m-name">W M16</span><div class="m-score"></div></div>
+        </div>
+      </div>
+
+      <!-- COL 7: R32 Right (8 matches) -->
+      <div class="col" id="col-r32-right">
+        <div class="m" role="group" aria-label="Round of 32 match 9">
+          <div class="m-date">2 Jul</div>
+          <div class="m-team"><span class="m-name">3rd Best</span><div class="m-score"></div></div>
+          <div class="m-team"><span class="m-name">3rd Best</span><div class="m-score"></div></div>
+          <span class="m-num" aria-hidden="true">M9</span>
+        </div>
+        <div class="m" role="group" aria-label="Round of 32 match 10">
+          <div class="m-date">3 Jul</div>
+          <div class="m-team"><span class="m-name">3rd Best</span><div class="m-score"></div></div>
+          <div class="m-team"><span class="m-name">3rd Best</span><div class="m-score"></div></div>
+          <span class="m-num" aria-hidden="true">M10</span>
+        </div>
+        <div class="m" role="group" aria-label="Round of 32 match 11">
+          <div class="m-date">3 Jul</div>
+          <div class="m-team"><span class="m-name">1B</span><div class="m-score"></div></div>
+          <div class="m-team"><span class="m-name">2A</span><div class="m-score"></div></div>
+          <span class="m-num" aria-hidden="true">M11</span>
+        </div>
+        <div class="m" role="group" aria-label="Round of 32 match 12">
+          <div class="m-date">3 Jul</div>
+          <div class="m-team"><span class="m-name">1D</span><div class="m-score"></div></div>
+          <div class="m-team"><span class="m-name">2C</span><div class="m-score"></div></div>
+          <span class="m-num" aria-hidden="true">M12</span>
+        </div>
+        <div class="m" role="group" aria-label="Round of 32 match 13">
+          <div class="m-date">3 Jul</div>
+          <div class="m-team"><span class="m-name">1F</span><div class="m-score"></div></div>
+          <div class="m-team"><span class="m-name">2E</span><div class="m-score"></div></div>
+          <span class="m-num" aria-hidden="true">M13</span>
+        </div>
+        <div class="m" role="group" aria-label="Round of 32 match 14">
+          <div class="m-date">3 Jul</div>
+          <div class="m-team"><span class="m-name">1H</span><div class="m-score"></div></div>
+          <div class="m-team"><span class="m-name">2G</span><div class="m-score"></div></div>
+          <span class="m-num" aria-hidden="true">M14</span>
+        </div>
+        <div class="m" role="group" aria-label="Round of 32 match 15">
+          <div class="m-date">3 Jul</div>
+          <div class="m-team"><span class="m-name">1J</span><div class="m-score"></div></div>
+          <div class="m-team"><span class="m-name">2I</span><div class="m-score"></div></div>
+          <span class="m-num" aria-hidden="true">M15</span>
+        </div>
+        <div class="m" role="group" aria-label="Round of 32 match 16">
+          <div class="m-date">3 Jul</div>
+          <div class="m-team"><span class="m-name">1L</span><div class="m-score"></div></div>
+          <div class="m-team"><span class="m-name">2K</span><div class="m-score"></div></div>
+          <span class="m-num" aria-hidden="true">M16</span>
+        </div>
+      </div>
+
+    </div><!-- end bracket-grid -->
+
+    <!-- GROUP REFERENCE BAR -->
+    <div style="margin-top:12px;border-top:1px solid var(--border);padding-top:10px;">
+      <div style="font-size:8px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--navy);margin-bottom:6px;">Group reference</div>
+      <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:4px;">
+        <div style="background:var(--navy);border-radius:3px;padding:5px 4px;text-align:center;">
+          <div style="font-family:'EB Garamond',serif;font-size:13px;font-weight:700;color:var(--gold);">A</div>
+          <div style="font-size:7px;color:rgba(255,255,255,0.6);line-height:1.5;">Mexico<br>S. Korea<br>S. Africa<br>PO-D</div>
+        </div>
+        <div style="background:var(--navy);border-radius:3px;padding:5px 4px;text-align:center;">
+          <div style="font-family:'EB Garamond',serif;font-size:13px;font-weight:700;color:var(--gold);">B</div>
+          <div style="font-size:7px;color:rgba(255,255,255,0.6);line-height:1.5;">Canada<br>Switzerland<br>Qatar<br>PO-A</div>
+        </div>
+        <div style="background:var(--navy);border-radius:3px;padding:5px 4px;text-align:center;">
+          <div style="font-family:'EB Garamond',serif;font-size:13px;font-weight:700;color:var(--gold);">C</div>
+          <div style="font-size:7px;color:rgba(255,255,255,0.6);line-height:1.5;">Brazil<br>Scotland<br>Morocco<br>Haiti</div>
+        </div>
+        <div style="background:var(--navy);border-radius:3px;padding:5px 4px;text-align:center;">
+          <div style="font-family:'EB Garamond',serif;font-size:13px;font-weight:700;color:var(--gold);">D</div>
+          <div style="font-size:7px;color:rgba(255,255,255,0.6);line-height:1.5;">USA<br>Australia<br>Paraguay<br>PO-C</div>
+        </div>
+        <div style="background:var(--navy);border-radius:3px;padding:5px 4px;text-align:center;">
+          <div style="font-family:'EB Garamond',serif;font-size:13px;font-weight:700;color:var(--gold);">E</div>
+          <div style="font-size:7px;color:rgba(255,255,255,0.6);line-height:1.5;">Germany<br>Iv. Coast<br>Ecuador<br>Curacao</div>
+        </div>
+        <div style="background:var(--navy);border-radius:3px;padding:5px 4px;text-align:center;">
+          <div style="font-family:'EB Garamond',serif;font-size:13px;font-weight:700;color:var(--gold);">F</div>
+          <div style="font-size:7px;color:rgba(255,255,255,0.6);line-height:1.5;">Netherlands<br>Japan<br>Tunisia<br>PO-B</div>
+        </div>
+        <div style="background:var(--navy);border-radius:3px;padding:5px 4px;text-align:center;">
+          <div style="font-family:'EB Garamond',serif;font-size:13px;font-weight:700;color:var(--gold);">G</div>
+          <div style="font-size:7px;color:rgba(255,255,255,0.6);line-height:1.5;">Belgium<br>Iran<br>Egypt<br>New Zealand</div>
+        </div>
+        <div style="background:var(--navy);border-radius:3px;padding:5px 4px;text-align:center;">
+          <div style="font-family:'EB Garamond',serif;font-size:13px;font-weight:700;color:var(--gold);">H</div>
+          <div style="font-size:7px;color:rgba(255,255,255,0.6);line-height:1.5;">Spain<br>Uruguay<br>Saudi Arabia<br>Cabo Verde</div>
+        </div>
+        <div style="background:var(--navy);border-radius:3px;padding:5px 4px;text-align:center;">
+          <div style="font-family:'EB Garamond',serif;font-size:13px;font-weight:700;color:var(--gold);">I</div>
+          <div style="font-size:7px;color:rgba(255,255,255,0.6);line-height:1.5;">France<br>Senegal<br>Norway<br>PO-2</div>
+        </div>
+        <div style="background:var(--navy);border-radius:3px;padding:5px 4px;text-align:center;">
+          <div style="font-family:'EB Garamond',serif;font-size:13px;font-weight:700;color:var(--gold);">J</div>
+          <div style="font-size:7px;color:rgba(255,255,255,0.6);line-height:1.5;">Argentina<br>Austria<br>Algeria<br>Jordan</div>
+        </div>
+        <div style="background:var(--navy);border-radius:3px;padding:5px 4px;text-align:center;">
+          <div style="font-family:'EB Garamond',serif;font-size:13px;font-weight:700;color:var(--gold);">K</div>
+          <div style="font-size:7px;color:rgba(255,255,255,0.6);line-height:1.5;">Portugal<br>Colombia<br>Uzbekistan<br>PO-1</div>
+        </div>
+        <div style="background:var(--red);border-radius:3px;padding:5px 4px;text-align:center;border:1px solid var(--gold);">
+          <div style="font-family:'EB Garamond',serif;font-size:13px;font-weight:700;color:var(--gold);">L</div>
+          <div style="font-size:7px;color:rgba(255,255,255,0.85);line-height:1.5;font-weight:600;">England<br>Croatia<br>Ghana<br>Panama</div>
+        </div>
+      </div>
+      <div style="margin-top:6px;font-size:7px;color:var(--text2);">PO = UEFA playoff winner · 1A = Group A winner · 2A = Group A runner-up · 3rd = best third-placed teams</div>
+    </div>
+
+  </div><!-- end bracket-body -->
+
+  <div class="p-footer">
+    <span class="pf-instructions">Print: A4 landscape · Margins: none · Background graphics: on</span>
+    <span class="pf-copy">2026 World Cup Knockout Bracket · The Wall Chart Co</span>
+    <span class="pf-disclaimer">Unofficial. Not affiliated with FIFA or any national football association.</span>
+  </div>
+
+</div><!-- end poster -->
+
+<div class="how-to no-print">
+  <h2>How to use this bracket</h2>
+  Print this poster at A4 landscape. Set printer margins to none and enable background graphics.
+  Fill in team names as they qualify from the group stage. The score boxes are sized for pen or pencil.
+  Group L — highlighted in red — contains England, Croatia, Ghana and Panama.
+  Matches run 28 June to 19 July 2026. The Final is at MetLife Stadium, East Rutherford, New Jersey.
+</div>
+
+<script>
+function scaleBracket() {
+  const scaler = document.getElementById('bkt-scaler');
+  if (!scaler) return;
+  const avail = document.body.clientWidth - 32;
+  const scale = Math.min(1, avail / 1120);
+  scaler.style.transform = 'scale(' + scale + ')';
+  scaler.style.transformOrigin = 'top center';
+  scaler.style.marginBottom = '0';
+}
+window.addEventListener('resize', scaleBracket);
+setTimeout(scaleBracket, 300);
+window.onbeforeprint = function() {
+  const scaler = document.getElementById('bkt-scaler');
+  if (scaler) {
+    scaler.style.transform = 'none';
+    scaler.style.marginBottom = '0';
+    scaler.style.margin = '0';
+    scaler.style.padding = '0';
+  }
+};
+</script>
+</body>
+</html
+</div>>

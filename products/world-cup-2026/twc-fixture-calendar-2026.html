@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2026 World Cup Wall Chart A4 — The Wall Chart Co</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ── TOKENS ── */
+:root{
+  --navy:#0B1E3D;--red:#C8502A;--gold:#C8A94A;
+  --cream:#F5F3EB;--white:#fff;
+  --text:#0d1520;--text2:#4a5568;--border:#c0bdb5;
+  --dark:#06101e;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#1a1a2e;font-family:'Inter',sans-serif}
+img.fi{display:inline-block;border-radius:1px;vertical-align:middle;object-fit:cover}
+.po{display:inline-flex;align-items:center;justify-content:center;width:11px;height:8px;background:#334;border-radius:1px;font-size:4.5px;font-weight:700;color:#9ab;vertical-align:middle}
+.hs{color:var(--gold);font-size:5px;margin-left:1px}
+
+/* ── TOOLBAR ── */
+.toolbar{background:#0d1117;padding:7px 16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;border-bottom:2px solid var(--gold);position:sticky;top:0;z-index:100}
+.tb-mono{width:26px;height:26px;border-radius:3px;background:var(--gold);color:var(--navy);font-family:'EB Garamond',serif;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.tb-name{font-family:'EB Garamond',serif;font-size:13px;font-weight:700;color:#fff;letter-spacing:.06em;text-transform:uppercase}
+.tb-sep{width:1px;height:18px;background:rgba(255,255,255,.15)}
+.tb-hint{font-size:10px;color:rgba(255,255,255,.4);flex:1}
+.print-btn{padding:5px 12px;background:var(--gold);color:var(--navy);border:none;border-radius:3px;font-size:11px;font-weight:700;cursor:pointer;letter-spacing:.08em;text-transform:uppercase}
+.print-btn:focus{outline:2px solid #fff;outline-offset:2px}
+
+/* ── HOW-TO ── */
+.how-to{background:#0d1117;border-bottom:2px solid var(--gold);padding:8px 16px;display:flex;align-items:flex-start;gap:10px;font-size:12px}
+.how-to.gone{display:none}
+.how-to p{flex:1;color:#94a3b8;line-height:1.5}
+.how-to strong{color:#e2e8f0}
+.how-to button{background:none;border:none;color:#64748b;cursor:pointer;font-size:16px;padding:0 4px;line-height:1}
+
+/* ── POSTER WRAP ── */
+.wrap{display:flex;justify-content:center;padding:16px 16px 40px}
+.scaler{transform-origin:top center}
+
+/* ── POSTER — A3 landscape 1190px wide ── */
+.poster{width:1190px;background:var(--navy);overflow:hidden;position:relative}
+
+/* ── ZONE 1: WINNERS STRIP ~26px ── */
+.ws{background:var(--dark);border-bottom:1px solid rgba(200,169,74,.25);padding:2px 10px;display:flex;align-items:center;gap:5px;height:18px;overflow:hidden}
+.wl{font-size:6.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);white-space:nowrap;flex-shrink:0}
+.wf{display:flex;align-items:center;gap:5px;overflow:hidden;flex:1}
+.we{display:inline-flex;align-items:center;gap:2px;flex-shrink:0}
+.wy{font-size:5.5px;color:rgba(255,255,255,.35);white-space:nowrap}
+.wn{font-size:6px;font-weight:600;color:rgba(255,255,255,.6);white-space:nowrap}
+
+/* ── ZONE 2: TITLE ~58px ── */
+.title{background:var(--navy);padding:4px 20px 4px;text-align:center;border-bottom:2px solid var(--gold)}
+.t-main{font-family:'EB Garamond',serif;font-size:22px;font-weight:700;color:var(--gold);letter-spacing:.07em;line-height:1}
+.t-sub{font-size:7.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-top:2px}
+
+/* ── ZONE 3: BRACKET ~497px ── */
+/* bracket-hdr ~17px, bracket-main fills rest */
+.bzone{background:var(--dark);overflow:hidden}
+.bhdr{background:var(--red);padding:2px 12px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center}
+.bhl{font-size:7px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#fff}
+.bhc{font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);text-align:center}
+.bhr{font-size:7px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#fff;text-align:right}
+
+/* 11 columns summing to 1190px exactly */
+.bmain{
+  display:grid;
+  grid-template-columns:147px 106px 100px 90px 65px 160px 65px 90px 100px 106px 161px;
+  height:629px;
+  overflow:hidden;
+}
+.rcol{display:flex;flex-direction:column;border-right:.5px solid rgba(255,255,255,.07)}
+.rcol:last-child{border-right:none}
+.rch{background:rgba(0,0,0,.5);padding:1px 4px;font-size:5.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);text-align:center;border-bottom:.5px solid rgba(200,169,74,.2);flex-shrink:0}
+.rcb{flex:1;display:flex;flex-direction:column;overflow:hidden}
+
+/* Group fixture strips */
+.gfx{border-bottom:.5px solid rgba(255,255,255,.08)}
+.gfx:last-child{border-bottom:none}
+.gfxh{background:rgba(200,169,74,.15);padding:0 5px;font-size:7px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);border-bottom:.5px solid rgba(200,169,74,.2);line-height:11px;height:11px}
+
+/* Fixture rows — the key content */
+.fr{
+  display:grid;
+  grid-template-columns:24px 1fr 12px 12px 1fr;
+  align-items:center;padding:0 3px;height:13px;
+  border-bottom:.5px solid rgba(255,255,255,.06);gap:2px;
+}
+.fr:last-child{border-bottom:none}
+.fr:nth-child(odd){background:rgba(255,255,255,.015)}
+.fdt{display:flex;flex-direction:column;line-height:1;gap:0}
+.fd{font-size:6px;color:rgba(255,255,255,.4);white-space:nowrap}
+.ft{font-size:7px;font-weight:700;color:var(--red);white-space:nowrap}
+/* Home/away team name areas — white writable boxes */
+.fhm,.faw{display:flex;align-items:center;gap:2px;overflow:hidden}
+.fnm{
+  flex:1;min-width:0;
+  font-size:6.5px;font-weight:500;color:var(--text);
+  background:#fff;border-radius:1px;
+  padding:0 2px;line-height:10px;height:10px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  border:.5px solid #bbb;
+}
+.fhm.hst .fnm,.faw.hst .fnm{color:var(--red)}
+/* Score boxes — white writable */
+.fsb{width:10px;height:10px;border:1px solid #888;border-radius:1px;background:#fff;flex-shrink:0}
+
+/* KO match boxes */
+.kom{border:.5px solid rgba(255,255,255,.12);border-radius:2px;margin:2px 3px;overflow:hidden;background:rgba(255,255,255,.02)}
+.koi{background:rgba(0,0,0,.35);padding:1px 4px;font-size:5.5px;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:.06em;border-bottom:.5px solid rgba(255,255,255,.07)}
+.kod{color:var(--gold);margin-left:3px;font-weight:600}
+.kot{display:flex;align-items:center;padding:3px 5px;gap:3px;height:20px;border-bottom:.5px solid rgba(255,255,255,.08)}
+.kot:last-child{border-bottom:none}
+/* KO name line — white writable box */
+.kol{flex:1;height:14px;background:#fff;border-radius:1px;border:.5px solid #bbb}
+/* KO score box — white writable */
+.kos{width:14px;height:14px;border:1px solid #888;border-radius:1px;background:#fff;flex-shrink:0}
+
+/* Centre final column */
+.fcol{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:6px 5px;gap:6px}
+.f-trophy{font-size:38px;line-height:1;text-align:center}
+.f-title{font-family:'EB Garamond',serif;font-size:18px;font-weight:700;color:var(--gold);text-align:center;letter-spacing:.05em;line-height:1.2}
+.f-box{width:100%;border:2px solid var(--gold);border-radius:4px;overflow:hidden}
+.f-bh{background:var(--gold);padding:5px 5px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--navy);text-align:center}
+.f-team{display:flex;align-items:center;padding:5px 8px;gap:5px;height:28px;border-bottom:.5px solid rgba(200,169,74,.3)}
+.f-team:last-child{border-bottom:none}
+/* Final name and score — white */
+.f-line{flex:1;height:18px;background:#fff;border-radius:2px;border:1px solid #bbb}
+.f-sc{width:22px;height:22px;border:1.5px solid #888;border-radius:2px;background:#fff;flex-shrink:0}
+.f-dt{font-size:9px;color:rgba(255,255,255,.5);text-align:center;letter-spacing:.05em;line-height:1.6}
+.t-box{width:100%;border:1px solid rgba(200,80,42,.5);border-radius:3px;overflow:hidden}
+.t-bh{background:rgba(200,80,42,.3);padding:2px 5px;font-size:6px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.7);text-align:center}
+.t-team{display:flex;align-items:center;padding:2px 4px;gap:3px;height:15px;border-bottom:.5px solid rgba(255,255,255,.07)}
+.t-team:last-child{border-bottom:none}
+.t-line{flex:1;height:11px;background:#fff;border-radius:1px;border:.5px solid #bbb}
+.t-sc{width:12px;height:12px;border:1px solid #aaa;border-radius:1px;background:#fff;flex-shrink:0}
+
+/* ── ZONE 4: STANDINGS (bottom) ~150px ── */
+.szone{background:var(--white);border-top:2px solid var(--gold)}
+.shdr{background:var(--navy);padding:1px 10px;font-size:6px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);text-align:center}
+.sgrid{display:grid;grid-template-columns:repeat(12,1fr);gap:0}
+/* Each standings block */
+.stbl{border-right:1px solid var(--border);overflow:hidden;min-width:0}
+.stbl:last-child{border-right:none}
+.s-hdr{background:var(--navy);padding:1px 4px;display:flex;align-items:center;justify-content:space-between}
+.s-gl{font-family:'EB Garamond',serif;font-size:11px;font-weight:700;color:var(--gold);line-height:1}
+.s-cl{font-size:5px;color:rgba(255,255,255,.4);letter-spacing:.05em}
+.st{width:100%;border-collapse:collapse}
+.st tr{border-bottom:.5px solid var(--border)}
+.st tr:last-child{border-bottom:none}
+.st tr:nth-child(even){background:var(--cream)}
+.s-fl{width:11px;padding:0 1px 0 2px}
+.s-nm{font-size:5.5px;color:var(--text);padding:0 2px;white-space:nowrap;overflow:hidden;max-width:34px}
+/* Stat cells — white writable */
+.s-st{width:9px;font-size:5.5px;color:var(--text2);text-align:center;border-left:.5px solid var(--border);background:#fff}
+.s-pt{width:12px;font-size:5.5px;font-weight:700;color:var(--navy);text-align:center;border-left:.5px solid var(--border);background:#fff}
+
+/* ── ZONE 5: CALENDARS + FOOTER ── */
+.calzone{background:var(--navy);display:flex;align-items:stretch;border-top:1px solid rgba(200,169,74,.3);height:75px}
+.mcal{flex:1;padding:4px 8px}
+.mch{font-family:'EB Garamond',serif;font-size:11px;font-weight:700;color:var(--gold);text-align:center;margin-bottom:2px;letter-spacing:.06em;line-height:1}
+.mcg{width:100%;border-collapse:collapse;margin:0 auto}
+.mcg th{font-size:6px;font-weight:700;color:rgba(255,255,255,.45);text-align:center;padding:0 0 1px;width:12px;line-height:1.3}
+.mcg td{font-size:6px;color:rgba(255,255,255,.55);text-align:center;padding:0;width:12px;line-height:1.3}
+.mcg td.cdm{color:var(--gold);font-weight:700}
+.footer{background:var(--dark);padding:4px 14px;display:flex;align-items:center;justify-content:space-between;border-top:1.5px solid rgba(200,169,74,.35)}
+.f-brand{font-family:'EB Garamond',serif;font-size:10px;font-weight:700;color:var(--gold);letter-spacing:.08em;text-transform:uppercase}
+.f-key{font-size:7px;color:rgba(255,255,255,.4);letter-spacing:.05em}
+.f-disc{font-size:6.5px;color:rgba(255,255,255,.25)}
+
+/* ── PRINT ── */
+@media print{
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+  @page{size:297mm 210mm;margin:0}
+  html,body{
+    width:297mm!important;height:210mm!important;
+    max-width:297mm!important;max-height:210mm!important;
+    margin:0!important;padding:0!important;
+    overflow:hidden!important;background:#fff
+  }
+  .how-to,.toolbar{display:none!important}
+  .wrap{
+    width:297mm!important;height:210mm!important;
+    max-width:297mm!important;max-height:210mm!important;
+    padding:0!important;margin:0!important;
+    overflow:hidden!important;display:block!important
+  }
+  .scaler{
+    width:1190px!important;height:841px!important;
+    transform:scale(0.9433)!important;
+    transform-origin:top left!important;
+    margin:0!important;padding:0!important;
+    display:block!important
+  }
+  .poster{
+    width:1190px!important;height:841px!important;
+    overflow:hidden!important
+  }
+}
+@media screen{.scaler{transform-origin:top center}}
+</style>
+</head>
+<body>
+
+<div class="how-to" id="htb">
+  <span style="font-size:16px;flex-shrink:0">📅</span>
+  <p><strong>Printable poster.</strong> Dismiss this bar first, then press <strong>Ctrl+P</strong> (Cmd+P on Mac). Paper: A4, landscape, margins: none, background graphics: on.</p>
+  <button onclick="document.getElementById('htb').classList.add('gone')" aria-label="Dismiss">✕</button>
+</div>
+
+<div class="toolbar">
+  <div class="tb-mono">TWC</div>
+  <div class="tb-name">The Wall Chart Co</div>
+  <div class="tb-sep"></div>
+  <p class="tb-hint">A4 · landscape · margins: none · background graphics: on</p>
+  <button class="print-btn" onclick="window.print()">Print / Save PDF</button>
+</div>
+
+<div class="wrap"><div class="scaler" id="scaler"><article class="poster" id="poster" aria-label="2026 World Cup Wall Chart">
+
+  <!-- ZONE 1: WINNERS -->
+  <div class="ws"><span class="wl">All-time winners</span><div class="wf"><span class="we"><img src="https://flagcdn.com/w13/uy.png" width="13" height="9" alt="" class="fi" loading="lazy"><span class="wy">1930</span><span class="wn">Uruguay</span></span><span class="we"><img src="https://flagcdn.com/w13/it.png" width="13" height="9" alt="" class="fi" loading="lazy"><span class="wy">1934</span><span class="wn">Italy</span></span><span class="we"><img src="https://flagcdn.com/w13/it.png" width="13" height="9" alt="" class="fi" loading="lazy"><span class="wy">1938</span><span class="wn">Italy</span></span><span class="we"><img src="https://flagcdn.com/w13/uy.png" width="13" height="9" alt="" class="fi" loading="lazy"><span class="wy">1950</span><span class="wn">Uruguay</span></span><span class="we"><img src="https://flagcdn.com/w13/de.png" width="13" height="9" alt="" class="fi" loading="lazy"><span class="wy">1954</span><span class="wn">W.Germany</span></span><span class="we"><img src="https://flagcdn.com/w13/br.png" width="13" height="9" alt="" class="fi" loading="lazy"><span class="wy">1958</span><span class="wn">Brazil</span></span><span class="we"><img src="https://flagcdn.com/w13/br.png" width="13" height="9" alt="" class="fi" loading="lazy"><span class="wy">1962</span><span class="wn">Brazil</span></span><span class="we"><img src="https://flagcdn.com/w13/gb-eng.png" width="13" height="9" alt="" class="fi" loading="lazy"><span class="wy">1966</span><span class="wn">England</span></span><span class="we"><img src="https://flagcdn.com/w13/br.png" width="13" height="9" alt="" class="fi" loading="lazy"><span class="wy">1970</span><span class="wn">Brazil</span></span><span class="we"><img src="https://flagcdn.com/w13/de.png" width="13" height="9" alt="" class="fi" loading="lazy"><span class="wy">1974</span><span class="wn">W.Germany</span></span><span class="we"><img src="https://flagcdn.com/w13/ar.png" width="13" height="9" alt="" class="fi" loading="lazy"><span class="wy">1978</span><span class="wn">Argentina</span></span><span class="we"><img src="https://flagcdn.com/w13/it.png" width="13" height="9" alt="" class="fi" loading="lazy"><span class="wy">1982</span><span class="wn">Italy</span></span><span class="we"><img src="https://flagcdn.com/w13/ar.png" width="13" height="9" alt="" class="fi" loading="lazy"><span class="wy">1986</span><span class="wn">Argentina</span></span><span class="we"><img src="https://flagcdn.com/w13/de.png" width="13" height="9" alt="" class="fi" loading="lazy"><span class="wy">1990</span><span class="wn">W.Germany</span></span><span class="we"><img src="https://flagcdn.com/w13/br.png" width="13" height="9" alt="" class="fi" loading="lazy"><span class="wy">1994</span><span class="wn">Brazil</span></span><span class="we"><img src="https://flagcdn.com/w13/fr.png" width="13" height="9" alt="" class="fi" loading="lazy"><span class="wy">1998</span><span class="wn">France</span></span><span class="we"><img src="https://flagcdn.com/w13/br.png" width="13" height="9" alt="" class="fi" loading="lazy"><span class="wy">2002</span><span class="wn">Brazil</span></span><span class="we"><img src="https://flagcdn.com/w13/it.png" width="13" height="9" alt="" class="fi" loading="lazy"><span class="wy">2006</span><span class="wn">Italy</span></span><span class="we"><img src="https://flagcdn.com/w13/es.png" width="13" height="9" alt="" class="fi" loading="lazy"><span class="wy">2010</span><span class="wn">Spain</span></span><span class="we"><img src="https://flagcdn.com/w13/de.png" width="13" height="9" alt="" class="fi" loading="lazy"><span class="wy">2014</span><span class="wn">Germany</span></span><span class="we"><img src="https://flagcdn.com/w13/fr.png" width="13" height="9" alt="" class="fi" loading="lazy"><span class="wy">2018</span><span class="wn">France</span></span><span class="we"><img src="https://flagcdn.com/w13/ar.png" width="13" height="9" alt="" class="fi" loading="lazy"><span class="wy">2022</span><span class="wn">Argentina</span></span></div></div>
+
+  <!-- ZONE 2: TITLE -->
+  <div class="title">
+    <div class="t-main">CANADA &nbsp;·&nbsp; MEXICO &nbsp;·&nbsp; USA &nbsp;&nbsp;&nbsp; 2026</div>
+    <div class="t-sub">Schedule &nbsp;·&nbsp; Bracket &nbsp;·&nbsp; Wall Chart &nbsp;·&nbsp; 104 Matches &nbsp;·&nbsp; 48 Teams &nbsp;·&nbsp; All times UK BST</div>
+  </div>
+
+  <!-- ZONE 3: BRACKET (fixtures left/right + KO centre) -->
+  <div class="bzone">
+    <div class="bhdr">
+      <span class="bhl">Knockout Stage &nbsp;·&nbsp; Round of 32 through to Final</span>
+      <span class="bhc">28 June &ndash; 19 July 2026</span>
+      <span class="bhr">★ = Host nation &nbsp;·&nbsp; Fill in score boxes as you go</span>
+    </div>
+    <div class="bmain">
+
+      <div class="rcol"><div class="rch">Groups A–F · All Fixtures</div><div class="rcb"><div class="gfx"><div class="gfxh">Grp A</div><div class="fr">
+          <div class="fdt"><span class="fd">11 Jun</span><span class="ft">20:00</span></div>
+          <div class="fhm hst"><img src="https://flagcdn.com/w11/mx.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">Mexico</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">S. Africa</span><img src="https://flagcdn.com/w11/za.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">12 Jun</span><span class="ft">03:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/kr.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">S. Korea</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">PO-D</span><span class="po">PO</span></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">18 Jun</span><span class="ft">17:00</span></div>
+          <div class="fhm"><span class="po">PO</span><span class="fnm">PO-D</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">S. Africa</span><img src="https://flagcdn.com/w11/za.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">19 Jun</span><span class="ft">02:00</span></div>
+          <div class="fhm hst"><img src="https://flagcdn.com/w11/mx.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">Mexico</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">S. Korea</span><img src="https://flagcdn.com/w11/kr.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">25 Jun</span><span class="ft">02:00</span></div>
+          <div class="fhm"><span class="po">PO</span><span class="fnm">PO-D</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw hst"><span class="fnm">Mexico</span><img src="https://flagcdn.com/w11/mx.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">25 Jun</span><span class="ft">02:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/za.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">S. Africa</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">S. Korea</span><img src="https://flagcdn.com/w11/kr.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div></div><div class="gfx"><div class="gfxh">Grp B</div><div class="fr">
+          <div class="fdt"><span class="fd">12 Jun</span><span class="ft">20:00</span></div>
+          <div class="fhm hst"><img src="https://flagcdn.com/w11/ca.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">Canada</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">PO-A</span><span class="po">PO</span></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">13 Jun</span><span class="ft">20:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/qa.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">Qatar</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">Switzerland</span><img src="https://flagcdn.com/w11/ch.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">18 Jun</span><span class="ft">20:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/ch.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">Switzerland</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">PO-A</span><span class="po">PO</span></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">18 Jun</span><span class="ft">23:00</span></div>
+          <div class="fhm hst"><img src="https://flagcdn.com/w11/ca.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">Canada</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">Qatar</span><img src="https://flagcdn.com/w11/qa.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">24 Jun</span><span class="ft">20:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/ch.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">Switzerland</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw hst"><span class="fnm">Canada</span><img src="https://flagcdn.com/w11/ca.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">24 Jun</span><span class="ft">20:00</span></div>
+          <div class="fhm"><span class="po">PO</span><span class="fnm">PO-A</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">Qatar</span><img src="https://flagcdn.com/w11/qa.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div></div><div class="gfx"><div class="gfxh">Grp C</div><div class="fr">
+          <div class="fdt"><span class="fd">14 Jun</span><span class="ft">02:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/ht.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">Haiti</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">Scotland</span><img src="https://flagcdn.com/w11/gb-sct.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">13 Jun</span><span class="ft">23:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/br.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">Brazil</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">Morocco</span><img src="https://flagcdn.com/w11/ma.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">20 Jun</span><span class="ft">02:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/br.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">Brazil</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">Haiti</span><img src="https://flagcdn.com/w11/ht.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">19 Jun</span><span class="ft">23:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/gb-sct.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">Scotland</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">Morocco</span><img src="https://flagcdn.com/w11/ma.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">24 Jun</span><span class="ft">23:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/gb-sct.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">Scotland</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">Brazil</span><img src="https://flagcdn.com/w11/br.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">24 Jun</span><span class="ft">23:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/ma.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">Morocco</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">Haiti</span><img src="https://flagcdn.com/w11/ht.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div></div><div class="gfx"><div class="gfxh">Grp D</div><div class="fr">
+          <div class="fdt"><span class="fd">13 Jun</span><span class="ft">02:00</span></div>
+          <div class="fhm hst"><img src="https://flagcdn.com/w11/us.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">USA</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">Paraguay</span><img src="https://flagcdn.com/w11/py.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">14 Jun</span><span class="ft">05:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/au.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">Australia</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">PO-C</span><span class="po">PO</span></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">20 Jun</span><span class="ft">05:00</span></div>
+          <div class="fhm"><span class="po">PO</span><span class="fnm">PO-C</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">Paraguay</span><img src="https://flagcdn.com/w11/py.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">19 Jun</span><span class="ft">20:00</span></div>
+          <div class="fhm hst"><img src="https://flagcdn.com/w11/us.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">USA</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">Australia</span><img src="https://flagcdn.com/w11/au.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">26 Jun</span><span class="ft">03:00</span></div>
+          <div class="fhm"><span class="po">PO</span><span class="fnm">PO-C</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw hst"><span class="fnm">USA</span><img src="https://flagcdn.com/w11/us.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">26 Jun</span><span class="ft">03:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/py.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">Paraguay</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">Australia</span><img src="https://flagcdn.com/w11/au.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div></div><div class="gfx"><div class="gfxh">Grp E</div><div class="fr">
+          <div class="fdt"><span class="fd">15 Jun</span><span class="ft">00:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/ci.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">Iv. Coast</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">Ecuador</span><img src="https://flagcdn.com/w11/ec.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">14 Jun</span><span class="ft">18:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/de.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">Germany</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">Curacao</span><img src="https://flagcdn.com/w11/cw.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">20 Jun</span><span class="ft">21:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/de.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">Germany</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">Iv. Coast</span><img src="https://flagcdn.com/w11/ci.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">21 Jun</span><span class="ft">01:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/ec.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">Ecuador</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">Curacao</span><img src="https://flagcdn.com/w11/cw.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">25 Jun</span><span class="ft">21:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/cw.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">Curacao</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">Iv. Coast</span><img src="https://flagcdn.com/w11/ci.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">25 Jun</span><span class="ft">21:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/ec.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">Ecuador</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">Germany</span><img src="https://flagcdn.com/w11/de.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div></div><div class="gfx"><div class="gfxh">Grp F</div><div class="fr">
+          <div class="fdt"><span class="fd">14 Jun</span><span class="ft">21:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/nl.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">Netherlands</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">Japan</span><img src="https://flagcdn.com/w11/jp.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">15 Jun</span><span class="ft">03:00</span></div>
+          <div class="fhm"><span class="po">PO</span><span class="fnm">PO-B</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">Tunisia</span><img src="https://flagcdn.com/w11/tn.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">20 Jun</span><span class="ft">18:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/nl.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">Netherlands</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">PO-B</span><span class="po">PO</span></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">21 Jun</span><span class="ft">05:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/tn.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">Tunisia</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">Japan</span><img src="https://flagcdn.com/w11/jp.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">26 Jun</span><span class="ft">00:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/jp.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">Japan</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">PO-B</span><span class="po">PO</span></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">26 Jun</span><span class="ft">00:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/tn.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">Tunisia</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">Netherlands</span><img src="https://flagcdn.com/w11/nl.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div></div></div></div>
+      <div class="rcol"><div class="rch">Round of 32</div><div class="rcb"><div class="kom" aria-label="Match 73">
+      <div class="koi">M73<span class="kod">28 Jun</span></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+    </div><div class="kom" aria-label="Match 76">
+      <div class="koi">M76<span class="kod">29 Jun</span></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+    </div><div class="kom" aria-label="Match 74">
+      <div class="koi">M74<span class="kod">29 Jun</span></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+    </div><div class="kom" aria-label="Match 75">
+      <div class="koi">M75<span class="kod">30 Jun</span></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+    </div><div class="kom" aria-label="Match 78">
+      <div class="koi">M78<span class="kod">30 Jun</span></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+    </div><div class="kom" aria-label="Match 79">
+      <div class="koi">M79<span class="kod">1 Jul</span></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+    </div><div class="kom" aria-label="Match 80">
+      <div class="koi">M80<span class="kod">1 Jul</span></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+    </div><div class="kom" aria-label="Match 81">
+      <div class="koi">M81<span class="kod">2 Jul</span></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+    </div></div></div>
+      <div class="rcol"><div class="rch">Round of 16</div><div class="rcb"><div class="kom" aria-label="Match 90">
+      <div class="koi">M90<span class="kod">4 Jul</span></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+    </div><div class="kom" aria-label="Match 89">
+      <div class="koi">M89<span class="kod">4 Jul</span></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+    </div><div class="kom" aria-label="Match 91">
+      <div class="koi">M91<span class="kod">5 Jul</span></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+    </div><div class="kom" aria-label="Match 92">
+      <div class="koi">M92<span class="kod">6 Jul</span></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+    </div></div></div>
+      <div class="rcol"><div class="rch">Quarter-finals</div><div class="rcb"><div class="kom" aria-label="Match 97">
+      <div class="koi">M97<span class="kod">9 Jul</span></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+    </div><div class="kom" aria-label="Match 98">
+      <div class="koi">M98<span class="kod">10 Jul</span></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+    </div></div></div>
+      <div class="rcol"><div class="rch">Semi-finals</div><div class="rcb"><div class="kom" aria-label="Match 101">
+      <div class="koi">M101<span class="kod">14 Jul</span></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+    </div></div></div>
+
+      <!-- FINAL (centre) -->
+      <div class="rcol fcol">
+        <div class="f-trophy" aria-hidden="true">🏆</div>
+        <div class="f-title">2026 World Cup<br>Final</div>
+        <div class="f-box" aria-label="Final">
+          <div class="f-bh">Final &nbsp;·&nbsp; M104</div>
+          <div class="f-team"><div class="f-line"></div><div class="f-sc"></div></div>
+          <div class="f-team"><div class="f-line"></div><div class="f-sc"></div></div>
+        </div>
+        <div class="f-dt">Sun 19 Jul · 20:00 BST<br>MetLife Stadium, New York/NJ</div>
+        <div class="t-box" aria-label="Third place">
+          <div class="t-bh">3rd Place · M103 · 18 Jul 22:00 BST</div>
+          <div class="t-team"><div class="t-line"></div><div class="t-sc"></div></div>
+          <div class="t-team"><div class="t-line"></div><div class="t-sc"></div></div>
+        </div>
+        <div class="f-dt" style="font-size:6px">Hard Rock Stadium, Miami</div>
+      </div>
+
+      <div class="rcol"><div class="rch">Semi-finals</div><div class="rcb"><div class="kom" aria-label="Match 102">
+      <div class="koi">M102<span class="kod">15 Jul</span></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+    </div></div></div>
+      <div class="rcol"><div class="rch">Quarter-finals</div><div class="rcb"><div class="kom" aria-label="Match 99">
+      <div class="koi">M99<span class="kod">11 Jul</span></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+    </div><div class="kom" aria-label="Match 100">
+      <div class="koi">M100<span class="kod">12 Jul</span></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+    </div></div></div>
+      <div class="rcol"><div class="rch">Round of 16</div><div class="rcb"><div class="kom" aria-label="Match 93">
+      <div class="koi">M93<span class="kod">6 Jul</span></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+    </div><div class="kom" aria-label="Match 94">
+      <div class="koi">M94<span class="kod">7 Jul</span></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+    </div><div class="kom" aria-label="Match 95">
+      <div class="koi">M95<span class="kod">7 Jul</span></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+    </div><div class="kom" aria-label="Match 96">
+      <div class="koi">M96<span class="kod">7 Jul</span></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+    </div></div></div>
+      <div class="rcol"><div class="rch">Round of 32</div><div class="rcb"><div class="kom" aria-label="Match 84">
+      <div class="koi">M84<span class="kod">2 Jul</span></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+    </div><div class="kom" aria-label="Match 83">
+      <div class="koi">M83<span class="kod">2 Jul</span></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+    </div><div class="kom" aria-label="Match 85">
+      <div class="koi">M85<span class="kod">3 Jul</span></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+    </div><div class="kom" aria-label="Match 88">
+      <div class="koi">M88<span class="kod">3 Jul</span></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+    </div><div class="kom" aria-label="Match 86">
+      <div class="koi">M86<span class="kod">3 Jul</span></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+    </div><div class="kom" aria-label="Match 87">
+      <div class="koi">M87<span class="kod">4 Jul</span></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+    </div><div class="kom" aria-label="Match 82">
+      <div class="koi">M82<span class="kod">1 Jul</span></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+    </div><div class="kom" aria-label="Match 77">
+      <div class="koi">M77<span class="kod">30 Jun</span></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+      <div class="kot"><div class="kol"></div><div class="kos"></div></div>
+    </div></div></div>
+      <div class="rcol"><div class="rch">Groups G–L · All Fixtures</div><div class="rcb"><div class="gfx"><div class="gfxh">Grp G</div><div class="fr">
+          <div class="fdt"><span class="fd">16 Jun</span><span class="ft">02:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/ir.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">Iran</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">N. Zealand</span><img src="https://flagcdn.com/w11/nz.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">15 Jun</span><span class="ft">20:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/be.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">Belgium</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">Egypt</span><img src="https://flagcdn.com/w11/eg.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">21 Jun</span><span class="ft">20:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/be.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">Belgium</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">Iran</span><img src="https://flagcdn.com/w11/ir.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">22 Jun</span><span class="ft">02:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/nz.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">N. Zealand</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">Egypt</span><img src="https://flagcdn.com/w11/eg.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">27 Jun</span><span class="ft">04:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/eg.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">Egypt</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">Iran</span><img src="https://flagcdn.com/w11/ir.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">27 Jun</span><span class="ft">04:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/nz.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">N. Zealand</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">Belgium</span><img src="https://flagcdn.com/w11/be.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div></div><div class="gfx"><div class="gfxh">Grp H</div><div class="fr">
+          <div class="fdt"><span class="fd">15 Jun</span><span class="ft">23:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/sa.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">S. Arabia</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">Uruguay</span><img src="https://flagcdn.com/w11/uy.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">15 Jun</span><span class="ft">17:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/es.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">Spain</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">C. Verde</span><img src="https://flagcdn.com/w11/cv.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">21 Jun</span><span class="ft">23:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/uy.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">Uruguay</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">C. Verde</span><img src="https://flagcdn.com/w11/cv.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">21 Jun</span><span class="ft">17:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/es.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">Spain</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">S. Arabia</span><img src="https://flagcdn.com/w11/sa.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">27 Jun</span><span class="ft">01:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/cv.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">C. Verde</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">S. Arabia</span><img src="https://flagcdn.com/w11/sa.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">27 Jun</span><span class="ft">01:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/uy.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">Uruguay</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">Spain</span><img src="https://flagcdn.com/w11/es.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div></div><div class="gfx"><div class="gfxh">Grp I</div><div class="fr">
+          <div class="fdt"><span class="fd">16 Jun</span><span class="ft">20:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/fr.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">France</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">Senegal</span><img src="https://flagcdn.com/w11/sn.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">16 Jun</span><span class="ft">23:00</span></div>
+          <div class="fhm"><span class="po">PO</span><span class="fnm">PO-2</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">Norway</span><img src="https://flagcdn.com/w11/no.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">23 Jun</span><span class="ft">01:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/no.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">Norway</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">Senegal</span><img src="https://flagcdn.com/w11/sn.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">22 Jun</span><span class="ft">22:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/fr.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">France</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">PO-2</span><span class="po">PO</span></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">26 Jun</span><span class="ft">20:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/no.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">Norway</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">France</span><img src="https://flagcdn.com/w11/fr.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">26 Jun</span><span class="ft">20:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/sn.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">Senegal</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">PO-2</span><span class="po">PO</span></div>
+        </div></div><div class="gfx"><div class="gfxh">Grp J</div><div class="fr">
+          <div class="fdt"><span class="fd">17 Jun</span><span class="ft">02:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/ar.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">Argentina</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">Algeria</span><img src="https://flagcdn.com/w11/dz.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">17 Jun</span><span class="ft">05:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/at.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">Austria</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">Jordan</span><img src="https://flagcdn.com/w11/jo.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">22 Jun</span><span class="ft">18:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/ar.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">Argentina</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">Austria</span><img src="https://flagcdn.com/w11/at.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">23 Jun</span><span class="ft">04:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/jo.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">Jordan</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">Algeria</span><img src="https://flagcdn.com/w11/dz.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">28 Jun</span><span class="ft">03:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/dz.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">Algeria</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">Austria</span><img src="https://flagcdn.com/w11/at.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">28 Jun</span><span class="ft">03:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/jo.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">Jordan</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">Argentina</span><img src="https://flagcdn.com/w11/ar.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div></div><div class="gfx"><div class="gfxh">Grp K</div><div class="fr">
+          <div class="fdt"><span class="fd">17 Jun</span><span class="ft">18:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/pt.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">Portugal</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">PO-1</span><span class="po">PO</span></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">18 Jun</span><span class="ft">03:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/uz.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">Uzbekistan</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">Colombia</span><img src="https://flagcdn.com/w11/co.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">23 Jun</span><span class="ft">18:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/pt.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">Portugal</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">Uzbekistan</span><img src="https://flagcdn.com/w11/uz.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">24 Jun</span><span class="ft">03:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/co.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">Colombia</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">PO-1</span><span class="po">PO</span></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">28 Jun</span><span class="ft">00:30</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/co.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">Colombia</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">Portugal</span><img src="https://flagcdn.com/w11/pt.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">28 Jun</span><span class="ft">00:30</span></div>
+          <div class="fhm"><span class="po">PO</span><span class="fnm">PO-1</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">Uzbekistan</span><img src="https://flagcdn.com/w11/uz.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div></div><div class="gfx"><div class="gfxh">Grp L</div><div class="fr">
+          <div class="fdt"><span class="fd">18 Jun</span><span class="ft">00:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/gh.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">Ghana</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">Panama</span><img src="https://flagcdn.com/w11/pa.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">17 Jun</span><span class="ft">21:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/gb-eng.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">England</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">Croatia</span><img src="https://flagcdn.com/w11/hr.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">23 Jun</span><span class="ft">21:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/gb-eng.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">England</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">Ghana</span><img src="https://flagcdn.com/w11/gh.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">24 Jun</span><span class="ft">00:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/pa.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">Panama</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">Croatia</span><img src="https://flagcdn.com/w11/hr.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">27 Jun</span><span class="ft">22:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/pa.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">Panama</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">England</span><img src="https://flagcdn.com/w11/gb-eng.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div><div class="fr">
+          <div class="fdt"><span class="fd">27 Jun</span><span class="ft">22:00</span></div>
+          <div class="fhm"><img src="https://flagcdn.com/w11/hr.png" width="11" height="8" alt="" class="fi" loading="lazy"><span class="fnm">Croatia</span></div>
+          <div class="fsb"></div><div class="fsb"></div>
+          <div class="faw"><span class="fnm">Ghana</span><img src="https://flagcdn.com/w11/gh.png" width="11" height="8" alt="" class="fi" loading="lazy"></div>
+        </div></div></div></div>
+
+    </div>
+  </div>
+
+  <!-- ZONE 4: STANDINGS -->
+  <div class="szone">
+    <div class="shdr">Group Stage / Final Tables &nbsp;·&nbsp; P = Played &nbsp; W = Won &nbsp; D = Drawn &nbsp; L = Lost &nbsp; GD = Goal Difference &nbsp; Pts = Points &nbsp;·&nbsp; ★ = Host nation</div>
+    <div class="sgrid"><div class="stbl">
+      <div class="s-hdr"><span class="s-gl">GA</span><span class="s-cl">W&nbsp;D&nbsp;L&nbsp;GD&nbsp;Pts</span></div>
+      <table class="st" aria-label="Group A"><tbody><tr>
+          <td class="s-fl"><img src="https://flagcdn.com/w11/mx.png" width="11" height="8" alt="" class="fi" loading="lazy"></td>
+          <td class="s-nm">Mexico<span class='hs'>★</span></td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-pt"></td>
+        </tr><tr>
+          <td class="s-fl"><img src="https://flagcdn.com/w11/za.png" width="11" height="8" alt="" class="fi" loading="lazy"></td>
+          <td class="s-nm">S. Africa</td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-pt"></td>
+        </tr><tr>
+          <td class="s-fl"><img src="https://flagcdn.com/w11/kr.png" width="11" height="8" alt="" class="fi" loading="lazy"></td>
+          <td class="s-nm">S. Korea</td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-pt"></td>
+        </tr><tr>
+          <td class="s-fl"><span class="po">PO</span></td>
+          <td class="s-nm">PO-D</td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-pt"></td>
+        </tr></tbody></table>
+    </div><div class="stbl">
+      <div class="s-hdr"><span class="s-gl">GB</span><span class="s-cl">W&nbsp;D&nbsp;L&nbsp;GD&nbsp;Pts</span></div>
+      <table class="st" aria-label="Group B"><tbody><tr>
+          <td class="s-fl"><img src="https://flagcdn.com/w11/ca.png" width="11" height="8" alt="" class="fi" loading="lazy"></td>
+          <td class="s-nm">Canada<span class='hs'>★</span></td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-pt"></td>
+        </tr><tr>
+          <td class="s-fl"><span class="po">PO</span></td>
+          <td class="s-nm">PO-A</td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-pt"></td>
+        </tr><tr>
+          <td class="s-fl"><img src="https://flagcdn.com/w11/qa.png" width="11" height="8" alt="" class="fi" loading="lazy"></td>
+          <td class="s-nm">Qatar</td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-pt"></td>
+        </tr><tr>
+          <td class="s-fl"><img src="https://flagcdn.com/w11/ch.png" width="11" height="8" alt="" class="fi" loading="lazy"></td>
+          <td class="s-nm">Switzerland</td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-pt"></td>
+        </tr></tbody></table>
+    </div><div class="stbl">
+      <div class="s-hdr"><span class="s-gl">GC</span><span class="s-cl">W&nbsp;D&nbsp;L&nbsp;GD&nbsp;Pts</span></div>
+      <table class="st" aria-label="Group C"><tbody><tr>
+          <td class="s-fl"><img src="https://flagcdn.com/w11/ht.png" width="11" height="8" alt="" class="fi" loading="lazy"></td>
+          <td class="s-nm">Haiti</td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-pt"></td>
+        </tr><tr>
+          <td class="s-fl"><img src="https://flagcdn.com/w11/gb-sct.png" width="11" height="8" alt="" class="fi" loading="lazy"></td>
+          <td class="s-nm">Scotland</td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-pt"></td>
+        </tr><tr>
+          <td class="s-fl"><img src="https://flagcdn.com/w11/br.png" width="11" height="8" alt="" class="fi" loading="lazy"></td>
+          <td class="s-nm">Brazil</td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-pt"></td>
+        </tr><tr>
+          <td class="s-fl"><img src="https://flagcdn.com/w11/ma.png" width="11" height="8" alt="" class="fi" loading="lazy"></td>
+          <td class="s-nm">Morocco</td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-pt"></td>
+        </tr></tbody></table>
+    </div><div class="stbl">
+      <div class="s-hdr"><span class="s-gl">GD</span><span class="s-cl">W&nbsp;D&nbsp;L&nbsp;GD&nbsp;Pts</span></div>
+      <table class="st" aria-label="Group D"><tbody><tr>
+          <td class="s-fl"><img src="https://flagcdn.com/w11/us.png" width="11" height="8" alt="" class="fi" loading="lazy"></td>
+          <td class="s-nm">USA<span class='hs'>★</span></td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-pt"></td>
+        </tr><tr>
+          <td class="s-fl"><img src="https://flagcdn.com/w11/py.png" width="11" height="8" alt="" class="fi" loading="lazy"></td>
+          <td class="s-nm">Paraguay</td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-pt"></td>
+        </tr><tr>
+          <td class="s-fl"><img src="https://flagcdn.com/w11/au.png" width="11" height="8" alt="" class="fi" loading="lazy"></td>
+          <td class="s-nm">Australia</td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-pt"></td>
+        </tr><tr>
+          <td class="s-fl"><span class="po">PO</span></td>
+          <td class="s-nm">PO-C</td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-pt"></td>
+        </tr></tbody></table>
+    </div><div class="stbl">
+      <div class="s-hdr"><span class="s-gl">GE</span><span class="s-cl">W&nbsp;D&nbsp;L&nbsp;GD&nbsp;Pts</span></div>
+      <table class="st" aria-label="Group E"><tbody><tr>
+          <td class="s-fl"><img src="https://flagcdn.com/w11/ci.png" width="11" height="8" alt="" class="fi" loading="lazy"></td>
+          <td class="s-nm">Iv. Coast</td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-pt"></td>
+        </tr><tr>
+          <td class="s-fl"><img src="https://flagcdn.com/w11/ec.png" width="11" height="8" alt="" class="fi" loading="lazy"></td>
+          <td class="s-nm">Ecuador</td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-pt"></td>
+        </tr><tr>
+          <td class="s-fl"><img src="https://flagcdn.com/w11/de.png" width="11" height="8" alt="" class="fi" loading="lazy"></td>
+          <td class="s-nm">Germany</td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-pt"></td>
+        </tr><tr>
+          <td class="s-fl"><img src="https://flagcdn.com/w11/cw.png" width="11" height="8" alt="" class="fi" loading="lazy"></td>
+          <td class="s-nm">Curacao</td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-pt"></td>
+        </tr></tbody></table>
+    </div><div class="stbl">
+      <div class="s-hdr"><span class="s-gl">GF</span><span class="s-cl">W&nbsp;D&nbsp;L&nbsp;GD&nbsp;Pts</span></div>
+      <table class="st" aria-label="Group F"><tbody><tr>
+          <td class="s-fl"><img src="https://flagcdn.com/w11/nl.png" width="11" height="8" alt="" class="fi" loading="lazy"></td>
+          <td class="s-nm">Netherlands</td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-pt"></td>
+        </tr><tr>
+          <td class="s-fl"><img src="https://flagcdn.com/w11/jp.png" width="11" height="8" alt="" class="fi" loading="lazy"></td>
+          <td class="s-nm">Japan</td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-pt"></td>
+        </tr><tr>
+          <td class="s-fl"><span class="po">PO</span></td>
+          <td class="s-nm">PO-B</td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-pt"></td>
+        </tr><tr>
+          <td class="s-fl"><img src="https://flagcdn.com/w11/tn.png" width="11" height="8" alt="" class="fi" loading="lazy"></td>
+          <td class="s-nm">Tunisia</td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-pt"></td>
+        </tr></tbody></table>
+    </div><div class="stbl">
+      <div class="s-hdr"><span class="s-gl">GG</span><span class="s-cl">W&nbsp;D&nbsp;L&nbsp;GD&nbsp;Pts</span></div>
+      <table class="st" aria-label="Group G"><tbody><tr>
+          <td class="s-fl"><img src="https://flagcdn.com/w11/ir.png" width="11" height="8" alt="" class="fi" loading="lazy"></td>
+          <td class="s-nm">Iran</td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-pt"></td>
+        </tr><tr>
+          <td class="s-fl"><img src="https://flagcdn.com/w11/nz.png" width="11" height="8" alt="" class="fi" loading="lazy"></td>
+          <td class="s-nm">N. Zealand</td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-pt"></td>
+        </tr><tr>
+          <td class="s-fl"><img src="https://flagcdn.com/w11/be.png" width="11" height="8" alt="" class="fi" loading="lazy"></td>
+          <td class="s-nm">Belgium</td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-pt"></td>
+        </tr><tr>
+          <td class="s-fl"><img src="https://flagcdn.com/w11/eg.png" width="11" height="8" alt="" class="fi" loading="lazy"></td>
+          <td class="s-nm">Egypt</td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-pt"></td>
+        </tr></tbody></table>
+    </div><div class="stbl">
+      <div class="s-hdr"><span class="s-gl">GH</span><span class="s-cl">W&nbsp;D&nbsp;L&nbsp;GD&nbsp;Pts</span></div>
+      <table class="st" aria-label="Group H"><tbody><tr>
+          <td class="s-fl"><img src="https://flagcdn.com/w11/sa.png" width="11" height="8" alt="" class="fi" loading="lazy"></td>
+          <td class="s-nm">S. Arabia</td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-pt"></td>
+        </tr><tr>
+          <td class="s-fl"><img src="https://flagcdn.com/w11/uy.png" width="11" height="8" alt="" class="fi" loading="lazy"></td>
+          <td class="s-nm">Uruguay</td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-pt"></td>
+        </tr><tr>
+          <td class="s-fl"><img src="https://flagcdn.com/w11/es.png" width="11" height="8" alt="" class="fi" loading="lazy"></td>
+          <td class="s-nm">Spain</td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-pt"></td>
+        </tr><tr>
+          <td class="s-fl"><img src="https://flagcdn.com/w11/cv.png" width="11" height="8" alt="" class="fi" loading="lazy"></td>
+          <td class="s-nm">C. Verde</td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-pt"></td>
+        </tr></tbody></table>
+    </div><div class="stbl">
+      <div class="s-hdr"><span class="s-gl">GI</span><span class="s-cl">W&nbsp;D&nbsp;L&nbsp;GD&nbsp;Pts</span></div>
+      <table class="st" aria-label="Group I"><tbody><tr>
+          <td class="s-fl"><img src="https://flagcdn.com/w11/fr.png" width="11" height="8" alt="" class="fi" loading="lazy"></td>
+          <td class="s-nm">France</td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-pt"></td>
+        </tr><tr>
+          <td class="s-fl"><img src="https://flagcdn.com/w11/sn.png" width="11" height="8" alt="" class="fi" loading="lazy"></td>
+          <td class="s-nm">Senegal</td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-pt"></td>
+        </tr><tr>
+          <td class="s-fl"><span class="po">PO</span></td>
+          <td class="s-nm">PO-2</td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-pt"></td>
+        </tr><tr>
+          <td class="s-fl"><img src="https://flagcdn.com/w11/no.png" width="11" height="8" alt="" class="fi" loading="lazy"></td>
+          <td class="s-nm">Norway</td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-pt"></td>
+        </tr></tbody></table>
+    </div><div class="stbl">
+      <div class="s-hdr"><span class="s-gl">GJ</span><span class="s-cl">W&nbsp;D&nbsp;L&nbsp;GD&nbsp;Pts</span></div>
+      <table class="st" aria-label="Group J"><tbody><tr>
+          <td class="s-fl"><img src="https://flagcdn.com/w11/ar.png" width="11" height="8" alt="" class="fi" loading="lazy"></td>
+          <td class="s-nm">Argentina</td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-pt"></td>
+        </tr><tr>
+          <td class="s-fl"><img src="https://flagcdn.com/w11/dz.png" width="11" height="8" alt="" class="fi" loading="lazy"></td>
+          <td class="s-nm">Algeria</td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-pt"></td>
+        </tr><tr>
+          <td class="s-fl"><img src="https://flagcdn.com/w11/at.png" width="11" height="8" alt="" class="fi" loading="lazy"></td>
+          <td class="s-nm">Austria</td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-pt"></td>
+        </tr><tr>
+          <td class="s-fl"><img src="https://flagcdn.com/w11/jo.png" width="11" height="8" alt="" class="fi" loading="lazy"></td>
+          <td class="s-nm">Jordan</td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-pt"></td>
+        </tr></tbody></table>
+    </div><div class="stbl">
+      <div class="s-hdr"><span class="s-gl">GK</span><span class="s-cl">W&nbsp;D&nbsp;L&nbsp;GD&nbsp;Pts</span></div>
+      <table class="st" aria-label="Group K"><tbody><tr>
+          <td class="s-fl"><img src="https://flagcdn.com/w11/pt.png" width="11" height="8" alt="" class="fi" loading="lazy"></td>
+          <td class="s-nm">Portugal</td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-pt"></td>
+        </tr><tr>
+          <td class="s-fl"><span class="po">PO</span></td>
+          <td class="s-nm">PO-1</td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-pt"></td>
+        </tr><tr>
+          <td class="s-fl"><img src="https://flagcdn.com/w11/uz.png" width="11" height="8" alt="" class="fi" loading="lazy"></td>
+          <td class="s-nm">Uzbekistan</td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-pt"></td>
+        </tr><tr>
+          <td class="s-fl"><img src="https://flagcdn.com/w11/co.png" width="11" height="8" alt="" class="fi" loading="lazy"></td>
+          <td class="s-nm">Colombia</td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-pt"></td>
+        </tr></tbody></table>
+    </div><div class="stbl">
+      <div class="s-hdr"><span class="s-gl">GL</span><span class="s-cl">W&nbsp;D&nbsp;L&nbsp;GD&nbsp;Pts</span></div>
+      <table class="st" aria-label="Group L"><tbody><tr>
+          <td class="s-fl"><img src="https://flagcdn.com/w11/gh.png" width="11" height="8" alt="" class="fi" loading="lazy"></td>
+          <td class="s-nm">Ghana</td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-pt"></td>
+        </tr><tr>
+          <td class="s-fl"><img src="https://flagcdn.com/w11/pa.png" width="11" height="8" alt="" class="fi" loading="lazy"></td>
+          <td class="s-nm">Panama</td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-pt"></td>
+        </tr><tr>
+          <td class="s-fl"><img src="https://flagcdn.com/w11/gb-eng.png" width="11" height="8" alt="" class="fi" loading="lazy"></td>
+          <td class="s-nm">England</td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-pt"></td>
+        </tr><tr>
+          <td class="s-fl"><img src="https://flagcdn.com/w11/hr.png" width="11" height="8" alt="" class="fi" loading="lazy"></td>
+          <td class="s-nm">Croatia</td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-st"></td><td class="s-st"></td>
+          <td class="s-pt"></td>
+        </tr></tbody></table>
+    </div></div>
+  </div>
+
+  <!-- ZONE 5: CALENDARS + FOOTER -->
+  <div class="calzone">
+    <div class="mcal">
+      <div class="mch">JUNE</div>
+      <table class="mcg"><thead><tr><th>M</th><th>T</th><th>W</th><th>T</th><th>F</th><th>S</th><th>S</th></tr></thead>
+      <tbody><tr><td class="cd">1</td><td class="cd">2</td><td class="cd">3</td><td class="cd">4</td><td class="cd">5</td><td class="cd">6</td><td class="cd">7</td></tr><tr><td class="cd">8</td><td class="cd">9</td><td class="cd">10</td><td class="cdm">11</td><td class="cdm">12</td><td class="cdm">13</td><td class="cdm">14</td></tr><tr><td class="cdm">15</td><td class="cdm">16</td><td class="cdm">17</td><td class="cdm">18</td><td class="cdm">19</td><td class="cdm">20</td><td class="cdm">21</td></tr><tr><td class="cdm">22</td><td class="cdm">23</td><td class="cdm">24</td><td class="cdm">25</td><td class="cdm">26</td><td class="cdm">27</td><td class="cd">28</td></tr><tr><td class="cd">29</td><td class="cd">30</td><td class="cd"></td><td class="cd"></td><td class="cd"></td><td class="cd"></td><td class="cd"></td></tr></tbody></table>
+    </div>
+    <div style="flex:1;display:flex;flex-direction:column;justify-content:center">
+      <div class="footer">
+        <span class="f-brand">The Wall Chart Co · 2026</span>
+        <span class="f-key">All times UK BST (UTC+1) &nbsp;·&nbsp; PO = Playoff winner &nbsp;·&nbsp; Score boxes to fill in by hand</span>
+        <span class="f-disc">Unofficial. Not affiliated with or endorsed by FIFA or any national football association.</span>
+      </div>
+    </div>
+    <div class="mcal">
+      <div class="mch">JULY</div>
+      <table class="mcg"><thead><tr><th>M</th><th>T</th><th>W</th><th>T</th><th>F</th><th>S</th><th>S</th></tr></thead>
+      <tbody><tr><td class="cd"></td><td class="cd"></td><td class="cdm">1</td><td class="cdm">2</td><td class="cdm">3</td><td class="cdm">4</td><td class="cdm">5</td></tr><tr><td class="cdm">6</td><td class="cdm">7</td><td class="cdm">8</td><td class="cdm">9</td><td class="cdm">10</td><td class="cdm">11</td><td class="cdm">12</td></tr><tr><td class="cdm">13</td><td class="cdm">14</td><td class="cdm">15</td><td class="cdm">16</td><td class="cdm">17</td><td class="cdm">18</td><td class="cdm">19</td></tr><tr><td class="cd">20</td><td class="cd">21</td><td class="cd">22</td><td class="cd">23</td><td class="cd">24</td><td class="cd">25</td><td class="cd">26</td></tr><tr><td class="cd">27</td><td class="cd">28</td><td class="cd">29</td><td class="cd">30</td><td class="cd">31</td><td class="cd"></td><td class="cd"></td></tr></tbody></table>
+    </div>
+  </div>
+
+</article></div></div>
+
+<script>
+function scale(){
+  const s=document.getElementById('scaler'),p=document.getElementById('poster');
+  const sc=Math.min(1,(document.body.clientWidth-32)/1190);
+  s.style.transform=`scale(${sc})`;
+  s.style.marginBottom=((p.offsetHeight*sc)-p.offsetHeight)+'px';
+}
+window.addEventListener('resize',scale);
+setTimeout(scale,300);
+</script>
+</body>
+</html>

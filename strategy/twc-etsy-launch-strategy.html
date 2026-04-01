@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Wall Chart Co — Etsy Launch Strategy &amp; Sales Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0B1E3D;--red:#C8502A;--gold:#C8A94A;--cream:#F7F5EE;--white:#fff;--bg:#0f172a;--bg2:#1e293b;--text:#e2e8f0;--text2:#94a3b8;--border:#334155}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+.header{background:var(--navy);border-bottom:3px solid var(--gold)}
+.stripe{height:5px;background:linear-gradient(90deg,var(--red) 33%,#fff 33%,#fff 66%,var(--navy) 66%)}
+.header-inner{padding:28px 40px;display:flex;align-items:center;gap:16px}
+.mono{width:52px;height:52px;border-radius:6px;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'EB Garamond',serif;font-size:18px;font-weight:700;color:var(--navy);flex-shrink:0}
+.h-name{font-family:'EB Garamond',serif;font-size:24px;font-weight:700;color:#fff;letter-spacing:.05em;text-transform:uppercase}
+.h-sub{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-top:3px}
+.content{max-width:960px;margin:0 auto;padding:40px 32px 80px}
+.phase{margin-bottom:64px}
+.phase-label{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:8px}
+.phase-label-pre{background:rgba(200,169,74,.15);color:var(--gold);border:1px solid rgba(200,169,74,.3)}
+.phase-label-launch{background:rgba(200,80,42,.15);color:#e8845a;border:1px solid rgba(200,80,42,.3)}
+.phase-label-grow{background:rgba(34,139,34,.15);color:#6ec96e;border:1px solid rgba(34,139,34,.3)}
+.phase-label-scale{background:rgba(100,149,237,.15);color:#87CEEB;border:1px solid rgba(100,149,237,.3)}
+.phase-title{font-family:'EB Garamond',serif;font-size:28px;font-weight:700;color:var(--gold);margin-bottom:4px}
+.phase-dates{font-size:12px;color:var(--text2);margin-bottom:20px}
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:24px;margin-bottom:16px}
+.card h3{font-family:'EB Garamond',serif;font-size:18px;color:#fff;margin-bottom:10px}
+.card h4{font-size:13px;font-weight:700;color:var(--gold);letter-spacing:.05em;margin:16px 0 8px}
+.card p{font-size:14px;color:var(--text2);line-height:1.7}
+.card ul{list-style:none;padding:0}
+.card li{font-size:14px;color:var(--text2);padding:5px 0 5px 18px;position:relative;line-height:1.6}
+.card li::before{content:'';position:absolute;left:0;top:13px;width:6px;height:6px;border-radius:50%;background:var(--gold)}
+.card li strong{color:#fff}
+.highlight{background:rgba(200,169,74,.06);border-color:var(--gold)}
+.timeline{display:grid;grid-template-columns:100px 1fr;gap:0;margin-top:16px}
+.tl-date{font-size:12px;font-weight:700;color:var(--gold);padding:10px 12px 10px 0;border-right:2px solid var(--gold);text-align:right;position:relative}
+.tl-date::after{content:'';position:absolute;right:-5px;top:14px;width:8px;height:8px;border-radius:50%;background:var(--gold)}
+.tl-item{padding:8px 0 8px 20px;font-size:13px;color:var(--text2);border-bottom:1px solid rgba(51,65,85,.5)}
+.tl-item strong{color:#fff}
+.metric{display:inline-block;background:var(--navy);border:1px solid var(--gold);border-radius:6px;padding:8px 16px;margin:4px;text-align:center}
+.metric-num{font-family:'EB Garamond',serif;font-size:24px;font-weight:700;color:var(--gold);line-height:1}
+.metric-label{font-size:9px;color:var(--text2);letter-spacing:.1em;text-transform:uppercase;margin-top:2px}
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-top:12px}
+.price-card{background:var(--navy);border:1px solid rgba(200,169,74,.3);border-radius:8px;padding:16px;text-align:center}
+.price-card .name{font-size:12px;color:var(--text2);margin-bottom:4px}
+.price-card .price{font-family:'EB Garamond',serif;font-size:24px;font-weight:700;color:var(--gold)}
+.price-card .note{font-size:10px;color:rgba(148,163,184,.6);margin-top:4px}
+table.data{width:100%;border-collapse:collapse;margin:16px 0}
+table.data th{background:var(--navy);color:var(--gold);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:8px 12px;text-align:left;border-bottom:2px solid var(--gold)}
+table.data td{padding:8px 12px;font-size:13px;color:var(--text2);border-bottom:1px solid var(--border)}
+table.data td strong{color:#fff}
+table.data tr:hover td{background:rgba(200,169,74,.03)}
+.footer{background:var(--navy);padding:16px 40px;border-top:3px solid var(--gold);display:flex;align-items:center;justify-content:space-between}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="stripe"></div>
+  <div class="header-inner">
+    <div class="mono">TWC</div>
+    <div>
+      <div class="h-name">The Wall Chart Co</div>
+      <div class="h-sub">Etsy Launch Strategy &amp; Sales Plan &middot; April 2026</div>
+    </div>
+  </div>
+</header>
+
+<div class="content">
+
+<!-- EXECUTIVE SUMMARY -->
+<div class="phase">
+  <div class="phase-title" style="margin-bottom:16px">Executive Summary</div>
+  <div class="card highlight">
+    <p>The Wall Chart Co launches on Etsy as a premium digital downloads shop selling interactive wall charts, fixture trackers, and team guides for major football and rugby tournaments. All products are single HTML files that open in any browser — no app, no install.</p>
+    <p style="margin-top:12px"><strong style="color:#fff">Launch window:</strong> April 2026, ahead of the FIFA World Cup 2026 (11 June &ndash; 19 July). The World Cup is the anchor event — 48 teams, 3 host nations, 104 matches, the biggest tournament in history. This is the highest-demand period for wall chart products.</p>
+    <p style="margin-top:12px"><strong style="color:#fff">Year 1 target:</strong> 11 products across football and rugby, building a recurring seasonal catalogue that generates revenue around every major tournament cycle.</p>
+
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;justify-content:center">
+      <div class="metric"><div class="metric-num">11</div><div class="metric-label">Products</div></div>
+      <div class="metric"><div class="metric-num">2</div><div class="metric-label">Sports</div></div>
+      <div class="metric"><div class="metric-num">6</div><div class="metric-label">Tournaments</div></div>
+      <div class="metric"><div class="metric-num">&pound;2.99&ndash;&pound;11.99</div><div class="metric-label">Price Range</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE 1: PRE-LAUNCH -->
+<div class="phase">
+  <span class="phase-label phase-label-pre">Phase 1</span>
+  <div class="phase-title">Pre-Launch Setup</div>
+  <div class="phase-dates">1 &ndash; 14 April 2026 (2 weeks)</div>
+
+  <div class="card">
+    <h3>Etsy Shop Setup</h3>
+    <ul>
+      <li><strong>Shop name:</strong> TheWallChartCo (or TheWallChartCompany if taken)</li>
+      <li><strong>Shop icon:</strong> Gold TWC monogram on navy background (500x500px)</li>
+      <li><strong>Banner:</strong> Navy background with gold text "The Wall Chart Co — Premium Tournament Downloads" and tri-colour stripe</li>
+      <li><strong>About section:</strong> Use the copy from the existing twc-etsy-listings-copy.html — Anthony's personal story from Swansea</li>
+      <li><strong>Policies:</strong> Digital downloads non-refundable, free updates, fast message response</li>
+      <li><strong>Payment:</strong> Set up Etsy Payments for GBP pricing</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>Listing Preparation Checklist</h3>
+    <ul>
+      <li><strong>Product screenshots:</strong> Capture 5+ images per product in a browser window</li>
+      <li><strong>Mockup images:</strong> Place screenshots into laptop/tablet mockup templates (free from Canva or Smartmockups)</li>
+      <li><strong>Listing copy:</strong> All titles, descriptions, and tags ready (see Etsy Listings Copy document)</li>
+      <li><strong>Files:</strong> Final HTML files tested in Chrome, Firefox, Safari, Edge on desktop and mobile</li>
+      <li><strong>Pricing:</strong> All prices set in GBP with Etsy auto-converting for international buyers</li>
+      <li><strong>Digital delivery:</strong> Upload HTML files to each listing's digital files section</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>Launch Day Listing Order</h3>
+    <p>List products in this order for maximum impact:</p>
+    <table class="data">
+      <thead><tr><th>Order</th><th>Product</th><th>Price</th><th>Priority</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><strong>World Cup 2026 Complete Bundle</strong></td><td>&pound;11.99</td><td>Anchor — highest perceived value</td></tr>
+        <tr><td>2</td><td><strong>World Cup 2026 Interactive Wall Chart</strong></td><td>&pound;5.99</td><td>Flagship — drives most searches</td></tr>
+        <tr><td>3</td><td><strong>England World Cup 2026</strong></td><td>&pound;5.99</td><td>Fan edition — UK audience magnet</td></tr>
+        <tr><td>4</td><td><strong>World Cup 2026 Team Guide</strong></td><td>&pound;5.99</td><td>Content-rich — unique selling point</td></tr>
+        <tr><td>5</td><td><strong>World Cup 2026 Fixture Poster</strong></td><td>&pound;3.49</td><td>Low price — review generator</td></tr>
+        <tr><td>6</td><td><strong>World Cup 2026 Bracket Poster</strong></td><td>&pound;2.99</td><td>Cheapest — impulse buy entry</td></tr>
+        <tr><td>7</td><td><strong>Champions League 2025/26</strong></td><td>&pound;4.99</td><td>Timely — knockouts in progress</td></tr>
+        <tr><td>8</td><td><strong>Premier League 2025/26</strong></td><td>&pound;4.99</td><td>Season-long — broadens catalogue</td></tr>
+        <tr><td>9</td><td><strong>Euro 2028 Qualifiers</strong></td><td>&pound;4.99</td><td>Long-tail — 18-month product life</td></tr>
+        <tr><td>10</td><td><strong>Six Nations 2026</strong></td><td>&pound;3.99</td><td>Rugby entry — new audience</td></tr>
+        <tr><td>11</td><td><strong>Rugby World Cup 2027</strong></td><td>&pound;5.99</td><td>Forward planning — early adopters</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- PHASE 2: LAUNCH -->
+<div class="phase">
+  <span class="phase-label phase-label-launch">Phase 2</span>
+  <div class="phase-title">Launch &amp; World Cup Sprint</div>
+  <div class="phase-dates">15 April &ndash; 19 July 2026 (World Cup Final)</div>
+
+  <div class="card">
+    <h3>Launch Timeline</h3>
+    <div class="timeline">
+      <div class="tl-date">15 Apr</div><div class="tl-item"><strong>Soft launch</strong> — All 11 listings go live. Share with friends/family for first reviews</div>
+      <div class="tl-date">15-30 Apr</div><div class="tl-item"><strong>Etsy SEO bedding in</strong> — Etsy algorithm indexes new listings. Optimise titles/tags based on search analytics</div>
+      <div class="tl-date">1 May</div><div class="tl-item"><strong>Etsy Ads on</strong> — Start with &pound;2/day budget on World Cup products only. Track ROAS</div>
+      <div class="tl-date">May</div><div class="tl-item"><strong>UCL Final push</strong> — Champions League Final 31 May. Promote UCL tracker heavily</div>
+      <div class="tl-date">Late May</div><div class="tl-item"><strong>Squad announcements</strong> — Release Official Squads Edition of Team Guide as free update</div>
+      <div class="tl-date">1-10 Jun</div><div class="tl-item"><strong>World Cup countdown</strong> — Peak demand window. Increase Etsy Ads to &pound;5/day. Social media push</div>
+      <div class="tl-date">11 Jun</div><div class="tl-item"><strong>World Cup kicks off</strong> — Tournament begins. Highest conversion period</div>
+      <div class="tl-date">11 Jun-19 Jul</div><div class="tl-item"><strong>Tournament period</strong> — Monitor reviews, respond to messages quickly, push bundle deals</div>
+      <div class="tl-date">19 Jul</div><div class="tl-item"><strong>World Cup Final</strong> — Post-tournament: keep listings active for souvenir/keepsake buyers</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Etsy Ads Strategy</h3>
+    <ul>
+      <li><strong>Budget:</strong> Start &pound;2/day, scale to &pound;5-10/day during World Cup. Total pre-tournament budget: &pound;150-250</li>
+      <li><strong>Focus products:</strong> World Cup Wall Chart and Bundle only — these have highest search volume</li>
+      <li><strong>Target ROAS:</strong> 3:1 minimum (every &pound;1 in ads returns &pound;3 in sales)</li>
+      <li><strong>Kill underperformers:</strong> If a listing has &gt;100 clicks with 0 sales, pause ads and revise listing</li>
+      <li><strong>Scale winners:</strong> If a listing converts above 5%, increase its daily budget</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>Social Media (Free Marketing)</h3>
+    <ul>
+      <li><strong>Facebook:</strong> Share in World Cup fan groups (do not spam — provide value, link in comments only when relevant)</li>
+      <li><strong>Reddit:</strong> r/worldcup, r/football, r/soccer — share screenshots as "I built this" posts, link in comments</li>
+      <li><strong>X/Twitter:</strong> Post product screenshots with #WorldCup2026, #FIFAWorldCup hashtags</li>
+      <li><strong>Instagram:</strong> Mockup images, behind-the-scenes "made in Wales" story</li>
+      <li><strong>YouTube:</strong> Quick demo video (60 seconds) showing the wall chart in action — link in description</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>Review Strategy</h3>
+    <p>Etsy reviews are critical for ranking and conversion. Target: 10+ reviews within first month.</p>
+    <ul>
+      <li><strong>Friends &amp; family:</strong> Ask 5-10 people to buy and leave honest reviews at launch</li>
+      <li><strong>Follow-up message:</strong> Send a friendly Etsy message 3 days after purchase asking if they need help and if they would leave a review</li>
+      <li><strong>Fast response:</strong> Reply to all messages within 2 hours during launch period. Etsy rewards fast response rates</li>
+      <li><strong>Fix issues fast:</strong> Any negative feedback = immediate fix + updated file + apologetic message</li>
+    </ul>
+  </div>
+</div>
+
+<!-- PHASE 3: GROWTH -->
+<div class="phase">
+  <span class="phase-label phase-label-grow">Phase 3</span>
+  <div class="phase-title">Post-World Cup Growth</div>
+  <div class="phase-dates">August 2026 &ndash; February 2027</div>
+
+  <div class="card">
+    <h3>New Products Pipeline</h3>
+    <table class="data">
+      <thead><tr><th>Product</th><th>Sport</th><th>Target Launch</th><th>Event Window</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Wales World Cup 2026 Edition</strong></td><td>Football</td><td>April 2026</td><td>If Wales qualify via playoffs</td></tr>
+        <tr><td><strong>Scotland World Cup 2026 Edition</strong></td><td>Football</td><td>April 2026</td><td>Scotland qualified — UK market</td></tr>
+        <tr><td><strong>USA / Canada / Mexico Editions</strong></td><td>Football</td><td>May 2026</td><td>Host nation fan market (USD pricing)</td></tr>
+        <tr><td><strong>Autumn Internationals 2026</strong></td><td>Rugby</td><td>October 2026</td><td>Nov international window</td></tr>
+        <tr><td><strong>Champions League 2026/27</strong></td><td>Football</td><td>September 2026</td><td>New UCL season</td></tr>
+        <tr><td><strong>Premier League 2026/27</strong></td><td>Football</td><td>August 2026</td><td>New PL season</td></tr>
+        <tr><td><strong>Six Nations 2027</strong></td><td>Rugby</td><td>January 2027</td><td>Feb-Mar championship</td></tr>
+        <tr><td><strong>Women's World Cup / Euro products</strong></td><td>Football</td><td>TBC</td><td>Expand to women's game</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Seasonal Revenue Calendar</h3>
+    <p>Digital wall charts are seasonal products. Revenue follows the tournament calendar:</p>
+    <table class="data">
+      <thead><tr><th>Month</th><th>Key Events</th><th>Revenue Expectation</th></tr></thead>
+      <tbody>
+        <tr><td>Jan-Mar</td><td>Six Nations, Euro Qualifiers</td><td>Moderate — rugby fans + qualifier tracking</td></tr>
+        <tr><td>Apr-May</td><td>UCL knockouts, PL run-in, World Cup hype</td><td>Building — pre-tournament buzz</td></tr>
+        <tr><td>Jun-Jul</td><td><strong>FIFA World Cup 2026</strong></td><td><strong>Peak — highest revenue period</strong></td></tr>
+        <tr><td>Aug-Sep</td><td>New PL/UCL season starts</td><td>Moderate — new season products</td></tr>
+        <tr><td>Oct-Nov</td><td>Autumn Internationals, Rugby World Cup 2027 pre-sales</td><td>Moderate — rugby fans</td></tr>
+        <tr><td>Dec</td><td>Christmas gifts, digital download gifting</td><td>Moderate — gift purchases spike</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Team Edition Strategy</h3>
+    <p>Team-specific editions (like the England Wall Chart) are high-margin products that target passionate fan bases. The same base product is reskinned with team colours and highlights.</p>
+    <ul>
+      <li><strong>Priority teams for WC2026:</strong> England, Scotland, Wales (if qualified), USA, Canada, Mexico, Germany, Brazil, Argentina, France</li>
+      <li><strong>Production time:</strong> 2-3 hours per team edition (reskin existing wall chart)</li>
+      <li><strong>Pricing:</strong> Same as base product (&pound;5.99) — fans pay for the personalisation</li>
+      <li><strong>SEO benefit:</strong> Each team edition is a separate listing with unique keywords (e.g., "England World Cup", "Brazil World Cup")</li>
+      <li><strong>Scale potential:</strong> 10-15 team editions = 10-15 additional listings with minimal extra work</li>
+    </ul>
+  </div>
+</div>
+
+<!-- PHASE 4: SCALE -->
+<div class="phase">
+  <span class="phase-label phase-label-scale">Phase 4</span>
+  <div class="phase-title">Scale &amp; Diversify</div>
+  <div class="phase-dates">2027 and beyond</div>
+
+  <div class="card">
+    <h3>Product Expansion Roadmap</h3>
+    <ul>
+      <li><strong>Rugby World Cup 2027 (Australia)</strong> — Full product suite: wall chart, bracket poster, team guide, bundle. Mirror the World Cup 2026 range</li>
+      <li><strong>Club competition products:</strong> Champions League, Europa League, Premier League, La Liga, Serie A, Bundesliga</li>
+      <li><strong>Women's tournaments:</strong> Women's World Cup, Women's Six Nations, WSL</li>
+      <li><strong>Template system:</strong> Build a reusable HTML template that can be configured for any tournament via a JSON data file</li>
+      <li><strong>Multi-language:</strong> Translate listings for French, German, Spanish markets (Etsy is global)</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>Revenue Targets</h3>
+    <table class="data">
+      <thead><tr><th>Period</th><th>Target Sales</th><th>Avg Order Value</th><th>Revenue</th></tr></thead>
+      <tbody>
+        <tr><td>Apr-Jul 2026 (WC period)</td><td><strong>200-500 orders</strong></td><td>&pound;6.50</td><td><strong>&pound;1,300 &ndash; &pound;3,250</strong></td></tr>
+        <tr><td>Aug-Dec 2026</td><td>50-150 orders</td><td>&pound;5.00</td><td>&pound;250 &ndash; &pound;750</td></tr>
+        <tr><td>Jan-Jul 2027</td><td>100-300 orders</td><td>&pound;5.50</td><td>&pound;550 &ndash; &pound;1,650</td></tr>
+        <tr><td>Oct-Nov 2027 (RWC)</td><td><strong>150-400 orders</strong></td><td>&pound;6.50</td><td><strong>&pound;975 &ndash; &pound;2,600</strong></td></tr>
+        <tr><td style="font-weight:700;color:var(--gold)">Year 1 Total</td><td></td><td></td><td style="font-weight:700;color:var(--gold)">&pound;3,075 &ndash; &pound;8,250</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:12px;font-size:12px">Note: These are conservative estimates. A single viral Reddit/Twitter post or Etsy feature can 10x a single day's sales. The World Cup 2022 digital wallchart market saw individual sellers reach 1,000+ sales.</p>
+  </div>
+
+  <div class="card">
+    <h3>Etsy Fee Structure (for reference)</h3>
+    <ul>
+      <li><strong>Listing fee:</strong> &pound;0.16 per listing (renews every 4 months or on sale)</li>
+      <li><strong>Transaction fee:</strong> 6.5% of sale price</li>
+      <li><strong>Payment processing:</strong> 4% + &pound;0.20 per transaction</li>
+      <li><strong>Etsy Ads:</strong> Variable (typically 12-15% of ad-driven sale)</li>
+      <li><strong>Effective margin on &pound;5.99 product:</strong> ~&pound;5.00 net (83% margin before ads)</li>
+      <li><strong>Digital products = 100% margin on COGS</strong> — no materials, shipping, or inventory</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ETSY SEO -->
+<div class="phase">
+  <div class="phase-title">Etsy SEO Playbook</div>
+  <div class="phase-dates">Search optimisation for maximum visibility</div>
+
+  <div class="card">
+    <h3>How Etsy Search Works</h3>
+    <p>Etsy's search algorithm (called "Explore") ranks listings based on:</p>
+    <ul>
+      <li><strong>Relevancy:</strong> Title, tags, categories, and attributes matching the search query</li>
+      <li><strong>Listing quality:</strong> Click-through rate, favourite rate, and conversion rate</li>
+      <li><strong>Recency:</strong> New and recently renewed listings get a temporary boost</li>
+      <li><strong>Shop quality:</strong> Overall shop reviews, response time, completed sales</li>
+      <li><strong>Customer experience:</strong> Positive reviews, low dispute rate</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>Keyword Strategy by Product</h3>
+    <table class="data">
+      <thead><tr><th>Product</th><th>Primary Keywords (Title)</th><th>Long-tail Tags</th></tr></thead>
+      <tbody>
+        <tr><td><strong>WC Wall Chart</strong></td><td>world cup 2026 wall chart</td><td>football fixture tracker, world cup score tracker, interactive football chart</td></tr>
+        <tr><td><strong>England Edition</strong></td><td>england world cup 2026</td><td>three lions world cup, england football gift, england fan edition</td></tr>
+        <tr><td><strong>Fixture Poster</strong></td><td>world cup 2026 fixture poster</td><td>printable football poster, a3 world cup poster, world cup schedule print</td></tr>
+        <tr><td><strong>Team Guide</strong></td><td>world cup 2026 team guide</td><td>48 team guide, world cup squads, football reference guide</td></tr>
+        <tr><td><strong>Champions League</strong></td><td>champions league 2025 2026 wall chart</td><td>UCL tracker, champions league bracket, football european cup tracker</td></tr>
+        <tr><td><strong>Premier League</strong></td><td>premier league 2025 2026 tracker</td><td>PL table tracker, football league tracker, premier league digital download</td></tr>
+        <tr><td><strong>Six Nations</strong></td><td>six nations 2026 wall chart</td><td>rugby wall chart, six nations tracker, rugby championship chart</td></tr>
+        <tr><td><strong>Rugby World Cup</strong></td><td>rugby world cup 2027 wall chart</td><td>RWC Australia 2027, rugby bracket poster, rugby tournament tracker</td></tr>
+        <tr><td><strong>Euro Qualifiers</strong></td><td>euro 2028 qualifiers tracker</td><td>european championship qualifying, euro qualifiers wall chart</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Title Formula</h3>
+    <p style="font-family:monospace;color:var(--gold);font-size:14px;background:rgba(0,0,0,.3);padding:12px;border-radius:6px;margin:12px 0">[Tournament Name] [Year] [Product Type] | [Key Feature / Differentiator] | Digital Download</p>
+    <h4>Title Rules</h4>
+    <ul>
+      <li>Front-load the most searched term (tournament + year)</li>
+      <li>Use pipes (|) to separate clauses — Etsy reads these as phrase boundaries</li>
+      <li>Always end with "Digital Download" — critical for the digital goods category</li>
+      <li>Stay under 140 characters (Etsy truncates beyond this)</li>
+      <li>Never use ALL CAPS — Etsy penalises this</li>
+      <li>Include "Interactive" or "Printable" to set expectations</li>
+    </ul>
+  </div>
+</div>
+
+<!-- COMPETITOR ANALYSIS -->
+<div class="phase">
+  <div class="phase-title">Competitive Positioning</div>
+  <div class="phase-dates">How TWC stands out</div>
+
+  <div class="card">
+    <h3>Market Landscape</h3>
+    <p>The digital wall chart market on Etsy has three main competitor types:</p>
+
+    <h4>1. PDF/Image Wall Charts (Most Common)</h4>
+    <ul>
+      <li>Static PDFs or JPGs — print and fill in by hand</li>
+      <li>Typically &pound;2-4</li>
+      <li>No interactivity, no auto-updating tables</li>
+      <li><strong>TWC advantage:</strong> Our interactive products are a completely different category. Auto-scoring, live tables, digital export — leagues ahead of a static PDF</li>
+    </ul>
+
+    <h4>2. Spreadsheet Trackers</h4>
+    <ul>
+      <li>Google Sheets or Excel templates</li>
+      <li>Typically &pound;3-5</li>
+      <li>Functional but ugly, requires Google/Excel account</li>
+      <li><strong>TWC advantage:</strong> Our products look premium, work in any browser, and require zero setup</li>
+    </ul>
+
+    <h4>3. Web App Competitors (e.g., footballwallcharts.com)</h4>
+    <ul>
+      <li>Full websites with similar functionality</li>
+      <li>Free or subscription-based</li>
+      <li>Require internet connection, account signup, data stored on their servers</li>
+      <li><strong>TWC advantage:</strong> Our products work offline, data stays on your device, one-time purchase, no account needed. Privacy and ownership</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>TWC Unique Selling Points</h3>
+    <ul>
+      <li><strong>One HTML file = everything:</strong> No install, no account, no internet needed after download</li>
+      <li><strong>Premium design:</strong> Consistent navy/gold branding that looks and feels premium</li>
+      <li><strong>Auto-scoring:</strong> Enter scores, tables update automatically. No manual maths</li>
+      <li><strong>Theme variants:</strong> Multiple colour themes per product — personalisation without extra cost</li>
+      <li><strong>Export/Import:</strong> Backup your data, move between devices — no lock-in</li>
+      <li><strong>Print-friendly:</strong> Every product has @media print CSS for clean physical output</li>
+      <li><strong>Cross-sport range:</strong> Football AND rugby — very few competitors cover both</li>
+      <li><strong>Made by a real person in Wales:</strong> Personal brand story resonates on Etsy</li>
+    </ul>
+  </div>
+</div>
+
+<!-- MARKETING CHANNELS -->
+<div class="phase">
+  <div class="phase-title">Marketing Channels</div>
+  <div class="phase-dates">Free and paid acquisition</div>
+
+  <div class="card">
+    <h3>Channel Priority Matrix</h3>
+    <table class="data">
+      <thead><tr><th>Channel</th><th>Cost</th><th>Effort</th><th>Impact</th><th>Priority</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Etsy SEO</strong></td><td>Free</td><td>Medium</td><td>High</td><td style="color:var(--gold);font-weight:700">1 — Essential</td></tr>
+        <tr><td><strong>Etsy Ads</strong></td><td>&pound;2-10/day</td><td>Low</td><td>High</td><td style="color:var(--gold);font-weight:700">2 — Essential</td></tr>
+        <tr><td><strong>Reddit</strong></td><td>Free</td><td>Medium</td><td>High (viral potential)</td><td style="color:var(--gold);font-weight:700">3 — High</td></tr>
+        <tr><td><strong>Facebook Groups</strong></td><td>Free</td><td>Medium</td><td>Medium</td><td>4 — Medium</td></tr>
+        <tr><td><strong>X/Twitter</strong></td><td>Free</td><td>Low</td><td>Medium</td><td>5 — Medium</td></tr>
+        <tr><td><strong>Instagram</strong></td><td>Free</td><td>Medium</td><td>Low-Medium</td><td>6 — Low</td></tr>
+        <tr><td><strong>YouTube demo video</strong></td><td>Free</td><td>High</td><td>Medium (long-tail)</td><td>7 — If time allows</td></tr>
+        <tr><td><strong>Facebook/Instagram Ads</strong></td><td>&pound;5-20/day</td><td>Medium</td><td>Medium</td><td>8 — Phase 2 only</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Reddit Strategy (Highest Free ROI)</h3>
+    <ul>
+      <li><strong>Target subreddits:</strong> r/worldcup, r/soccer, r/football, r/rugbyunion, r/sixnations, r/premierleague, r/championsleague</li>
+      <li><strong>Post format:</strong> Screenshot of the product with title like "I built an interactive World Cup 2026 wall chart — enter scores and the tables update automatically"</li>
+      <li><strong>Golden rule:</strong> Lead with value, not sales. Show the product, let people ask for the link</li>
+      <li><strong>Timing:</strong> Post 1-2 weeks before the tournament starts for maximum anticipation</li>
+      <li><strong>One viral Reddit post can generate 50-200 sales in 24 hours</strong></li>
+    </ul>
+  </div>
+</div>
+
+<!-- BUNDLE STRATEGY -->
+<div class="phase">
+  <div class="phase-title">Bundle &amp; Cross-Sell Strategy</div>
+  <div class="phase-dates">Maximising average order value</div>
+
+  <div class="card">
+    <h3>Bundle Offerings</h3>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="name">World Cup Complete</div>
+        <div class="price">&pound;11.99</div>
+        <div class="note">Wall Chart + Poster + Guide<br>Save &pound;3.48</div>
+      </div>
+      <div class="price-card">
+        <div class="name">Football Fan Bundle</div>
+        <div class="price">&pound;14.99</div>
+        <div class="note">WC + UCL + PL trackers<br>Save &pound;4.98</div>
+      </div>
+      <div class="price-card">
+        <div class="name">Rugby Fan Bundle</div>
+        <div class="price">&pound;8.99</div>
+        <div class="note">Six Nations + RWC 2027<br>Save &pound;0.99</div>
+      </div>
+      <div class="price-card">
+        <div class="name">Ultimate Sports Bundle</div>
+        <div class="price">&pound;29.99</div>
+        <div class="note">All 11 products<br>Save &pound;23+</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Cross-Sell in Listings</h3>
+    <p>Every listing description ends with an "ALSO AVAILABLE" section linking to related products. This drives internal traffic between listings:</p>
+    <ul>
+      <li>Wall Chart listing → link to Bundle, Team Guide, Poster</li>
+      <li>Poster listing → link to Wall Chart (interactive upgrade)</li>
+      <li>Team Guide → link to Wall Chart, Bundle</li>
+      <li>UCL listing → link to PL tracker, World Cup</li>
+      <li>Six Nations → link to Rugby World Cup 2027</li>
+    </ul>
+  </div>
+</div>
+
+</div>
+
+<footer class="footer">
+  <div style="display:flex;align-items:center;gap:10px">
+    <div class="mono" style="width:32px;height:32px;font-size:11px;border-radius:4px">TWC</div>
+    <span style="font-family:'EB Garamond',serif;font-size:14px;font-weight:700;color:var(--gold);letter-spacing:.06em;text-transform:uppercase">The Wall Chart Co</span>
+  </div>
+  <span style="font-size:11px;color:rgba(255,255,255,.4)">Etsy Launch Strategy &middot; Version 1.0 &middot; April 2026</span>
+</footer>
+
+</body>
+</html>

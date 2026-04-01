@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Wall Chart Co — Brand Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:#0B1E3D; --red:#C8502A; --gold:#C8A94A;
+  --cream:#F7F5EE; --white:#FFFFFF;
+  --text:#12121F; --text2:#4a4a68; --border:#CCCBC4;
+  --bg:#0f172a; --bg2:#1e293b;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:#e2e8f0;line-height:1.6}
+
+/* Header */
+.brand-header{background:var(--navy);border-bottom:3px solid var(--gold);padding:0}
+.header-stripe{height:5px;background:linear-gradient(90deg,var(--red) 33%,#fff 33%,#fff 66%,var(--navy) 66%)}
+.header-inner{padding:32px 40px;display:flex;align-items:center;gap:20px}
+.logo-mono{width:64px;height:64px;border-radius:8px;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'EB Garamond',serif;font-size:22px;font-weight:700;color:var(--navy);letter-spacing:0.04em;flex-shrink:0}
+.logo-text .name{font-family:'EB Garamond',serif;font-size:28px;font-weight:700;color:#fff;letter-spacing:0.05em;text-transform:uppercase}
+.logo-text .sub{font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-top:4px}
+
+/* Content */
+.content{max-width:960px;margin:0 auto;padding:40px 32px 80px}
+.section{margin-bottom:56px}
+.section-title{font-family:'EB Garamond',serif;font-size:28px;font-weight:700;color:var(--gold);margin-bottom:6px;letter-spacing:0.03em}
+.section-sub{font-size:12px;color:#94a3b8;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:24px}
+.card{background:var(--bg2);border:1px solid #334155;border-radius:10px;padding:24px;margin-bottom:16px}
+.card h3{font-family:'EB Garamond',serif;font-size:18px;color:#fff;margin-bottom:10px}
+.card p{font-size:14px;color:#94a3b8;line-height:1.7}
+.card ul{list-style:none;padding:0}
+.card li{font-size:14px;color:#94a3b8;padding:4px 0;padding-left:16px;position:relative}
+.card li::before{content:'';position:absolute;left:0;top:12px;width:6px;height:6px;border-radius:50%;background:var(--gold)}
+
+/* Color swatches */
+.swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-top:16px}
+.swatch{border-radius:8px;overflow:hidden;border:1px solid #334155}
+.swatch-color{height:80px}
+.swatch-info{background:var(--bg2);padding:10px 12px}
+.swatch-name{font-size:13px;font-weight:600;color:#fff}
+.swatch-hex{font-size:11px;color:#64748b;font-family:monospace;margin-top:2px}
+
+/* Typography */
+.type-sample{margin:16px 0;padding:20px;background:rgba(255,255,255,0.03);border-radius:8px}
+.type-garamond{font-family:'EB Garamond',serif}
+.type-inter{font-family:'Inter',sans-serif}
+.type-label{font-size:10px;color:var(--gold);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:6px}
+
+/* Logo usage */
+.logo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin-top:16px}
+.logo-example{padding:24px;border-radius:8px;display:flex;align-items:center;justify-content:center;gap:12px}
+.logo-example .mono{width:44px;height:44px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-family:'EB Garamond',serif;font-size:15px;font-weight:700;flex-shrink:0}
+.logo-example .brand-name{font-family:'EB Garamond',serif;font-size:16px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase}
+
+/* Product catalog */
+.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-top:16px}
+.product-card{background:var(--bg2);border:1px solid #334155;border-radius:10px;overflow:hidden;transition:border-color 0.2s}
+.product-card:hover{border-color:var(--gold)}
+.product-header{background:var(--navy);padding:14px 16px;border-bottom:2px solid var(--gold)}
+.product-name{font-family:'EB Garamond',serif;font-size:16px;font-weight:700;color:var(--gold)}
+.product-type{font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-top:2px}
+.product-body{padding:16px}
+.product-price{font-size:20px;font-weight:700;color:#fff;margin-bottom:8px}
+.product-desc{font-size:13px;color:#94a3b8;line-height:1.6;margin-bottom:12px}
+.product-tags{display:flex;flex-wrap:wrap;gap:4px}
+.ptag{font-size:10px;padding:2px 8px;border-radius:12px;font-weight:600;letter-spacing:0.05em}
+.ptag-football{background:rgba(200,80,42,0.15);color:#e8845a;border:1px solid rgba(200,80,42,0.3)}
+.ptag-rugby{background:rgba(34,139,34,0.15);color:#6ec96e;border:1px solid rgba(34,139,34,0.3)}
+.ptag-interactive{background:rgba(200,169,74,0.15);color:var(--gold);border:1px solid rgba(200,169,74,0.3)}
+.ptag-printable{background:rgba(100,149,237,0.15);color:#87CEEB;border:1px solid rgba(100,149,237,0.3)}
+.ptag-bundle{background:rgba(147,51,234,0.15);color:#c084fc;border:1px solid rgba(147,51,234,0.3)}
+
+/* Pricing table */
+.price-table{width:100%;border-collapse:collapse;margin-top:16px}
+.price-table th{background:var(--navy);color:var(--gold);font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:10px 14px;text-align:left;border-bottom:2px solid var(--gold)}
+.price-table td{padding:10px 14px;font-size:13px;border-bottom:1px solid #334155}
+.price-table tr:hover td{background:rgba(200,169,74,0.05)}
+.price-table .price{font-weight:700;color:var(--gold)}
+
+/* Voice & Tone */
+.tone-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.tone-card{padding:20px;border-radius:8px}
+.tone-do{background:rgba(34,139,34,0.08);border:1px solid rgba(34,139,34,0.3)}
+.tone-dont{background:rgba(220,38,38,0.08);border:1px solid rgba(220,38,38,0.3)}
+.tone-label{font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:10px}
+.tone-do .tone-label{color:#6ec96e}
+.tone-dont .tone-label{color:#ef4444}
+.tone-card p{font-size:13px;color:#94a3b8;line-height:1.6}
+</style>
+</head>
+<body>
+
+<header class="brand-header">
+  <div class="header-stripe"></div>
+  <div class="header-inner">
+    <div class="logo-mono">TWC</div>
+    <div class="logo-text">
+      <div class="name">The Wall Chart Co</div>
+      <div class="sub">Brand Guide &middot; April 2026</div>
+    </div>
+  </div>
+</header>
+
+<div class="content">
+
+<!-- 1. BRAND IDENTITY -->
+<div class="section">
+  <div class="section-title">Brand Identity</div>
+  <div class="section-sub">Who we are</div>
+
+  <div class="card">
+    <h3>Brand Story</h3>
+    <p>The Wall Chart Co makes premium digital downloads for football and rugby fans who want to get more out of the tournament. Every product opens in any web browser — no app, no subscription, no install. Buy once, use all tournament long.</p>
+    <p style="margin-top:12px">Founded in Swansea, Wales by Anthony — 30 years of web development experience combined with a genuine love for football and rugby. We build the kind of tools we would want to use ourselves watching the matches.</p>
+  </div>
+
+  <div class="card">
+    <h3>Brand Values</h3>
+    <ul>
+      <li><strong style="color:#fff">Quality over quantity</strong> — Every product is meticulously designed with correct data and clean layouts</li>
+      <li><strong style="color:#fff">Simplicity</strong> — One HTML file, any browser, no install. It just works</li>
+      <li><strong style="color:#fff">Fan-first</strong> — Built by fans, for fans. We care about the experience of following the tournament</li>
+      <li><strong style="color:#fff">Honest pricing</strong> — Premium quality at fair digital prices. No subscriptions, no upsells</li>
+      <li><strong style="color:#fff">Welsh pride</strong> — Made in Swansea, Wales. Local craft, global audience</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>Brand Voice</h3>
+    <p>Confident, knowledgeable, approachable. We know our stuff but we don't talk down to anyone. We write like a mate who happens to be really good at building web tools and knows a lot about football and rugby.</p>
+
+    <div class="tone-grid">
+      <div class="tone-card tone-do">
+        <div class="tone-label">Do</div>
+        <p>"Track every match, group table and knockout result at the 2026 World Cup."</p>
+        <p style="margin-top:8px">"If anything does not work, message me and I will sort it quickly."</p>
+        <p style="margin-top:8px">"Open in any browser. No app, no install."</p>
+      </div>
+      <div class="tone-card tone-dont">
+        <div class="tone-label">Don't</div>
+        <p>"Revolutionize your World Cup experience with our cutting-edge digital solution!"</p>
+        <p style="margin-top:8px">"Please contact customer support for assistance with your purchase."</p>
+        <p style="margin-top:8px">"Download our state-of-the-art application today!"</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 2. COLOUR PALETTE -->
+<div class="section">
+  <div class="section-title">Colour Palette</div>
+  <div class="section-sub">Primary brand colours</div>
+
+  <div class="swatches">
+    <div class="swatch"><div class="swatch-color" style="background:#0B1E3D"></div><div class="swatch-info"><div class="swatch-name">Navy</div><div class="swatch-hex">#0B1E3D</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#C8502A"></div><div class="swatch-info"><div class="swatch-name">Red</div><div class="swatch-hex">#C8502A</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#C8A94A"></div><div class="swatch-info"><div class="swatch-name">Gold</div><div class="swatch-hex">#C8A94A</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#F7F5EE"></div><div class="swatch-info"><div class="swatch-name">Cream</div><div class="swatch-hex">#F7F5EE</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#FFFFFF;border-bottom:1px solid #ddd"></div><div class="swatch-info"><div class="swatch-name">White</div><div class="swatch-hex">#FFFFFF</div></div></div>
+  </div>
+
+  <div class="card" style="margin-top:24px">
+    <h3>Colour Usage Rules</h3>
+    <ul>
+      <li><strong style="color:#fff">Navy</strong> — Primary background for headers, sidebars, section heads. The anchor of the brand</li>
+      <li><strong style="color:#fff">Gold</strong> — Accent colour for logos, borders, highlights, CTAs, active states. The premium signal</li>
+      <li><strong style="color:#fff">Red</strong> — Secondary accent for dates, times, sport-specific highlights, urgency</li>
+      <li><strong style="color:#fff">Cream</strong> — Content background, alternating table rows, print-friendly surfaces</li>
+      <li><strong style="color:#fff">White</strong> — Input fields, score boxes, clean content areas</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>Sport-Specific Accent Colours</h3>
+    <ul>
+      <li><strong style="color:#fff">Football products</strong> — Use core palette (navy/red/gold). Team editions use team colours as accent override</li>
+      <li><strong style="color:#fff">Rugby products</strong> — Core palette with green (#2D6A2E) as supplementary accent for rugby-specific elements</li>
+      <li><strong style="color:#fff">Champions League</strong> — Core palette with UCL blue (#1A3668) integration</li>
+      <li><strong style="color:#fff">Premier League</strong> — Core palette with PL purple (#38003C) as theme option</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 3. TYPOGRAPHY -->
+<div class="section">
+  <div class="section-title">Typography</div>
+  <div class="section-sub">Font system</div>
+
+  <div class="card">
+    <div class="type-sample">
+      <div class="type-label">Primary — EB Garamond (Headings, Brand, Titles)</div>
+      <div class="type-garamond" style="font-size:36px;font-weight:700;color:#fff;margin:8px 0">The Wall Chart Co</div>
+      <div class="type-garamond" style="font-size:24px;font-weight:700;color:var(--gold)">2026 World Cup Wall Chart</div>
+      <div class="type-garamond" style="font-size:18px;font-weight:400;color:#94a3b8;margin-top:4px">ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789</div>
+    </div>
+
+    <div class="type-sample">
+      <div class="type-label">Secondary — Inter (Body, UI, Data, Navigation)</div>
+      <div class="type-inter" style="font-size:14px;font-weight:400;color:#e2e8f0;margin:8px 0">Track every match, group table and knockout result at the 2026 World Cup. Open the file in any browser.</div>
+      <div class="type-inter" style="font-size:10px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-top:8px">PREMIUM TOURNAMENT DOWNLOADS</div>
+      <div class="type-inter" style="font-size:13px;font-weight:600;color:#94a3b8;margin-top:4px">ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Typography Rules</h3>
+    <ul>
+      <li>EB Garamond: Brand name, product titles, group letters, section headings, trophy/champion text</li>
+      <li>Inter: Navigation, body text, data tables, buttons, labels, UI elements, score inputs</li>
+      <li>Section labels: 8-10px, Inter, weight 700, letter-spacing 0.15-0.2em, uppercase, gold colour</li>
+      <li>Never mix — Garamond is the premium voice, Inter is the functional workhorse</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 4. LOGO -->
+<div class="section">
+  <div class="section-title">Logo System</div>
+  <div class="section-sub">Monogram + wordmark</div>
+
+  <div class="logo-grid">
+    <div class="logo-example" style="background:var(--navy)">
+      <div class="mono" style="background:var(--gold);color:var(--navy)">TWC</div>
+      <div class="brand-name" style="color:#fff">The Wall Chart Co</div>
+    </div>
+    <div class="logo-example" style="background:#fff">
+      <div class="mono" style="background:var(--navy);color:var(--gold)">TWC</div>
+      <div class="brand-name" style="color:var(--navy)">The Wall Chart Co</div>
+    </div>
+    <div class="logo-example" style="background:var(--cream)">
+      <div class="mono" style="background:var(--gold);color:var(--navy)">TWC</div>
+      <div class="brand-name" style="color:var(--navy)">The Wall Chart Co</div>
+    </div>
+    <div class="logo-example" style="background:#1a1a2a">
+      <div class="mono" style="background:var(--gold);color:var(--navy)">TWC</div>
+      <div class="brand-name" style="color:var(--gold)">The Wall Chart Co</div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <h3>Logo Rules</h3>
+    <ul>
+      <li>Monogram is always "TWC" in EB Garamond Bold inside a rounded square</li>
+      <li>Default: Gold monogram on navy background, white wordmark</li>
+      <li>On light backgrounds: Navy monogram with gold text, navy wordmark</li>
+      <li>Minimum monogram size: 26px (toolbar), standard: 44px (header), large: 64px (brand page)</li>
+      <li>Always include the tri-colour stripe (red/white/navy) above or below the header</li>
+      <li>Gold (#C8A94A) border always separates the header from content below</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 5. PRODUCT COMPONENTS -->
+<div class="section">
+  <div class="section-title">Product Components</div>
+  <div class="section-sub">Reusable design patterns across all products</div>
+
+  <div class="card">
+    <h3>Standard Product Structure</h3>
+    <ul>
+      <li><strong style="color:#fff">Tri-colour stripe</strong> — 4-5px gradient bar at very top of every product</li>
+      <li><strong style="color:#fff">Sticky header</strong> — Navy background, TWC logo left, product title centre, action buttons right</li>
+      <li><strong style="color:#fff">Gold border</strong> — 2-3px gold line below header, above footer</li>
+      <li><strong style="color:#fff">Tab navigation</strong> — Uppercase labels, gold active state, navy/dark background</li>
+      <li><strong style="color:#fff">Content cards</strong> — Rounded corners (8-10px), subtle border, dark background on dark theme</li>
+      <li><strong style="color:#fff">Score inputs</strong> — White background, 1px border, centered text, rounded corners</li>
+      <li><strong style="color:#fff">Print button</strong> — Gold background, navy text, uppercase, always visible</li>
+      <li><strong style="color:#fff">Footer</strong> — Navy background, gold TWC brand, copyright, unofficial disclaimer</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>Interactive Features (Standard across all products)</h3>
+    <ul>
+      <li>localStorage auto-save on every score entry</li>
+      <li>Export save as JSON file with timestamped filename</li>
+      <li>Import save from JSON file with validation</li>
+      <li>Print/Save PDF button with @media print optimisation</li>
+      <li>Theme variants (minimum 3 per product)</li>
+      <li>Responsive layout — works on desktop, tablet, and phone</li>
+      <li>Flag images from flagcdn.com (free, no API key needed)</li>
+      <li>All times shown in UK GMT/BST with clear labelling</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 6. PRODUCT CATALOGUE -->
+<div class="section">
+  <div class="section-title">Product Catalogue</div>
+  <div class="section-sub">Full product range &middot; April 2026</div>
+
+  <div class="product-grid">
+    <!-- World Cup 2026 -->
+    <div class="product-card">
+      <div class="product-header">
+        <div class="product-name">World Cup 2026 Wall Chart</div>
+        <div class="product-type">Interactive &middot; Football</div>
+      </div>
+      <div class="product-body">
+        <div class="product-price">&pound;5.99</div>
+        <div class="product-desc">Full tournament tracker — 12 groups, 104 matches, knockout bracket, 5 themes, auto-save. The flagship product.</div>
+        <div class="product-tags"><span class="ptag ptag-football">Football</span><span class="ptag ptag-interactive">Interactive</span></div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-header">
+        <div class="product-name">England World Cup 2026</div>
+        <div class="product-type">Interactive &middot; Football &middot; Team Edition</div>
+      </div>
+      <div class="product-body">
+        <div class="product-price">&pound;5.99</div>
+        <div class="product-desc">England fan edition — red/white theme, England rows highlighted, all 104 matches with BST times.</div>
+        <div class="product-tags"><span class="ptag ptag-football">Football</span><span class="ptag ptag-interactive">Interactive</span></div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-header">
+        <div class="product-name">World Cup 2026 Fixture Poster</div>
+        <div class="product-type">Printable &middot; Football</div>
+      </div>
+      <div class="product-body">
+        <div class="product-price">&pound;3.49</div>
+        <div class="product-desc">A3 landscape poster — all groups + knockout bracket on one page. Print, fill in by hand.</div>
+        <div class="product-tags"><span class="ptag ptag-football">Football</span><span class="ptag ptag-printable">Printable</span></div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-header">
+        <div class="product-name">World Cup 2026 Bracket Poster</div>
+        <div class="product-type">Printable &middot; Football</div>
+      </div>
+      <div class="product-body">
+        <div class="product-price">&pound;2.99</div>
+        <div class="product-desc">A4 landscape knockout bracket — Round of 32 to Final. Clean layout for pen/pencil scoring.</div>
+        <div class="product-tags"><span class="ptag ptag-football">Football</span><span class="ptag ptag-printable">Printable</span></div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-header">
+        <div class="product-name">World Cup 2026 Team Guide</div>
+        <div class="product-type">Interactive &middot; Football &middot; Reference</div>
+      </div>
+      <div class="product-body">
+        <div class="product-price">&pound;5.99</div>
+        <div class="product-desc">48 teams — squads, World Cup history, notable moments, fixtures. Searchable sidebar navigation.</div>
+        <div class="product-tags"><span class="ptag ptag-football">Football</span><span class="ptag ptag-interactive">Interactive</span></div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-header">
+        <div class="product-name">World Cup 2026 Complete Bundle</div>
+        <div class="product-type">Bundle &middot; Football</div>
+      </div>
+      <div class="product-body">
+        <div class="product-price">&pound;11.99</div>
+        <div class="product-desc">Wall Chart + Fixture Poster + Team Guide — save &pound;3.48 off individual prices.</div>
+        <div class="product-tags"><span class="ptag ptag-football">Football</span><span class="ptag ptag-bundle">Bundle</span></div>
+      </div>
+    </div>
+
+    <!-- Champions League -->
+    <div class="product-card">
+      <div class="product-header">
+        <div class="product-name">Champions League 2025/26</div>
+        <div class="product-type">Interactive &middot; Football</div>
+      </div>
+      <div class="product-body">
+        <div class="product-price">&pound;4.99</div>
+        <div class="product-desc">36-team league phase + full knockout bracket. Track every UCL match through to the Munich Final.</div>
+        <div class="product-tags"><span class="ptag ptag-football">Football</span><span class="ptag ptag-interactive">Interactive</span></div>
+      </div>
+    </div>
+
+    <!-- Premier League -->
+    <div class="product-card">
+      <div class="product-header">
+        <div class="product-name">Premier League 2025/26</div>
+        <div class="product-type">Interactive &middot; Football</div>
+      </div>
+      <div class="product-body">
+        <div class="product-price">&pound;4.99</div>
+        <div class="product-desc">Full season tracker — 20 teams, 380 matches, 38 gameweeks. Live table, form guide, top scorers.</div>
+        <div class="product-tags"><span class="ptag ptag-football">Football</span><span class="ptag ptag-interactive">Interactive</span></div>
+      </div>
+    </div>
+
+    <!-- Euro 2028 Qualifiers -->
+    <div class="product-card">
+      <div class="product-header">
+        <div class="product-name">Euro 2028 Qualifiers</div>
+        <div class="product-type">Interactive &middot; Football</div>
+      </div>
+      <div class="product-body">
+        <div class="product-price">&pound;4.99</div>
+        <div class="product-desc">Track every qualifying group — who qualifies for Euro 2028 in UK &amp; Ireland. All groups, fixtures, qualified teams tracker.</div>
+        <div class="product-tags"><span class="ptag ptag-football">Football</span><span class="ptag ptag-interactive">Interactive</span></div>
+      </div>
+    </div>
+
+    <!-- Six Nations -->
+    <div class="product-card">
+      <div class="product-header">
+        <div class="product-name">Six Nations 2026</div>
+        <div class="product-type">Interactive &middot; Rugby</div>
+      </div>
+      <div class="product-body">
+        <div class="product-price">&pound;3.99</div>
+        <div class="product-desc">Championship tracker — 6 teams, 15 matches, bonus points, Grand Slam/Triple Crown indicators. Full rugby scoring.</div>
+        <div class="product-tags"><span class="ptag ptag-rugby">Rugby</span><span class="ptag ptag-interactive">Interactive</span></div>
+      </div>
+    </div>
+
+    <!-- Rugby World Cup -->
+    <div class="product-card">
+      <div class="product-header">
+        <div class="product-name">Rugby World Cup 2027</div>
+        <div class="product-type">Interactive &middot; Rugby</div>
+      </div>
+      <div class="product-body">
+        <div class="product-price">&pound;5.99</div>
+        <div class="product-desc">Australia 2027 — 4 pools, 20 teams, knockout bracket, full rugby scoring with bonus points and try trackers.</div>
+        <div class="product-tags"><span class="ptag ptag-rugby">Rugby</span><span class="ptag ptag-interactive">Interactive</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 7. PRICING STRATEGY -->
+<div class="section">
+  <div class="section-title">Pricing Structure</div>
+  <div class="section-sub">Etsy digital downloads</div>
+
+  <table class="price-table">
+    <thead>
+      <tr><th>Product Type</th><th>Price Point</th><th>Rationale</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Printable posters (single page)</td><td class="price">&pound;2.99 &ndash; &pound;3.49</td><td>Low entry point, impulse buy. Drives traffic and reviews</td></tr>
+      <tr><td>Interactive trackers (smaller tournaments)</td><td class="price">&pound;3.99 &ndash; &pound;4.99</td><td>Mid-range for seasonal/league products. Good value for repeat use</td></tr>
+      <tr><td>Interactive trackers (major tournaments)</td><td class="price">&pound;5.99</td><td>Premium anchor price for flagship products (World Cup, RWC)</td></tr>
+      <tr><td>Team guides &amp; reference products</td><td class="price">&pound;5.99</td><td>High perceived value — comprehensive content justifies premium</td></tr>
+      <tr><td>Bundles</td><td class="price">&pound;9.99 &ndash; &pound;11.99</td><td>20-30% discount vs individual. Drives higher AOV</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 8. ETSY LISTING STANDARDS -->
+<div class="section">
+  <div class="section-title">Etsy Listing Standards</div>
+  <div class="section-sub">Consistency across all listings</div>
+
+  <div class="card">
+    <h3>Title Format</h3>
+    <p style="font-family:monospace;color:var(--gold);font-size:14px;margin:8px 0">[Tournament] [Year] [Product Type] | [Key Feature] | Digital Download</p>
+    <p>Example: "World Cup 2026 Interactive Wall Chart | Track All 104 Matches | Digital Download"</p>
+    <p style="margin-top:6px">Keep under 140 characters. Front-load the tournament name. Always end with "Digital Download".</p>
+  </div>
+
+  <div class="card">
+    <h3>Description Structure</h3>
+    <ul>
+      <li>Opening line: One clear sentence about what the product does</li>
+      <li>"Open the file in any browser" line</li>
+      <li>WHAT YOU GET section with bullet points</li>
+      <li>HOW IT WORKS section (download → open → use)</li>
+      <li>UNOFFICIAL NOTICE disclaimer</li>
+      <li>DELIVERY section (instant digital download)</li>
+      <li>ALSO AVAILABLE cross-sell section</li>
+      <li>Copyright notice</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>Tags (13 per listing)</h3>
+    <ul>
+      <li>Tags 1-3: Tournament + product type (highest intent)</li>
+      <li>Tags 4-6: Sport + year + variation keywords</li>
+      <li>Tags 7-9: Gift/occasion keywords</li>
+      <li>Tags 10-13: Broader sport/download keywords for discovery</li>
+      <li>Always include: "digital download", tournament year, sport name</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>Photography / Mockups</h3>
+    <ul>
+      <li>Image 1: Product screenshot on laptop mockup, 45-degree angle, lifestyle setting</li>
+      <li>Image 2: Full product screenshot (browser view)</li>
+      <li>Image 3: Close-up of key feature (group table, bracket, team page)</li>
+      <li>Image 4: Mobile/tablet view showing responsive design</li>
+      <li>Image 5: "What's included" infographic with TWC branding</li>
+      <li>Consistent gold/navy colour framing on all mockup images</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 9. DISCLAIMER -->
+<div class="section">
+  <div class="section-title">Legal &amp; Disclaimers</div>
+  <div class="section-sub">Required on all products and listings</div>
+
+  <div class="card">
+    <h3>Standard Disclaimer</h3>
+    <p style="color:var(--gold);font-style:italic">"This is an unofficial product. It is not affiliated with or endorsed by [governing body], any host nation [sport] association, or any national team."</p>
+    <p style="margin-top:12px">Replace [governing body] with: FIFA (football), World Rugby (rugby), UEFA (Champions League/Euro), the Premier League (PL).</p>
+  </div>
+
+  <div class="card">
+    <h3>Copyright</h3>
+    <p>&copy; 2026 The Wall Chart Co. Personal use only.</p>
+    <p style="margin-top:8px">All products are for personal, non-commercial use. No redistribution.</p>
+  </div>
+</div>
+
+</div>
+
+<!-- Footer -->
+<footer style="background:var(--navy);padding:20px 40px;border-top:3px solid var(--gold);display:flex;align-items:center;justify-content:space-between">
+  <div style="display:flex;align-items:center;gap:10px">
+    <div class="logo-mono" style="width:32px;height:32px;font-size:11px;border-radius:4px">TWC</div>
+    <span style="font-family:'EB Garamond',serif;font-size:14px;font-weight:700;color:var(--gold);letter-spacing:0.06em;text-transform:uppercase">The Wall Chart Co</span>
+  </div>
+  <span style="font-size:11px;color:rgba(255,255,255,0.4)">Brand Guide &middot; Version 1.0 &middot; April 2026</span>
+</footer>
+
+</body>
+</html>

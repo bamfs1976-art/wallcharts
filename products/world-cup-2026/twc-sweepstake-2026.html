@@ -722,11 +722,11 @@ function renderParticipantList() {
   badge.textContent = participants.length + ' / 48';
 
   if (participants.length === 0) {
-    empty.style.display = '';
-    while (list.childNodes.length > 1) list.removeChild(list.lastChild);
+    if (empty) empty.style.display = '';
+    while (list.children.length > 1) list.removeChild(list.lastChild);
     return;
   }
-  empty.style.display = 'none';
+  if (empty) empty.style.display = 'none';
   // Rebuild list (keep empty item)
   while (list.children.length > 1) list.removeChild(list.lastChild);
 

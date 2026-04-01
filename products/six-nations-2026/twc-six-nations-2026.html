@@ -709,7 +709,7 @@ table.stat-table tbody tr:hover td { background: var(--cream); }
               <option value="Scotland">Scotland</option>
               <option value="Wales">Wales</option>
             </select>
-            <input type="number" id="try-num" placeholder="Tries" min="1" value="1" style="max-width:60px;" aria-label="Number of tries">
+            <input type="number" id="try-num" placeholder="Tries" min="1" max="50" value="1" style="max-width:60px;" aria-label="Number of tries">
             <button class="btn-add" onclick="addTryScorer()">Add</button>
           </div>
           <table class="stat-table">
@@ -737,7 +737,7 @@ table.stat-table tbody tr:hover td { background: var(--cream); }
               <option value="Scotland">Scotland</option>
               <option value="Wales">Wales</option>
             </select>
-            <input type="number" id="pts-num" placeholder="Pts" min="1" value="0" style="max-width:60px;" aria-label="Points scored">
+            <input type="number" id="pts-num" placeholder="Pts" min="1" max="999" value="0" style="max-width:60px;" aria-label="Points scored">
             <button class="btn-add" onclick="addPointsScorer()">Add</button>
           </div>
           <table class="stat-table">

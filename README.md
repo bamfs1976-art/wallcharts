@@ -18,6 +18,7 @@ Premium digital downloads for football and rugby fans. Every product is a single
 | **World Cup 2026 Knockout Bracket Poster** | £2.99 | `products/world-cup-2026/twc-bracket-poster-2026.html` |
 | **World Cup 2026 Team Guide (48 teams)** | £5.99 | `products/world-cup-2026/twc-team-guide-2026.html` |
 | **World Cup 2026 Team Guide (Official Squads)** | £5.99 | `products/world-cup-2026/twc-team-guide-official-squads-2026.html` |
+| **World Cup 2026 Office Sweepstake Kit** | £2.99 | `products/world-cup-2026/twc-sweepstake-2026.html` |
 | **Champions League 2025/26 Wall Chart** | £4.99 | `products/champions-league-2025-26/twc-champions-league-2025-26.html` |
 | **Premier League 2025/26 Tracker** | £4.99 | `products/premier-league-2025-26/twc-premier-league-2025-26.html` |
 | **Euro 2028 Qualifiers Tracker** | £4.99 | `products/euro-2028-qualifiers/twc-euro-2028-qualifiers.html` |

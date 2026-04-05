@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 World Cup Snake Sweepstake — The Wall Chart Co</title>
+<meta property="og:title" content="2026 World Cup Snake Sweepstake — The Wall Chart Co">
+<meta property="og:description" content="The fairest sweepstake format for the 2026 FIFA World Cup. Snake rotation assigns all 48 nations equally. Perfect for offices, pubs, and friends. Instant digital download.">
+<meta property="og:type" content="website">
+<meta name="description" content="World Cup 2026 snake sweepstake draw tool. Fair snake rotation for 2-48 players across all 48 teams. Printable results. Digital download from The Wall Chart Co.">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --twc-navy:#0B1E3D; --twc-red:#C8502A; --twc-gold:#C8A94A;
+  --bg:#0f172a; --bg2:#1e293b; --bg3:#334155;
+  --text:#f1f5f9; --text-muted:#94a3b8; --text-faint:#64748b;
+  --border:#475569; --accent:#C8A94A;
+  --gold:#C8A94A; --silver:#94a3b8; --bronze:#c9734a;
+  --green:#4ade80; --danger:#ef4444;
+  --transition: 180ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body {
+  min-height: 100dvh;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 16px;
+  color: var(--text);
+  background: var(--bg);
+}
+button { cursor: pointer; font: inherit; border: none; background: none; color: inherit; }
+input, select { font: inherit; color: inherit; }
+
+.container { max-width: 960px; margin: 0 auto; padding: 0 16px; }
+
+/* HEADER */
+.site-header {
+  background: var(--twc-navy);
+  position: sticky; top: 0; z-index: 100;
+  border-bottom: 3px solid var(--accent);
+}
+.header-stripe { height: 4px; background: linear-gradient(90deg, var(--twc-red) 33%, #fff 33%, #fff 66%, var(--twc-navy) 66%); }
+.header-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 20px; max-width: 960px; margin: 0 auto;
+}
+.logo-wrap { display: flex; align-items: center; gap: 10px; }
+.logo-mono {
+  width: 40px; height: 40px; border-radius: 5px;
+  background: var(--accent); display: flex; align-items: center; justify-content: center;
+  font-family: Georgia, serif; font-size: 14px; font-weight: 700; color: var(--twc-navy); flex-shrink: 0;
+}
+.logo-text { display: flex; flex-direction: column; }
+.logo-name { font-family: 'EB Garamond', Georgia, serif; font-size: 18px; font-weight: 700; color: #fff; letter-spacing: 0.05em; text-transform: uppercase; line-height: 1; }
+.logo-sub { font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-top: 4px; }
+
+/* HERO */
+.hero {
+  text-align: center;
+  padding: 64px 16px 48px;
+  background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(200,169,74,0.08), transparent);
+  position: relative;
+}
+.hero-tag {
+  display: inline-block;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(200,169,74,0.1); border: 1px solid rgba(200,169,74,0.25);
+  padding: 4px 12px; border-radius: 999px; margin-bottom: 16px;
+}
+.hero h1 {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: clamp(2.5rem, 1rem + 5vw, 5rem);
+  letter-spacing: 0.02em; line-height: 1; margin-bottom: 16px; color: #fff;
+}
+.hero h1 span { color: var(--twc-red); }
+.hero p {
+  font-size: clamp(1rem, 0.9rem + 0.5vw, 1.25rem);
+  color: var(--text-muted); max-width: 52ch; margin: 0 auto 24px; line-height: 1.5;
+}
+.snake-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 14px; font-weight: 500;
+  color: var(--twc-red); background: rgba(200,80,42,0.1);
+  border: 1px solid rgba(200,80,42,0.25);
+  padding: 8px 16px; border-radius: 999px;
+}
+
+/* CARDS */
+.card {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 10px; overflow: hidden;
+}
+.card-header {
+  padding: 20px 24px; border-bottom: 1px solid rgba(71,85,105,0.5);
+}
+.card-body { padding: 24px; }
+
+/* STEPS */
+.steps {
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 32px; overflow-x: auto; padding-bottom: 8px;
+}
+.step {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 14px; font-weight: 500; white-space: nowrap; color: var(--text-faint);
+}
+.step.active { color: var(--text); }
+.step.done { color: var(--accent); }
+.step-num {
+  width: 28px; height: 28px; border-radius: 999px;
+  border: 2px solid currentColor;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700; flex-shrink: 0;
+}
+.step.active .step-num { background: var(--accent); color: var(--twc-navy); border-color: var(--accent); }
+.step.done .step-num { background: var(--accent); color: var(--twc-navy); border-color: var(--accent); }
+.step-line { flex: 1; height: 1px; background: var(--border); min-width: 20px; }
+
+/* FORMS */
+.form-group { margin-bottom: 20px; }
+.form-label {
+  display: block; font-size: 12px; font-weight: 600;
+  margin-bottom: 8px; color: var(--text-muted);
+  letter-spacing: 0.08em; text-transform: uppercase;
+}
+.form-input, .form-select {
+  width: 100%; padding: 10px 14px;
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: 6px; font-size: 16px; color: var(--text);
+  outline: none; transition: border-color var(--transition), box-shadow var(--transition);
+}
+.form-input:focus, .form-select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(200,169,74,0.15);
+}
+.form-input::placeholder { color: var(--text-faint); }
+.form-hint { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+
+.participants-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px;
+}
+.participant-input-wrap { position: relative; }
+.participant-num {
+  position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
+  font-size: 11px; font-weight: 700;
+  color: var(--accent); background: rgba(200,169,74,0.15);
+  width: 20px; height: 20px; border-radius: 999px;
+  display: flex; align-items: center; justify-content: center; pointer-events: none;
+}
+.participant-input-wrap .form-input { padding-left: 40px; }
+
+/* BUTTONS */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 20px; font-size: 13px; font-weight: 600;
+  border-radius: 6px; transition: all var(--transition);
+  letter-spacing: 0.04em; text-decoration: none;
+  cursor: pointer; border: 1px solid transparent;
+}
+.btn-primary { background: var(--accent); color: var(--twc-navy); border-color: var(--accent); }
+.btn-primary:hover { filter: brightness(1.1); }
+.btn-secondary { background: var(--bg2); color: var(--text); border-color: var(--border); }
+.btn-secondary:hover { border-color: var(--accent); }
+.btn-lg { padding: 14px 28px; font-size: 16px; border-radius: 8px; }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* SECTION HEADINGS */
+.section-title {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: clamp(1.25rem, 1rem + 1vw, 1.75rem);
+  font-weight: 700; letter-spacing: 0.04em;
+}
+
+/* PAGES */
+.page { display: none; }
+.page.active { display: block; }
+
+/* INFO BOX */
+.info-box {
+  background: rgba(200,169,74,0.06);
+  border: 1px solid rgba(200,169,74,0.2);
+  border-radius: 10px; padding: 16px 20px; margin-bottom: 24px;
+}
+.info-box p { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+.info-box strong { color: var(--text); }
+
+/* SNAKE EXPLAINER */
+.snake-explainer { display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px; }
+.snake-row { display: flex; align-items: center; gap: 4px; }
+.snake-row-label {
+  font-size: 12px; font-weight: 700; color: var(--text-muted);
+  width: 60px; flex-shrink: 0; text-align: right; padding-right: 8px;
+}
+.snake-cell {
+  font-size: 12px; font-weight: 700;
+  width: 32px; height: 28px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 4px; border: 1px solid var(--border);
+  color: var(--text-muted); transition: all var(--transition);
+}
+.snake-cell.highlight { background: rgba(200,169,74,0.15); border-color: var(--accent); color: var(--accent); }
+
+/* TIER LEGEND */
+.tier-legend { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.tier-item { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-muted); }
+.tier-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.tier-1 { background: var(--gold); }
+.tier-2 { background: var(--silver); }
+.tier-3 { background: var(--bronze); }
+.tier-4 { background: var(--text-faint); }
+
+/* DRAW ARENA */
+.draw-arena {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 10px; padding: 32px; text-align: center;
+  margin-bottom: 24px; position: relative; overflow: hidden;
+}
+.draw-arena::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(200,169,74,0.06), transparent);
+  pointer-events: none;
+}
+.current-pick-label {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--text-muted); margin-bottom: 12px;
+}
+.current-participant {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+  letter-spacing: 0.05em; color: var(--accent); margin-bottom: 8px; min-height: 1.2em;
+}
+.current-direction {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--twc-red); margin-bottom: 24px;
+}
+
+/* CARD FLIP */
+.card-flip-container { perspective: 600px; display: inline-block; }
+.card-flip {
+  width: 220px; height: 130px; position: relative;
+  transform-style: preserve-3d; transition: transform 0.6s ease;
+}
+.card-flip.flipped { transform: rotateY(180deg); }
+.card-face {
+  position: absolute; inset: 0; backface-visibility: hidden;
+  border-radius: 8px; display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 8px; border: 2px solid var(--border);
+}
+.card-back {
+  background: linear-gradient(135deg, var(--twc-navy) 0%, #0a1628 100%);
+  border-color: var(--accent);
+}
+.card-back-pattern { font-size: 3rem; opacity: 0.3; }
+.card-front {
+  background: var(--bg2); transform: rotateY(180deg);
+  border-color: var(--accent); box-shadow: 0 0 20px rgba(200,169,74,0.15);
+}
+.team-flag-big { font-size: 2.5rem; line-height: 1; }
+.team-name-big {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 18px; font-weight: 700; letter-spacing: 0.05em;
+  color: var(--text); text-align: center; line-height: 1.1;
+}
+.team-group-badge {
+  font-size: 11px; font-weight: 700;
+  padding: 2px 8px; border-radius: 999px;
+  background: rgba(200,169,74,0.15); color: var(--accent);
+  border: 1px solid rgba(200,169,74,0.3);
+}
+
+/* SNAKE TRACKER */
+.snake-tracker {
+  display: flex; align-items: center; justify-content: center;
+  flex-wrap: wrap; gap: 8px; margin: 24px 0;
+}
+.snake-slot {
+  min-width: 36px; height: 36px; padding: 0 8px;
+  border-radius: 999px; border: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700; transition: all var(--transition);
+  color: var(--text-faint);
+}
+.snake-slot.current {
+  border-color: var(--accent); color: var(--accent);
+  background: rgba(200,169,74,0.15);
+  box-shadow: 0 0 12px rgba(200,169,74,0.2);
+  animation: pulse 1.2s ease-in-out infinite;
+}
+.snake-slot.done { border-color: var(--accent); background: rgba(200,169,74,0.1); color: var(--accent); }
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 8px rgba(200,169,74,0.15); }
+  50% { box-shadow: 0 0 20px rgba(200,169,74,0.35); }
+}
+.draw-controls {
+  display: flex; align-items: center; justify-content: center;
+  gap: 12px; flex-wrap: wrap;
+}
+.pick-counter { font-size: 14px; color: var(--text-muted); font-weight: 500; }
+.progress-bar-wrap {
+  background: var(--bg3); border-radius: 999px; height: 6px;
+  margin: 16px 0; overflow: hidden;
+}
+.progress-bar {
+  height: 100%; background: linear-gradient(90deg, var(--twc-red), var(--accent));
+  border-radius: 999px; transition: width 0.4s ease;
+}
+
+/* RESULTS */
+.results-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;
+}
+.result-card {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 10px; overflow: hidden;
+  transition: transform var(--transition), box-shadow var(--transition);
+  animation: slideIn 0.4s ease both;
+}
+.result-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.result-card-header {
+  padding: 16px 20px; background: var(--twc-navy);
+  border-bottom: 1px solid rgba(200,169,74,0.2);
+  display: flex; align-items: center; gap: 12px;
+}
+.participant-avatar {
+  width: 40px; height: 40px; border-radius: 999px;
+  background: rgba(200,169,74,0.15); border: 2px solid var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 18px; color: var(--accent); flex-shrink: 0;
+}
+.participant-name { font-weight: 700; font-size: 16px; color: #fff; }
+.participant-count { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+.team-list { padding: 16px 20px; display: flex; flex-direction: column; gap: 8px; }
+.team-row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 8px 12px; border-radius: 6px; background: var(--bg3);
+  transition: background var(--transition);
+}
+.team-row:hover { background: rgba(200,169,74,0.08); }
+.team-flag { font-size: 1.3rem; line-height: 1; flex-shrink: 0; }
+.team-info { flex: 1; min-width: 0; }
+.team-name { font-weight: 600; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.team-sub { font-size: 12px; color: var(--text-muted); }
+
+/* PICK LOG */
+.pick-log { max-height: 200px; overflow-y: auto; display: flex; flex-direction: column; gap: 4px; }
+.pick-log::-webkit-scrollbar { width: 4px; }
+.pick-log::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+.log-entry {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 12px; color: var(--text-muted);
+  padding: 4px 8px; border-radius: 4px; animation: fadeIn 0.3s ease;
+}
+@keyframes fadeIn { from { opacity: 0; transform: translateX(-8px); } to { opacity: 1; transform: translateX(0); } }
+.log-pick { font-weight: 700; color: var(--accent); }
+.log-participant { font-weight: 600; color: var(--text); }
+
+/* ACTION BAR */
+.action-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; flex-wrap: wrap;
+  padding: 16px 24px; background: var(--bg2);
+  border: 1px solid var(--border); border-radius: 10px; margin-bottom: 24px;
+}
+.action-bar-left { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* CONFETTI */
+.confetti-container { position: fixed; inset: 0; pointer-events: none; z-index: 999; overflow: hidden; }
+.confetti-piece {
+  position: absolute; width: 10px; height: 10px; border-radius: 2px;
+  animation: confettiFall linear forwards;
+}
+@keyframes confettiFall {
+  0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+}
+
+/* PRINT */
+@media print {
+  .site-header, .hero, .action-bar, .pick-log-section, .draw-page, .setup-page, .steps { display: none !important; }
+  body { background: #fff; color: #000; }
+  .card { border: 1px solid #ddd; background: #fff; }
+  .results-grid { grid-template-columns: repeat(3, 1fr); }
+  .result-card { break-inside: avoid; }
+  .result-card-header { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .participant-avatar { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .tier-dot { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .print-title { display: block !important; }
+}
+.print-title {
+  display: none; font-family: 'EB Garamond', Georgia, serif;
+  font-size: 2.5rem; text-align: center; margin-bottom: 1rem; color: #000;
+}
+
+/* UTIL */
+.mt-4 { margin-top: 16px; }
+.mt-6 { margin-top: 24px; }
+.mt-8 { margin-top: 32px; }
+.text-center { text-align: center; }
+.text-muted { color: var(--text-muted); }
+.gap-3 { gap: 12px; }
+.flex { display: flex; }
+.flex-wrap { flex-wrap: wrap; }
+.items-center { align-items: center; }
+.section { padding: 32px 0; }
+
+/* FOOTER */
+.site-footer {
+  background: var(--bg2); border-top: 1px solid var(--border);
+  padding: 20px; text-align: center; margin-top: 40px;
+}
+.footer-logo { font-family: 'EB Garamond', Georgia, serif; font-size: 14px; font-weight: 700; color: var(--text); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 4px; }
+.footer-copy { font-size: 11px; color: var(--text-muted); }
+
+@media (max-width: 640px) {
+  .results-grid { grid-template-columns: 1fr; }
+  .participants-grid { grid-template-columns: 1fr 1fr; }
+  .action-bar { flex-direction: column; align-items: stretch; }
+  .draw-controls { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<!-- CONFETTI -->
+<div class="confetti-container" id="confettiContainer"></div>
+
+<!-- HEADER -->
+<header class="site-header" role="banner">
+  <div class="header-stripe" aria-hidden="true"></div>
+  <div class="header-inner">
+    <div class="logo-wrap">
+      <div class="logo-mono" aria-hidden="true">TWC</div>
+      <div class="logo-text">
+        <div class="logo-name">The Wall Chart Co</div>
+        <div class="logo-sub">Snake Sweepstake · 2026</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="heroSection">
+  <div class="hero-tag">FIFA World Cup 2026 · USA / Canada / Mexico</div>
+  <h1>WORLD CUP <span>SNAKE</span><br>SWEEPSTAKE</h1>
+  <p>The fairest sweepstake format. Add your players, hit draw, and watch the snake rotation assign all 48 nations fairly.</p>
+  <div class="snake-badge">
+    Snake Rotation — Every participant gets an equal spread of strong and weaker teams
+  </div>
+</section>
+
+<!-- MAIN -->
+<main class="section">
+  <div class="container">
+
+    <!-- STEPS -->
+    <div class="steps" id="stepsNav">
+      <div class="step active" id="step1nav">
+        <div class="step-num">1</div> Setup
+      </div>
+      <div class="step-line"></div>
+      <div class="step" id="step2nav">
+        <div class="step-num">2</div> Draw
+      </div>
+      <div class="step-line"></div>
+      <div class="step" id="step3nav">
+        <div class="step-num">3</div> Results
+      </div>
+    </div>
+
+    <!-- PAGE 1: SETUP -->
+    <div class="page active setup-page" id="page1">
+
+      <div class="info-box">
+        <p>
+          <strong>How snake rotation works:</strong> Participants pick in order (1 to N), then the order reverses (N to 1), then repeats.
+          This ensures the person who picks last in round 1 picks <em>first</em> in round 2 — giving everyone an equal balance of
+          favourite and underdog teams across all 48 nations.
+        </p>
+      </div>
+
+      <div class="flex gap-3 flex-wrap" style="margin-bottom: 32px;">
+        <div class="card" style="flex:1; min-width: 280px;">
+          <div class="card-header">
+            <div class="section-title">Configuration</div>
+          </div>
+          <div class="card-body">
+            <div class="form-group">
+              <label class="form-label" for="numParticipants">Number of Participants</label>
+              <input type="number" id="numParticipants" class="form-input" min="2" max="48" value="6" onchange="updateParticipantFields()">
+              <p class="form-hint" id="teamsPerPerson">With 6 participants, each person gets 8 teams from 48.</p>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="seedInput">Random Seed (optional)</label>
+              <input type="text" id="seedInput" class="form-input" placeholder="Leave blank for random draw...">
+              <p class="form-hint">Use the same seed to reproduce an identical draw.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="flex:1; min-width: 280px;">
+          <div class="card-header">
+            <div class="section-title">Snake Preview</div>
+          </div>
+          <div class="card-body">
+            <p class="text-muted" style="font-size: 14px; margin-bottom: 16px;">Round-by-round pick order for your settings:</p>
+            <div class="snake-explainer" id="snakeExplainer"></div>
+            <div class="tier-legend">
+              <div class="tier-item"><div class="tier-dot tier-1"></div> Favourite</div>
+              <div class="tier-item"><div class="tier-dot tier-2"></div> Contender</div>
+              <div class="tier-item"><div class="tier-dot tier-3"></div> Outsider</div>
+              <div class="tier-item"><div class="tier-dot tier-4"></div> Underdog</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mt-6">
+        <div class="card-header">
+          <div class="section-title">Participant Names</div>
+          <p class="text-muted" style="font-size: 14px; margin-top: 4px;">Enter names or leave blank to use default labels.</p>
+        </div>
+        <div class="card-body">
+          <div class="participants-grid" id="participantFields"></div>
+        </div>
+      </div>
+
+      <div class="text-center mt-8">
+        <button class="btn btn-primary btn-lg" onclick="startDraw()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Start the Draw
+        </button>
+      </div>
+    </div>
+
+    <!-- PAGE 2: DRAW -->
+    <div class="page draw-page" id="page2">
+      <div class="draw-arena">
+        <div class="current-pick-label" id="pickLabel">NEXT PICK</div>
+        <div class="current-participant" id="currentParticipantName">—</div>
+        <div class="current-direction" id="directionLabel"></div>
+
+        <div class="card-flip-container">
+          <div class="card-flip" id="cardFlip">
+            <div class="card-face card-back">
+              <div class="card-back-pattern">&#9917;</div>
+            </div>
+            <div class="card-face card-front">
+              <div class="team-flag-big" id="revealFlag">&#127758;</div>
+              <div class="team-name-big" id="revealName">Team</div>
+              <div class="team-group-badge" id="revealGroup">Group A</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="progress-bar-wrap" style="margin-top: 24px; max-width: 400px; margin-left: auto; margin-right: auto;">
+          <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+        </div>
+        <div class="pick-counter" id="pickCounter">Pick 1 of 48</div>
+      </div>
+
+      <div class="snake-tracker" id="snakeTracker"></div>
+
+      <div class="draw-controls">
+        <button class="btn btn-secondary" id="autoDrawBtn" onclick="toggleAutoDraw()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Auto Draw
+        </button>
+        <button class="btn btn-primary btn-lg" id="nextPickBtn" onclick="nextPick()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Draw Next Team
+        </button>
+        <button class="btn btn-secondary" id="drawAllBtn" onclick="drawAll()">
+          Draw All Remaining
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 17l5-5-5-5M6 17l5-5-5-5"/></svg>
+        </button>
+      </div>
+
+      <div class="card mt-6 pick-log-section">
+        <div class="card-header" style="display: flex; align-items: center; justify-content: space-between;">
+          <div class="section-title" style="font-size: 18px;">Pick Log</div>
+        </div>
+        <div class="card-body">
+          <div class="pick-log" id="pickLog"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 3: RESULTS -->
+    <div class="page" id="page3">
+      <div class="print-title">World Cup 2026 Snake Sweepstake — Results</div>
+
+      <div class="action-bar">
+        <div class="action-bar-left">
+          <button class="btn btn-secondary" onclick="goToPage(1)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+            New Draw
+          </button>
+          <button class="btn btn-secondary" onclick="goToPage(2)">
+            View Draw
+          </button>
+        </div>
+        <div class="flex gap-3 flex-wrap">
+          <button class="btn btn-secondary" onclick="copyResults()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy Results
+          </button>
+          <button class="btn btn-primary" onclick="window.print()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+            Print Results
+          </button>
+        </div>
+      </div>
+
+      <div class="results-grid" id="resultsGrid"></div>
+
+      <div class="card mt-8">
+        <div class="card-header">
+          <div class="section-title">Draft Order Recap</div>
+        </div>
+        <div class="card-body">
+          <div class="snake-explainer" id="recapExplainer" style="overflow-x: auto;"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-logo">The Wall Chart Co</div>
+  <div class="footer-copy">Unofficial fan product. Not associated with FIFA. &copy; 2026 The Wall Chart Co.</div>
+</footer>
+
+<script>
+// DATA: All 48 World Cup 2026 Teams
+const TEAMS = [
+  { name: "Mexico", flag: "\u{1F1F2}\u{1F1FD}", group: "A", conf: "CONCACAF", tier: 2 },
+  { name: "South Africa", flag: "\u{1F1FF}\u{1F1E6}", group: "A", conf: "CAF", tier: 4 },
+  { name: "South Korea", flag: "\u{1F1F0}\u{1F1F7}", group: "A", conf: "AFC", tier: 3 },
+  { name: "Czech Republic", flag: "\u{1F1E8}\u{1F1FF}", group: "A", conf: "UEFA", tier: 3 },
+  { name: "Canada", flag: "\u{1F1E8}\u{1F1E6}", group: "B", conf: "CONCACAF", tier: 3 },
+  { name: "Bosnia & Herz.", flag: "\u{1F1E7}\u{1F1E6}", group: "B", conf: "UEFA", tier: 3 },
+  { name: "Qatar", flag: "\u{1F1F6}\u{1F1E6}", group: "B", conf: "AFC", tier: 4 },
+  { name: "Switzerland", flag: "\u{1F1E8}\u{1F1ED}", group: "B", conf: "UEFA", tier: 2 },
+  { name: "Brazil", flag: "\u{1F1E7}\u{1F1F7}", group: "C", conf: "CONMEBOL", tier: 1 },
+  { name: "Morocco", flag: "\u{1F1F2}\u{1F1E6}", group: "C", conf: "CAF", tier: 2 },
+  { name: "Haiti", flag: "\u{1F1ED}\u{1F1F9}", group: "C", conf: "CONCACAF", tier: 4 },
+  { name: "Scotland", flag: "\u{1F3F4}\u{E0067}\u{E0062}\u{E0073}\u{E0063}\u{E0074}\u{E007F}", group: "C", conf: "UEFA", tier: 3 },
+  { name: "United States", flag: "\u{1F1FA}\u{1F1F8}", group: "D", conf: "CONCACAF", tier: 2 },
+  { name: "Paraguay", flag: "\u{1F1F5}\u{1F1FE}", group: "D", conf: "CONMEBOL", tier: 3 },
+  { name: "Australia", flag: "\u{1F1E6}\u{1F1FA}", group: "D", conf: "AFC", tier: 3 },
+  { name: "Turkey", flag: "\u{1F1F9}\u{1F1F7}", group: "D", conf: "UEFA", tier: 3 },
+  { name: "Germany", flag: "\u{1F1E9}\u{1F1EA}", group: "E", conf: "UEFA", tier: 1 },
+  { name: "Cura\u00e7ao", flag: "\u{1F1E8}\u{1F1FC}", group: "E", conf: "CONCACAF", tier: 4 },
+  { name: "Ivory Coast", flag: "\u{1F1E8}\u{1F1EE}", group: "E", conf: "CAF", tier: 3 },
+  { name: "Ecuador", flag: "\u{1F1EA}\u{1F1E8}", group: "E", conf: "CONMEBOL", tier: 3 },
+  { name: "Netherlands", flag: "\u{1F1F3}\u{1F1F1}", group: "F", conf: "UEFA", tier: 1 },
+  { name: "Japan", flag: "\u{1F1EF}\u{1F1F5}", group: "F", conf: "AFC", tier: 2 },
+  { name: "Sweden", flag: "\u{1F1F8}\u{1F1EA}", group: "F", conf: "UEFA", tier: 3 },
+  { name: "Tunisia", flag: "\u{1F1F9}\u{1F1F3}", group: "F", conf: "CAF", tier: 4 },
+  { name: "Belgium", flag: "\u{1F1E7}\u{1F1EA}", group: "G", conf: "UEFA", tier: 1 },
+  { name: "Egypt", flag: "\u{1F1EA}\u{1F1EC}", group: "G", conf: "CAF", tier: 3 },
+  { name: "Iran", flag: "\u{1F1EE}\u{1F1F7}", group: "G", conf: "AFC", tier: 3 },
+  { name: "New Zealand", flag: "\u{1F1F3}\u{1F1FF}", group: "G", conf: "OFC", tier: 4 },
+  { name: "Spain", flag: "\u{1F1EA}\u{1F1F8}", group: "H", conf: "UEFA", tier: 1 },
+  { name: "Cape Verde", flag: "\u{1F1E8}\u{1F1FB}", group: "H", conf: "CAF", tier: 4 },
+  { name: "Saudi Arabia", flag: "\u{1F1F8}\u{1F1E6}", group: "H", conf: "AFC", tier: 3 },
+  { name: "Uruguay", flag: "\u{1F1FA}\u{1F1FE}", group: "H", conf: "CONMEBOL", tier: 2 },
+  { name: "France", flag: "\u{1F1EB}\u{1F1F7}", group: "I", conf: "UEFA", tier: 1 },
+  { name: "Senegal", flag: "\u{1F1F8}\u{1F1F3}", group: "I", conf: "CAF", tier: 2 },
+  { name: "Iraq", flag: "\u{1F1EE}\u{1F1F6}", group: "I", conf: "AFC", tier: 4 },
+  { name: "Norway", flag: "\u{1F1F3}\u{1F1F4}", group: "I", conf: "UEFA", tier: 3 },
+  { name: "Argentina", flag: "\u{1F1E6}\u{1F1F7}", group: "J", conf: "CONMEBOL", tier: 1 },
+  { name: "Algeria", flag: "\u{1F1E9}\u{1F1FF}", group: "J", conf: "CAF", tier: 3 },
+  { name: "Austria", flag: "\u{1F1E6}\u{1F1F9}", group: "J", conf: "UEFA", tier: 3 },
+  { name: "Jordan", flag: "\u{1F1EF}\u{1F1F4}", group: "J", conf: "AFC", tier: 4 },
+  { name: "Portugal", flag: "\u{1F1F5}\u{1F1F9}", group: "K", conf: "UEFA", tier: 1 },
+  { name: "DR Congo", flag: "\u{1F1E8}\u{1F1E9}", group: "K", conf: "CAF", tier: 4 },
+  { name: "Uzbekistan", flag: "\u{1F1FA}\u{1F1FF}", group: "K", conf: "AFC", tier: 4 },
+  { name: "Colombia", flag: "\u{1F1E8}\u{1F1F4}", group: "K", conf: "CONMEBOL", tier: 2 },
+  { name: "England", flag: "\u{1F3F4}\u{E0067}\u{E0062}\u{E0065}\u{E006E}\u{E0067}\u{E007F}", group: "L", conf: "UEFA", tier: 1 },
+  { name: "Croatia", flag: "\u{1F1ED}\u{1F1F7}", group: "L", conf: "UEFA", tier: 2 },
+  { name: "Ghana", flag: "\u{1F1EC}\u{1F1ED}", group: "L", conf: "CAF", tier: 3 },
+  { name: "Panama", flag: "\u{1F1F5}\u{1F1E6}", group: "L", conf: "CONCACAF", tier: 4 }
+];
+
+let state = {
+  participants: [],
+  shuffledTeams: [],
+  assignments: [],
+  currentPickIndex: 0,
+  totalPicks: 0,
+  isFlipped: false,
+  autoTimer: null,
+  isDrawComplete: false
+};
+
+function seededRandom(seed) {
+  let s = seed;
+  return function() {
+    s = Math.imul(s ^ (s >>> 15), s | 1);
+    s ^= s + Math.imul(s ^ (s >>> 7), s | 61);
+    return ((s ^ (s >>> 14)) >>> 0) / 4294967296;
+  };
+}
+function hashStr(str) {
+  let h = 0x811c9dc5;
+  for (let i = 0; i < str.length; i++) {
+    h ^= str.charCodeAt(i);
+    h = Math.imul(h, 0x01000193);
+  }
+  return h >>> 0;
+}
+function shuffleWithSeed(arr, seedStr) {
+  const seed = seedStr ? hashStr(seedStr) : Math.floor(Math.random() * 2147483647);
+  const rng = seededRandom(seed);
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(rng() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function buildSnakeOrder(n, total) {
+  const order = [];
+  let pick = 0;
+  let round = 0;
+  while (pick < total) {
+    if (round % 2 === 0) {
+      for (let i = 0; i < n && pick < total; i++, pick++) order.push(i);
+    } else {
+      for (let i = n - 1; i >= 0 && pick < total; i--, pick++) order.push(i);
+    }
+    round++;
+  }
+  return order;
+}
+
+function updateParticipantFields() {
+  const n = parseInt(document.getElementById('numParticipants').value) || 6;
+  const clamped = Math.max(2, Math.min(48, n));
+  if (clamped !== n) document.getElementById('numParticipants').value = clamped;
+
+  const teamsEach = Math.floor(48 / clamped);
+  const remainder = 48 % clamped;
+  let hint = `With ${clamped} participant${clamped > 1 ? 's' : ''}, `;
+  if (remainder === 0) hint += `each person gets ${teamsEach} teams from 48.`;
+  else hint += `${clamped - remainder} get ${teamsEach} teams, ${remainder} get ${teamsEach + 1} teams (48 total).`;
+  document.getElementById('teamsPerPerson').textContent = hint;
+
+  const container = document.getElementById('participantFields');
+  const existing = container.querySelectorAll('input');
+  const existingVals = Array.from(existing).map(i => i.value);
+  container.innerHTML = '';
+  for (let i = 0; i < clamped; i++) {
+    const wrap = document.createElement('div');
+    wrap.className = 'participant-input-wrap';
+    wrap.innerHTML = `
+      <span class="participant-num">${i + 1}</span>
+      <input type="text" class="form-input" placeholder="Player ${i + 1}" value="${existingVals[i] || ''}" id="player_${i}">
+    `;
+    container.appendChild(wrap);
+  }
+  updateSnakeExplainer(clamped);
+}
+
+function updateSnakeExplainer(n) {
+  const container = document.getElementById('snakeExplainer');
+  container.innerHTML = '';
+  const rounds = Math.min(Math.ceil(48 / n), 4);
+  for (let r = 0; r < rounds; r++) {
+    const row = document.createElement('div');
+    row.className = 'snake-row';
+    row.innerHTML = `<div class="snake-row-label">Round ${r + 1}</div>`;
+    const order = r % 2 === 0
+      ? Array.from({length: n}, (_, i) => i)
+      : Array.from({length: n}, (_, i) => n - 1 - i);
+    order.forEach((pos, idx) => {
+      const cell = document.createElement('div');
+      cell.className = 'snake-cell' + (idx === 0 ? ' highlight' : '');
+      cell.textContent = pos + 1;
+      row.appendChild(cell);
+    });
+    container.appendChild(row);
+  }
+  if (Math.ceil(48 / n) > 4) {
+    const more = document.createElement('div');
+    more.style.cssText = 'font-size:12px; color:var(--text-faint); padding-left: 68px; margin-top: 4px;';
+    more.textContent = `\u2026 continues for ${Math.ceil(48 / n)} rounds total`;
+    container.appendChild(more);
+  }
+}
+
+function startDraw() {
+  const n = parseInt(document.getElementById('numParticipants').value) || 6;
+  const seed = document.getElementById('seedInput').value.trim();
+  const participants = [];
+  for (let i = 0; i < n; i++) {
+    const input = document.getElementById(`player_${i}`);
+    participants.push(input && input.value.trim() ? input.value.trim() : `Player ${i + 1}`);
+  }
+  const shuffled = shuffleWithSeed(TEAMS, seed || String(Date.now()));
+  const snakeOrder = buildSnakeOrder(n, 48);
+  state = {
+    participants, shuffledTeams: shuffled, snakeOrder,
+    assignments: Array.from({length: n}, () => []),
+    currentPickIndex: 0, totalPicks: 48,
+    isFlipped: false, autoTimer: null, isDrawComplete: false
+  };
+  document.getElementById('cardFlip').classList.remove('flipped');
+  buildSnakeTracker();
+  updateDrawUI();
+  goToPage(2);
+}
+
+function buildSnakeTracker() {
+  const tracker = document.getElementById('snakeTracker');
+  tracker.innerHTML = '';
+  const { participants, currentPickIndex } = state;
+  const n = participants.length;
+  const currentRound = Math.floor(currentPickIndex / n);
+  const direction = currentRound % 2 === 0 ? '\u2192' : '\u2190';
+  tracker.innerHTML = `<span style="font-size:12px; color:var(--text-muted); margin-right:8px;">Round ${currentRound + 1} ${direction}</span>`;
+  for (let i = 0; i < n; i++) {
+    const slot = document.createElement('div');
+    slot.className = 'snake-slot';
+    slot.id = `slot_${i}`;
+    slot.textContent = i + 1;
+    tracker.appendChild(slot);
+  }
+  refreshTracker();
+}
+
+function refreshTracker() {
+  const { participants, currentPickIndex } = state;
+  const n = participants.length;
+  const currentRound = Math.floor(currentPickIndex / n);
+  const direction = currentRound % 2 === 0 ? '\u2192' : '\u2190';
+  const label = document.querySelector('#snakeTracker span');
+  if (label) label.textContent = `Round ${currentRound + 1} ${direction}`;
+  for (let i = 0; i < n; i++) {
+    const slot = document.getElementById(`slot_${i}`);
+    if (!slot) continue;
+    const absolutePickForSlot = currentRound * n + (currentRound % 2 === 0 ? i : (n - 1 - i));
+    if (absolutePickForSlot < currentPickIndex) slot.className = 'snake-slot done';
+    else if (absolutePickForSlot === currentPickIndex) slot.className = 'snake-slot current';
+    else slot.className = 'snake-slot';
+  }
+}
+
+function updateDrawUI() {
+  const { participants, snakeOrder, currentPickIndex, totalPicks } = state;
+  if (currentPickIndex >= totalPicks) { finishDraw(); return; }
+  const participantIdx = snakeOrder[currentPickIndex];
+  const name = participants[participantIdx];
+  const round = Math.floor(currentPickIndex / participants.length);
+  const direction = round % 2 === 0 ? '\u2193 Forward' : '\u2191 Reverse';
+  document.getElementById('currentParticipantName').textContent = name;
+  document.getElementById('directionLabel').textContent = `Round ${round + 1} \u00b7 ${direction}`;
+  document.getElementById('pickLabel').textContent = `PICK ${currentPickIndex + 1} OF ${totalPicks}`;
+  document.getElementById('pickCounter').textContent = `Pick ${currentPickIndex + 1} of ${totalPicks}`;
+  document.getElementById('progressBar').style.width = `${(currentPickIndex / totalPicks) * 100}%`;
+  document.getElementById('cardFlip').classList.remove('flipped');
+  state.isFlipped = false;
+  refreshTracker();
+}
+
+function nextPick() {
+  if (state.currentPickIndex >= state.totalPicks) return;
+  if (!state.isFlipped) {
+    const team = state.shuffledTeams[state.currentPickIndex];
+    document.getElementById('revealFlag').textContent = team.flag;
+    document.getElementById('revealName').textContent = team.name;
+    document.getElementById('revealGroup').textContent = `Group ${team.group} \u00b7 ${team.conf}`;
+    document.getElementById('cardFlip').classList.add('flipped');
+    state.isFlipped = true;
+    const pIdx = state.snakeOrder[state.currentPickIndex];
+    state.assignments[pIdx].push(team);
+    addPickLog(state.currentPickIndex + 1, state.participants[pIdx], team);
+    state.currentPickIndex++;
+    document.getElementById('progressBar').style.width = `${(state.currentPickIndex / state.totalPicks) * 100}%`;
+    if (state.currentPickIndex >= state.totalPicks) {
+      document.getElementById('nextPickBtn').innerHTML = `
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        View Results
+      `;
+      document.getElementById('nextPickBtn').onclick = () => goToPage(3);
+      if (state.autoTimer) clearInterval(state.autoTimer);
+      setTimeout(() => finishDraw(), 800);
+    }
+  } else {
+    updateDrawUI();
+  }
+}
+
+function toggleAutoDraw() {
+  if (state.autoTimer) {
+    clearInterval(state.autoTimer);
+    state.autoTimer = null;
+    document.getElementById('autoDrawBtn').innerHTML = `
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      Auto Draw
+    `;
+  } else {
+    state.autoTimer = setInterval(() => {
+      if (state.currentPickIndex >= state.totalPicks) {
+        clearInterval(state.autoTimer); state.autoTimer = null; return;
+      }
+      nextPick();
+      if (state.isFlipped) setTimeout(() => nextPick(), 500);
+    }, 1000);
+    document.getElementById('autoDrawBtn').innerHTML = `
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+      Pause
+    `;
+  }
+}
+
+function drawAll() {
+  if (state.autoTimer) { clearInterval(state.autoTimer); state.autoTimer = null; }
+  while (state.currentPickIndex < state.totalPicks) {
+    const team = state.shuffledTeams[state.currentPickIndex];
+    const pIdx = state.snakeOrder[state.currentPickIndex];
+    state.assignments[pIdx].push(team);
+    addPickLog(state.currentPickIndex + 1, state.participants[pIdx], team);
+    state.currentPickIndex++;
+  }
+  finishDraw();
+}
+
+function addPickLog(num, participant, team) {
+  const log = document.getElementById('pickLog');
+  const entry = document.createElement('div');
+  entry.className = 'log-entry';
+  entry.innerHTML = `
+    <span class="log-pick">#${num}</span>
+    <span class="log-participant">${participant}</span>
+    <span style="color:var(--text-faint)">\u2192</span>
+    <span>${team.flag}</span>
+    <span style="color:var(--text)">${team.name}</span>
+    <span style="color:var(--text-faint)">Grp ${team.group}</span>
+  `;
+  log.prepend(entry);
+}
+
+function finishDraw() {
+  state.isDrawComplete = true;
+  buildResults();
+  updateStep(3);
+  setTimeout(() => { goToPage(3); launchConfetti(); }, 400);
+}
+
+function buildResults() {
+  const grid = document.getElementById('resultsGrid');
+  grid.innerHTML = '';
+  state.participants.forEach((name, i) => {
+    const teams = state.assignments[i] || [];
+    const card = document.createElement('div');
+    card.className = 'result-card';
+    card.style.animationDelay = `${i * 0.06}s`;
+    const initials = name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
+    const tierSummary = [1,2,3,4].map(t => teams.filter(tm => tm.tier === t).length);
+    card.innerHTML = `
+      <div class="result-card-header">
+        <div class="participant-avatar">${initials}</div>
+        <div>
+          <div class="participant-name">${name}</div>
+          <div class="participant-count">${teams.length} team${teams.length !== 1 ? 's' : ''} \u00b7
+            <span style="color:var(--gold)">${tierSummary[0]} fav</span> \u00b7
+            <span style="color:var(--silver)">${tierSummary[1]} cont</span> \u00b7
+            <span style="color:var(--bronze)">${tierSummary[2]} out</span> \u00b7
+            <span style="color:var(--text-faint)">${tierSummary[3]} undg</span>
+          </div>
+        </div>
+      </div>
+      <div class="team-list">
+        ${teams.map(t => `
+          <div class="team-row">
+            <span class="team-flag">${t.flag}</span>
+            <div class="team-info">
+              <div class="team-name">${t.name}</div>
+              <div class="team-sub">Group ${t.group} \u00b7 ${t.conf}</div>
+            </div>
+            <div class="tier-dot tier-${t.tier}" title="Tier ${t.tier}"></div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+  buildRecapExplainer();
+}
+
+function buildRecapExplainer() {
+  const container = document.getElementById('recapExplainer');
+  container.innerHTML = '';
+  const n = state.participants.length;
+  const rounds = Math.ceil(48 / n);
+  for (let r = 0; r < rounds; r++) {
+    const row = document.createElement('div');
+    row.className = 'snake-row';
+    row.innerHTML = `<div class="snake-row-label">Rnd ${r + 1}</div>`;
+    for (let p = 0; p < n; p++) {
+      const pickIdx = r * n + (r % 2 === 0 ? p : (n - 1 - p));
+      if (pickIdx >= 48) break;
+      const pIdx = state.snakeOrder[pickIdx];
+      const team = state.shuffledTeams[pickIdx];
+      if (!team) break;
+      const cell = document.createElement('div');
+      cell.className = 'snake-cell';
+      cell.style.cssText = 'width:auto; padding:0 6px; min-width:28px; font-size:0.65rem;';
+      cell.textContent = `P${pIdx + 1}`;
+      cell.title = `${state.participants[pIdx]}: ${team.flag} ${team.name}`;
+      row.appendChild(cell);
+    }
+    container.appendChild(row);
+  }
+}
+
+function copyResults() {
+  let text = 'World Cup 2026 Snake Sweepstake Results\n';
+  text += 'The Wall Chart Co\n';
+  text += '\u2550'.repeat(40) + '\n\n';
+  state.participants.forEach((name, i) => {
+    const teams = state.assignments[i] || [];
+    text += `${name}:\n`;
+    teams.forEach(t => {
+      const tierLabel = ['','\u2605 Favourite','Contender','Outsider','Underdog'][t.tier];
+      text += `  ${t.flag} ${t.name} (Group ${t.group}) \u2014 ${tierLabel}\n`;
+    });
+    text += '\n';
+  });
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = event.target.closest('button');
+    const orig = btn.innerHTML;
+    btn.innerHTML = '\u2713 Copied!';
+    setTimeout(() => btn.innerHTML = orig, 2000);
+  });
+}
+
+function launchConfetti() {
+  const container = document.getElementById('confettiContainer');
+  const colors = ['#C8A94A','#C8502A','#ffffff','#0B1E3D','#f0be5f','#ef4444'];
+  for (let i = 0; i < 80; i++) {
+    const piece = document.createElement('div');
+    piece.className = 'confetti-piece';
+    piece.style.left = Math.random() * 100 + 'vw';
+    piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+    piece.style.width = (8 + Math.random() * 8) + 'px';
+    piece.style.height = (8 + Math.random() * 8) + 'px';
+    piece.style.animationDuration = (2 + Math.random() * 3) + 's';
+    piece.style.animationDelay = Math.random() * 0.5 + 's';
+    piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+    container.appendChild(piece);
+    setTimeout(() => piece.remove(), 4000);
+  }
+}
+
+function goToPage(n) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page' + n).classList.add('active');
+  updateStep(n);
+  if (n === 1) {
+    document.getElementById('heroSection').style.display = '';
+    state = { participants: [], shuffledTeams: [], assignments: [], currentPickIndex: 0, totalPicks: 0, isFlipped: false, autoTimer: null, isDrawComplete: false };
+    if (document.getElementById('nextPickBtn')) {
+      document.getElementById('nextPickBtn').innerHTML = `
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        Draw Next Team
+      `;
+      document.getElementById('nextPickBtn').onclick = nextPick;
+    }
+  } else {
+    document.getElementById('heroSection').style.display = 'none';
+  }
+  window.scrollTo(0, 0);
+}
+
+function updateStep(active) {
+  [1, 2, 3].forEach(n => {
+    const el = document.getElementById('step' + n + 'nav');
+    if (!el) return;
+    el.className = 'step' + (n < active ? ' done' : n === active ? ' active' : '');
+  });
+}
+
+updateParticipantFields();
+</script>
+</body>
+</html>

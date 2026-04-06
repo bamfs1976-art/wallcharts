@@ -10,7 +10,7 @@
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   :root{
@@ -40,9 +40,13 @@
   .tab-btn:hover{color:var(--cream)}
 
   /* Device select */
-  .device-select{margin-bottom:1.5rem}
-  .device-select select{width:100%;padding:0.7rem 1rem;background:var(--navy);border:1px solid rgba(200,169,74,0.3);border-radius:6px;color:var(--cream);font-family:'Inter',sans-serif;font-size:0.9rem;cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C8A94A' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
-  .device-select select:focus{outline:none;border-color:var(--gold)}
+  .device-select{margin-bottom:1rem}
+  .device-select select,.style-select select{width:100%;padding:0.7rem 1rem;background:var(--navy);border:1px solid rgba(200,169,74,0.3);border-radius:6px;color:var(--cream);font-family:'Inter',sans-serif;font-size:0.9rem;cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C8A94A' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
+  .device-select select:focus,.style-select select:focus{outline:none;border-color:var(--gold)}
+
+  /* Style selects */
+  .style-selects{display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;margin-bottom:1.5rem}
+  .style-select label{display:block;font-size:0.75rem;color:var(--gold);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.35rem;font-weight:600}
 
   /* Preview */
   .preview-area{display:flex;flex-direction:column;align-items:center;margin-bottom:1.5rem}
@@ -69,6 +73,7 @@
     .main{padding:1.2rem 1rem}
     .page-title h2{font-size:1.4rem}
     .tab-btn{padding:0.5rem 0.8rem;font-size:0.78rem}
+    .style-selects{grid-template-columns:1fr}
   }
 </style>
 </head>
@@ -98,6 +103,29 @@
     <select id="deviceSelect"></select>
   </div>
 
+  <div class="style-selects">
+    <div class="style-select">
+      <label>Design Style</label>
+      <select id="designSelect">
+        <option value="classic">Classic</option>
+        <option value="minimal">Minimal</option>
+        <option value="boldgrid">Bold Grid</option>
+        <option value="timeline">Timeline</option>
+        <option value="magazine">Magazine</option>
+      </select>
+    </div>
+    <div class="style-select">
+      <label>Colour Scheme</label>
+      <select id="colourSelect">
+        <option value="navygold">Navy &amp; Gold</option>
+        <option value="midnight">Midnight</option>
+        <option value="forest">Forest</option>
+        <option value="cleanwhite">Clean White</option>
+        <option value="carbon">Carbon</option>
+      </select>
+    </div>
+  </div>
+
   <div class="preview-area">
     <div class="canvas-wrap">
       <canvas id="wallpaperCanvas"></canvas>
@@ -107,7 +135,7 @@
 
   <div class="download-area">
     <button class="btn-download" id="downloadBtn">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/><\/svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
       Download Wallpaper
     </button>
   </div>
@@ -116,6 +144,7 @@
     <h3>How to Set Your Wallpaper</h3>
     <ol>
       <li>Select your device from the dropdown above</li>
+      <li>Choose a design style and colour scheme</li>
       <li>Tap <strong>Download Wallpaper</strong> to save the PNG</li>
       <li><strong>iPhone/iPad:</strong> Settings &rarr; Wallpaper &rarr; Add New &rarr; choose saved image</li>
       <li><strong>Android:</strong> Long-press home screen &rarr; Wallpaper &rarr; My Photos &rarr; choose image</li>
@@ -166,8 +195,135 @@
   var canvas = document.getElementById("wallpaperCanvas");
   var ctx = canvas.getContext("2d");
   var select = document.getElementById("deviceSelect");
+  var designSelect = document.getElementById("designSelect");
+  var colourSelect = document.getElementById("colourSelect");
   var resLabel = document.getElementById("resLabel");
   var downloadBtn = document.getElementById("downloadBtn");
+
+  /* ── Colour Schemes ── */
+  var colourSchemes = {
+    navygold: {
+      bg: "#0B1E3D",
+      bgDark: "#060D18",
+      bgMid: "#071A2E",
+      bgEnd: "#030810",
+      accent1: "#C8A94A",
+      accent2: "#004D40",
+      accent2Light: "#00695C",
+      text: "#F5F3EB",
+      textDim: "rgba(245,243,235,0.6)",
+      textMuted: "rgba(245,243,235,0.3)",
+      highlight: "#C8A94A",
+      cellBg: "rgba(11,30,61,0.5)",
+      cellBorder: "rgba(0,105,92,0.25)",
+      goldCellBg1: "rgba(200,169,74,0.18)",
+      goldCellBg2: "rgba(200,169,74,0.06)",
+      goldCellBorder: "rgba(200,169,74,0.5)",
+      bannerBg1: "rgba(200,169,74,0.15)",
+      bannerBg2: "rgba(200,169,74,0.25)",
+      divider: "rgba(200,169,74,0.3)"
+    },
+    midnight: {
+      bg: "#080C14",
+      bgDark: "#050810",
+      bgMid: "#0C1220",
+      bgEnd: "#040610",
+      accent1: "#818CF8",
+      accent2: "#C084FC",
+      accent2Light: "#A78BFA",
+      text: "#E2E8F0",
+      textDim: "rgba(226,232,240,0.6)",
+      textMuted: "rgba(226,232,240,0.3)",
+      highlight: "#C084FC",
+      cellBg: "rgba(100,116,139,0.12)",
+      cellBorder: "rgba(129,140,248,0.25)",
+      goldCellBg1: "rgba(192,132,252,0.18)",
+      goldCellBg2: "rgba(192,132,252,0.06)",
+      goldCellBorder: "rgba(192,132,252,0.5)",
+      bannerBg1: "rgba(129,140,248,0.12)",
+      bannerBg2: "rgba(192,132,252,0.2)",
+      divider: "rgba(129,140,248,0.3)"
+    },
+    forest: {
+      bg: "#0A1A14",
+      bgDark: "#060F0C",
+      bgMid: "#0D2018",
+      bgEnd: "#040C08",
+      accent1: "#34D399",
+      accent2: "#FDE68A",
+      accent2Light: "#34D399",
+      text: "#ECFDF5",
+      textDim: "rgba(236,253,245,0.6)",
+      textMuted: "rgba(236,253,245,0.3)",
+      highlight: "#FDE68A",
+      cellBg: "rgba(52,211,153,0.08)",
+      cellBorder: "rgba(52,211,153,0.25)",
+      goldCellBg1: "rgba(253,230,138,0.18)",
+      goldCellBg2: "rgba(253,230,138,0.06)",
+      goldCellBorder: "rgba(253,230,138,0.5)",
+      bannerBg1: "rgba(52,211,153,0.12)",
+      bannerBg2: "rgba(253,230,138,0.15)",
+      divider: "rgba(52,211,153,0.3)"
+    },
+    cleanwhite: {
+      bg: "#FFFFFF",
+      bgDark: "#F8FAFC",
+      bgMid: "#F1F5F9",
+      bgEnd: "#E2E8F0",
+      accent1: "#0B1E3D",
+      accent2: "#004D40",
+      accent2Light: "#00695C",
+      text: "#1E293B",
+      textDim: "rgba(30,41,59,0.6)",
+      textMuted: "rgba(30,41,59,0.35)",
+      highlight: "#0B1E3D",
+      cellBg: "rgba(241,245,249,0.8)",
+      cellBorder: "rgba(11,30,61,0.15)",
+      goldCellBg1: "rgba(0,77,64,0.08)",
+      goldCellBg2: "rgba(0,77,64,0.03)",
+      goldCellBorder: "rgba(0,77,64,0.4)",
+      bannerBg1: "rgba(11,30,61,0.06)",
+      bannerBg2: "rgba(0,77,64,0.1)",
+      divider: "rgba(11,30,61,0.2)"
+    },
+    carbon: {
+      bg: "#0A0A0A",
+      bgDark: "#050505",
+      bgMid: "#111111",
+      bgEnd: "#080808",
+      accent1: "#C8A94A",
+      accent2: "#EF4444",
+      accent2Light: "#E5E5E5",
+      text: "#E5E5E5",
+      textDim: "rgba(229,229,229,0.6)",
+      textMuted: "rgba(229,229,229,0.3)",
+      highlight: "#EF4444",
+      cellBg: "rgba(229,229,229,0.06)",
+      cellBorder: "rgba(200,169,74,0.2)",
+      goldCellBg1: "rgba(239,68,68,0.15)",
+      goldCellBg2: "rgba(239,68,68,0.05)",
+      goldCellBorder: "rgba(239,68,68,0.5)",
+      bannerBg1: "rgba(200,169,74,0.1)",
+      bannerBg2: "rgba(239,68,68,0.15)",
+      divider: "rgba(200,169,74,0.3)"
+    }
+  };
+
+  /* ── Calendar Data ── */
+  var months = [
+    {m:"JAN",full:"January",events:[]},
+    {m:"FEB",full:"February",events:["Six Nations R1-R3"],gold:false},
+    {m:"MAR",full:"March",events:["Six Nations R4-R5","Super Saturday 13 Mar"],gold:false},
+    {m:"APR",full:"April",events:["Champions Cup R16/QFs"],gold:false},
+    {m:"MAY",full:"May",events:["Champ Cup Final 22 May","Premiership Final"],gold:false},
+    {m:"JUN",full:"June",events:["Summer Tours"],gold:false},
+    {m:"JUL",full:"July",events:[]},
+    {m:"AUG",full:"August",events:[]},
+    {m:"SEP",full:"September",events:[]},
+    {m:"OCT",full:"October",events:["RWC OPENS 1 OCT","Perth, Australia"],gold:true},
+    {m:"NOV",full:"November",events:["RWC FINAL 13 NOV","Sydney, Australia"],gold:true},
+    {m:"DEC",full:"December",events:[]}
+  ];
 
   /* ── Tabs ── */
   document.getElementById("tabs").addEventListener("click", function(e){
@@ -190,223 +346,15 @@
   }
 
   select.addEventListener("change", function(){ render(); });
+  designSelect.addEventListener("change", function(){ render(); });
+  colourSelect.addEventListener("change", function(){ render(); });
 
   function getDevice(){
     return devices[currentTab][parseInt(select.value,10)||0];
   }
 
-  /* ── Colours ── */
-  var NAVY = "#0B1E3D";
-  var TEAL = "#004D40";
-  var TEAL_L = "#00695C";
-  var GOLD = "#C8A94A";
-  var RED = "#C8502A";
-  var CREAM = "#F5F3EB";
-
-  /* ── Calendar Data ── */
-  var months = [
-    {m:"JAN",events:[]},
-    {m:"FEB",events:["Six Nations R1-R3"],gold:false},
-    {m:"MAR",events:["Six Nations R4-R5","Super Saturday 13 Mar"],gold:false},
-    {m:"APR",events:["Champions Cup R16/QFs"],gold:false},
-    {m:"MAY",events:["Champ Cup Final 22 May","Premiership Final"],gold:false},
-    {m:"JUN",events:["Summer Tours"],gold:false},
-    {m:"JUL",events:[]},
-    {m:"AUG",events:[]},
-    {m:"SEP",events:[]},
-    {m:"OCT",events:["RWC OPENS 1 OCT","Perth, Australia"],gold:true},
-    {m:"NOV",events:["RWC FINAL 13 NOV","Sydney, Australia"],gold:true},
-    {m:"DEC",events:[]}
-  ];
-
-  /* ── Render ── */
-  function render(){
-    var d = getDevice();
-    var W = d.w, H = d.h;
-    canvas.width = W;
-    canvas.height = H;
-    resLabel.textContent = d.name + " \u2014 " + W + " \u00d7 " + H + " px";
-
-    var s = Math.min(W,H) / 1300;
-
-    /* Background gradient */
-    var bg = ctx.createLinearGradient(0,0,0,H);
-    bg.addColorStop(0, "#060D18");
-    bg.addColorStop(0.3, NAVY);
-    bg.addColorStop(0.6, "#071A2E");
-    bg.addColorStop(1, "#030810");
-    ctx.fillStyle = bg;
-    ctx.fillRect(0,0,W,H);
-
-    /* Teal diagonal accent */
-    var tg = ctx.createLinearGradient(0,H*0.2,W,H*0.5);
-    tg.addColorStop(0,"rgba(0,77,64,0)");
-    tg.addColorStop(0.5,"rgba(0,77,64,0.12)");
-    tg.addColorStop(1,"rgba(0,77,64,0)");
-    ctx.fillStyle = tg;
-    ctx.fillRect(0,0,W,H);
-
-    /* Subtle oval glow */
-    var rg = ctx.createRadialGradient(W*0.5,H*0.35,0,W*0.5,H*0.35,W*0.6);
-    rg.addColorStop(0,"rgba(0,105,92,0.10)");
-    rg.addColorStop(1,"rgba(0,0,0,0)");
-    ctx.fillStyle = rg;
-    ctx.fillRect(0,0,W,H);
-
-    /* Top stripe */
-    ctx.fillStyle = GOLD;
-    ctx.fillRect(0, 0, W, Math.round(6*s));
-
-    /* TWC Monogram */
-    var monoY = 50*s + 6*s;
-    ctx.save();
-    ctx.strokeStyle = GOLD;
-    ctx.lineWidth = Math.max(2, 2.5*s);
-    ctx.beginPath();
-    ctx.arc(W/2, monoY, 32*s, 0, Math.PI*2);
-    ctx.stroke();
-    ctx.font = "bold " + Math.round(26*s) + "px 'EB Garamond', serif";
-    ctx.fillStyle = GOLD;
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.fillText("TWC", W/2, monoY + 2*s);
-    ctx.restore();
-
-    /* Title */
-    var titleY = monoY + 70*s;
-    ctx.font = "600 " + Math.round(42*s) + "px 'EB Garamond', serif";
-    ctx.fillStyle = CREAM;
-    ctx.textAlign = "center";
-    ctx.fillText("2027 RUGBY", W/2, titleY);
-
-    ctx.font = "300 " + Math.round(22*s) + "px 'Inter', sans-serif";
-    ctx.fillStyle = TEAL_L;
-    ctx.letterSpacing = Math.round(8*s) + "px";
-    ctx.fillText("C A L E N D A R", W/2, titleY + 38*s);
-    ctx.letterSpacing = "0px";
-
-    /* Divider line */
-    var divY = titleY + 65*s;
-    ctx.strokeStyle = "rgba(200,169,74,0.3)";
-    ctx.lineWidth = Math.max(1, 1*s);
-    ctx.beginPath();
-    ctx.moveTo(W*0.15, divY);
-    ctx.lineTo(W*0.85, divY);
-    ctx.stroke();
-
-    /* ── Month Grid ── */
-    var gridTop = divY + 30*s;
-    var gridW = W * 0.82;
-    var gridLeft = (W - gridW) / 2;
-    var cols = 3, rows = 4;
-    var cellW = gridW / cols;
-    var cellH = 110 * s;
-    var gap = 8 * s;
-
-    months.forEach(function(mo, idx){
-      var col = idx % cols;
-      var row = Math.floor(idx / cols);
-      var cx = gridLeft + col * cellW + gap/2;
-      var cy = gridTop + row * (cellH + gap);
-      var cw = cellW - gap;
-      var ch = cellH;
-
-      /* Cell bg */
-      var isGold = mo.gold;
-      if(isGold){
-        var gg = ctx.createLinearGradient(cx, cy, cx+cw, cy+ch);
-        gg.addColorStop(0, "rgba(200,169,74,0.18)");
-        gg.addColorStop(1, "rgba(200,169,74,0.06)");
-        ctx.fillStyle = gg;
-      } else {
-        ctx.fillStyle = "rgba(11,30,61,0.5)";
-      }
-      roundRect(ctx, cx, cy, cw, ch, 8*s);
-      ctx.fill();
-
-      /* Cell border */
-      ctx.strokeStyle = isGold ? "rgba(200,169,74,0.5)" : "rgba(0,105,92,0.25)";
-      ctx.lineWidth = Math.max(1, 1.2*s);
-      roundRect(ctx, cx, cy, cw, ch, 8*s);
-      ctx.stroke();
-
-      /* Month label */
-      ctx.font = "700 " + Math.round(18*s) + "px 'Inter', sans-serif";
-      ctx.fillStyle = isGold ? GOLD : TEAL_L;
-      ctx.textAlign = "left";
-      ctx.fillText(mo.m, cx + 10*s, cy + 24*s);
-
-      /* Events */
-      ctx.font = Math.round(11*s) + "px 'Inter', sans-serif";
-      ctx.fillStyle = isGold ? "#E8D498" : "rgba(245,243,235,0.6)";
-      mo.events.forEach(function(ev, ei){
-        ctx.fillText(ev, cx + 10*s, cy + 44*s + ei * 17*s);
-      });
-    });
-
-    /* ── RWC Banner ── */
-    var bannerY = gridTop + 4*(cellH + gap) + 20*s;
-    var bannerH = 100*s;
-    var bannerL = W * 0.08;
-    var bannerW = W * 0.84;
-
-    /* Banner background */
-    var bg2 = ctx.createLinearGradient(bannerL, bannerY, bannerL+bannerW, bannerY);
-    bg2.addColorStop(0, "rgba(200,169,74,0.15)");
-    bg2.addColorStop(0.5, "rgba(200,169,74,0.25)");
-    bg2.addColorStop(1, "rgba(200,169,74,0.15)");
-    ctx.fillStyle = bg2;
-    roundRect(ctx, bannerL, bannerY, bannerW, bannerH, 10*s);
-    ctx.fill();
-
-    /* Banner border */
-    ctx.strokeStyle = GOLD;
-    ctx.lineWidth = Math.max(1.5, 2*s);
-    roundRect(ctx, bannerL, bannerY, bannerW, bannerH, 10*s);
-    ctx.stroke();
-
-    /* Banner text */
-    ctx.textAlign = "center";
-    ctx.font = "700 " + Math.round(24*s) + "px 'EB Garamond', serif";
-    ctx.fillStyle = GOLD;
-    ctx.fillText("RUGBY WORLD CUP \u00b7 AUSTRALIA", W/2, bannerY + 38*s);
-
-    ctx.font = "400 " + Math.round(14*s) + "px 'Inter', sans-serif";
-    ctx.fillStyle = CREAM;
-    ctx.fillText("1 October \u2013 13 November 2027  \u00b7  Perth \u00b7 Sydney \u00b7 Melbourne \u00b7 Brisbane", W/2, bannerY + 66*s);
-
-    /* Small rugby ball icon (simple oval) */
-    ctx.save();
-    ctx.strokeStyle = GOLD;
-    ctx.lineWidth = Math.max(1, 1.5*s);
-    ctx.beginPath();
-    ctx.ellipse(W/2, bannerY - 12*s, 14*s, 9*s, -Math.PI/6, 0, Math.PI*2);
-    ctx.stroke();
-    /* seam line */
-    ctx.beginPath();
-    ctx.ellipse(W/2, bannerY - 12*s, 14*s, 3*s, -Math.PI/6, 0, Math.PI*2);
-    ctx.stroke();
-    ctx.restore();
-
-    /* ── Bottom branding ── */
-    var botY = H - 80*s;
-    ctx.fillStyle = GOLD;
-    ctx.fillRect(W*0.3, botY, W*0.4, Math.max(1,1*s));
-
-    ctx.font = "600 " + Math.round(16*s) + "px 'EB Garamond', serif";
-    ctx.fillStyle = "rgba(200,169,74,0.6)";
-    ctx.textAlign = "center";
-    ctx.fillText("THE WALLCHART COMPANY", W/2, botY + 28*s);
-
-    ctx.font = Math.round(10*s) + "px 'Inter', sans-serif";
-    ctx.fillStyle = "rgba(245,243,235,0.3)";
-    ctx.fillText("thewallchartcompany.com", W/2, botY + 48*s);
-
-    /* Scale preview */
-    var maxPrev = 420;
-    var ratio = Math.min(maxPrev/W, (maxPrev * 1.8)/H, 1);
-    canvas.style.width = Math.round(W * ratio) + "px";
-    canvas.style.height = Math.round(H * ratio) + "px";
+  function getColours(){
+    return colourSchemes[colourSelect.value] || colourSchemes.navygold;
   }
 
   /* Rounded rect helper */
@@ -424,11 +372,663 @@
     c.closePath();
   }
 
+  /* ── Draw TWC Badge ── */
+  function drawBadge(W, s, y, col){
+    ctx.save();
+    ctx.strokeStyle = col.accent1;
+    ctx.lineWidth = Math.max(2, 2.5*s);
+    ctx.beginPath();
+    ctx.arc(W/2, y, 32*s, 0, Math.PI*2);
+    ctx.stroke();
+    ctx.font = "bold " + Math.round(26*s) + "px 'EB Garamond', serif";
+    ctx.fillStyle = col.accent1;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText("TWC", W/2, y + 2*s);
+    ctx.restore();
+  }
+
+  /* ── Draw bottom branding ── */
+  function drawBranding(W, H, s, col){
+    var botY = H - 80*s;
+    ctx.fillStyle = col.accent1;
+    ctx.fillRect(W*0.3, botY, W*0.4, Math.max(1,1*s));
+    ctx.font = "600 " + Math.round(16*s) + "px 'EB Garamond', serif";
+    ctx.fillStyle = col.textMuted;
+    ctx.textAlign = "center";
+    ctx.fillText("THE WALLCHART COMPANY", W/2, botY + 28*s);
+    ctx.font = Math.round(10*s) + "px 'Inter', sans-serif";
+    ctx.fillStyle = col.textMuted;
+    ctx.fillText("thewallchartcompany.com", W/2, botY + 48*s);
+  }
+
+  /* ── Draw rugby ball icon ── */
+  function drawRugbyBall(x, y, s, col){
+    ctx.save();
+    ctx.strokeStyle = col.accent1;
+    ctx.lineWidth = Math.max(1, 1.5*s);
+    ctx.beginPath();
+    ctx.ellipse(x, y, 14*s, 9*s, -Math.PI/6, 0, Math.PI*2);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.ellipse(x, y, 14*s, 3*s, -Math.PI/6, 0, Math.PI*2);
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  /* ── Background helper ── */
+  function drawBackground(W, H, col){
+    var bg = ctx.createLinearGradient(0,0,0,H);
+    bg.addColorStop(0, col.bgDark);
+    bg.addColorStop(0.3, col.bg);
+    bg.addColorStop(0.6, col.bgMid);
+    bg.addColorStop(1, col.bgEnd);
+    ctx.fillStyle = bg;
+    ctx.fillRect(0,0,W,H);
+  }
+
+  /* ======================================================
+     DESIGN: CLASSIC
+     ====================================================== */
+  function renderClassic(W, H, s, col){
+    drawBackground(W, H, col);
+
+    /* Teal-ish diagonal accent */
+    var tg = ctx.createLinearGradient(0,H*0.2,W,H*0.5);
+    tg.addColorStop(0, "rgba(0,0,0,0)");
+    tg.addColorStop(0.5, col.cellBg);
+    tg.addColorStop(1, "rgba(0,0,0,0)");
+    ctx.fillStyle = tg;
+    ctx.fillRect(0,0,W,H);
+
+    /* Subtle oval glow */
+    var rg = ctx.createRadialGradient(W*0.5,H*0.35,0,W*0.5,H*0.35,W*0.6);
+    rg.addColorStop(0, col.cellBg);
+    rg.addColorStop(1,"rgba(0,0,0,0)");
+    ctx.fillStyle = rg;
+    ctx.fillRect(0,0,W,H);
+
+    /* Top stripe */
+    ctx.fillStyle = col.accent1;
+    ctx.fillRect(0, 0, W, Math.round(6*s));
+
+    /* TWC Monogram */
+    var monoY = 50*s + 6*s;
+    drawBadge(W, s, monoY, col);
+
+    /* Title */
+    var titleY = monoY + 70*s;
+    ctx.font = "600 " + Math.round(42*s) + "px 'EB Garamond', serif";
+    ctx.fillStyle = col.text;
+    ctx.textAlign = "center";
+    ctx.fillText("2027 RUGBY", W/2, titleY);
+
+    ctx.font = "300 " + Math.round(22*s) + "px 'Inter', sans-serif";
+    ctx.fillStyle = col.accent2Light;
+    ctx.letterSpacing = Math.round(8*s) + "px";
+    ctx.fillText("C A L E N D A R", W/2, titleY + 38*s);
+    ctx.letterSpacing = "0px";
+
+    /* Divider line */
+    var divY = titleY + 65*s;
+    ctx.strokeStyle = col.divider;
+    ctx.lineWidth = Math.max(1, 1*s);
+    ctx.beginPath();
+    ctx.moveTo(W*0.15, divY);
+    ctx.lineTo(W*0.85, divY);
+    ctx.stroke();
+
+    /* Month Grid */
+    var gridTop = divY + 30*s;
+    var gridW = W * 0.82;
+    var gridLeft = (W - gridW) / 2;
+    var cols = 3, cellW = gridW / cols;
+    var cellH = 110 * s;
+    var gap = 8 * s;
+
+    months.forEach(function(mo, idx){
+      var c = idx % cols;
+      var r = Math.floor(idx / cols);
+      var cx = gridLeft + c * cellW + gap/2;
+      var cy = gridTop + r * (cellH + gap);
+      var cw = cellW - gap;
+      var ch = cellH;
+      var isGold = mo.gold;
+
+      if(isGold){
+        var gg = ctx.createLinearGradient(cx, cy, cx+cw, cy+ch);
+        gg.addColorStop(0, col.goldCellBg1);
+        gg.addColorStop(1, col.goldCellBg2);
+        ctx.fillStyle = gg;
+      } else {
+        ctx.fillStyle = col.cellBg;
+      }
+      roundRect(ctx, cx, cy, cw, ch, 8*s);
+      ctx.fill();
+
+      ctx.strokeStyle = isGold ? col.goldCellBorder : col.cellBorder;
+      ctx.lineWidth = Math.max(1, 1.2*s);
+      roundRect(ctx, cx, cy, cw, ch, 8*s);
+      ctx.stroke();
+
+      ctx.font = "700 " + Math.round(18*s) + "px 'Inter', sans-serif";
+      ctx.fillStyle = isGold ? col.accent1 : col.accent2Light;
+      ctx.textAlign = "left";
+      ctx.fillText(mo.m, cx + 10*s, cy + 24*s);
+
+      ctx.font = Math.round(11*s) + "px 'Inter', sans-serif";
+      ctx.fillStyle = isGold ? col.highlight : col.textDim;
+      mo.events.forEach(function(ev, ei){
+        ctx.fillText(ev, cx + 10*s, cy + 44*s + ei * 17*s);
+      });
+    });
+
+    /* RWC Banner */
+    var bannerY = gridTop + 4*(cellH + gap) + 20*s;
+    var bannerH = 100*s;
+    var bannerL = W * 0.08;
+    var bannerW = W * 0.84;
+
+    var bg2 = ctx.createLinearGradient(bannerL, bannerY, bannerL+bannerW, bannerY);
+    bg2.addColorStop(0, col.bannerBg1);
+    bg2.addColorStop(0.5, col.bannerBg2);
+    bg2.addColorStop(1, col.bannerBg1);
+    ctx.fillStyle = bg2;
+    roundRect(ctx, bannerL, bannerY, bannerW, bannerH, 10*s);
+    ctx.fill();
+
+    ctx.strokeStyle = col.accent1;
+    ctx.lineWidth = Math.max(1.5, 2*s);
+    roundRect(ctx, bannerL, bannerY, bannerW, bannerH, 10*s);
+    ctx.stroke();
+
+    ctx.textAlign = "center";
+    ctx.font = "700 " + Math.round(24*s) + "px 'EB Garamond', serif";
+    ctx.fillStyle = col.accent1;
+    ctx.fillText("RUGBY WORLD CUP \u00b7 AUSTRALIA", W/2, bannerY + 38*s);
+
+    ctx.font = "400 " + Math.round(14*s) + "px 'Inter', sans-serif";
+    ctx.fillStyle = col.text;
+    ctx.fillText("1 October \u2013 13 November 2027  \u00b7  Perth \u00b7 Sydney \u00b7 Melbourne \u00b7 Brisbane", W/2, bannerY + 66*s);
+
+    drawRugbyBall(W/2, bannerY - 12*s, s, col);
+    drawBranding(W, H, s, col);
+  }
+
+  /* ======================================================
+     DESIGN: MINIMAL
+     ====================================================== */
+  function renderMinimal(W, H, s, col){
+    /* Flat background */
+    ctx.fillStyle = col.bg;
+    ctx.fillRect(0,0,W,H);
+
+    /* Very subtle gradient overlay */
+    var bg = ctx.createLinearGradient(0,0,0,H);
+    bg.addColorStop(0, "rgba(0,0,0,0)");
+    bg.addColorStop(1, "rgba(0,0,0,0.08)");
+    ctx.fillStyle = bg;
+    ctx.fillRect(0,0,W,H);
+
+    /* TWC Badge - small, top-left area */
+    var badgeY = 60*s;
+    drawBadge(W, s * 0.7, badgeY, col);
+
+    /* Large year text */
+    var yearY = badgeY + 90*s;
+    ctx.font = "700 " + Math.round(90*s) + "px 'EB Garamond', serif";
+    ctx.fillStyle = col.accent1;
+    ctx.textAlign = "center";
+    ctx.globalAlpha = 0.12;
+    ctx.fillText("2027", W/2, yearY);
+    ctx.globalAlpha = 1;
+
+    /* Title over the year */
+    ctx.font = "300 " + Math.round(18*s) + "px 'Inter', sans-serif";
+    ctx.fillStyle = col.textDim;
+    ctx.letterSpacing = Math.round(10*s) + "px";
+    ctx.fillText("R U G B Y   C A L E N D A R", W/2, yearY + 30*s);
+    ctx.letterSpacing = "0px";
+
+    /* Months - minimal list */
+    var listTop = yearY + 70*s;
+    var lineH = (H - listTop - 120*s) / 12;
+    var leftX = W * 0.12;
+    var rightX = W * 0.88;
+
+    months.forEach(function(mo, idx){
+      var y = listTop + idx * lineH;
+      var isGold = mo.gold;
+
+      /* Thin separator */
+      ctx.strokeStyle = col.divider;
+      ctx.lineWidth = Math.max(0.5, 0.5*s);
+      ctx.beginPath();
+      ctx.moveTo(leftX, y);
+      ctx.lineTo(rightX, y);
+      ctx.stroke();
+
+      /* Month name */
+      ctx.font = "600 " + Math.round(16*s) + "px 'Inter', sans-serif";
+      ctx.fillStyle = isGold ? col.highlight : col.text;
+      ctx.textAlign = "left";
+      ctx.fillText(mo.full, leftX, y + lineH * 0.55);
+
+      /* Key event - just one line */
+      if(mo.events.length > 0){
+        ctx.font = "300 " + Math.round(12*s) + "px 'Inter', sans-serif";
+        ctx.fillStyle = isGold ? col.accent1 : col.textDim;
+        ctx.textAlign = "right";
+        ctx.fillText(mo.events[0], rightX, y + lineH * 0.55);
+      }
+
+      /* Gold dot for RWC months */
+      if(isGold){
+        ctx.fillStyle = col.highlight;
+        ctx.beginPath();
+        ctx.arc(leftX - 12*s, y + lineH * 0.5, 4*s, 0, Math.PI*2);
+        ctx.fill();
+      }
+    });
+
+    /* RWC section - simple prominent text */
+    var rwcY = listTop + 12 * lineH + 15*s;
+    ctx.strokeStyle = col.divider;
+    ctx.lineWidth = Math.max(0.5, 0.5*s);
+    ctx.beginPath();
+    ctx.moveTo(leftX, rwcY);
+    ctx.lineTo(rightX, rwcY);
+    ctx.stroke();
+
+    ctx.font = "600 " + Math.round(20*s) + "px 'EB Garamond', serif";
+    ctx.fillStyle = col.accent1;
+    ctx.textAlign = "center";
+    ctx.fillText("Rugby World Cup 2027  \u00b7  Australia", W/2, rwcY + 30*s);
+
+    ctx.font = "300 " + Math.round(11*s) + "px 'Inter', sans-serif";
+    ctx.fillStyle = col.textDim;
+    ctx.fillText("1 Oct \u2013 13 Nov  |  Perth  |  Sydney  |  Melbourne  |  Brisbane", W/2, rwcY + 52*s);
+
+    drawBranding(W, H, s, col);
+  }
+
+  /* ======================================================
+     DESIGN: BOLD GRID
+     ====================================================== */
+  function renderBoldGrid(W, H, s, col){
+    /* Solid background */
+    ctx.fillStyle = col.bgDark;
+    ctx.fillRect(0,0,W,H);
+
+    /* Top bar */
+    ctx.fillStyle = col.accent1;
+    ctx.fillRect(0, 0, W, Math.round(8*s));
+
+    /* TWC Badge */
+    var monoY = 55*s + 8*s;
+    drawBadge(W, s, monoY, col);
+
+    /* Title */
+    var titleY = monoY + 65*s;
+    ctx.font = "700 " + Math.round(38*s) + "px 'EB Garamond', serif";
+    ctx.fillStyle = col.text;
+    ctx.textAlign = "center";
+    ctx.fillText("2027 RUGBY CALENDAR", W/2, titleY);
+
+    /* Grid of 12 months - 3 columns x 4 rows, thick borders, solid colour blocks */
+    var gridTop = titleY + 40*s;
+    var gridW = W * 0.88;
+    var gridLeft = (W - gridW) / 2;
+    var cols = 3, rows = 4;
+    var cellW = gridW / cols;
+    var cellH = 120 * s;
+    var border = Math.max(3, 3*s);
+
+    /* Colour palette for blocks */
+    var blockColours = [
+      col.accent2, col.bg, col.accent1,
+      col.bg, col.accent1, col.accent2,
+      col.accent1, col.accent2, col.bg,
+      col.accent2, col.accent1, col.bg
+    ];
+
+    months.forEach(function(mo, idx){
+      var c = idx % cols;
+      var r = Math.floor(idx / cols);
+      var cx = gridLeft + c * cellW;
+      var cy = gridTop + r * cellH;
+      var isGold = mo.gold;
+
+      /* Solid block */
+      if(isGold){
+        ctx.fillStyle = col.accent1;
+      } else {
+        ctx.fillStyle = blockColours[idx];
+      }
+      ctx.fillRect(cx + border/2, cy + border/2, cellW - border, cellH - border);
+
+      /* Thick border */
+      ctx.strokeStyle = col.text;
+      ctx.lineWidth = border;
+      ctx.strokeRect(cx + border/2, cy + border/2, cellW - border, cellH - border);
+
+      /* Month text - large white */
+      ctx.font = "700 " + Math.round(26*s) + "px 'Inter', sans-serif";
+      ctx.fillStyle = "#FFFFFF";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "top";
+      ctx.fillText(mo.m, cx + cellW/2, cy + 15*s);
+
+      /* Events */
+      ctx.font = "500 " + Math.round(10*s) + "px 'Inter', sans-serif";
+      ctx.fillStyle = "rgba(255,255,255,0.85)";
+      mo.events.forEach(function(ev, ei){
+        ctx.fillText(ev, cx + cellW/2, cy + 50*s + ei * 18*s);
+      });
+      ctx.textBaseline = "alphabetic";
+    });
+
+    /* RWC Banner below grid */
+    var bannerY = gridTop + 4 * cellH + 20*s;
+    var bannerH = 90*s;
+    var bannerL = gridLeft;
+    var bannerW = gridW;
+
+    ctx.fillStyle = col.accent1;
+    ctx.fillRect(bannerL, bannerY, bannerW, bannerH);
+    ctx.strokeStyle = col.text;
+    ctx.lineWidth = border;
+    ctx.strokeRect(bannerL, bannerY, bannerW, bannerH);
+
+    ctx.font = "700 " + Math.round(26*s) + "px 'EB Garamond', serif";
+    ctx.fillStyle = "#FFFFFF";
+    ctx.textAlign = "center";
+    ctx.fillText("RUGBY WORLD CUP  \u00b7  AUSTRALIA 2027", W/2, bannerY + 38*s);
+
+    ctx.font = "500 " + Math.round(13*s) + "px 'Inter', sans-serif";
+    ctx.fillStyle = "rgba(255,255,255,0.9)";
+    ctx.fillText("1 October \u2013 13 November  |  Perth  |  Sydney  |  Melbourne  |  Brisbane", W/2, bannerY + 62*s);
+
+    drawRugbyBall(W/2, bannerY - 14*s, s, col);
+    drawBranding(W, H, s, col);
+  }
+
+  /* ======================================================
+     DESIGN: TIMELINE
+     ====================================================== */
+  function renderTimeline(W, H, s, col){
+    drawBackground(W, H, col);
+
+    /* TWC Badge */
+    var monoY = 55*s;
+    drawBadge(W, s * 0.8, monoY, col);
+
+    /* Title */
+    var titleY = monoY + 60*s;
+    ctx.font = "600 " + Math.round(32*s) + "px 'EB Garamond', serif";
+    ctx.fillStyle = col.text;
+    ctx.textAlign = "center";
+    ctx.fillText("2027 RUGBY CALENDAR", W/2, titleY);
+
+    /* Vertical timeline strip */
+    var timeTop = titleY + 40*s;
+    var timeBot = H - 120*s;
+    var centerX = W / 2;
+    var stripW = Math.max(2, 2.5*s);
+
+    /* Draw the main timeline line */
+    ctx.fillStyle = col.divider;
+    ctx.fillRect(centerX - stripW/2, timeTop, stripW, timeBot - timeTop);
+
+    /* Distribute months along timeline */
+    var segmentH = (timeBot - timeTop) / 12;
+
+    months.forEach(function(mo, idx){
+      var y = timeTop + idx * segmentH + segmentH / 2;
+      var isGold = mo.gold;
+      var isLeft = (idx % 2 === 0);
+      var dotR = isGold ? 8*s : 5*s;
+
+      /* Dot on timeline */
+      ctx.fillStyle = isGold ? col.highlight : col.accent1;
+      ctx.beginPath();
+      ctx.arc(centerX, y, dotR, 0, Math.PI*2);
+      ctx.fill();
+
+      /* Connector line */
+      var lineLen = W * 0.22;
+      var startX = isLeft ? centerX - dotR - 4*s : centerX + dotR + 4*s;
+      var endX = isLeft ? centerX - lineLen : centerX + lineLen;
+
+      ctx.strokeStyle = isGold ? col.highlight : col.divider;
+      ctx.lineWidth = Math.max(1, 1*s);
+      ctx.beginPath();
+      ctx.moveTo(startX, y);
+      ctx.lineTo(endX, y);
+      ctx.stroke();
+
+      /* Month header */
+      var textX = isLeft ? endX - 8*s : endX + 8*s;
+      ctx.textAlign = isLeft ? "right" : "left";
+
+      ctx.font = "700 " + Math.round(16*s) + "px 'Inter', sans-serif";
+      ctx.fillStyle = isGold ? col.highlight : col.accent1;
+      ctx.fillText(mo.m, textX, y - 4*s);
+
+      /* Events */
+      if(mo.events.length > 0){
+        ctx.font = "300 " + Math.round(10*s) + "px 'Inter', sans-serif";
+        ctx.fillStyle = isGold ? col.accent1 : col.textDim;
+        mo.events.forEach(function(ev, ei){
+          ctx.fillText(ev, textX, y + 14*s + ei * 15*s);
+        });
+      }
+
+      /* RWC special highlight box for gold months */
+      if(isGold){
+        var boxX = isLeft ? endX - W*0.28 : endX + 4*s;
+        var boxW = W * 0.28;
+        var boxY = y - 20*s;
+        var boxH = 50*s + mo.events.length * 15*s;
+        ctx.fillStyle = col.goldCellBg1;
+        roundRect(ctx, boxX, boxY, boxW, boxH, 6*s);
+        ctx.fill();
+        ctx.strokeStyle = col.goldCellBorder;
+        ctx.lineWidth = Math.max(1, 1*s);
+        roundRect(ctx, boxX, boxY, boxW, boxH, 6*s);
+        ctx.stroke();
+      }
+    });
+
+    /* RWC callout at bottom */
+    var rwcY = timeBot + 10*s;
+    ctx.font = "600 " + Math.round(18*s) + "px 'EB Garamond', serif";
+    ctx.fillStyle = col.accent1;
+    ctx.textAlign = "center";
+    ctx.fillText("Rugby World Cup 2027  \u00b7  Australia", W/2, rwcY + 20*s);
+
+    ctx.font = "300 " + Math.round(10*s) + "px 'Inter', sans-serif";
+    ctx.fillStyle = col.textDim;
+    ctx.fillText("Perth  \u00b7  Sydney  \u00b7  Melbourne  \u00b7  Brisbane", W/2, rwcY + 40*s);
+
+    drawBranding(W, H, s, col);
+  }
+
+  /* ======================================================
+     DESIGN: MAGAZINE
+     ====================================================== */
+  function renderMagazine(W, H, s, col){
+    /* Solid background */
+    ctx.fillStyle = col.bg;
+    ctx.fillRect(0,0,W,H);
+
+    /* Subtle texture overlay */
+    var tg = ctx.createLinearGradient(0,0,0,H);
+    tg.addColorStop(0, "rgba(0,0,0,0)");
+    tg.addColorStop(0.5, "rgba(0,0,0,0.03)");
+    tg.addColorStop(1, "rgba(0,0,0,0.08)");
+    ctx.fillStyle = tg;
+    ctx.fillRect(0,0,W,H);
+
+    /* Top accent line */
+    ctx.fillStyle = col.accent1;
+    ctx.fillRect(0, 0, W, Math.round(4*s));
+
+    /* TWC Badge top */
+    var monoY = 45*s + 4*s;
+    drawBadge(W, s * 0.65, monoY, col);
+
+    /* Large hero text - RUGBY 2027 */
+    var heroY = monoY + 70*s;
+    ctx.font = "900 " + Math.round(72*s) + "px 'Playfair Display', 'EB Garamond', serif";
+    ctx.fillStyle = col.accent1;
+    ctx.textAlign = "center";
+    ctx.fillText("RUGBY", W/2, heroY);
+
+    ctx.font = "400 " + Math.round(48*s) + "px 'Playfair Display', 'EB Garamond', serif";
+    ctx.fillStyle = col.text;
+    ctx.fillText("2027", W/2, heroY + 55*s);
+
+    /* Decorative rules */
+    var ruleY = heroY + 75*s;
+    ctx.fillStyle = col.accent1;
+    ctx.fillRect(W*0.2, ruleY, W*0.6, Math.max(2, 2*s));
+    ctx.fillRect(W*0.25, ruleY + 6*s, W*0.5, Math.max(1, 1*s));
+
+    /* Subtitle */
+    ctx.font = "400 " + Math.round(13*s) + "px 'Inter', sans-serif";
+    ctx.fillStyle = col.textDim;
+    ctx.letterSpacing = Math.round(6*s) + "px";
+    ctx.fillText("T H E  C O M P L E T E  C A L E N D A R", W/2, ruleY + 30*s);
+    ctx.letterSpacing = "0px";
+
+    /* Two-column event listing */
+    var colTop = ruleY + 55*s;
+    var colWidth = W * 0.38;
+    var leftCol = W * 0.08;
+    var rightCol = W * 0.54;
+    var lineH = 0;
+
+    /* Calculate available height for the two columns */
+    var availH = H - colTop - 200*s;
+    lineH = availH / 6.5;
+
+    /* Left column: Jan - Jun */
+    var leftMonths = months.slice(0, 6);
+    leftMonths.forEach(function(mo, idx){
+      var y = colTop + idx * lineH;
+
+      /* Month header - serif */
+      ctx.font = "700 " + Math.round(20*s) + "px 'Playfair Display', 'EB Garamond', serif";
+      ctx.fillStyle = mo.gold ? col.highlight : col.text;
+      ctx.textAlign = "left";
+      ctx.fillText(mo.full, leftCol, y + 20*s);
+
+      /* Underline */
+      ctx.fillStyle = col.divider;
+      ctx.fillRect(leftCol, y + 26*s, colWidth, Math.max(1, 0.5*s));
+
+      /* Events */
+      ctx.font = "300 " + Math.round(11*s) + "px 'Inter', sans-serif";
+      ctx.fillStyle = mo.gold ? col.accent1 : col.textDim;
+      if(mo.events.length === 0){
+        ctx.fillText("\u2014", leftCol, y + 44*s);
+      }
+      mo.events.forEach(function(ev, ei){
+        ctx.fillText(ev, leftCol, y + 44*s + ei * 16*s);
+      });
+    });
+
+    /* Right column: Jul - Dec */
+    var rightMonths = months.slice(6, 12);
+    rightMonths.forEach(function(mo, idx){
+      var y = colTop + idx * lineH;
+
+      ctx.font = "700 " + Math.round(20*s) + "px 'Playfair Display', 'EB Garamond', serif";
+      ctx.fillStyle = mo.gold ? col.highlight : col.text;
+      ctx.textAlign = "left";
+      ctx.fillText(mo.full, rightCol, y + 20*s);
+
+      ctx.fillStyle = col.divider;
+      ctx.fillRect(rightCol, y + 26*s, colWidth, Math.max(1, 0.5*s));
+
+      ctx.font = "300 " + Math.round(11*s) + "px 'Inter', sans-serif";
+      ctx.fillStyle = mo.gold ? col.accent1 : col.textDim;
+      if(mo.events.length === 0){
+        ctx.fillText("\u2014", rightCol, y + 44*s);
+      }
+      mo.events.forEach(function(ev, ei){
+        ctx.fillText(ev, rightCol, y + 44*s + ei * 16*s);
+      });
+    });
+
+    /* Vertical divider between columns */
+    var divX = W * 0.5;
+    ctx.fillStyle = col.divider;
+    ctx.fillRect(divX, colTop, Math.max(1, 1*s), 6 * lineH);
+
+    /* RWC Feature box */
+    var rwcTop = colTop + 6 * lineH + 15*s;
+    var rwcH = 90*s;
+    var rwcL = W * 0.08;
+    var rwcW = W * 0.84;
+
+    ctx.fillStyle = col.accent1;
+    ctx.fillRect(rwcL, rwcTop, rwcW, rwcH);
+
+    ctx.font = "900 " + Math.round(22*s) + "px 'Playfair Display', 'EB Garamond', serif";
+    ctx.fillStyle = "#FFFFFF";
+    ctx.textAlign = "center";
+    ctx.fillText("RUGBY WORLD CUP  \u00b7  AUSTRALIA", W/2, rwcTop + 35*s);
+
+    ctx.font = "400 " + Math.round(12*s) + "px 'Inter', sans-serif";
+    ctx.fillStyle = "rgba(255,255,255,0.85)";
+    ctx.fillText("1 October \u2013 13 November 2027  |  Perth  |  Sydney  |  Melbourne  |  Brisbane", W/2, rwcTop + 60*s);
+
+    drawRugbyBall(W/2, rwcTop - 14*s, s, col);
+    drawBranding(W, H, s, col);
+  }
+
+  /* ── Master Render ── */
+  function render(){
+    var d = getDevice();
+    var W = d.w, H = d.h;
+    canvas.width = W;
+    canvas.height = H;
+    resLabel.textContent = d.name + " \u2014 " + W + " \u00d7 " + H + " px";
+
+    var s = Math.min(W,H) / 1300;
+    var col = getColours();
+    var design = designSelect.value;
+
+    ctx.clearRect(0, 0, W, H);
+
+    if(design === "minimal"){
+      renderMinimal(W, H, s, col);
+    } else if(design === "boldgrid"){
+      renderBoldGrid(W, H, s, col);
+    } else if(design === "timeline"){
+      renderTimeline(W, H, s, col);
+    } else if(design === "magazine"){
+      renderMagazine(W, H, s, col);
+    } else {
+      renderClassic(W, H, s, col);
+    }
+
+    /* Scale preview */
+    var maxPrev = 420;
+    var ratio = Math.min(maxPrev/W, (maxPrev * 1.8)/H, 1);
+    canvas.style.width = Math.round(W * ratio) + "px";
+    canvas.style.height = Math.round(H * ratio) + "px";
+  }
+
   /* ── Download ── */
   downloadBtn.addEventListener("click", function(){
     var d = getDevice();
     var slug = d.name.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/-+$/,"");
-    var filename = "twc-rugby-2027-" + slug + "-" + d.w + "x" + d.h + ".png";
+    var design = designSelect.value;
+    var colour = colourSelect.value;
+    var filename = "twc-rugby-2027-" + design + "-" + colour + "-" + slug + ".png";
     var link = document.createElement("a");
     link.download = filename;
     link.href = canvas.toDataURL("image/png");
@@ -438,7 +1038,6 @@
   /* ── Init ── */
   function init(){
     populateSelect();
-    /* Wait for fonts */
     if(document.fonts && document.fonts.ready){
       document.fonts.ready.then(function(){ render(); });
     } else {

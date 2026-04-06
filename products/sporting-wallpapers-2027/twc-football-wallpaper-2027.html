@@ -101,6 +101,14 @@
     background-position: right 16px center;
   }
   .device-select option { background: #0B1E3D; color: #F5F3EB; }
+  .select-label {
+    font-size: 12px;
+    color: rgba(245,243,235,0.5);
+    margin-bottom: 4px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
   .resolution-label {
     text-align: center; font-size: 12px;
     color: rgba(245,243,235,0.4); margin-bottom: 20px;
@@ -173,7 +181,25 @@
   <select class="device-select" id="deviceSelect"></select>
   <p class="resolution-label" id="resLabel">1320 &times; 2868 px</p>
 
-  <div class="preview-wrap">
+  <p class="select-label">Design Style</p>
+  <select class="device-select" id="designSelect">
+    <option value="classic">Classic &mdash; Navy background, gold accents, 4&times;3 month grid</option>
+    <option value="minimal">Minimal &mdash; Clean, sparse, large 2027 text, key events only</option>
+    <option value="bold-grid">Bold Grid &mdash; Geometric grid, solid coloured month blocks</option>
+    <option value="timeline">Timeline &mdash; Vertical timeline strip with event dots</option>
+    <option value="magazine">Magazine &mdash; Editorial style, hero text, two-column layout</option>
+  </select>
+
+  <p class="select-label">Colour Scheme</p>
+  <select class="device-select" id="colourSelect">
+    <option value="navy-gold">Navy &amp; Gold &mdash; Classic navy, gold accents, cream text</option>
+    <option value="midnight">Midnight &mdash; Very dark, indigo accents, purple highlights</option>
+    <option value="pitch-green">Pitch Green &mdash; Dark green, bright green accents, mint text</option>
+    <option value="clean-white">Clean White &mdash; Light background, dark text, red highlights</option>
+    <option value="carbon">Carbon &mdash; Ultra-dark, silver text, gold and red accents</option>
+  </select>
+
+  <div class="preview-wrap" style="margin-top: 20px;">
     <canvas id="canvas" style="display:none"></canvas>
     <img id="preview" alt="Football Calendar 2027 Wallpaper Preview">
   </div>
@@ -217,44 +243,61 @@
     ]
   };
 
-  var NAVY = "#0B1E3D";
-  var RED = "#C8502A";
-  var GOLD = "#C8A94A";
-  var CREAM = "#F5F3EB";
-  var GREEN = "#1B5E20";
-  var DARK_GREEN = "#2E7D32";
+  var COLOUR_SCHEMES = {
+    "navy-gold": { bg: "#0B1E3D", bg2: "#0f2648", text: "#F5F3EB", accent: "#C8A94A", sport: "#1B5E20", highlight: "#C8502A" },
+    "midnight": { bg: "#080C14", bg2: "#0e1420", text: "#64748B", accent: "#818CF8", sport: "#C084FC", highlight: "#C084FC" },
+    "pitch-green": { bg: "#0A1F0A", bg2: "#0f2a0f", text: "#F0FDF4", accent: "#4ADE80", sport: "#4ADE80", highlight: "#FDE68A" },
+    "clean-white": { bg: "#FFFFFF", bg2: "#F8FAFC", text: "#1E293B", accent: "#0B1E3D", sport: "#0B1E3D", highlight: "#C8502A" },
+    "carbon": { bg: "#0A0A0A", bg2: "#141414", text: "#E5E5E5", accent: "#C8A94A", sport: "#EF4444", highlight: "#EF4444" }
+  };
 
   var MONTHS = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
   var FULL_MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
   var DAYS_IN_MONTH_2027 = [31,28,31,30,31,30,31,31,30,31,30,31];
-  var START_DAYS = [4,0,0,3,5,1,3,6,2,4,0,2]; // 2027: Jan 1 = Fri (index 5)... computed
 
-  // Compute actual start days for 2027
   function getStartDay(month) {
     return new Date(2027, month, 1).getDay();
   }
 
-  var EVENTS = {
-    0: [{ text: "FA Cup R3", color: RED }, { text: "Transfer window", color: CREAM }],
-    1: [{ text: "Carabao Cup Final", color: GOLD }],
-    2: [{ text: "Six Nations", color: CREAM }, { text: "FA Cup R5", color: RED }],
-    3: [{ text: "FA Cup SF", color: RED }],
-    4: [{ text: "PL Final Day 30th", color: GREEN }, { text: "FA Cup Final 15th", color: GOLD }],
-    5: [{ text: "UCL Final 5th Madrid", color: GOLD }, { text: "Nations League Finals", color: CREAM }, { text: "Women's WC 24th", color: RED }],
-    6: [{ text: "Women's WC Final 25th", color: GOLD }],
-    7: [{ text: "Community Shield", color: GOLD }, { text: "PL new season", color: GREEN }],
-    8: [{ text: "Euro 2028 quals", color: CREAM }, { text: "Int'l break", color: CREAM }],
-    9: [{ text: "Euro 2028 quals", color: CREAM }],
-    10: [{ text: "Euro 2028 quals", color: CREAM }],
-    11: [{ text: "Christmas PL fixtures", color: GREEN }]
+  // Events stored with keys referencing colour roles instead of hardcoded values
+  var EVENTS_RAW = {
+    0: [{ text: "FA Cup R3", role: "highlight" }, { text: "Transfer window", role: "text" }],
+    1: [{ text: "Carabao Cup Final", role: "accent" }],
+    2: [{ text: "Six Nations", role: "text" }, { text: "FA Cup R5", role: "highlight" }],
+    3: [{ text: "FA Cup SF", role: "highlight" }],
+    4: [{ text: "PL Final Day 30th", role: "sport" }, { text: "FA Cup Final 15th", role: "accent" }],
+    5: [{ text: "UCL Final 5th Madrid", role: "accent" }, { text: "Nations League Finals", role: "text" }, { text: "Women's WC 24th", role: "highlight" }],
+    6: [{ text: "Women's WC Final 25th", role: "accent" }],
+    7: [{ text: "Community Shield", role: "accent" }, { text: "PL new season", role: "sport" }],
+    8: [{ text: "Euro 2028 quals", role: "text" }, { text: "Int'l break", role: "text" }],
+    9: [{ text: "Euro 2028 quals", role: "text" }],
+    10: [{ text: "Euro 2028 quals", role: "text" }],
+    11: [{ text: "Christmas PL fixtures", role: "sport" }]
   };
+
+  function getEventsWithColors(COLORS) {
+    var result = {};
+    for (var m = 0; m < 12; m++) {
+      var raw = EVENTS_RAW[m] || [];
+      result[m] = [];
+      for (var i = 0; i < raw.length; i++) {
+        result[m].push({ text: raw[i].text, color: COLORS[raw[i].role] });
+      }
+    }
+    return result;
+  }
 
   var currentCat = "iphone";
   var currentIdx = 0;
+  var currentDesign = "classic";
+  var currentColour = "navy-gold";
+
   var canvas = document.getElementById("canvas");
   var ctx = canvas.getContext("2d");
   var preview = document.getElementById("preview");
   var selectEl = document.getElementById("deviceSelect");
+  var designSelect = document.getElementById("designSelect");
+  var colourSelect = document.getElementById("colourSelect");
   var resLabel = document.getElementById("resLabel");
   var tabs = document.querySelectorAll(".tab");
   var downloadBtn = document.getElementById("downloadBtn");
@@ -281,31 +324,70 @@
     return DEVICES[currentCat][currentIdx];
   }
 
-  // Render wallpaper on canvas
-  function renderWallpaper() {
-    var dev = getDevice();
-    var W = dev.w;
-    var H = dev.h;
-    canvas.width = W;
-    canvas.height = H;
+  // ===== SHARED HELPERS =====
+  var garamond = "'EB Garamond', Georgia, serif";
+  var inter = "'Inter', sans-serif";
 
-    var isTablet = currentCat === "ipad";
-    var scale = W / 1320; // base scale relative to iPhone 16 Pro Max
+  function drawBadge(W, topY, scale, COLORS) {
+    var badgeR = 36 * scale;
+    var badgeCX = W / 2;
+    var badgeCY = topY + badgeR;
+    ctx.beginPath();
+    ctx.arc(badgeCX, badgeCY, badgeR, 0, Math.PI * 2);
+    ctx.strokeStyle = COLORS.accent;
+    ctx.lineWidth = 2.5 * scale;
+    ctx.stroke();
+    ctx.fillStyle = COLORS.accent;
+    ctx.font = "700 " + Math.round(22 * scale) + "px " + garamond;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText("TWC", badgeCX, badgeCY + 1 * scale);
+    return badgeCY + badgeR;
+  }
 
-    // Background
-    ctx.fillStyle = NAVY;
+  function drawBackground(W, H, COLORS) {
+    ctx.fillStyle = COLORS.bg;
     ctx.fillRect(0, 0, W, H);
+  }
+
+  function drawBottomBranding(W, H, scale, COLORS, isTablet) {
+    var brandY = H * (isTablet ? 0.92 : 0.94);
+    ctx.strokeStyle = COLORS.accent + "40";
+    ctx.lineWidth = 1 * scale;
+    ctx.beginPath();
+    ctx.moveTo(W * 0.2, brandY - 20 * scale);
+    ctx.lineTo(W * 0.8, brandY - 20 * scale);
+    ctx.stroke();
+    ctx.fillStyle = COLORS.accent;
+    ctx.font = "600 " + Math.round(14 * scale) + "px " + inter;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText("THE WALL CHART CO", W / 2, brandY);
+    ctx.fillStyle = COLORS.text + "40";
+    ctx.font = "400 " + Math.round(9 * scale) + "px " + inter;
+    ctx.fillText("Unofficial fan product \u2022 thewallchartco.com", W / 2, brandY + 22 * scale);
+    // Bottom stripe
+    ctx.fillStyle = COLORS.sport;
+    ctx.fillRect(0, H - 6 * scale, W, 6 * scale);
+  }
+
+  // ===== CLASSIC DESIGN =====
+  function renderClassic(W, H, scale, COLORS) {
+    var isTablet = currentCat === "ipad";
+    var EVENTS = getEventsWithColors(COLORS);
+
+    drawBackground(W, H, COLORS);
 
     // Diagonal gradient overlay
     var grad = ctx.createLinearGradient(0, 0, W, H);
-    grad.addColorStop(0, "rgba(27,94,32,0.12)");
-    grad.addColorStop(0.5, "rgba(11,30,61,0)");
-    grad.addColorStop(1, "rgba(200,169,74,0.08)");
+    grad.addColorStop(0, COLORS.sport + "1F");
+    grad.addColorStop(0.5, COLORS.bg + "00");
+    grad.addColorStop(1, COLORS.accent + "14");
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, W, H);
 
-    // Subtle pitch lines decoration
-    ctx.strokeStyle = "rgba(27,94,32,0.08)";
+    // Subtle pitch lines
+    ctx.strokeStyle = COLORS.sport + "14";
     ctx.lineWidth = 2 * scale;
     ctx.beginPath();
     ctx.arc(W / 2, H * 0.15, W * 0.15, 0, Math.PI * 2);
@@ -315,30 +397,12 @@
     ctx.lineTo(W * 0.9, H * 0.12);
     ctx.stroke();
 
-    var garamond = "'EB Garamond', Georgia, serif";
-    var inter = "'Inter', sans-serif";
-
-    // Top padding
     var topY = H * 0.06;
-
-    // TWC Monogram badge
-    var badgeR = 36 * scale;
-    var badgeCX = W / 2;
-    var badgeCY = topY + badgeR;
-    ctx.beginPath();
-    ctx.arc(badgeCX, badgeCY, badgeR, 0, Math.PI * 2);
-    ctx.strokeStyle = GOLD;
-    ctx.lineWidth = 2.5 * scale;
-    ctx.stroke();
-    ctx.fillStyle = GOLD;
-    ctx.font = "700 " + Math.round(22 * scale) + "px " + garamond;
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.fillText("TWC", badgeCX, badgeCY + 1 * scale);
+    var badgeBottom = drawBadge(W, topY, scale, COLORS);
 
     // Year
-    var yearY = badgeCY + badgeR + 40 * scale;
-    ctx.fillStyle = CREAM;
+    var yearY = badgeBottom + 40 * scale;
+    ctx.fillStyle = COLORS.text;
     ctx.font = "700 " + Math.round(90 * scale) + "px " + garamond;
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
@@ -346,24 +410,21 @@
 
     // Subtitle
     var subtitleY = yearY + 55 * scale;
-    ctx.fillStyle = GOLD;
+    ctx.fillStyle = COLORS.accent;
     ctx.font = "600 " + Math.round(18 * scale) + "px " + inter;
-    ctx.letterSpacing = "4px";
     ctx.fillText("FOOTBALL CALENDAR", W / 2, subtitleY);
 
     // Decorative line
     var lineY = subtitleY + 28 * scale;
-    ctx.strokeStyle = "rgba(200,169,74,0.4)";
+    ctx.strokeStyle = COLORS.accent + "66";
     ctx.lineWidth = 1.5 * scale;
     ctx.beginPath();
     ctx.moveTo(W * 0.25, lineY);
     ctx.lineTo(W * 0.75, lineY);
     ctx.stroke();
-
-    // Green football accent dot
     ctx.beginPath();
     ctx.arc(W / 2, lineY, 4 * scale, 0, Math.PI * 2);
-    ctx.fillStyle = GREEN;
+    ctx.fillStyle = COLORS.sport;
     ctx.fill();
 
     // Month grid: 4 cols x 3 rows
@@ -371,11 +432,9 @@
     var gridPadX = W * 0.05;
     var gridW = W - gridPadX * 2;
     var colW = gridW / 4;
-
     var gridBottom = H * (isTablet ? 0.82 : 0.88);
     var gridH = gridBottom - gridTop;
     var rowH = gridH / 3;
-
     var dayLabels = ["M","T","W","T","F","S","S"];
 
     for (var m = 0; m < 12; m++) {
@@ -385,18 +444,16 @@
       var cellTop = gridTop + row * rowH;
       var cellPad = 8 * scale;
 
-      // Month name
-      ctx.fillStyle = CREAM;
+      ctx.fillStyle = COLORS.text;
       ctx.font = "700 " + Math.round(16 * scale) + "px " + inter;
       ctx.textAlign = "center";
       ctx.textBaseline = "top";
       ctx.fillText(MONTHS[m], cx, cellTop + cellPad);
 
-      // Day headers
       var dayHeaderY = cellTop + cellPad + 24 * scale;
       var dayFontSize = Math.round(8 * scale);
       ctx.font = "500 " + dayFontSize + "px " + inter;
-      ctx.fillStyle = "rgba(245,243,235,0.35)";
+      ctx.fillStyle = COLORS.text + "59";
       var miniColW = (colW - cellPad * 2) / 7;
       var gridLeft = cx - (colW - cellPad * 2) / 2;
 
@@ -404,11 +461,9 @@
         ctx.fillText(dayLabels[d], gridLeft + d * miniColW + miniColW / 2, dayHeaderY);
       }
 
-      // Day numbers
       var numFontSize = Math.round(8.5 * scale);
       ctx.font = "400 " + numFontSize + "px " + inter;
       var startDay = getStartDay(m);
-      // Convert Sunday=0 to Monday=0 based
       var startOffset = (startDay + 6) % 7;
       var numDays = DAYS_IN_MONTH_2027[m];
       var dayNumY = dayHeaderY + 14 * scale;
@@ -420,17 +475,14 @@
         var dr = Math.floor(pos / 7);
         var dx = gridLeft + dc * miniColW + miniColW / 2;
         var dy = dayNumY + dr * dayRowH;
-
-        // Weekend colouring
         if (dc >= 5) {
-          ctx.fillStyle = "rgba(200,169,74,0.4)";
+          ctx.fillStyle = COLORS.accent + "66";
         } else {
-          ctx.fillStyle = "rgba(245,243,235,0.55)";
+          ctx.fillStyle = COLORS.text + "8C";
         }
         ctx.fillText(String(dn + 1), dx, dy);
       }
 
-      // Events below the calendar numbers
       var evts = EVENTS[m] || [];
       var maxDayRows = Math.ceil((startOffset + numDays) / 7);
       var evtStartY = dayNumY + maxDayRows * dayRowH + 6 * scale;
@@ -438,36 +490,32 @@
 
       for (var e = 0; e < evts.length && e < 3; e++) {
         var evtY = evtStartY + e * (evtFontSize + 5 * scale);
-        // Dot
         ctx.beginPath();
         ctx.arc(gridLeft + 4 * scale, evtY + evtFontSize * 0.35, 2.5 * scale, 0, Math.PI * 2);
         ctx.fillStyle = evts[e].color;
         ctx.fill();
-        // Text
         ctx.fillStyle = evts[e].color;
         ctx.font = "500 " + evtFontSize + "px " + inter;
         ctx.textAlign = "left";
         ctx.fillText(evts[e].text, gridLeft + 10 * scale, evtY);
-        ctx.textAlign = "center"; // reset
+        ctx.textAlign = "center";
       }
     }
 
-    // Key / Legend
+    // Legend
     var legendY = gridBottom + 14 * scale;
     var legendFontSize = Math.round(9 * scale);
     ctx.font = "500 " + legendFontSize + "px " + inter;
     ctx.textAlign = "center";
-
     var legends = [
-      { label: "Finals", color: GOLD },
-      { label: "Premier League", color: GREEN },
-      { label: "Cups", color: RED },
-      { label: "Other", color: CREAM }
+      { label: "Finals", color: COLORS.accent },
+      { label: "Premier League", color: COLORS.sport },
+      { label: "Cups", color: COLORS.highlight },
+      { label: "Other", color: COLORS.text }
     ];
     var legendTotalW = 0;
     var legendGap = 24 * scale;
     var dotR = 3.5 * scale;
-    // measure
     var measurements = [];
     for (var li = 0; li < legends.length; li++) {
       var lm = ctx.measureText(legends[li].label).width;
@@ -483,37 +531,399 @@
       ctx.fillStyle = legends[li2].color;
       ctx.fill();
       lx += dotR * 2 + 6 * scale;
-      ctx.fillStyle = "rgba(245,243,235,0.5)";
+      ctx.fillStyle = COLORS.text + "80";
       ctx.textAlign = "left";
       ctx.fillText(legends[li2].label, lx, legendY - legendFontSize * 0.35);
       lx += measurements[li2] + legendGap;
     }
     ctx.textAlign = "center";
 
-    // Bottom branding
-    var brandY = H * (isTablet ? 0.92 : 0.94);
+    drawBottomBranding(W, H, scale, COLORS, isTablet);
+  }
 
-    // Decorative line
-    ctx.strokeStyle = "rgba(200,169,74,0.25)";
-    ctx.lineWidth = 1 * scale;
+  // ===== MINIMAL DESIGN =====
+  function renderMinimal(W, H, scale, COLORS) {
+    var isTablet = currentCat === "ipad";
+    var EVENTS = getEventsWithColors(COLORS);
+
+    drawBackground(W, H, COLORS);
+
+    var topY = H * 0.05;
+    var badgeBottom = drawBadge(W, topY, scale, COLORS);
+
+    // Large year text
+    var yearY = badgeBottom + 80 * scale;
+    ctx.fillStyle = COLORS.text;
+    ctx.font = "700 " + Math.round(160 * scale) + "px " + garamond;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.globalAlpha = 0.08;
+    ctx.fillText("2027", W / 2, H * 0.3);
+    ctx.globalAlpha = 1.0;
+
+    ctx.fillStyle = COLORS.text;
+    ctx.font = "700 " + Math.round(72 * scale) + "px " + garamond;
+    ctx.fillText("2027", W / 2, yearY);
+
+    var subtitleY = yearY + 48 * scale;
+    ctx.fillStyle = COLORS.accent;
+    ctx.font = "600 " + Math.round(14 * scale) + "px " + inter;
+    ctx.fillText("FOOTBALL CALENDAR", W / 2, subtitleY);
+
+    // Months listed vertically with 1-2 key events
+    var listTop = subtitleY + 60 * scale;
+    var listBottom = H * (isTablet ? 0.85 : 0.90);
+    var monthSpacing = (listBottom - listTop) / 12;
+
+    for (var m = 0; m < 12; m++) {
+      var my = listTop + m * monthSpacing;
+
+      // Month name
+      ctx.fillStyle = COLORS.accent;
+      ctx.font = "700 " + Math.round(16 * scale) + "px " + inter;
+      ctx.textAlign = "left";
+      ctx.textBaseline = "middle";
+      ctx.fillText(FULL_MONTHS[m].toUpperCase(), W * 0.12, my);
+
+      // Thin line
+      var textW = ctx.measureText(FULL_MONTHS[m].toUpperCase()).width;
+      ctx.strokeStyle = COLORS.accent + "30";
+      ctx.lineWidth = 1 * scale;
+      ctx.beginPath();
+      ctx.moveTo(W * 0.12 + textW + 12 * scale, my);
+      ctx.lineTo(W * 0.88, my);
+      ctx.stroke();
+
+      // Key events (max 2)
+      var evts = EVENTS[m] || [];
+      var evtX = W * 0.88;
+      ctx.textAlign = "right";
+      ctx.font = "400 " + Math.round(11 * scale) + "px " + inter;
+      for (var e = 0; e < evts.length && e < 2; e++) {
+        ctx.fillStyle = evts[e].color;
+        ctx.fillText(evts[e].text, evtX, my + (e === 0 ? -7 * scale : 10 * scale));
+      }
+      if (evts.length === 1) {
+        ctx.fillStyle = evts[0].color;
+        ctx.fillText(evts[0].text, evtX, my);
+      }
+    }
+
+    ctx.textAlign = "center";
+    drawBottomBranding(W, H, scale, COLORS, isTablet);
+  }
+
+  // ===== BOLD GRID DESIGN =====
+  function renderBoldGrid(W, H, scale, COLORS) {
+    var isTablet = currentCat === "ipad";
+    var EVENTS = getEventsWithColors(COLORS);
+
+    drawBackground(W, H, COLORS);
+
+    var topY = H * 0.04;
+    var badgeBottom = drawBadge(W, topY, scale, COLORS);
+
+    // Title
+    var yearY = badgeBottom + 36 * scale;
+    ctx.fillStyle = COLORS.text;
+    ctx.font = "700 " + Math.round(50 * scale) + "px " + garamond;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText("2027", W / 2, yearY);
+
+    var subtitleY = yearY + 36 * scale;
+    ctx.fillStyle = COLORS.accent;
+    ctx.font = "600 " + Math.round(14 * scale) + "px " + inter;
+    ctx.fillText("FOOTBALL CALENDAR", W / 2, subtitleY);
+
+    // Grid: 3 cols x 4 rows
+    var gridTop = subtitleY + 30 * scale;
+    var gridPadX = W * 0.05;
+    var gridW = W - gridPadX * 2;
+    var gap = 6 * scale;
+    var cols = 3;
+    var rows = 4;
+    var cellW = (gridW - (cols - 1) * gap) / cols;
+    var gridBottom = H * (isTablet ? 0.85 : 0.90);
+    var gridH = gridBottom - gridTop;
+    var cellH = (gridH - (rows - 1) * gap) / rows;
+
+    // Generate block colours from the accent
+    var blockColors = [
+      COLORS.accent,
+      COLORS.sport,
+      COLORS.highlight,
+      COLORS.accent + "CC",
+      COLORS.sport + "CC",
+      COLORS.highlight + "CC",
+      COLORS.accent + "99",
+      COLORS.sport + "99",
+      COLORS.highlight + "99",
+      COLORS.accent + "BB",
+      COLORS.sport + "BB",
+      COLORS.highlight + "BB"
+    ];
+
+    for (var m = 0; m < 12; m++) {
+      var col = m % cols;
+      var row = Math.floor(m / cols);
+      var bx = gridPadX + col * (cellW + gap);
+      var by = gridTop + row * (cellH + gap);
+
+      // Solid coloured block
+      ctx.fillStyle = blockColors[m];
+      ctx.fillRect(bx, by, cellW, cellH);
+
+      // Thick border
+      ctx.strokeStyle = COLORS.text + "40";
+      ctx.lineWidth = 3 * scale;
+      ctx.strokeRect(bx, by, cellW, cellH);
+
+      // Month name centred
+      ctx.fillStyle = COLORS.bg;
+      ctx.font = "700 " + Math.round(20 * scale) + "px " + inter;
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText(MONTHS[m], bx + cellW / 2, by + cellH * 0.3);
+
+      // Events below
+      var evts = EVENTS[m] || [];
+      ctx.font = "500 " + Math.round(8 * scale) + "px " + inter;
+      ctx.fillStyle = COLORS.bg;
+      for (var e = 0; e < evts.length && e < 3; e++) {
+        var ey = by + cellH * 0.5 + e * 14 * scale;
+        ctx.fillText(evts[e].text, bx + cellW / 2, ey);
+      }
+    }
+
+    drawBottomBranding(W, H, scale, COLORS, isTablet);
+  }
+
+  // ===== TIMELINE DESIGN =====
+  function renderTimeline(W, H, scale, COLORS) {
+    var isTablet = currentCat === "ipad";
+    var EVENTS = getEventsWithColors(COLORS);
+
+    drawBackground(W, H, COLORS);
+
+    var topY = H * 0.04;
+    var badgeBottom = drawBadge(W, topY, scale, COLORS);
+
+    // Title
+    var yearY = badgeBottom + 36 * scale;
+    ctx.fillStyle = COLORS.text;
+    ctx.font = "700 " + Math.round(54 * scale) + "px " + garamond;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText("2027", W / 2, yearY);
+
+    var subtitleY = yearY + 38 * scale;
+    ctx.fillStyle = COLORS.accent;
+    ctx.font = "600 " + Math.round(14 * scale) + "px " + inter;
+    ctx.fillText("FOOTBALL CALENDAR", W / 2, subtitleY);
+
+    // Timeline strip
+    var timeTop = subtitleY + 40 * scale;
+    var timeBottom = H * (isTablet ? 0.86 : 0.91);
+    var centerX = W / 2;
+
+    // Vertical line
+    ctx.strokeStyle = COLORS.accent + "50";
+    ctx.lineWidth = 2 * scale;
     ctx.beginPath();
-    ctx.moveTo(W * 0.2, brandY - 20 * scale);
-    ctx.lineTo(W * 0.8, brandY - 20 * scale);
+    ctx.moveTo(centerX, timeTop);
+    ctx.lineTo(centerX, timeBottom);
     ctx.stroke();
 
-    ctx.fillStyle = GOLD;
-    ctx.font = "600 " + Math.round(14 * scale) + "px " + inter;
-    ctx.fillText("THE WALL CHART CO", W / 2, brandY);
+    var monthSpacing = (timeBottom - timeTop) / 12;
 
-    ctx.fillStyle = "rgba(245,243,235,0.25)";
-    ctx.font = "400 " + Math.round(9 * scale) + "px " + inter;
-    ctx.fillText("Unofficial fan product \u2022 thewallchartco.com", W / 2, brandY + 22 * scale);
+    for (var m = 0; m < 12; m++) {
+      var my = timeTop + m * monthSpacing + monthSpacing * 0.5;
 
-    // Green stripe at very bottom
-    ctx.fillStyle = GREEN;
-    ctx.fillRect(0, H - 6 * scale, W, 6 * scale);
+      // Month header dot
+      ctx.beginPath();
+      ctx.arc(centerX, my, 8 * scale, 0, Math.PI * 2);
+      ctx.fillStyle = COLORS.accent;
+      ctx.fill();
 
-    // Update preview
+      // Month label (alternating sides)
+      var isLeft = m % 2 === 0;
+      ctx.font = "700 " + Math.round(14 * scale) + "px " + inter;
+      ctx.textBaseline = "middle";
+      if (isLeft) {
+        ctx.textAlign = "right";
+        ctx.fillStyle = COLORS.text;
+        ctx.fillText(MONTHS[m], centerX - 20 * scale, my);
+      } else {
+        ctx.textAlign = "left";
+        ctx.fillStyle = COLORS.text;
+        ctx.fillText(MONTHS[m], centerX + 20 * scale, my);
+      }
+
+      // Events as small dots with labels on the opposite side
+      var evts = EVENTS[m] || [];
+      ctx.font = "400 " + Math.round(9 * scale) + "px " + inter;
+      for (var e = 0; e < evts.length && e < 2; e++) {
+        var ey = my + (e + 1) * 14 * scale;
+        var evtSide = !isLeft;
+
+        // Small dot
+        ctx.beginPath();
+        ctx.arc(centerX, ey, 3 * scale, 0, Math.PI * 2);
+        ctx.fillStyle = evts[e].color;
+        ctx.fill();
+
+        // Horizontal connector
+        ctx.strokeStyle = evts[e].color + "60";
+        ctx.lineWidth = 1 * scale;
+        ctx.beginPath();
+        if (evtSide) {
+          ctx.moveTo(centerX + 3 * scale, ey);
+          ctx.lineTo(centerX + 16 * scale, ey);
+          ctx.stroke();
+          ctx.textAlign = "left";
+          ctx.fillStyle = evts[e].color;
+          ctx.fillText(evts[e].text, centerX + 18 * scale, ey);
+        } else {
+          ctx.moveTo(centerX - 3 * scale, ey);
+          ctx.lineTo(centerX - 16 * scale, ey);
+          ctx.stroke();
+          ctx.textAlign = "right";
+          ctx.fillStyle = evts[e].color;
+          ctx.fillText(evts[e].text, centerX - 18 * scale, ey);
+        }
+      }
+    }
+
+    ctx.textAlign = "center";
+    drawBottomBranding(W, H, scale, COLORS, isTablet);
+  }
+
+  // ===== MAGAZINE DESIGN =====
+  function renderMagazine(W, H, scale, COLORS) {
+    var isTablet = currentCat === "ipad";
+    var EVENTS = getEventsWithColors(COLORS);
+
+    drawBackground(W, H, COLORS);
+
+    // Subtle texture
+    var grad = ctx.createLinearGradient(0, 0, 0, H);
+    grad.addColorStop(0, COLORS.accent + "0A");
+    grad.addColorStop(1, COLORS.bg);
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, W, H);
+
+    // Top third: hero area
+    var heroBottom = H * 0.30;
+
+    // TWC badge small in corner
+    var smallBadgeR = 24 * scale;
+    ctx.beginPath();
+    ctx.arc(W * 0.1, H * 0.04 + smallBadgeR, smallBadgeR, 0, Math.PI * 2);
+    ctx.strokeStyle = COLORS.accent;
+    ctx.lineWidth = 2 * scale;
+    ctx.stroke();
+    ctx.fillStyle = COLORS.accent;
+    ctx.font = "700 " + Math.round(15 * scale) + "px " + garamond;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText("TWC", W * 0.1, H * 0.04 + smallBadgeR + 1 * scale);
+
+    // Large hero text
+    ctx.fillStyle = COLORS.text;
+    ctx.font = "700 " + Math.round(80 * scale) + "px " + garamond;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText("FOOTBALL", W / 2, H * 0.12);
+
+    ctx.fillStyle = COLORS.accent;
+    ctx.font = "700 " + Math.round(100 * scale) + "px " + garamond;
+    ctx.fillText("2027", W / 2, H * 0.20);
+
+    // Decorative line under hero
+    ctx.strokeStyle = COLORS.accent;
+    ctx.lineWidth = 3 * scale;
+    ctx.beginPath();
+    ctx.moveTo(W * 0.08, heroBottom);
+    ctx.lineTo(W * 0.92, heroBottom);
+    ctx.stroke();
+
+    ctx.fillStyle = COLORS.text + "80";
+    ctx.font = "500 " + Math.round(11 * scale) + "px " + inter;
+    ctx.fillText("THE COMPLETE CALENDAR", W / 2, heroBottom + 18 * scale);
+
+    // Two-column month listing
+    var colTop = heroBottom + 40 * scale;
+    var colBottom = H * (isTablet ? 0.85 : 0.90);
+    var colH = colBottom - colTop;
+    var leftX = W * 0.08;
+    var rightX = W * 0.54;
+    var colWidth = W * 0.38;
+    var monthH = colH / 6;
+
+    for (var m = 0; m < 12; m++) {
+      var isRight = m >= 6;
+      var baseX = isRight ? rightX : leftX;
+      var localIdx = isRight ? m - 6 : m;
+      var my = colTop + localIdx * monthH;
+
+      // Month name - serif
+      ctx.fillStyle = COLORS.accent;
+      ctx.font = "700 " + Math.round(18 * scale) + "px " + garamond;
+      ctx.textAlign = "left";
+      ctx.textBaseline = "top";
+      ctx.fillText(FULL_MONTHS[m], baseX, my);
+
+      // Thin separator
+      ctx.strokeStyle = COLORS.accent + "30";
+      ctx.lineWidth = 1 * scale;
+      ctx.beginPath();
+      ctx.moveTo(baseX, my + 22 * scale);
+      ctx.lineTo(baseX + colWidth, my + 22 * scale);
+      ctx.stroke();
+
+      // Events
+      var evts = EVENTS[m] || [];
+      ctx.font = "400 " + Math.round(10 * scale) + "px " + inter;
+      for (var e = 0; e < evts.length && e < 3; e++) {
+        ctx.fillStyle = evts[e].color;
+        ctx.fillText(evts[e].text, baseX, my + 28 * scale + e * 14 * scale);
+      }
+    }
+
+    ctx.textAlign = "center";
+    drawBottomBranding(W, H, scale, COLORS, isTablet);
+  }
+
+  // ===== MAIN RENDER =====
+  function renderWallpaper() {
+    var dev = getDevice();
+    var W = dev.w;
+    var H = dev.h;
+    canvas.width = W;
+    canvas.height = H;
+
+    var scale = W / 1320;
+    var COLORS = COLOUR_SCHEMES[currentColour];
+
+    switch (currentDesign) {
+      case "minimal":
+        renderMinimal(W, H, scale, COLORS);
+        break;
+      case "bold-grid":
+        renderBoldGrid(W, H, scale, COLORS);
+        break;
+      case "timeline":
+        renderTimeline(W, H, scale, COLORS);
+        break;
+      case "magazine":
+        renderMagazine(W, H, scale, COLORS);
+        break;
+      default:
+        renderClassic(W, H, scale, COLORS);
+        break;
+    }
+
     preview.src = canvas.toDataURL("image/png");
   }
 
@@ -536,10 +946,22 @@
     renderWallpaper();
   });
 
+  // Design select change
+  designSelect.addEventListener("change", function() {
+    currentDesign = designSelect.value;
+    renderWallpaper();
+  });
+
+  // Colour select change
+  colourSelect.addEventListener("change", function() {
+    currentColour = colourSelect.value;
+    renderWallpaper();
+  });
+
   // Download
   downloadBtn.addEventListener("click", function() {
     var dev = getDevice();
-    var filename = "twc-football-2027-" + dev.slug + ".png";
+    var filename = "twc-football-2027-" + currentDesign + "-" + currentColour + "-" + dev.slug + ".png";
     canvas.toBlob(function(blob) {
       var url = URL.createObjectURL(blob);
       var a = document.createElement("a");

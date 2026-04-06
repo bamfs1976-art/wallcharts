@@ -110,7 +110,7 @@
   }
   /* Dropdown */
   .select-wrap {
-    position: relative; margin-bottom: 1.5rem;
+    position: relative; margin-bottom: 1.25rem;
   }
   .select-wrap select {
     width: 100%;
@@ -135,6 +135,24 @@
     font-size: 0.75rem;
   }
   .select-wrap select:focus { outline: none; border-color: var(--gold); }
+  .select-label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--text-dim);
+    margin-bottom: 0.4rem;
+  }
+  .selector-row {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+  }
+  .selector-row .select-wrap {
+    flex: 1;
+    margin-bottom: 0;
+  }
   /* Preview area */
   .preview-section {
     display: flex;
@@ -230,6 +248,7 @@
     .flagship-badge { display: none; }
     .tab-btn { padding: 8px 14px; font-size: 0.8rem; }
     .main { padding: 1.25rem 1rem 2rem; }
+    .selector-row { flex-direction: column; gap: 0.75rem; }
   }
 </style>
 </head>
@@ -261,7 +280,32 @@
 
   <!-- Device selector -->
   <div class="select-wrap">
+    <label class="select-label">Device</label>
     <select id="deviceSelect"></select>
+  </div>
+
+  <!-- Design Style & Colour Scheme selectors -->
+  <div class="selector-row">
+    <div class="select-wrap">
+      <label class="select-label">Design Style</label>
+      <select id="designSelect">
+        <option value="classic">Classic</option>
+        <option value="minimal">Minimal</option>
+        <option value="boldgrid">Bold Grid</option>
+        <option value="timeline">Timeline</option>
+        <option value="magazine">Magazine</option>
+      </select>
+    </div>
+    <div class="select-wrap">
+      <label class="select-label">Colour Scheme</label>
+      <select id="colourSelect">
+        <option value="navygold">Navy &amp; Gold</option>
+        <option value="midnight">Midnight</option>
+        <option value="earth">Earth</option>
+        <option value="cleanwhite">Clean White</option>
+        <option value="carbon">Carbon</option>
+      </select>
+    </div>
   </div>
 
   <!-- Preview -->
@@ -281,6 +325,7 @@
     <h3>How to Set Your Wallpaper</h3>
     <ol>
       <li>Select your device from the dropdown above.</li>
+      <li>Choose a <strong>Design Style</strong> and <strong>Colour Scheme</strong>.</li>
       <li>Click <strong>Download Wallpaper</strong> to save the PNG.</li>
       <li><strong>iPhone / iPad:</strong> Open the image in Photos, tap the share icon, then <em>Use as Wallpaper</em>.</li>
       <li><strong>Android:</strong> Open the image in Gallery, tap the three-dot menu, then <em>Set as wallpaper</em>.</li>
@@ -300,7 +345,7 @@
   "use strict";
 
   /* ── Device data ── */
-  const DEVICES = {
+  var DEVICES = {
     iphone: [
       { name: "iPhone 16 Pro Max",  w: 1320, h: 2868, slug: "iphone16promax" },
       { name: "iPhone 15 Pro Max",  w: 1290, h: 2796, slug: "iphone15promax" },
@@ -329,86 +374,171 @@
   };
 
   /* ── Sport data ── */
-  const SPORTS = [
+  var SPORTS = [
     {
       name: "FOOTBALL",
+      shortName: "Football",
       colour: "#1B5E20",
       colourLight: "#4CAF50",
       dates: [
-        "FA Cup Final  -  15 May",
-        "PL Final Day  -  30 May",
-        "UCL Final  -  5 Jun",
-        "Women\u2019s World Cup  -  Jun\u2013Jul"
+        "FA Cup Final  \u2013  15 May",
+        "PL Final Day  \u2013  30 May",
+        "UCL Final  \u2013  5 Jun",
+        "Women\u2019s World Cup  \u2013  Jun\u2013Jul"
       ]
     },
     {
       name: "RUGBY",
+      shortName: "Rugby",
       colour: "#004D40",
       colourLight: "#26A69A",
       dates: [
-        "Six Nations  -  Feb\u2013Mar",
-        "Rugby World Cup  -  Oct\u2013Nov",
+        "Six Nations  \u2013  Feb\u2013Mar",
+        "Rugby World Cup  \u2013  Oct\u2013Nov",
         "Host Nation: Australia"
       ]
     },
     {
       name: "CRICKET",
+      shortName: "Cricket",
       colour: "#2E7D32",
       colourLight: "#66BB6A",
       dates: [
-        "The Ashes  -  Jun\u2013Jul",
-        "ICC Champions Trophy  -  Feb\u2013Mar",
-        "ICC World Cup  -  Oct\u2013Nov"
+        "The Ashes  \u2013  Jun\u2013Jul",
+        "ICC Champions Trophy  \u2013  Feb\u2013Mar",
+        "ICC World Cup  \u2013  Oct\u2013Nov"
       ]
     },
     {
       name: "FORMULA 1",
+      shortName: "F1",
       colour: "#E10600",
       colourLight: "#FF5252",
       dates: [
-        "24 Races  -  Mar\u2013Dec",
+        "24 Races  \u2013  Mar\u2013Dec",
         "Bahrain  \u2022  Monaco  \u2022  Silverstone",
         "Monza  \u2022  Singapore  \u2022  Abu Dhabi"
       ]
     }
   ];
 
-  const BIG8 = [
+  var BIG8 = [
     "FA Cup Final", "PL Final Day", "UCL Final",
     "Six Nations Grand Slam", "Rugby World Cup Final",
     "Ashes 1st Test", "Monaco GP", "Abu Dhabi Finale"
   ];
 
+  /* ── Timeline events (for Timeline design) ── */
+  var TIMELINE_EVENTS = [
+    { month: "Feb", text: "Six Nations begins", sport: 1 },
+    { month: "Feb", text: "ICC Champions Trophy", sport: 2 },
+    { month: "Mar", text: "F1 Season opens \u2013 Bahrain", sport: 3 },
+    { month: "Mar", text: "Six Nations finale", sport: 1 },
+    { month: "May", text: "FA Cup Final", sport: 0 },
+    { month: "May", text: "Monaco Grand Prix", sport: 3 },
+    { month: "May", text: "PL Final Day", sport: 0 },
+    { month: "Jun", text: "UCL Final", sport: 0 },
+    { month: "Jun", text: "The Ashes begin", sport: 2 },
+    { month: "Jun", text: "Women\u2019s World Cup", sport: 0 },
+    { month: "Jul", text: "Silverstone GP", sport: 3 },
+    { month: "Sep", text: "Monza \u2022 Singapore", sport: 3 },
+    { month: "Oct", text: "Rugby World Cup", sport: 1 },
+    { month: "Oct", text: "ICC World Cup", sport: 2 },
+    { month: "Nov", text: "Rugby WC Final", sport: 1 },
+    { month: "Dec", text: "Abu Dhabi Finale", sport: 3 }
+  ];
+
+  /* ── Colour schemes ── */
+  var COLOUR_SCHEMES = {
+    navygold: {
+      name: "Navy & Gold",
+      bg1: "#06101F", bg2: "#0B1E3D", bg3: "#0A1A35", bg4: "#050D19",
+      glowColour: "rgba(200,169,74,0.06)",
+      accent: "#C8A94A", accentLight: "#D4B85C",
+      text: "#FFFFFF", textSecondary: "rgba(232,230,225,0.85)", textDim: "rgba(138,154,181,0.5)",
+      cardBg: "rgba(11,30,61,0.6)", brandBg: "#0B1E3D",
+      sport: ["#1B5E20", "#004D40", "#2E7D32", "#E10600"],
+      sportLight: ["#4CAF50", "#26A69A", "#66BB6A", "#FF5252"],
+      cream: "#F5F3EB"
+    },
+    midnight: {
+      name: "Midnight",
+      bg1: "#080C14", bg2: "#0D1320", bg3: "#0B101C", bg4: "#060910",
+      glowColour: "rgba(129,140,248,0.06)",
+      accent: "#818CF8", accentLight: "#A5B4FC",
+      text: "#E2E8F0", textSecondary: "rgba(148,163,184,0.9)", textDim: "rgba(100,116,139,0.6)",
+      cardBg: "rgba(13,19,32,0.7)", brandBg: "#0D1320",
+      sport: ["#818CF8", "#C084FC", "#34D399", "#F472B6"],
+      sportLight: ["#A5B4FC", "#D8B4FE", "#6EE7B7", "#F9A8D4"],
+      cream: "#E2E8F0"
+    },
+    earth: {
+      name: "Earth",
+      bg1: "#1A1510", bg2: "#221C14", bg3: "#1E1812", bg4: "#14100C",
+      glowColour: "rgba(212,165,116,0.06)",
+      accent: "#D4A574", accentLight: "#E8C9A0",
+      text: "#F5F0E8", textSecondary: "rgba(212,165,116,0.85)", textDim: "rgba(163,130,92,0.55)",
+      cardBg: "rgba(34,28,20,0.7)", brandBg: "#221C14",
+      sport: ["#4ADE80", "#22D3EE", "#A3E635", "#FB923C"],
+      sportLight: ["#86EFAC", "#67E8F9", "#BEF264", "#FDBA74"],
+      cream: "#F5F0E8"
+    },
+    cleanwhite: {
+      name: "Clean White",
+      bg1: "#FFFFFF", bg2: "#F8FAFC", bg3: "#F1F5F9", bg4: "#E2E8F0",
+      glowColour: "rgba(30,41,59,0.03)",
+      accent: "#1E293B", accentLight: "#334155",
+      text: "#1E293B", textSecondary: "rgba(30,41,59,0.7)", textDim: "rgba(100,116,139,0.5)",
+      cardBg: "rgba(241,245,249,0.9)", brandBg: "#F8FAFC",
+      sport: ["#1B5E20", "#004D40", "#2E7D32", "#E10600"],
+      sportLight: ["#2E7D32", "#00695C", "#388E3C", "#FF1744"],
+      cream: "#1E293B"
+    },
+    carbon: {
+      name: "Carbon",
+      bg1: "#0A0A0A", bg2: "#141414", bg3: "#111111", bg4: "#080808",
+      glowColour: "rgba(200,169,74,0.04)",
+      accent: "#C8A94A", accentLight: "#D4B85C",
+      text: "#E5E5E5", textSecondary: "rgba(229,229,229,0.8)", textDim: "rgba(163,163,163,0.5)",
+      cardBg: "rgba(20,20,20,0.8)", brandBg: "#141414",
+      sport: ["#4ADE80", "#22D3EE", "#A78BFA", "#EF4444"],
+      sportLight: ["#86EFAC", "#67E8F9", "#C4B5FD", "#FCA5A5"],
+      cream: "#E5E5E5"
+    }
+  };
+
+  /* ── Month names ── */
+  var MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
   /* ── State ── */
-  let activeTab = "iphone";
-  let activeIndex = 0;
+  var activeTab = "iphone";
+  var activeIndex = 0;
+  var activeDesign = "classic";
+  var activeColour = "navygold";
 
-  const canvas   = document.getElementById("wallpaperCanvas");
-  const ctx      = canvas.getContext("2d");
-  const select   = document.getElementById("deviceSelect");
-  const resLabel = document.getElementById("resLabel");
-  const dlBtn    = document.getElementById("downloadBtn");
-  const tabs     = document.querySelectorAll(".tab-btn");
+  var canvas   = document.getElementById("wallpaperCanvas");
+  var ctx      = canvas.getContext("2d");
+  var deviceSel = document.getElementById("deviceSelect");
+  var designSel = document.getElementById("designSelect");
+  var colourSel = document.getElementById("colourSelect");
+  var resLabel = document.getElementById("resLabel");
+  var dlBtn    = document.getElementById("downloadBtn");
+  var tabs     = document.querySelectorAll(".tab-btn");
 
-  /* ── Font loading ── */
-  function fontsReady() {
-    return document.fonts.ready;
-  }
-
-  /* ── Populate dropdown ── */
+  /* ── Populate device dropdown ── */
   function populateSelect() {
-    select.innerHTML = "";
+    deviceSel.innerHTML = "";
     DEVICES[activeTab].forEach(function (d, i) {
       var opt = document.createElement("option");
       opt.value = i;
       opt.textContent = d.name + "  (" + d.w + " \u00d7 " + d.h + ")";
-      select.appendChild(opt);
+      deviceSel.appendChild(opt);
     });
-    select.value = activeIndex;
+    deviceSel.value = activeIndex;
   }
 
   /* ── Helpers ── */
-  function s(base, W) {
+  function sc(base, W) {
     return Math.round(base * (W / 1440));
   }
 
@@ -426,13 +556,653 @@
     cx.closePath();
   }
 
-  function drawMultiColourStripe(cx, x, y, w, h) {
-    var colours = ["#1B5E20", "#004D40", "#2E7D32", "#E10600"];
+  function drawMultiColourStripe(cx, x, y, w, h, colours) {
     var segW = w / colours.length;
     colours.forEach(function (c, i) {
       cx.fillStyle = c;
       cx.fillRect(x + i * segW, y, segW + 1, h);
     });
+  }
+
+  function getScheme() {
+    return COLOUR_SCHEMES[activeColour];
+  }
+
+  function getSportColours() {
+    var sch = getScheme();
+    return SPORTS.map(function (sp, i) {
+      return {
+        name: sp.name,
+        shortName: sp.shortName,
+        colour: sch.sport[i],
+        colourLight: sch.sportLight[i],
+        dates: sp.dates
+      };
+    });
+  }
+
+  /* ── Background painter ── */
+  function paintBackground(W, H) {
+    var sch = getScheme();
+    var bgGrad = ctx.createLinearGradient(0, 0, 0, H);
+    bgGrad.addColorStop(0, sch.bg1);
+    bgGrad.addColorStop(0.3, sch.bg2);
+    bgGrad.addColorStop(0.7, sch.bg3);
+    bgGrad.addColorStop(1, sch.bg4);
+    ctx.fillStyle = bgGrad;
+    ctx.fillRect(0, 0, W, H);
+
+    var radGlow = ctx.createRadialGradient(W / 2, H * 0.15, 0, W / 2, H * 0.15, W * 0.7);
+    radGlow.addColorStop(0, sch.glowColour);
+    radGlow.addColorStop(1, sch.glowColour.replace(/[\d.]+\)$/, "0)"));
+    ctx.fillStyle = radGlow;
+    ctx.fillRect(0, 0, W, H);
+  }
+
+  /* ── Bottom branding painter ── */
+  function paintBranding(W, H) {
+    var sch = getScheme();
+    var sports = getSportColours();
+    var brandY = H - sc(80, W);
+    drawMultiColourStripe(ctx, W * 0.25, brandY - sc(30, W), W * 0.5, sc(3, W), sports.map(function(s){return s.colour;}));
+    ctx.font = "600 " + sc(24, W) + "px 'EB Garamond', serif";
+    ctx.fillStyle = sch.accent + "99";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "alphabetic";
+    ctx.fillText("THE WALLCHART COMPANY", W / 2, brandY);
+    ctx.font = "400 " + sc(18, W) + "px 'Inter', sans-serif";
+    ctx.fillStyle = sch.textDim;
+    ctx.fillText("thewallchartcompany.com", W / 2, brandY + sc(28, W));
+  }
+
+  /* ================================================================
+     DESIGN: CLASSIC
+     ================================================================ */
+  function renderClassic(W, H) {
+    var sch = getScheme();
+    var sports = getSportColours();
+    var pad = sc(80, W);
+    var cW = W - pad * 2;
+
+    /* Multi-colour accent strip at top */
+    var stripY = sc(100, W);
+    var stripH = sc(8, W);
+    drawMultiColourStripe(ctx, pad, stripY, cW, stripH, sports.map(function(s){return s.colour;}));
+
+    /* TWC Monogram */
+    var monoSize = sc(70, W);
+    var monoY = stripY + stripH + sc(40, W);
+    var monoX = W / 2;
+    roundRect(ctx, monoX - monoSize / 2, monoY, monoSize, monoSize, sc(12, W));
+    var monoGrad = ctx.createLinearGradient(monoX - monoSize / 2, monoY, monoX + monoSize / 2, monoY + monoSize);
+    monoGrad.addColorStop(0, sch.accent);
+    monoGrad.addColorStop(1, sch.accentLight);
+    ctx.fillStyle = monoGrad;
+    ctx.fill();
+    ctx.font = "800 " + sc(32, W) + "px 'EB Garamond', serif";
+    ctx.fillStyle = sch.brandBg;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText("TWC", monoX, monoY + monoSize / 2 + sc(2, W));
+
+    /* Title */
+    var titleY = monoY + monoSize + sc(50, W);
+    ctx.font = "700 " + sc(62, W) + "px 'EB Garamond', serif";
+    ctx.fillStyle = sch.text;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "alphabetic";
+    ctx.fillText("2027", W / 2, titleY);
+
+    titleY += sc(70, W);
+    ctx.font = "600 " + sc(38, W) + "px 'Inter', sans-serif";
+    ctx.fillStyle = sch.accent;
+    ctx.letterSpacing = sc(8, W) + "px";
+    ctx.fillText("SPORTING CALENDAR", W / 2, titleY);
+    ctx.letterSpacing = "0px";
+
+    /* Thin separator */
+    titleY += sc(36, W);
+    drawMultiColourStripe(ctx, pad + cW * 0.15, titleY, cW * 0.7, sc(4, W), sports.map(function(s){return s.colour;}));
+
+    /* Sport sections */
+    var secStartY = titleY + sc(60, W);
+    var secGap = sc(20, W);
+    var secFontTitle = sc(34, W);
+    var secFontDate = sc(26, W);
+    var secPadV = sc(28, W);
+    var secPadH = sc(30, W);
+
+    var big8Height = sc(340, W);
+    var bottomReserve = sc(160, W);
+    var availH = H - secStartY - big8Height - bottomReserve;
+    var secHeight = (availH - secGap * 3) / 4;
+
+    sports.forEach(function (sport, idx) {
+      var sy = secStartY + idx * (secHeight + secGap);
+
+      roundRect(ctx, pad, sy, cW, secHeight, sc(16, W));
+      var cardGrad = ctx.createLinearGradient(pad, sy, pad + cW, sy);
+      cardGrad.addColorStop(0, sport.colour + "30");
+      cardGrad.addColorStop(1, sch.cardBg);
+      ctx.fillStyle = cardGrad;
+      ctx.fill();
+
+      roundRect(ctx, pad, sy, sc(8, W), secHeight, sc(4, W));
+      ctx.fillStyle = sport.colour;
+      ctx.fill();
+
+      var textX = pad + secPadH + sc(10, W);
+      var textY = sy + secPadV + secFontTitle * 0.35;
+      ctx.font = "700 " + secFontTitle + "px 'Inter', sans-serif";
+      ctx.fillStyle = sport.colourLight;
+      ctx.textAlign = "left";
+      ctx.textBaseline = "alphabetic";
+      ctx.fillText(sport.name, textX, textY + secFontTitle * 0.35);
+
+      ctx.beginPath();
+      ctx.arc(textX - sc(16, W), textY + secFontTitle * 0.35, sc(6, W), 0, Math.PI * 2);
+      ctx.fillStyle = sport.colourLight;
+      ctx.fill();
+
+      var dateStartY = textY + secFontTitle + sc(14, W);
+      ctx.font = "400 " + secFontDate + "px 'Inter', sans-serif";
+      ctx.fillStyle = sch.textSecondary;
+      sport.dates.forEach(function (d, di) {
+        var dy = dateStartY + di * (secFontDate + sc(10, W));
+        if (dy < sy + secHeight - secPadV) {
+          ctx.fillText(d, textX, dy);
+        }
+      });
+
+      var glowGrad = ctx.createRadialGradient(
+        pad + cW - sc(80, W), sy + secHeight / 2, 0,
+        pad + cW - sc(80, W), sy + secHeight / 2, sc(180, W)
+      );
+      glowGrad.addColorStop(0, sport.colour + "18");
+      glowGrad.addColorStop(1, sport.colour + "00");
+      ctx.fillStyle = glowGrad;
+      roundRect(ctx, pad, sy, cW, secHeight, sc(16, W));
+      ctx.fill();
+    });
+
+    /* BIG 8 EVENTS */
+    var big8Y = secStartY + 4 * (secHeight + secGap) + sc(10, W);
+    var big8W = cW;
+    var big8H = big8Height;
+
+    roundRect(ctx, pad, big8Y, big8W, big8H, sc(16, W));
+    var big8Grad = ctx.createLinearGradient(pad, big8Y, pad + big8W, big8Y + big8H);
+    big8Grad.addColorStop(0, sch.accent + "1F");
+    big8Grad.addColorStop(1, sch.cardBg);
+    ctx.fillStyle = big8Grad;
+    ctx.fill();
+
+    roundRect(ctx, pad, big8Y, big8W, big8H, sc(16, W));
+    ctx.strokeStyle = sch.accent + "59";
+    ctx.lineWidth = sc(3, W);
+    ctx.stroke();
+
+    var big8TitleY = big8Y + sc(46, W);
+    ctx.font = "700 " + sc(30, W) + "px 'Inter', sans-serif";
+    ctx.fillStyle = sch.accent;
+    ctx.textAlign = "center";
+    ctx.letterSpacing = sc(6, W) + "px";
+    ctx.fillText("BIG 8 EVENTS", W / 2, big8TitleY);
+    ctx.letterSpacing = "0px";
+
+    ctx.font = sc(22, W) + "px serif";
+    ctx.fillText("\u2605", W / 2 - sc(140, W), big8TitleY);
+    ctx.fillText("\u2605", W / 2 + sc(140, W), big8TitleY);
+
+    ctx.fillStyle = sch.accent + "66";
+    ctx.fillRect(pad + cW * 0.2, big8TitleY + sc(14, W), cW * 0.6, sc(2, W));
+
+    var colW = (big8W - sc(60, W)) / 2;
+    var evFontSize = sc(24, W);
+    var evStartY = big8TitleY + sc(50, W);
+    var evLineH = sc(34, W);
+    ctx.font = "500 " + evFontSize + "px 'Inter', sans-serif";
+
+    BIG8.forEach(function (ev, i) {
+      var col = i < 4 ? 0 : 1;
+      var row = i < 4 ? i : i - 4;
+      var ex = pad + sc(36, W) + col * (colW + sc(20, W));
+      var ey = evStartY + row * evLineH;
+
+      var bulletColour = sch.accent;
+      if (ev.indexOf("FA Cup") >= 0 || ev.indexOf("PL ") >= 0 || ev.indexOf("UCL") >= 0) bulletColour = sports[0].colourLight;
+      else if (ev.indexOf("Six Nations") >= 0 || ev.indexOf("Rugby") >= 0) bulletColour = sports[1].colourLight;
+      else if (ev.indexOf("Ashes") >= 0) bulletColour = sports[2].colourLight;
+      else if (ev.indexOf("Monaco") >= 0 || ev.indexOf("Abu Dhabi") >= 0) bulletColour = sports[3].colourLight;
+
+      ctx.save();
+      ctx.translate(ex, ey);
+      ctx.rotate(Math.PI / 4);
+      ctx.fillStyle = bulletColour;
+      ctx.fillRect(-sc(5, W), -sc(5, W), sc(10, W), sc(10, W));
+      ctx.restore();
+
+      ctx.fillStyle = sch.textSecondary;
+      ctx.textAlign = "left";
+      ctx.fillText(ev, ex + sc(18, W), ey + evFontSize * 0.12);
+    });
+  }
+
+  /* ================================================================
+     DESIGN: MINIMAL
+     ================================================================ */
+  function renderMinimal(W, H) {
+    var sch = getScheme();
+    var sports = getSportColours();
+    var pad = sc(100, W);
+    var cW = W - pad * 2;
+
+    /* Large year */
+    var yearY = sc(280, W);
+    ctx.font = "300 " + sc(180, W) + "px 'EB Garamond', serif";
+    ctx.fillStyle = sch.text;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "alphabetic";
+    ctx.fillText("2027", W / 2, yearY);
+
+    /* Thin accent line */
+    yearY += sc(30, W);
+    ctx.fillStyle = sch.accent + "66";
+    ctx.fillRect(pad + cW * 0.3, yearY, cW * 0.4, sc(2, W));
+
+    /* TWC small text */
+    yearY += sc(40, W);
+    ctx.font = "600 " + sc(22, W) + "px 'Inter', sans-serif";
+    ctx.fillStyle = sch.accent;
+    ctx.letterSpacing = sc(10, W) + "px";
+    ctx.fillText("THE WALLCHART CO", W / 2, yearY);
+    ctx.letterSpacing = "0px";
+
+    /* Sport sections as labelled lists */
+    var secY = yearY + sc(80, W);
+    var bottomBrand = sc(140, W);
+    var availH = H - secY - bottomBrand;
+    var secH = availH / 4;
+
+    sports.forEach(function (sport, idx) {
+      var sy = secY + idx * secH;
+
+      /* Sport dot + name */
+      var dotX = pad + sc(12, W);
+      var nameY = sy + sc(10, W);
+      ctx.beginPath();
+      ctx.arc(dotX, nameY, sc(8, W), 0, Math.PI * 2);
+      ctx.fillStyle = sport.colour;
+      ctx.fill();
+
+      ctx.font = "600 " + sc(28, W) + "px 'Inter', sans-serif";
+      ctx.fillStyle = sport.colourLight;
+      ctx.textAlign = "left";
+      ctx.fillText(sport.name, dotX + sc(24, W), nameY + sc(9, W));
+
+      /* thin line under name */
+      ctx.fillStyle = sport.colour + "40";
+      ctx.fillRect(pad, nameY + sc(22, W), cW, sc(1, W));
+
+      /* Dates */
+      ctx.font = "400 " + sc(24, W) + "px 'Inter', sans-serif";
+      ctx.fillStyle = sch.textSecondary;
+      sport.dates.forEach(function (d, di) {
+        var dy = nameY + sc(52, W) + di * sc(36, W);
+        if (dy < sy + secH - sc(10, W)) {
+          ctx.fillText(d, pad + sc(34, W), dy);
+        }
+      });
+    });
+
+    /* Big 8 line at bottom area */
+    var big8Y = H - bottomBrand - sc(20, W);
+    ctx.font = "500 " + sc(18, W) + "px 'Inter', sans-serif";
+    ctx.fillStyle = sch.accent + "80";
+    ctx.textAlign = "center";
+    ctx.fillText("BIG 8: " + BIG8.join("  \u2022  "), W / 2, big8Y);
+  }
+
+  /* ================================================================
+     DESIGN: BOLD GRID
+     ================================================================ */
+  function renderBoldGrid(W, H) {
+    var sch = getScheme();
+    var sports = getSportColours();
+    var pad = sc(60, W);
+
+    /* Header area */
+    var headerH = sc(220, W);
+
+    /* TWC monogram small */
+    var monoSize = sc(50, W);
+    var monoY = sc(80, W);
+    roundRect(ctx, W / 2 - monoSize / 2, monoY, monoSize, monoSize, sc(10, W));
+    var monoGrad = ctx.createLinearGradient(W/2 - monoSize/2, monoY, W/2 + monoSize/2, monoY + monoSize);
+    monoGrad.addColorStop(0, sch.accent);
+    monoGrad.addColorStop(1, sch.accentLight);
+    ctx.fillStyle = monoGrad;
+    ctx.fill();
+    ctx.font = "800 " + sc(24, W) + "px 'EB Garamond', serif";
+    ctx.fillStyle = sch.brandBg;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText("TWC", W / 2, monoY + monoSize / 2 + sc(1, W));
+
+    /* Title */
+    ctx.font = "700 " + sc(48, W) + "px 'EB Garamond', serif";
+    ctx.fillStyle = sch.text;
+    ctx.textBaseline = "alphabetic";
+    ctx.fillText("SPORTING 2027", W / 2, monoY + monoSize + sc(50, W));
+
+    /* Sport legend */
+    var legendY = monoY + monoSize + sc(76, W);
+    var legendTotalW = sc(500, W);
+    var legendStartX = W / 2 - legendTotalW / 2;
+    ctx.font = "500 " + sc(18, W) + "px 'Inter', sans-serif";
+    sports.forEach(function (sport, i) {
+      var lx = legendStartX + i * (legendTotalW / 4);
+      ctx.fillStyle = sport.colour;
+      ctx.fillRect(lx, legendY, sc(14, W), sc(14, W));
+      ctx.fillStyle = sch.textSecondary;
+      ctx.textAlign = "left";
+      ctx.fillText(sport.shortName, lx + sc(20, W), legendY + sc(12, W));
+    });
+
+    /* 4x3 month grid */
+    var gridTop = legendY + sc(50, W);
+    var gridBottom = H - sc(180, W);
+    var gridH = gridBottom - gridTop;
+    var gridW = W - pad * 2;
+    var cellW = gridW / 4;
+    var cellH = gridH / 3;
+    var cellPad = sc(6, W);
+    var laneH = (cellH - sc(46, W)) / 4;
+
+    /* Month-sport mapping: which sports are active each month */
+    var monthSports = [
+      [0,0,0,0],[1,0,1,0],[1,0,1,1],[0,0,0,1],[1,0,0,1],[1,0,1,1],
+      [1,1,1,1],[0,0,0,1],[0,0,0,1],[0,1,1,1],[0,1,1,1],[0,0,0,1]
+    ];
+
+    MONTHS.forEach(function (mn, mi) {
+      var col = mi % 4;
+      var row = Math.floor(mi / 4);
+      var cx = pad + col * cellW + cellPad;
+      var cy = gridTop + row * cellH + cellPad;
+      var cw = cellW - cellPad * 2;
+      var ch = cellH - cellPad * 2;
+
+      /* Cell background */
+      roundRect(ctx, cx, cy, cw, ch, sc(10, W));
+      ctx.fillStyle = sch.cardBg;
+      ctx.fill();
+      roundRect(ctx, cx, cy, cw, ch, sc(10, W));
+      ctx.strokeStyle = sch.accent + "20";
+      ctx.lineWidth = sc(1, W);
+      ctx.stroke();
+
+      /* Month name */
+      ctx.font = "700 " + sc(22, W) + "px 'Inter', sans-serif";
+      ctx.fillStyle = sch.accent;
+      ctx.textAlign = "left";
+      ctx.fillText(mn.toUpperCase(), cx + sc(12, W), cy + sc(30, W));
+
+      /* 4 sport lanes */
+      var lanesTop = cy + sc(42, W);
+      sports.forEach(function (sport, si) {
+        var ly = lanesTop + si * laneH;
+        var lw = cw - sc(16, W);
+        var lh = laneH - sc(4, W);
+        ctx.fillStyle = monthSports[mi][si] ? sport.colour + "60" : sport.colour + "10";
+        roundRect(ctx, cx + sc(8, W), ly, lw, lh, sc(4, W));
+        ctx.fill();
+        if (monthSports[mi][si]) {
+          ctx.fillStyle = sport.colour;
+          roundRect(ctx, cx + sc(8, W), ly, sc(4, W), lh, sc(2, W));
+          ctx.fill();
+        }
+      });
+    });
+
+    /* Big 8 events bar */
+    var big8Y = gridBottom + sc(20, W);
+    ctx.font = "600 " + sc(20, W) + "px 'Inter', sans-serif";
+    ctx.fillStyle = sch.accent;
+    ctx.textAlign = "center";
+    ctx.letterSpacing = sc(4, W) + "px";
+    ctx.fillText("BIG 8 EVENTS", W / 2, big8Y);
+    ctx.letterSpacing = "0px";
+
+    ctx.font = "400 " + sc(17, W) + "px 'Inter', sans-serif";
+    ctx.fillStyle = sch.textSecondary;
+    var evLine = BIG8.slice(0, 4).join("  \u2022  ");
+    ctx.fillText(evLine, W / 2, big8Y + sc(28, W));
+    evLine = BIG8.slice(4).join("  \u2022  ");
+    ctx.fillText(evLine, W / 2, big8Y + sc(52, W));
+  }
+
+  /* ================================================================
+     DESIGN: TIMELINE
+     ================================================================ */
+  function renderTimeline(W, H) {
+    var sch = getScheme();
+    var sports = getSportColours();
+    var pad = sc(80, W);
+
+    /* Header */
+    var titleY = sc(140, W);
+    ctx.font = "700 " + sc(52, W) + "px 'EB Garamond', serif";
+    ctx.fillStyle = sch.text;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "alphabetic";
+    ctx.fillText("2027", W / 2, titleY);
+
+    ctx.font = "500 " + sc(24, W) + "px 'Inter', sans-serif";
+    ctx.fillStyle = sch.accent;
+    ctx.letterSpacing = sc(6, W) + "px";
+    ctx.fillText("SPORTING CALENDAR", W / 2, titleY + sc(40, W));
+    ctx.letterSpacing = "0px";
+
+    /* TWC small top-right */
+    ctx.font = "700 " + sc(20, W) + "px 'EB Garamond', serif";
+    ctx.fillStyle = sch.accent;
+    ctx.textAlign = "right";
+    ctx.fillText("TWC", W - pad, sc(100, W));
+
+    /* Sport legend */
+    var legendY = titleY + sc(80, W);
+    var legendW = sc(440, W);
+    var legendX = W / 2 - legendW / 2;
+    ctx.font = "500 " + sc(18, W) + "px 'Inter', sans-serif";
+    sports.forEach(function (sport, i) {
+      var lx = legendX + i * (legendW / 4);
+      ctx.beginPath();
+      ctx.arc(lx + sc(7, W), legendY, sc(7, W), 0, Math.PI * 2);
+      ctx.fillStyle = sport.colour;
+      ctx.fill();
+      ctx.fillStyle = sch.textSecondary;
+      ctx.textAlign = "left";
+      ctx.fillText(sport.shortName, lx + sc(20, W), legendY + sc(6, W));
+    });
+
+    /* Timeline */
+    var tlTop = legendY + sc(50, W);
+    var tlBottom = H - sc(180, W);
+    var tlX = pad + sc(60, W);
+    var tlH = tlBottom - tlTop;
+    var eventCount = TIMELINE_EVENTS.length;
+    var evSpacing = tlH / (eventCount + 1);
+
+    /* Vertical line */
+    ctx.fillStyle = sch.accent + "30";
+    ctx.fillRect(tlX, tlTop, sc(2, W), tlH);
+
+    /* Events */
+    TIMELINE_EVENTS.forEach(function (ev, i) {
+      var ey = tlTop + (i + 1) * evSpacing;
+      var sport = sports[ev.sport];
+
+      /* Dot */
+      ctx.beginPath();
+      ctx.arc(tlX + sc(1, W), ey, sc(10, W), 0, Math.PI * 2);
+      ctx.fillStyle = sport.colour;
+      ctx.fill();
+
+      /* Inner dot */
+      ctx.beginPath();
+      ctx.arc(tlX + sc(1, W), ey, sc(5, W), 0, Math.PI * 2);
+      ctx.fillStyle = sch.bg2;
+      ctx.fill();
+
+      /* Month label */
+      ctx.font = "700 " + sc(20, W) + "px 'Inter', sans-serif";
+      ctx.fillStyle = sch.accent;
+      ctx.textAlign = "right";
+      ctx.fillText(ev.month.toUpperCase(), tlX - sc(20, W), ey + sc(6, W));
+
+      /* Event text */
+      ctx.font = "400 " + sc(24, W) + "px 'Inter', sans-serif";
+      ctx.fillStyle = sch.textSecondary;
+      ctx.textAlign = "left";
+      ctx.fillText(ev.text, tlX + sc(28, W), ey + sc(7, W));
+
+      /* Faint connecting line to text */
+      ctx.fillStyle = sport.colour + "25";
+      ctx.fillRect(tlX + sc(12, W), ey - sc(1, W), sc(14, W), sc(2, W));
+    });
+
+    /* Big 8 at bottom */
+    var big8Y = tlBottom + sc(30, W);
+    ctx.font = "600 " + sc(18, W) + "px 'Inter', sans-serif";
+    ctx.fillStyle = sch.accent;
+    ctx.textAlign = "center";
+    ctx.letterSpacing = sc(4, W) + "px";
+    ctx.fillText("BIG 8 EVENTS", W / 2, big8Y);
+    ctx.letterSpacing = "0px";
+    ctx.font = "400 " + sc(16, W) + "px 'Inter', sans-serif";
+    ctx.fillStyle = sch.textSecondary;
+    ctx.fillText(BIG8.slice(0, 4).join("  \u2022  "), W / 2, big8Y + sc(26, W));
+    ctx.fillText(BIG8.slice(4).join("  \u2022  "), W / 2, big8Y + sc(48, W));
+  }
+
+  /* ================================================================
+     DESIGN: MAGAZINE
+     ================================================================ */
+  function renderMagazine(W, H) {
+    var sch = getScheme();
+    var sports = getSportColours();
+    var pad = sc(70, W);
+    var cW = W - pad * 2;
+
+    /* Large hero title */
+    var heroY = sc(160, W);
+    ctx.font = "800 " + sc(30, W) + "px 'Inter', sans-serif";
+    ctx.fillStyle = sch.accent;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "alphabetic";
+    ctx.letterSpacing = sc(14, W) + "px";
+    ctx.fillText("SPORTING", W / 2, heroY);
+    ctx.letterSpacing = "0px";
+
+    ctx.font = "700 " + sc(120, W) + "px 'EB Garamond', serif";
+    ctx.fillStyle = sch.text;
+    ctx.fillText("2027", W / 2, heroY + sc(120, W));
+
+    /* TWC badge below */
+    var badgeY = heroY + sc(150, W);
+    var badgeW = sc(120, W);
+    var badgeH = sc(34, W);
+    roundRect(ctx, W / 2 - badgeW / 2, badgeY, badgeW, badgeH, sc(6, W));
+    ctx.fillStyle = sch.accent;
+    ctx.fill();
+    ctx.font = "800 " + sc(16, W) + "px 'EB Garamond', serif";
+    ctx.fillStyle = sch.brandBg;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText("TWC", W / 2, badgeY + badgeH / 2 + sc(1, W));
+
+    /* Divider */
+    var divY = badgeY + badgeH + sc(30, W);
+    drawMultiColourStripe(ctx, pad, divY, cW, sc(4, W), sports.map(function(s){return s.colour;}));
+
+    /* 4 sport columns side by side */
+    var colTop = divY + sc(30, W);
+    var colBottom = H - sc(240, W);
+    var colH = colBottom - colTop;
+    var colGap = sc(14, W);
+    var colW = (cW - colGap * 3) / 4;
+
+    sports.forEach(function (sport, idx) {
+      var cx = pad + idx * (colW + colGap);
+
+      /* Column header bar */
+      roundRect(ctx, cx, colTop, colW, sc(50, W), sc(8, W));
+      ctx.fillStyle = sport.colour;
+      ctx.fill();
+
+      ctx.font = "700 " + sc(20, W) + "px 'Inter', sans-serif";
+      ctx.fillStyle = sch.text;
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText(sport.shortName, cx + colW / 2, colTop + sc(25, W));
+
+      /* Column body */
+      var bodyTop = colTop + sc(58, W);
+      roundRect(ctx, cx, bodyTop, colW, colH - sc(58, W), sc(8, W));
+      ctx.fillStyle = sport.colour + "12";
+      ctx.fill();
+      roundRect(ctx, cx, bodyTop, colW, colH - sc(58, W), sc(8, W));
+      ctx.strokeStyle = sport.colour + "30";
+      ctx.lineWidth = sc(1, W);
+      ctx.stroke();
+
+      /* Date items */
+      ctx.font = "400 " + sc(20, W) + "px 'Inter', sans-serif";
+      ctx.fillStyle = sch.textSecondary;
+      ctx.textAlign = "left";
+      sport.dates.forEach(function (d, di) {
+        var dy = bodyTop + sc(30, W) + di * sc(50, W);
+        /* Wrap text for narrow columns */
+        var words = d.split("  ");
+        var lineY = dy;
+        words.forEach(function (w) {
+          if (lineY < bodyTop + colH - sc(80, W)) {
+            ctx.fillText(w.trim(), cx + sc(12, W), lineY);
+            lineY += sc(28, W);
+          }
+        });
+
+        /* Small colour dot */
+        ctx.beginPath();
+        ctx.arc(cx + colW - sc(14, W), dy, sc(4, W), 0, Math.PI * 2);
+        ctx.fillStyle = sport.colourLight;
+        ctx.fill();
+        ctx.fillStyle = sch.textSecondary;
+      });
+    });
+
+    /* Big 8 section */
+    var big8Y = colBottom + sc(30, W);
+    roundRect(ctx, pad, big8Y, cW, sc(120, W), sc(12, W));
+    ctx.fillStyle = sch.accent + "10";
+    ctx.fill();
+    roundRect(ctx, pad, big8Y, cW, sc(120, W), sc(12, W));
+    ctx.strokeStyle = sch.accent + "30";
+    ctx.lineWidth = sc(1, W);
+    ctx.stroke();
+
+    ctx.font = "700 " + sc(22, W) + "px 'Inter', sans-serif";
+    ctx.fillStyle = sch.accent;
+    ctx.textAlign = "center";
+    ctx.letterSpacing = sc(5, W) + "px";
+    ctx.fillText("BIG 8 EVENTS", W / 2, big8Y + sc(34, W));
+    ctx.letterSpacing = "0px";
+
+    ctx.font = "400 " + sc(18, W) + "px 'Inter', sans-serif";
+    ctx.fillStyle = sch.textSecondary;
+    ctx.fillText(BIG8.slice(0, 4).join("  \u2022  "), W / 2, big8Y + sc(64, W));
+    ctx.fillText(BIG8.slice(4).join("  \u2022  "), W / 2, big8Y + sc(90, W));
   }
 
   /* ── Main render ── */
@@ -443,221 +1213,22 @@
     canvas.width = W;
     canvas.height = H;
 
-    /* Background */
-    var bgGrad = ctx.createLinearGradient(0, 0, 0, H);
-    bgGrad.addColorStop(0, "#06101F");
-    bgGrad.addColorStop(0.3, "#0B1E3D");
-    bgGrad.addColorStop(0.7, "#0A1A35");
-    bgGrad.addColorStop(1, "#050D19");
-    ctx.fillStyle = bgGrad;
-    ctx.fillRect(0, 0, W, H);
+    paintBackground(W, H);
 
-    /* Subtle radial glow at top */
-    var radGlow = ctx.createRadialGradient(W / 2, H * 0.15, 0, W / 2, H * 0.15, W * 0.7);
-    radGlow.addColorStop(0, "rgba(200,169,74,0.06)");
-    radGlow.addColorStop(1, "rgba(200,169,74,0)");
-    ctx.fillStyle = radGlow;
-    ctx.fillRect(0, 0, W, H);
+    switch (activeDesign) {
+      case "classic":  renderClassic(W, H);  break;
+      case "minimal":  renderMinimal(W, H);  break;
+      case "boldgrid": renderBoldGrid(W, H); break;
+      case "timeline": renderTimeline(W, H); break;
+      case "magazine": renderMagazine(W, H); break;
+      default:         renderClassic(W, H);  break;
+    }
 
-    var pad = s(80, W);
-    var cW = W - pad * 2;
+    paintBranding(W, H);
 
-    /* ── Multi-colour accent strip at top ── */
-    var stripY = s(100, W);
-    var stripH = s(8, W);
-    drawMultiColourStripe(ctx, pad, stripY, cW, stripH);
-
-    /* ── TWC Monogram ── */
-    var monoSize = s(70, W);
-    var monoY = stripY + stripH + s(40, W);
-    var monoX = W / 2;
-    roundRect(ctx, monoX - monoSize / 2, monoY, monoSize, monoSize, s(12, W));
-    var monoGrad = ctx.createLinearGradient(monoX - monoSize / 2, monoY, monoX + monoSize / 2, monoY + monoSize);
-    monoGrad.addColorStop(0, "#C8A94A");
-    monoGrad.addColorStop(1, "#D4B85C");
-    ctx.fillStyle = monoGrad;
-    ctx.fill();
-    ctx.font = "800 " + s(32, W) + "px 'EB Garamond', serif";
-    ctx.fillStyle = "#0B1E3D";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.fillText("TWC", monoX, monoY + monoSize / 2 + s(2, W));
-
-    /* ── Title ── */
-    var titleY = monoY + monoSize + s(50, W);
-    ctx.font = "700 " + s(62, W) + "px 'EB Garamond', serif";
-    ctx.fillStyle = "#FFFFFF";
-    ctx.textAlign = "center";
-    ctx.fillText("2027", W / 2, titleY);
-
-    titleY += s(70, W);
-    ctx.font = "600 " + s(38, W) + "px 'Inter', sans-serif";
-    ctx.fillStyle = "#C8A94A";
-    ctx.letterSpacing = s(8, W) + "px";
-    ctx.fillText("SPORTING CALENDAR", W / 2, titleY);
-    ctx.letterSpacing = "0px";
-
-    /* ── Thin separator ── */
-    titleY += s(36, W);
-    drawMultiColourStripe(ctx, pad + cW * 0.15, titleY, cW * 0.7, s(4, W));
-
-    /* ── Sport sections ── */
-    var secStartY = titleY + s(60, W);
-    var secGap = s(20, W);
-    var isTablet = (W / H) > 0.7;
-    var secFontTitle = s(34, W);
-    var secFontDate = s(26, W);
-    var secPadV = s(28, W);
-    var secPadH = s(30, W);
-
-    /* Calculate available height for sports + big 8 */
-    var big8Height = s(340, W);
-    var bottomReserve = s(160, W);
-    var availH = H - secStartY - big8Height - bottomReserve;
-    var secHeight = (availH - secGap * 3) / 4;
-
-    SPORTS.forEach(function (sport, idx) {
-      var sy = secStartY + idx * (secHeight + secGap);
-
-      /* Card background */
-      roundRect(ctx, pad, sy, cW, secHeight, s(16, W));
-      var cardGrad = ctx.createLinearGradient(pad, sy, pad + cW, sy);
-      cardGrad.addColorStop(0, sport.colour + "30");
-      cardGrad.addColorStop(1, "rgba(11,30,61,0.6)");
-      ctx.fillStyle = cardGrad;
-      ctx.fill();
-
-      /* Left accent bar */
-      roundRect(ctx, pad, sy, s(8, W), secHeight, s(4, W));
-      ctx.fillStyle = sport.colour;
-      ctx.fill();
-
-      /* Sport title */
-      var textX = pad + secPadH + s(10, W);
-      var textY = sy + secPadV + secFontTitle * 0.35;
-      ctx.font = "700 " + secFontTitle + "px 'Inter', sans-serif";
-      ctx.fillStyle = sport.colourLight;
-      ctx.textAlign = "left";
-      ctx.fillText(sport.name, textX, textY + secFontTitle * 0.35);
-
-      /* Colour dot */
-      ctx.beginPath();
-      ctx.arc(textX - s(16, W), textY + secFontTitle * 0.35, s(6, W), 0, Math.PI * 2);
-      ctx.fillStyle = sport.colourLight;
-      ctx.fill();
-
-      /* Dates */
-      var dateStartY = textY + secFontTitle + s(14, W);
-      ctx.font = "400 " + secFontDate + "px 'Inter', sans-serif";
-      ctx.fillStyle = "rgba(232,230,225,0.85)";
-      sport.dates.forEach(function (d, di) {
-        var dy = dateStartY + di * (secFontDate + s(10, W));
-        if (dy < sy + secHeight - secPadV) {
-          ctx.fillText(d, textX, dy);
-        }
-      });
-
-      /* Subtle glow on right */
-      var glowGrad = ctx.createRadialGradient(
-        pad + cW - s(80, W), sy + secHeight / 2, 0,
-        pad + cW - s(80, W), sy + secHeight / 2, s(180, W)
-      );
-      glowGrad.addColorStop(0, sport.colour + "18");
-      glowGrad.addColorStop(1, sport.colour + "00");
-      ctx.fillStyle = glowGrad;
-      roundRect(ctx, pad, sy, cW, secHeight, s(16, W));
-      ctx.fill();
-    });
-
-    /* ── BIG 8 EVENTS section ── */
-    var big8Y = secStartY + 4 * (secHeight + secGap) + s(10, W);
-    var big8W = cW;
-    var big8H = big8Height;
-
-    /* Box */
-    roundRect(ctx, pad, big8Y, big8W, big8H, s(16, W));
-    var big8Grad = ctx.createLinearGradient(pad, big8Y, pad + big8W, big8Y + big8H);
-    big8Grad.addColorStop(0, "rgba(200,169,74,0.12)");
-    big8Grad.addColorStop(1, "rgba(11,30,61,0.8)");
-    ctx.fillStyle = big8Grad;
-    ctx.fill();
-
-    /* Gold border */
-    roundRect(ctx, pad, big8Y, big8W, big8H, s(16, W));
-    ctx.strokeStyle = "rgba(200,169,74,0.35)";
-    ctx.lineWidth = s(3, W);
-    ctx.stroke();
-
-    /* Title */
-    var big8TitleY = big8Y + s(46, W);
-    ctx.font = "700 " + s(30, W) + "px 'Inter', sans-serif";
-    ctx.fillStyle = "#C8A94A";
-    ctx.textAlign = "center";
-    ctx.letterSpacing = s(6, W) + "px";
-    ctx.fillText("BIG 8 EVENTS", W / 2, big8TitleY);
-    ctx.letterSpacing = "0px";
-
-    /* Star decorations */
-    var starSize = s(10, W);
-    ctx.fillStyle = "#C8A94A";
-    ctx.font = s(22, W) + "px serif";
-    ctx.fillText("\u2605", W / 2 - s(140, W), big8TitleY);
-    ctx.fillText("\u2605", W / 2 + s(140, W), big8TitleY);
-
-    /* Gold line under title */
-    ctx.fillStyle = "rgba(200,169,74,0.4)";
-    ctx.fillRect(pad + cW * 0.2, big8TitleY + s(14, W), cW * 0.6, s(2, W));
-
-    /* Event items — 2 columns */
-    var colW = (big8W - s(60, W)) / 2;
-    var evFontSize = s(24, W);
-    var evStartY = big8TitleY + s(50, W);
-    var evLineH = s(34, W);
-    ctx.font = "500 " + evFontSize + "px 'Inter', sans-serif";
-
-    BIG8.forEach(function (ev, i) {
-      var col = i < 4 ? 0 : 1;
-      var row = i < 4 ? i : i - 4;
-      var ex = pad + s(36, W) + col * (colW + s(20, W));
-      var ey = evStartY + row * evLineH;
-
-      /* Bullet colour based on sport association */
-      var bulletColour = "#C8A94A";
-      if (ev.includes("FA Cup") || ev.includes("PL ") || ev.includes("UCL")) bulletColour = "#4CAF50";
-      else if (ev.includes("Six Nations") || ev.includes("Rugby")) bulletColour = "#26A69A";
-      else if (ev.includes("Ashes")) bulletColour = "#66BB6A";
-      else if (ev.includes("Monaco") || ev.includes("Abu Dhabi")) bulletColour = "#FF5252";
-
-      /* Diamond bullet */
-      ctx.save();
-      ctx.translate(ex, ey);
-      ctx.rotate(Math.PI / 4);
-      ctx.fillStyle = bulletColour;
-      ctx.fillRect(-s(5, W), -s(5, W), s(10, W), s(10, W));
-      ctx.restore();
-
-      ctx.fillStyle = "rgba(232,230,225,0.92)";
-      ctx.textAlign = "left";
-      ctx.fillText(ev, ex + s(18, W), ey + evFontSize * 0.12);
-    });
-
-    /* ── Bottom branding ── */
-    var brandY = H - s(80, W);
-
-    /* Thin multi-colour line */
-    drawMultiColourStripe(ctx, pad + cW * 0.25, brandY - s(30, W), cW * 0.5, s(3, W));
-
-    ctx.font = "600 " + s(24, W) + "px 'EB Garamond', serif";
-    ctx.fillStyle = "rgba(200,169,74,0.6)";
-    ctx.textAlign = "center";
-    ctx.fillText("THE WALLCHART COMPANY", W / 2, brandY);
-
-    ctx.font = "400 " + s(18, W) + "px 'Inter', sans-serif";
-    ctx.fillStyle = "rgba(138,154,181,0.5)";
-    ctx.fillText("thewallchartcompany.com", W / 2, brandY + s(28, W));
-
-    /* Update label */
-    resLabel.textContent = device.name + "  \u2014  " + W + " \u00d7 " + H + " px";
+    resLabel.textContent = device.name + "  \u2014  " + W + " \u00d7 " + H + " px  \u2014  " +
+      designSel.options[designSel.selectedIndex].text + " / " +
+      colourSel.options[colourSel.selectedIndex].text;
   }
 
   /* ── Tab switching ── */
@@ -672,9 +1243,19 @@
     });
   });
 
-  /* ── Select change ── */
-  select.addEventListener("change", function () {
-    activeIndex = parseInt(select.value, 10);
+  /* ── Select changes ── */
+  deviceSel.addEventListener("change", function () {
+    activeIndex = parseInt(deviceSel.value, 10);
+    render();
+  });
+
+  designSel.addEventListener("change", function () {
+    activeDesign = designSel.value;
+    render();
+  });
+
+  colourSel.addEventListener("change", function () {
+    activeColour = colourSel.value;
     render();
   });
 
@@ -682,13 +1263,13 @@
   dlBtn.addEventListener("click", function () {
     var device = DEVICES[activeTab][activeIndex];
     var link = document.createElement("a");
-    link.download = "twc-sporting-2027-" + device.slug + ".png";
+    link.download = "twc-sporting-2027-" + activeDesign + "-" + activeColour + "-" + device.slug + ".png";
     link.href = canvas.toDataURL("image/png");
     link.click();
   });
 
   /* ── Init ── */
-  fontsReady().then(function () {
+  document.fonts.ready.then(function () {
     populateSelect();
     render();
   });

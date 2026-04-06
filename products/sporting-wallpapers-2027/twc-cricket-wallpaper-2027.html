@@ -42,6 +42,8 @@
   .instructions ol{padding-left:20px;font-size:13px;line-height:1.8;color:#bbb}
   .footer{text-align:center;padding:24px;border-top:1px solid rgba(255,255,255,.06);font-size:11px;color:#555}
   .footer a{color:var(--gold);text-decoration:none}
+  .control-group{display:flex;flex-direction:column;gap:4px}
+  .control-group label{font-size:11px;color:#888;text-transform:uppercase;letter-spacing:.5px;font-weight:600}
 </style>
 </head>
 <body>
@@ -59,7 +61,30 @@
   </div>
 
   <div class="controls">
-    <select id="deviceSelect"></select>
+    <div class="control-group">
+      <label>Device</label>
+      <select id="deviceSelect"></select>
+    </div>
+    <div class="control-group">
+      <label>Design Style</label>
+      <select id="designSelect">
+        <option value="classic">Classic</option>
+        <option value="minimal">Minimal</option>
+        <option value="boldgrid">Bold Grid</option>
+        <option value="timeline">Timeline</option>
+        <option value="magazine">Magazine</option>
+      </select>
+    </div>
+    <div class="control-group">
+      <label>Colour Scheme</label>
+      <select id="colourSelect">
+        <option value="navygold">Navy &amp; Gold</option>
+        <option value="midnight">Midnight</option>
+        <option value="pitchgreen">Pitch Green</option>
+        <option value="cleanwhite">Clean White</option>
+        <option value="carbon">Carbon</option>
+      </select>
+    </div>
     <span class="res-label" id="resLabel"></span>
   </div>
 
@@ -69,7 +94,7 @@
 
   <div class="actions">
     <button class="btn" id="downloadBtn">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/><\/svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
       Download PNG
     </button>
     <span class="res-label" id="dlSize"></span>
@@ -78,7 +103,7 @@
   <div class="instructions">
     <h3>How to Set Your Wallpaper</h3>
     <ol>
-      <li>Select your device from the dropdown above.</li>
+      <li>Select your device, design style, and colour scheme above.</li>
       <li>Click <strong>Download PNG</strong> to save the image.</li>
       <li><strong>iPhone / iPad:</strong> Settings &rarr; Wallpaper &rarr; Add New &rarr; choose the downloaded image.</li>
       <li><strong>Android:</strong> Long-press home screen &rarr; Wallpaper &rarr; choose the downloaded image.</li>
@@ -96,7 +121,7 @@
   "use strict";
 
   /* ── Device catalogue ── */
-  const devices = {
+  var devices = {
     iphone: [
       {name:"iPhone 16 Pro Max",w:1320,h:2868},
       {name:"iPhone 15 Pro Max",w:1290,h:2796},
@@ -125,8 +150,9 @@
   };
 
   /* ── Cricket events ── */
-  const months = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
-  const events = {
+  var months = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
+  var monthsFull = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  var events = {
     0:[],
     1:[],
     2:[{t:"IPL Season 20",c:"#F57C00"}],
@@ -141,20 +167,42 @@
     11:[]
   };
 
+  var highlights = [
+    {label:"IPL Season 20", period:"Mar \u2013 May", color:"#F57C00"},
+    {label:"County Championship", period:"Apr \u2013 Sep", color:"#66BB6A"},
+    {label:"WTC Final \u2013 Lord\u2019s", period:"June", color:"#CE93D8"},
+    {label:"Ashes \u2013 Eng v Aus", period:"Jun \u2013 Aug", color:"#C8A94A"},
+    {label:"The Hundred", period:"Jul \u2013 Aug", color:"#26C6DA"},
+    {label:"ICC Cricket World Cup", period:"Oct \u2013 Nov", color:"#2E7D32"}
+  ];
+
+  /* ── Colour schemes ── */
+  var colourSchemes = {
+    navygold: {name:"Navy & Gold", bg1:"#060E1A", bg2:"#0B1E3D", accent:"#C8A94A", highlight:"#2E7D32", text:"#F5F3EB", textMuted:"rgba(245,243,235,0.5)", cardBg:"rgba(255,255,255,0.03)", cardBorder:"rgba(255,255,255,0.06)", headerBg:"rgba(11,30,61,0.8)", stripe:"#C8502A"},
+    midnight: {name:"Midnight", bg1:"#080C14", bg2:"#0F1520", accent:"#818CF8", highlight:"#C084FC", text:"#E2E8F0", textMuted:"rgba(226,232,240,0.45)", cardBg:"rgba(129,140,248,0.06)", cardBorder:"rgba(129,140,248,0.12)", headerBg:"rgba(8,12,20,0.85)", stripe:"#64748B"},
+    pitchgreen: {name:"Pitch Green", bg1:"#0A1F0A", bg2:"#0F2E0F", accent:"#4ADE80", highlight:"#FDE68A", text:"#F0FDF4", textMuted:"rgba(240,253,244,0.45)", cardBg:"rgba(74,222,128,0.05)", cardBorder:"rgba(74,222,128,0.12)", headerBg:"rgba(10,31,10,0.85)", stripe:"#4ADE80"},
+    cleanwhite: {name:"Clean White", bg1:"#FFFFFF", bg2:"#F1F5F9", accent:"#0B1E3D", highlight:"#2E7D32", text:"#1E293B", textMuted:"rgba(30,41,59,0.5)", cardBg:"rgba(0,0,0,0.03)", cardBorder:"rgba(0,0,0,0.08)", headerBg:"rgba(241,245,249,0.9)", stripe:"#2E7D32"},
+    carbon: {name:"Carbon", bg1:"#0A0A0A", bg2:"#141414", accent:"#C8A94A", highlight:"#EF4444", text:"#E5E5E5", textMuted:"rgba(229,229,229,0.4)", cardBg:"rgba(229,229,229,0.04)", cardBorder:"rgba(229,229,229,0.08)", headerBg:"rgba(10,10,10,0.9)", stripe:"#EF4444"}
+  };
+
   /* ── State ── */
-  let activeCat = "iphone";
-  let activeIdx = 0;
-  const canvas = document.getElementById("preview");
-  const ctx = canvas.getContext("2d");
-  const sel = document.getElementById("deviceSelect");
-  const resLabel = document.getElementById("resLabel");
-  const dlSize = document.getElementById("dlSize");
+  var activeCat = "iphone";
+  var activeIdx = 0;
+  var activeDesign = "classic";
+  var activeColour = "navygold";
+  var canvas = document.getElementById("preview");
+  var ctx = canvas.getContext("2d");
+  var sel = document.getElementById("deviceSelect");
+  var designSel = document.getElementById("designSelect");
+  var colourSel = document.getElementById("colourSelect");
+  var resLabel = document.getElementById("resLabel");
+  var dlSize = document.getElementById("dlSize");
 
   /* ── Populate dropdown ── */
   function populateSelect(){
     sel.innerHTML = "";
     devices[activeCat].forEach(function(d,i){
-      const o = document.createElement("option");
+      var o = document.createElement("option");
       o.value = i;
       o.textContent = d.name + "  (" + d.w + " \u00d7 " + d.h + ")";
       sel.appendChild(o);
@@ -164,7 +212,7 @@
   }
 
   function updateLabel(){
-    const d = devices[activeCat][activeIdx];
+    var d = devices[activeCat][activeIdx];
     resLabel.textContent = d.w + " \u00d7 " + d.h + " px";
     dlSize.textContent = "Output: " + d.w + " \u00d7 " + d.h + " PNG";
   }
@@ -186,17 +234,28 @@
     render();
   });
 
+  designSel.addEventListener("change",function(){
+    activeDesign = designSel.value;
+    render();
+  });
+
+  colourSel.addEventListener("change",function(){
+    activeColour = colourSel.value;
+    render();
+  });
+
   document.getElementById("downloadBtn").addEventListener("click",function(){
-    const d = devices[activeCat][activeIdx];
-    const link = document.createElement("a");
-    link.download = "twc-cricket-2027-" + d.name.toLowerCase().replace(/[^a-z0-9]+/g,"-") + ".png";
+    var d = devices[activeCat][activeIdx];
+    var devSlug = d.name.toLowerCase().replace(/[^a-z0-9]+/g,"-");
+    var link = document.createElement("a");
+    link.download = "twc-cricket-2027-" + activeDesign + "-" + activeColour + "-" + devSlug + ".png";
     link.href = canvas.toDataURL("image/png");
     link.click();
   });
 
   /* ── Drawing helpers ── */
-  function s(v){ return v * scaleFactor; }
   var scaleFactor = 1;
+  function s(v){ return v * scaleFactor; }
 
   function roundRect(x,y,w,h,r){
     ctx.beginPath();
@@ -212,39 +271,88 @@
     ctx.closePath();
   }
 
-  /* ── Main render ── */
-  function render(){
-    const d = devices[activeCat][activeIdx];
-    const W = d.w;
-    const H = d.h;
-    canvas.width = W;
-    canvas.height = H;
-    scaleFactor = W / 1300;
+  function getScheme(){ return colourSchemes[activeColour]; }
 
-    /* Background gradient */
+  /* Map event colours to scheme-aware colours */
+  function eventColor(ev, scheme){
+    if(ev.gold) return scheme.accent;
+    if(ev.green) return scheme.highlight;
+    return ev.c;
+  }
+
+  /* ── Background painter ── */
+  function paintBackground(W, H, scheme){
     var bg = ctx.createLinearGradient(0,0,0,H);
-    bg.addColorStop(0,"#060E1A");
-    bg.addColorStop(0.3,"#0B1E3D");
-    bg.addColorStop(0.7,"#0B1E3D");
-    bg.addColorStop(1,"#060E1A");
+    bg.addColorStop(0, scheme.bg1);
+    bg.addColorStop(0.3, scheme.bg2);
+    bg.addColorStop(0.7, scheme.bg2);
+    bg.addColorStop(1, scheme.bg1);
     ctx.fillStyle = bg;
     ctx.fillRect(0,0,W,H);
 
-    /* Green accent glow */
+    /* Accent glow */
     var glow = ctx.createRadialGradient(W*0.5,H*0.45,0,W*0.5,H*0.45,W*0.7);
-    glow.addColorStop(0,"rgba(46,125,50,0.08)");
-    glow.addColorStop(1,"rgba(46,125,50,0)");
+    glow.addColorStop(0, scheme.accent + "14");
+    glow.addColorStop(1, scheme.accent + "00");
     ctx.fillStyle = glow;
     ctx.fillRect(0,0,W,H);
 
     /* Top stripe */
-    ctx.fillStyle = "#C8502A";
+    ctx.fillStyle = scheme.stripe;
     ctx.fillRect(0,0,W,s(6));
+  }
 
-    /* Cricket ball subtle pattern - top corner */
+  /* ── TWC monogram painter ── */
+  function paintMonogram(cx, cy, radius, scheme){
+    ctx.save();
+    ctx.strokeStyle = scheme.accent;
+    ctx.lineWidth = s(2.5);
+    ctx.beginPath();
+    ctx.arc(cx, cy, radius, 0, Math.PI*2);
+    ctx.stroke();
+    ctx.font = "700 " + (radius * 0.75) + "px 'EB Garamond', serif";
+    ctx.fillStyle = scheme.accent;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText("TWC", cx, cy + s(1));
+    ctx.restore();
+  }
+
+  /* ── Bottom branding painter ── */
+  function paintBottomBranding(W, yPos, scheme){
+    ctx.strokeStyle = scheme.accent + "33";
+    ctx.lineWidth = s(1);
+    ctx.beginPath();
+    ctx.moveTo(W*0.25, yPos);
+    ctx.lineTo(W*0.75, yPos);
+    ctx.stroke();
+    yPos += s(20);
+
+    paintMonogram(W/2, yPos + s(14), s(16), scheme);
+    yPos += s(42);
+
+    ctx.font = "500 " + s(10) + "px 'Inter', sans-serif";
+    ctx.fillStyle = scheme.textMuted;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "alphabetic";
+    ctx.fillText("thewallchartcompany.com", W/2, yPos);
+    yPos += s(16);
+    ctx.font = "400 " + s(8) + "px 'Inter', sans-serif";
+    ctx.fillStyle = scheme.textMuted;
+    ctx.fillText("Fixtures subject to change. Updated Apr 2027.", W/2, yPos);
+    return yPos;
+  }
+
+  /* ════════════════════════════════════════════════
+     DESIGN 1: CLASSIC
+     ════════════════════════════════════════════════ */
+  function renderClassic(W, H, scheme){
+    paintBackground(W, H, scheme);
+
+    /* Cricket ball subtle pattern */
     ctx.save();
     ctx.globalAlpha = 0.04;
-    ctx.strokeStyle = "#fff";
+    ctx.strokeStyle = scheme.text;
     ctx.lineWidth = s(3);
     ctx.beginPath();
     ctx.arc(W*0.85, H*0.06, s(80), 0, Math.PI*2);
@@ -255,37 +363,22 @@
     ctx.restore();
 
     var yPos = s(50);
-
-    /* TWC Monogram */
-    ctx.save();
-    var mx = W/2, my = yPos + s(30);
-    ctx.strokeStyle = "#C8A94A";
-    ctx.lineWidth = s(2.5);
-    ctx.beginPath();
-    ctx.arc(mx, my, s(32), 0, Math.PI*2);
-    ctx.stroke();
-    ctx.font = "700 " + s(24) + "px 'EB Garamond', serif";
-    ctx.fillStyle = "#C8A94A";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.fillText("TWC", mx, my + s(1));
-    ctx.restore();
-
+    paintMonogram(W/2, yPos + s(30), s(32), scheme);
     yPos += s(80);
 
     /* Title */
     ctx.textAlign = "center";
-    ctx.fillStyle = "#ffffff";
+    ctx.fillStyle = scheme.text;
     ctx.font = "700 " + s(48) + "px 'EB Garamond', serif";
     ctx.fillText("2027", W/2, yPos);
     yPos += s(52);
     ctx.font = "600 " + s(34) + "px 'EB Garamond', serif";
-    ctx.fillStyle = "#2E7D32";
+    ctx.fillStyle = scheme.highlight;
     ctx.fillText("CRICKET CALENDAR", W/2, yPos);
     yPos += s(20);
 
     /* Divider */
-    ctx.strokeStyle = "rgba(200,169,74,0.3)";
+    ctx.strokeStyle = scheme.accent + "4D";
     ctx.lineWidth = s(1);
     ctx.beginPath();
     ctx.moveTo(W*0.2, yPos);
@@ -293,115 +386,93 @@
     ctx.stroke();
     yPos += s(30);
 
-    /* ── ASHES BANNER ── */
+    /* Ashes banner */
     var bannerH = s(52);
     var bannerW = W * 0.82;
     var bannerX = (W - bannerW) / 2;
-    var bannerY = yPos;
-
-    /* Gold border box */
-    ctx.save();
-    roundRect(bannerX, bannerY, bannerW, bannerH, s(6));
-    ctx.strokeStyle = "#C8A94A";
+    roundRect(bannerX, yPos, bannerW, bannerH, s(6));
+    ctx.strokeStyle = scheme.accent;
     ctx.lineWidth = s(2);
     ctx.stroke();
-    ctx.fillStyle = "rgba(200,169,74,0.08)";
+    ctx.fillStyle = scheme.accent + "14";
     ctx.fill();
-
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.font = "700 " + s(20) + "px 'EB Garamond', serif";
-    ctx.fillStyle = "#C8A94A";
-    ctx.fillText("ASHES 2027  \u00b7  ENGLAND v AUSTRALIA", W/2, bannerY + bannerH/2);
-    ctx.restore();
-
+    ctx.fillStyle = scheme.accent;
+    ctx.fillText("ASHES 2027  \u00b7  ENGLAND v AUSTRALIA", W/2, yPos + bannerH/2);
     yPos += bannerH + s(30);
 
-    /* ── 12-MONTH GRID ── */
-    var gridCols = 3;
-    var gridRows = 4;
+    /* 12-month grid */
+    var gridCols = 3, gridRows = 4;
     var gridPadX = W * 0.06;
     var gridPadBetween = s(10);
     var cellW = (W - gridPadX*2 - gridPadBetween*(gridCols-1)) / gridCols;
     var cellH = s(120);
-    var gridStartY = yPos;
 
     for(var row=0; row<gridRows; row++){
       for(var col=0; col<gridCols; col++){
         var mIdx = row * gridCols + col;
         var cx = gridPadX + col * (cellW + gridPadBetween);
-        var cy = gridStartY + row * (cellH + gridPadBetween);
+        var cy = yPos + row * (cellH + gridPadBetween);
 
-        /* Cell background */
         roundRect(cx, cy, cellW, cellH, s(6));
-        ctx.fillStyle = "rgba(255,255,255,0.03)";
+        ctx.fillStyle = scheme.cardBg;
         ctx.fill();
-        ctx.strokeStyle = "rgba(255,255,255,0.06)";
+        ctx.strokeStyle = scheme.cardBorder;
         ctx.lineWidth = s(1);
         ctx.stroke();
 
-        /* Month header */
-        ctx.fillStyle = "rgba(11,30,61,0.8)";
+        ctx.fillStyle = scheme.headerBg;
         roundRect(cx, cy, cellW, s(28), s(6));
         ctx.fill();
-        /* Cover bottom corners of header */
         ctx.fillRect(cx, cy + s(20), cellW, s(8));
 
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
         ctx.font = "700 " + s(14) + "px 'Inter', sans-serif";
-        ctx.fillStyle = "#ffffff";
+        ctx.fillStyle = scheme.text;
         ctx.fillText(months[mIdx], cx + cellW/2, cy + s(15));
 
-        /* Events */
         var evts = events[mIdx];
         if(evts && evts.length > 0){
           var evtY = cy + s(38);
           for(var e=0; e<evts.length; e++){
             var ev = evts[e];
             ctx.font = "600 " + s(10) + "px 'Inter', sans-serif";
-            ctx.fillStyle = ev.c;
+            ctx.fillStyle = eventColor(ev, scheme);
             ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
             ctx.fillText(ev.t, cx + cellW/2, evtY);
-
-            /* Highlight bar for special events */
             if(ev.gold || ev.green){
               var tw = ctx.measureText(ev.t).width;
-              ctx.fillStyle = ev.gold ? "rgba(200,169,74,0.15)" : "rgba(46,125,50,0.15)";
+              ctx.fillStyle = ev.gold ? scheme.accent + "26" : scheme.highlight + "26";
               roundRect(cx + cellW/2 - tw/2 - s(6), evtY - s(8), tw + s(12), s(16), s(3));
               ctx.fill();
-              /* Redraw text on top */
-              ctx.fillStyle = ev.c;
+              ctx.fillStyle = eventColor(ev, scheme);
               ctx.fillText(ev.t, cx + cellW/2, evtY);
             }
             evtY += s(20);
           }
         } else {
           ctx.font = "400 " + s(9) + "px 'Inter', sans-serif";
-          ctx.fillStyle = "rgba(255,255,255,0.2)";
+          ctx.fillStyle = scheme.textMuted;
           ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
           ctx.fillText("\u2014", cx + cellW/2, cy + s(55));
         }
       }
     }
 
-    yPos = gridStartY + gridRows * (cellH + gridPadBetween) + s(20);
+    yPos += gridRows * (cellH + gridPadBetween) + s(20);
 
-    /* ── KEY HIGHLIGHTS ── */
+    /* Key highlights */
     ctx.textAlign = "center";
+    ctx.textBaseline = "alphabetic";
     ctx.font = "600 " + s(16) + "px 'EB Garamond', serif";
-    ctx.fillStyle = "rgba(255,255,255,0.5)";
+    ctx.fillStyle = scheme.textMuted;
     ctx.fillText("KEY TOURNAMENTS", W/2, yPos);
     yPos += s(24);
-
-    var highlights = [
-      {label:"IPL Season 20", period:"Mar \u2013 May", color:"#F57C00"},
-      {label:"County Championship", period:"Apr \u2013 Sep", color:"#66BB6A"},
-      {label:"WTC Final \u2013 Lord\u2019s", period:"June", color:"#CE93D8"},
-      {label:"Ashes \u2013 Eng v Aus", period:"Jun \u2013 Aug", color:"#C8A94A"},
-      {label:"The Hundred", period:"Jul \u2013 Aug", color:"#26C6DA"},
-      {label:"ICC Cricket World Cup", period:"Oct \u2013 Nov", color:"#2E7D32"}
-    ];
 
     var hlCols = W > 1800 ? 3 : 2;
     var hlW = (W - gridPadX*2 - s(10)*(hlCols-1)) / hlCols;
@@ -414,33 +485,33 @@
       var hy = yPos + hRow * (hlH + s(6));
 
       roundRect(hx, hy, hlW, hlH, s(4));
-      ctx.fillStyle = "rgba(255,255,255,0.03)";
+      ctx.fillStyle = scheme.cardBg;
       ctx.fill();
 
-      /* Color dot */
       ctx.beginPath();
       ctx.arc(hx + s(14), hy + hlH/2, s(5), 0, Math.PI*2);
       ctx.fillStyle = highlights[h].color;
       ctx.fill();
 
       ctx.textAlign = "left";
+      ctx.textBaseline = "middle";
       ctx.font = "600 " + s(10) + "px 'Inter', sans-serif";
-      ctx.fillStyle = "#ddd";
-      ctx.fillText(highlights[h].label, hx + s(26), hy + hlH/2 - s(1));
+      ctx.fillStyle = scheme.text;
+      ctx.fillText(highlights[h].label, hx + s(26), hy + hlH/2);
 
       ctx.textAlign = "right";
       ctx.font = "400 " + s(9) + "px 'Inter', sans-serif";
-      ctx.fillStyle = "rgba(255,255,255,0.4)";
-      ctx.fillText(highlights[h].period, hx + hlW - s(10), hy + hlH/2 - s(1));
+      ctx.fillStyle = scheme.textMuted;
+      ctx.fillText(highlights[h].period, hx + hlW - s(10), hy + hlH/2);
     }
 
     var hlTotalRows = Math.ceil(highlights.length / hlCols);
     yPos += hlTotalRows * (hlH + s(6)) + s(20);
 
-    /* ── Stumps decoration ── */
+    /* Stumps decoration */
     ctx.save();
     ctx.globalAlpha = 0.06;
-    ctx.strokeStyle = "#C8A94A";
+    ctx.strokeStyle = scheme.accent;
     ctx.lineWidth = s(3);
     for(var st=0; st<3; st++){
       var sx = W/2 - s(20) + st*s(20);
@@ -449,7 +520,6 @@
       ctx.lineTo(sx, yPos + s(40));
       ctx.stroke();
     }
-    /* Bails */
     ctx.beginPath();
     ctx.moveTo(W/2 - s(22), yPos);
     ctx.lineTo(W/2 - s(8), yPos - s(4));
@@ -459,40 +529,460 @@
     ctx.lineTo(W/2 + s(22), yPos);
     ctx.stroke();
     ctx.restore();
-
     yPos += s(60);
 
-    /* ── Bottom branding ── */
-    /* Divider */
-    ctx.strokeStyle = "rgba(200,169,74,0.2)";
+    paintBottomBranding(W, yPos, scheme);
+  }
+
+  /* ════════════════════════════════════════════════
+     DESIGN 2: MINIMAL
+     ════════════════════════════════════════════════ */
+  function renderMinimal(W, H, scheme){
+    /* Solid background */
+    ctx.fillStyle = scheme.bg1;
+    ctx.fillRect(0, 0, W, H);
+
+    var yPos = s(80);
+
+    /* Large year */
+    ctx.textAlign = "center";
+    ctx.textBaseline = "alphabetic";
+    ctx.font = "700 " + s(140) + "px 'EB Garamond', serif";
+    ctx.fillStyle = scheme.accent + "18";
+    ctx.fillText("2027", W/2, yPos + s(100));
+
+    ctx.font = "700 " + s(56) + "px 'EB Garamond', serif";
+    ctx.fillStyle = scheme.text;
+    ctx.fillText("2027", W/2, yPos);
+    yPos += s(30);
+
+    ctx.font = "400 " + s(14) + "px 'Inter', sans-serif";
+    ctx.fillStyle = scheme.textMuted;
+    ctx.fillText("CRICKET CALENDAR", W/2, yPos);
+    yPos += s(60);
+
+    /* Ashes feature */
+    ctx.save();
+    var ashW = W * 0.7;
+    var ashX = (W - ashW) / 2;
+    ctx.strokeStyle = scheme.accent;
     ctx.lineWidth = s(1);
     ctx.beginPath();
-    ctx.moveTo(W*0.25, yPos);
-    ctx.lineTo(W*0.75, yPos);
+    ctx.moveTo(ashX, yPos);
+    ctx.lineTo(ashX + ashW, yPos);
     ctx.stroke();
-    yPos += s(20);
-
-    /* TWC small monogram */
-    ctx.strokeStyle = "rgba(200,169,74,0.4)";
-    ctx.lineWidth = s(1.5);
+    yPos += s(24);
+    ctx.font = "700 " + s(28) + "px 'EB Garamond', serif";
+    ctx.fillStyle = scheme.accent;
+    ctx.textAlign = "center";
+    ctx.fillText("THE ASHES", W/2, yPos);
+    yPos += s(22);
+    ctx.font = "400 " + s(12) + "px 'Inter', sans-serif";
+    ctx.fillStyle = scheme.textMuted;
+    ctx.fillText("England v Australia  \u00b7  Jun \u2013 Aug", W/2, yPos);
+    yPos += s(24);
     ctx.beginPath();
-    ctx.arc(W/2, yPos + s(14), s(16), 0, Math.PI*2);
+    ctx.moveTo(ashX, yPos);
+    ctx.lineTo(ashX + ashW, yPos);
     ctx.stroke();
-    ctx.font = "700 " + s(12) + "px 'EB Garamond', serif";
-    ctx.fillStyle = "rgba(200,169,74,0.5)";
+    ctx.restore();
+    yPos += s(50);
+
+    /* Month list with key events */
+    var padX = W * 0.1;
+    for(var m=0; m<12; m++){
+      var evts = events[m];
+      ctx.textAlign = "left";
+      ctx.textBaseline = "alphabetic";
+      ctx.font = "600 " + s(16) + "px 'EB Garamond', serif";
+      ctx.fillStyle = (evts && evts.length > 0) ? scheme.text : scheme.textMuted;
+      ctx.fillText(monthsFull[m], padX, yPos);
+
+      if(evts && evts.length > 0){
+        ctx.textAlign = "right";
+        ctx.font = "400 " + s(11) + "px 'Inter', sans-serif";
+        var evText = evts.map(function(e){ return e.t; }).join("  \u00b7  ");
+        ctx.fillStyle = scheme.accent;
+        ctx.fillText(evText, W - padX, yPos);
+      }
+
+      yPos += s(8);
+      ctx.strokeStyle = scheme.cardBorder;
+      ctx.lineWidth = s(0.5);
+      ctx.beginPath();
+      ctx.moveTo(padX, yPos);
+      ctx.lineTo(W - padX, yPos);
+      ctx.stroke();
+      yPos += s(22);
+    }
+
+    yPos += s(20);
+    paintMonogram(W/2, yPos, s(18), scheme);
+    yPos += s(36);
+    ctx.font = "400 " + s(8) + "px 'Inter', sans-serif";
+    ctx.fillStyle = scheme.textMuted;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "alphabetic";
+    ctx.fillText("thewallchartcompany.com", W/2, yPos);
+  }
+
+  /* ════════════════════════════════════════════════
+     DESIGN 3: BOLD GRID
+     ════════════════════════════════════════════════ */
+  function renderBoldGrid(W, H, scheme){
+    ctx.fillStyle = scheme.bg1;
+    ctx.fillRect(0, 0, W, H);
+
+    /* Top stripe */
+    ctx.fillStyle = scheme.stripe;
+    ctx.fillRect(0, 0, W, s(8));
+
+    var yPos = s(40);
+
+    /* TWC mark */
+    paintMonogram(W/2, yPos + s(20), s(24), scheme);
+    yPos += s(60);
+
+    /* Title bar */
+    ctx.fillStyle = scheme.accent;
+    ctx.fillRect(0, yPos, W, s(60));
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    ctx.fillText("TWC", W/2, yPos + s(15));
+    ctx.font = "700 " + s(32) + "px 'EB Garamond', serif";
+    ctx.fillStyle = scheme.bg1;
+    ctx.fillText("CRICKET 2027", W/2, yPos + s(30));
+    yPos += s(60);
 
-    yPos += s(42);
-    ctx.font = "500 " + s(10) + "px 'Inter', sans-serif";
-    ctx.fillStyle = "rgba(255,255,255,0.25)";
-    ctx.fillText("thewallchartcompany.com", W/2, yPos);
+    /* Ashes banner */
+    ctx.fillStyle = scheme.highlight;
+    ctx.fillRect(0, yPos, W, s(40));
+    ctx.font = "700 " + s(18) + "px 'Inter', sans-serif";
+    ctx.fillStyle = scheme.bg1;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText("ASHES 2027  \u00b7  ENGLAND v AUSTRALIA  \u00b7  JUN\u2013AUG", W/2, yPos + s(20));
+    yPos += s(40) + s(16);
 
-    yPos += s(16);
-    ctx.font = "400 " + s(8) + "px 'Inter', sans-serif";
-    ctx.fillStyle = "rgba(255,255,255,0.15)";
-    ctx.fillText("Fixtures subject to change. Updated Apr 2027.", W/2, yPos);
+    /* Grid */
+    var gridCols = 3, gridRows = 4;
+    var gap = s(4);
+    var padX = W * 0.04;
+    var cellW = (W - padX*2 - gap*(gridCols-1)) / gridCols;
+    var cellH = s(130);
+
+    /* Colour blocks for months with events get a tinted bg */
+    var monthColors = [];
+    for(var i=0; i<12; i++){
+      if(events[i] && events[i].length > 0){
+        var first = events[i][0];
+        monthColors.push(first.c);
+      } else {
+        monthColors.push(null);
+      }
+    }
+
+    for(var row=0; row<gridRows; row++){
+      for(var col=0; col<gridCols; col++){
+        var mIdx = row * gridCols + col;
+        var cx = padX + col * (cellW + gap);
+        var cy = yPos + row * (cellH + gap);
+
+        /* Cell fill */
+        var hasBg = monthColors[mIdx];
+        if(hasBg){
+          ctx.fillStyle = hasBg + "1A";
+        } else {
+          ctx.fillStyle = scheme.cardBg;
+        }
+        ctx.fillRect(cx, cy, cellW, cellH);
+
+        /* Thick border */
+        ctx.strokeStyle = hasBg ? hasBg : scheme.cardBorder;
+        ctx.lineWidth = hasBg ? s(3) : s(1);
+        ctx.strokeRect(cx, cy, cellW, cellH);
+
+        /* Month name */
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.font = "700 " + s(18) + "px 'Inter', sans-serif";
+        ctx.fillStyle = scheme.text;
+        ctx.fillText(months[mIdx], cx + cellW/2, cy + s(22));
+
+        /* Events */
+        var evts = events[mIdx];
+        if(evts && evts.length > 0){
+          var ey = cy + s(48);
+          for(var e=0; e<evts.length; e++){
+            ctx.font = "600 " + s(11) + "px 'Inter', sans-serif";
+            ctx.fillStyle = eventColor(evts[e], scheme);
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+            ctx.fillText(evts[e].t, cx + cellW/2, ey);
+            ey += s(22);
+          }
+        }
+      }
+    }
+
+    yPos += gridRows * (cellH + gap) + s(30);
+
+    /* Bottom stripe */
+    ctx.fillStyle = scheme.stripe;
+    ctx.fillRect(0, yPos, W, s(4));
+    yPos += s(24);
+
+    paintBottomBranding(W, yPos, scheme);
+  }
+
+  /* ════════════════════════════════════════════════
+     DESIGN 4: TIMELINE
+     ════════════════════════════════════════════════ */
+  function renderTimeline(W, H, scheme){
+    paintBackground(W, H, scheme);
+
+    var yPos = s(50);
+    paintMonogram(W/2, yPos + s(22), s(24), scheme);
+    yPos += s(66);
+
+    /* Title */
+    ctx.textAlign = "center";
+    ctx.textBaseline = "alphabetic";
+    ctx.font = "700 " + s(40) + "px 'EB Garamond', serif";
+    ctx.fillStyle = scheme.text;
+    ctx.fillText("CRICKET 2027", W/2, yPos);
+    yPos += s(40);
+
+    /* Ashes feature */
+    ctx.font = "600 " + s(16) + "px 'Inter', sans-serif";
+    ctx.fillStyle = scheme.accent;
+    ctx.textAlign = "center";
+    ctx.fillText("ASHES  \u00b7  ENGLAND v AUSTRALIA  \u00b7  JUN\u2013AUG", W/2, yPos);
+    yPos += s(40);
+
+    /* Timeline line */
+    var lineX = W * 0.15;
+    var startY = yPos;
+    var monthGap = s(62);
+    var endY = startY + 11 * monthGap;
+
+    ctx.strokeStyle = scheme.accent + "40";
+    ctx.lineWidth = s(2);
+    ctx.beginPath();
+    ctx.moveTo(lineX, startY);
+    ctx.lineTo(lineX, endY + s(20));
+    ctx.stroke();
+
+    for(var m=0; m<12; m++){
+      var my = startY + m * monthGap;
+      var evts = events[m];
+      var hasEvents = evts && evts.length > 0;
+
+      /* Dot on timeline */
+      ctx.beginPath();
+      ctx.arc(lineX, my, hasEvents ? s(7) : s(4), 0, Math.PI*2);
+      if(hasEvents){
+        ctx.fillStyle = eventColor(evts[0], scheme);
+      } else {
+        ctx.fillStyle = scheme.textMuted;
+      }
+      ctx.fill();
+
+      /* Month label */
+      ctx.textAlign = "right";
+      ctx.textBaseline = "middle";
+      ctx.font = "700 " + s(13) + "px 'Inter', sans-serif";
+      ctx.fillStyle = hasEvents ? scheme.text : scheme.textMuted;
+      ctx.fillText(months[m], lineX - s(18), my);
+
+      /* Events - alternating left/right labels */
+      if(hasEvents){
+        var evX = lineX + s(22);
+        ctx.textAlign = "left";
+        for(var e=0; e<evts.length; e++){
+          ctx.font = "500 " + s(11) + "px 'Inter', sans-serif";
+          ctx.fillStyle = eventColor(evts[e], scheme);
+          ctx.fillText(evts[e].t, evX, my + e * s(18));
+
+          /* Connector line */
+          ctx.strokeStyle = eventColor(evts[e], scheme) + "40";
+          ctx.lineWidth = s(1);
+          ctx.beginPath();
+          ctx.moveTo(lineX + s(8), my + e * s(18));
+          ctx.lineTo(evX - s(4), my + e * s(18));
+          ctx.stroke();
+        }
+      }
+    }
+
+    yPos = endY + s(50);
+    paintBottomBranding(W, yPos, scheme);
+  }
+
+  /* ════════════════════════════════════════════════
+     DESIGN 5: MAGAZINE
+     ════════════════════════════════════════════════ */
+  function renderMagazine(W, H, scheme){
+    ctx.fillStyle = scheme.bg1;
+    ctx.fillRect(0, 0, W, H);
+
+    var yPos = s(50);
+
+    /* TWC small */
+    paintMonogram(W/2, yPos + s(16), s(18), scheme);
+    yPos += s(56);
+
+    /* Hero text */
+    ctx.textAlign = "center";
+    ctx.textBaseline = "alphabetic";
+    ctx.font = "700 " + s(72) + "px 'EB Garamond', serif";
+    ctx.fillStyle = scheme.text;
+    ctx.fillText("CRICKET", W/2, yPos);
+    yPos += s(70);
+    ctx.font = "700 " + s(72) + "px 'EB Garamond', serif";
+    ctx.fillStyle = scheme.accent;
+    ctx.fillText("2027", W/2, yPos);
+    yPos += s(30);
+
+    /* Subtitle line */
+    ctx.font = "400 " + s(12) + "px 'Inter', sans-serif";
+    ctx.fillStyle = scheme.textMuted;
+    ctx.fillText("THE COMPLETE SEASON GUIDE", W/2, yPos);
+    yPos += s(30);
+
+    /* Ashes hero block */
+    var ashW = W * 0.84;
+    var ashX = (W - ashW) / 2;
+    var ashH = s(80);
+    ctx.fillStyle = scheme.accent + "1A";
+    roundRect(ashX, yPos, ashW, ashH, s(8));
+    ctx.fill();
+    ctx.strokeStyle = scheme.accent;
+    ctx.lineWidth = s(2);
+    roundRect(ashX, yPos, ashW, ashH, s(8));
+    ctx.stroke();
+
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.font = "700 " + s(26) + "px 'EB Garamond', serif";
+    ctx.fillStyle = scheme.accent;
+    ctx.fillText("THE ASHES 2027", W/2, yPos + s(28));
+    ctx.font = "500 " + s(13) + "px 'Inter', sans-serif";
+    ctx.fillStyle = scheme.text;
+    ctx.fillText("England v Australia  \u00b7  June \u2013 August", W/2, yPos + s(56));
+    yPos += ashH + s(30);
+
+    /* Divider */
+    ctx.strokeStyle = scheme.cardBorder;
+    ctx.lineWidth = s(1);
+    ctx.beginPath();
+    ctx.moveTo(ashX, yPos);
+    ctx.lineTo(ashX + ashW, yPos);
+    ctx.stroke();
+    yPos += s(24);
+
+    /* Two-column listing */
+    var colGap = s(20);
+    var colW = (ashW - colGap) / 2;
+    var leftX = ashX;
+    var rightX = ashX + colW + colGap;
+
+    /* Section header */
+    ctx.textAlign = "left";
+    ctx.textBaseline = "alphabetic";
+    ctx.font = "700 " + s(14) + "px 'Inter', sans-serif";
+    ctx.fillStyle = scheme.accent;
+    ctx.fillText("SEASON FIXTURES", leftX, yPos);
+    yPos += s(20);
+
+    var colLeftY = yPos;
+    var colRightY = yPos;
+    var useLeft = true;
+
+    for(var m=0; m<12; m++){
+      var evts = events[m];
+      var currentX = useLeft ? leftX : rightX;
+      var currentY = useLeft ? colLeftY : colRightY;
+
+      /* Month header */
+      ctx.textAlign = "left";
+      ctx.textBaseline = "alphabetic";
+      ctx.font = "700 " + s(12) + "px 'Inter', sans-serif";
+      ctx.fillStyle = scheme.text;
+      ctx.fillText(monthsFull[m].toUpperCase(), currentX, currentY);
+      currentY += s(4);
+
+      /* Underline */
+      ctx.strokeStyle = scheme.cardBorder;
+      ctx.lineWidth = s(0.5);
+      ctx.beginPath();
+      ctx.moveTo(currentX, currentY);
+      ctx.lineTo(currentX + colW, currentY);
+      ctx.stroke();
+      currentY += s(14);
+
+      if(evts && evts.length > 0){
+        for(var e=0; e<evts.length; e++){
+          ctx.font = "500 " + s(10) + "px 'Inter', sans-serif";
+          ctx.fillStyle = eventColor(evts[e], scheme);
+          ctx.textAlign = "left";
+          ctx.fillText(evts[e].t, currentX + s(8), currentY);
+          /* Bullet */
+          ctx.beginPath();
+          ctx.arc(currentX + s(3), currentY - s(3), s(2), 0, Math.PI*2);
+          ctx.fill();
+          currentY += s(16);
+        }
+      } else {
+        ctx.font = "400 " + s(9) + "px 'Inter', sans-serif";
+        ctx.fillStyle = scheme.textMuted;
+        ctx.fillText("No major events", currentX + s(8), currentY);
+        currentY += s(16);
+      }
+
+      currentY += s(8);
+
+      if(useLeft){
+        colLeftY = currentY;
+      } else {
+        colRightY = currentY;
+      }
+      useLeft = !useLeft;
+    }
+
+    yPos = Math.max(colLeftY, colRightY) + s(20);
+
+    /* Key tournaments box */
+    ctx.fillStyle = scheme.cardBg;
+    roundRect(ashX, yPos, ashW, s(36), s(6));
+    ctx.fill();
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.font = "600 " + s(10) + "px 'Inter', sans-serif";
+    ctx.fillStyle = scheme.textMuted;
+    ctx.fillText("ASHES  \u00b7  IPL  \u00b7  WTC FINAL  \u00b7  THE HUNDRED  \u00b7  ICC WORLD CUP", W/2, yPos + s(18));
+
+    yPos += s(56);
+    paintBottomBranding(W, yPos, scheme);
+  }
+
+  /* ── Main render ── */
+  function render(){
+    var d = devices[activeCat][activeIdx];
+    var W = d.w;
+    var H = d.h;
+    canvas.width = W;
+    canvas.height = H;
+    scaleFactor = W / 1300;
+    var scheme = getScheme();
+
+    switch(activeDesign){
+      case "classic":   renderClassic(W, H, scheme);  break;
+      case "minimal":   renderMinimal(W, H, scheme);  break;
+      case "boldgrid":  renderBoldGrid(W, H, scheme); break;
+      case "timeline":  renderTimeline(W, H, scheme); break;
+      case "magazine":  renderMagazine(W, H, scheme); break;
+      default:          renderClassic(W, H, scheme);  break;
+    }
   }
 
   /* ── Font load then init ── */

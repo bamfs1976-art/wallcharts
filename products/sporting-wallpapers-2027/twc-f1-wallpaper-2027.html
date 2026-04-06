@@ -24,7 +24,7 @@
   .tab{padding:0.5rem 1.2rem;background:var(--card);border:1px solid var(--border);border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;color:#999;transition:all .2s}
   .tab:hover{color:#ccc;border-color:#333}
   .tab.active{background:var(--f1red);color:#fff;border-color:var(--f1red)}
-  .controls{display:flex;gap:1rem;align-items:center;margin-bottom:1.5rem;flex-wrap:wrap}
+  .controls{display:flex;gap:1rem;align-items:center;margin-bottom:1rem;flex-wrap:wrap}
   select{background:var(--card);color:#e0e0e0;border:1px solid var(--border);padding:0.6rem 1rem;border-radius:6px;font-size:0.9rem;font-family:'Inter',sans-serif;cursor:pointer;min-width:220px}
   select:focus{outline:none;border-color:var(--f1red)}
   .preview-wrap{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;text-align:center;margin-bottom:1.5rem}
@@ -39,6 +39,8 @@
   .footer{text-align:center;padding:2rem 1rem;color:#555;font-size:0.78rem;border-top:1px solid var(--border);margin-top:3rem}
   .footer a{color:var(--gold);text-decoration:none}
   .dim{font-size:0.78rem;color:#666;margin-bottom:1rem}
+  .select-label{font-size:0.78rem;color:#888;margin-bottom:0.3rem}
+  .select-group{display:flex;flex-direction:column}
 </style>
 </head>
 <body>
@@ -58,7 +60,30 @@
   </div>
 
   <div class="controls">
-    <select id="deviceSelect"></select>
+    <div class="select-group">
+      <span class="select-label">Device</span>
+      <select id="deviceSelect"></select>
+    </div>
+    <div class="select-group">
+      <span class="select-label">Design Style</span>
+      <select id="designSelect">
+        <option value="classic">Classic</option>
+        <option value="minimal">Minimal</option>
+        <option value="boldgrid">Bold Grid</option>
+        <option value="timeline">Timeline</option>
+        <option value="magazine">Magazine</option>
+      </select>
+    </div>
+    <div class="select-group">
+      <span class="select-label">Colour Scheme</span>
+      <select id="colourSelect">
+        <option value="racingred">Racing Red</option>
+        <option value="midnight">Midnight</option>
+        <option value="silverarrow">Silver Arrow</option>
+        <option value="cleanwhite">Clean White</option>
+        <option value="carbon">Carbon</option>
+      </select>
+    </div>
   </div>
   <p class="dim" id="dimLabel"></p>
 
@@ -96,7 +121,7 @@
 (function(){
 "use strict";
 
-const DEVICES = {
+var DEVICES = {
   iphone: [
     {name:"iPhone 16 Pro Max",w:1320,h:2868},
     {name:"iPhone 15 Pro Max",w:1290,h:2796},
@@ -124,7 +149,7 @@ const DEVICES = {
   ]
 };
 
-const RACES = [
+var RACES = [
   {rnd:1,  code:"BHR",flag:"Bahrain",        name:"Bahrain GP",          date:"Mar 16"},
   {rnd:2,  code:"SAU",flag:"Saudi Arabia",    name:"Saudi Arabian GP",    date:"Mar 23"},
   {rnd:3,  code:"AUS",flag:"Australia",       name:"Australian GP",       date:"Apr 6"},
@@ -152,19 +177,31 @@ const RACES = [
   {rnd:24, code:"ABU",flag:"UAE",             name:"Abu Dhabi GP",        date:"Nov 30"}
 ];
 
-let currentCat = "iphone";
-let currentIdx = 0;
+var COLOURS = {
+  racingred: {bg:"#06101e", primary:"#E10600", secondary:"#C8A94A", text:"#F5F3EB", textDim:"rgba(245,243,235,0.5)", textFaint:"rgba(245,243,235,0.3)", badgeBg:"#0B1E3D", label:"Racing Red"},
+  midnight:  {bg:"#080C14", primary:"#818CF8", secondary:"#C084FC", text:"#E2E8F0", textDim:"rgba(226,232,240,0.5)", textFaint:"rgba(100,116,139,0.5)", badgeBg:"#0F172A", label:"Midnight"},
+  silverarrow:{bg:"#1A1A2E",primary:"#00D2FF", secondary:"#C0C0C0", text:"#FFFFFF", textDim:"rgba(255,255,255,0.5)", textFaint:"rgba(192,192,192,0.3)", badgeBg:"#16213E", label:"Silver Arrow"},
+  cleanwhite:{bg:"#FFFFFF", primary:"#E10600", secondary:"#0B1E3D", text:"#1E293B", textDim:"rgba(30,41,59,0.5)", textFaint:"rgba(30,41,59,0.25)", badgeBg:"#F1F5F9", label:"Clean White"},
+  carbon:    {bg:"#0A0A0A", primary:"#E10600", secondary:"#C8A94A", text:"#E5E5E5", textDim:"rgba(229,229,229,0.5)", textFaint:"rgba(229,229,229,0.25)", badgeBg:"#1A1A1A", label:"Carbon"}
+};
 
-const tabs = document.querySelectorAll(".tab");
-const sel = document.getElementById("deviceSelect");
-const cv = document.getElementById("cv");
-const ctx = cv.getContext("2d");
-const dimLabel = document.getElementById("dimLabel");
+var currentCat = "iphone";
+var currentIdx = 0;
+var currentDesign = "classic";
+var currentColour = "racingred";
+
+var tabs = document.querySelectorAll(".tab");
+var sel = document.getElementById("deviceSelect");
+var designSel = document.getElementById("designSelect");
+var colourSel = document.getElementById("colourSelect");
+var cv = document.getElementById("cv");
+var ctx = cv.getContext("2d");
+var dimLabel = document.getElementById("dimLabel");
 
 function populateSelect(){
   sel.innerHTML = "";
-  DEVICES[currentCat].forEach((d,i) => {
-    const o = document.createElement("option");
+  DEVICES[currentCat].forEach(function(d, i){
+    var o = document.createElement("option");
     o.value = i;
     o.textContent = d.name + " (" + d.w + "\u00d7" + d.h + ")";
     sel.appendChild(o);
@@ -174,13 +211,13 @@ function populateSelect(){
 }
 
 function updateDim(){
-  const d = DEVICES[currentCat][currentIdx];
+  var d = DEVICES[currentCat][currentIdx];
   dimLabel.textContent = d.w + " \u00d7 " + d.h + " px";
 }
 
-tabs.forEach(t => {
-  t.addEventListener("click", () => {
-    tabs.forEach(x => x.classList.remove("active"));
+tabs.forEach(function(t){
+  t.addEventListener("click", function(){
+    tabs.forEach(function(x){ x.classList.remove("active"); });
     t.classList.add("active");
     currentCat = t.dataset.cat;
     currentIdx = 0;
@@ -189,222 +226,32 @@ tabs.forEach(t => {
   });
 });
 
-sel.addEventListener("change", () => {
+sel.addEventListener("change", function(){
   currentIdx = parseInt(sel.value);
   updateDim();
   render();
 });
 
-document.getElementById("dlBtn").addEventListener("click", () => {
-  const d = DEVICES[currentCat][currentIdx];
-  const a = document.createElement("a");
-  a.download = "TWC-F1-2027-" + d.name.replace(/[^a-zA-Z0-9]/g,"-") + ".png";
+designSel.addEventListener("change", function(){
+  currentDesign = designSel.value;
+  render();
+});
+
+colourSel.addEventListener("change", function(){
+  currentColour = colourSel.value;
+  render();
+});
+
+document.getElementById("dlBtn").addEventListener("click", function(){
+  var d = DEVICES[currentCat][currentIdx];
+  var safeName = d.name.replace(/[^a-zA-Z0-9]/g, "-");
+  var a = document.createElement("a");
+  a.download = "twc-f1-2027-" + currentDesign + "-" + currentColour + "-" + safeName + ".png";
   a.href = cv.toDataURL("image/png");
   a.click();
 });
 
-function render(){
-  const dev = DEVICES[currentCat][currentIdx];
-  const W = dev.w;
-  const H = dev.h;
-  cv.width = W;
-  cv.height = H;
-
-  const s = Math.min(W, H) / 1300;
-
-  // --- Background ---
-  ctx.fillStyle = "#06101e";
-  ctx.fillRect(0, 0, W, H);
-
-  // Diagonal speed lines
-  ctx.save();
-  ctx.globalAlpha = 0.08;
-  for(let i = -H; i < W + H; i += 60 * s){
-    ctx.strokeStyle = "#E10600";
-    ctx.lineWidth = 2 * s;
-    ctx.beginPath();
-    ctx.moveTo(i, 0);
-    ctx.lineTo(i + H * 0.4, H);
-    ctx.stroke();
-  }
-  ctx.globalAlpha = 0.04;
-  for(let i = -H; i < W + H; i += 120 * s){
-    ctx.strokeStyle = "#E10600";
-    ctx.lineWidth = 6 * s;
-    ctx.beginPath();
-    ctx.moveTo(i + 30 * s, 0);
-    ctx.lineTo(i + 30 * s + H * 0.4, H);
-    ctx.stroke();
-  }
-  ctx.restore();
-
-  // Top red accent bar
-  const barH = 8 * s;
-  ctx.fillStyle = "#E10600";
-  ctx.fillRect(0, 0, W, barH);
-
-  // TWC badge area
-  const badgeY = barH + 40 * s;
-  const badgeSize = 56 * s;
-  const badgeX = W / 2 - badgeSize / 2;
-
-  // Gold circle behind badge
-  ctx.save();
-  ctx.beginPath();
-  ctx.arc(W / 2, badgeY + badgeSize / 2, badgeSize * 0.65, 0, Math.PI * 2);
-  ctx.fillStyle = "#C8A94A";
-  ctx.fill();
-  ctx.restore();
-
-  ctx.font = "bold " + Math.round(28 * s) + "px 'EB Garamond', serif";
-  ctx.fillStyle = "#0B1E3D";
-  ctx.textAlign = "center";
-  ctx.textBaseline = "middle";
-  ctx.fillText("TWC", W / 2, badgeY + badgeSize / 2 + 1 * s);
-
-  // Title
-  const titleY = badgeY + badgeSize + 50 * s;
-  ctx.font = "700 " + Math.round(52 * s) + "px 'Inter', sans-serif";
-  ctx.fillStyle = "#ffffff";
-  ctx.textAlign = "center";
-  ctx.fillText("2027", W / 2, titleY);
-
-  ctx.font = "700 " + Math.round(36 * s) + "px 'Inter', sans-serif";
-  ctx.fillStyle = "#E10600";
-  ctx.fillText("F1 CALENDAR", W / 2, titleY + 48 * s);
-
-  // Decorative line under title
-  const lineY = titleY + 80 * s;
-  const lineW = 200 * s;
-  ctx.strokeStyle = "#E10600";
-  ctx.lineWidth = 2 * s;
-  ctx.beginPath();
-  ctx.moveTo(W / 2 - lineW / 2, lineY);
-  ctx.lineTo(W / 2 + lineW / 2, lineY);
-  ctx.stroke();
-
-  // Race list
-  const startY = lineY + 40 * s;
-  const raceH = (H - startY - 160 * s) / RACES.length;
-  const maxRaceH = 90 * s;
-  const rowH = Math.min(raceH, maxRaceH);
-  const leftPad = 80 * s;
-  const rightPad = 80 * s;
-  const contentW = W - leftPad - rightPad;
-
-  const fontSize = Math.min(Math.round(24 * s), Math.round(rowH * 0.55));
-  const smallFont = Math.round(fontSize * 0.7);
-
-  RACES.forEach((race, i) => {
-    const y = startY + i * rowH + rowH / 2;
-
-    if(race.rnd === -1){
-      // Summer break
-      ctx.save();
-      ctx.strokeStyle = "rgba(200,169,74,0.3)";
-      ctx.lineWidth = 1 * s;
-      ctx.setLineDash([6 * s, 4 * s]);
-      ctx.beginPath();
-      ctx.moveTo(leftPad, y);
-      ctx.lineTo(W - rightPad, y);
-      ctx.stroke();
-      ctx.setLineDash([]);
-      ctx.font = "600 " + smallFont + "px 'Inter', sans-serif";
-      ctx.fillStyle = "#C8A94A";
-      ctx.textAlign = "center";
-      ctx.fillText("--- SUMMER BREAK ---", W / 2, y + smallFont * 0.35);
-      ctx.restore();
-      return;
-    }
-
-    // Row background on hover-like alternation
-    if(i % 2 === 0){
-      ctx.fillStyle = "rgba(255,255,255,0.015)";
-      ctx.fillRect(leftPad - 10 * s, y - rowH / 2, contentW + 20 * s, rowH);
-    }
-
-    // Sprint dot
-    if(race.sprint){
-      ctx.beginPath();
-      ctx.arc(leftPad - 20 * s, y, 5 * s, 0, Math.PI * 2);
-      ctx.fillStyle = "#C8A94A";
-      ctx.fill();
-    }
-
-    // Round number
-    ctx.font = "700 " + smallFont + "px 'Inter', sans-serif";
-    ctx.fillStyle = "rgba(255,255,255,0.3)";
-    ctx.textAlign = "right";
-    const rndStr = race.rnd < 10 ? "0" + race.rnd : "" + race.rnd;
-    ctx.fillText("R" + rndStr, leftPad + 40 * s, y + fontSize * 0.1);
-
-    // Country code
-    ctx.font = "700 " + fontSize + "px 'Inter', sans-serif";
-    ctx.fillStyle = "#ffffff";
-    ctx.textAlign = "left";
-    ctx.fillText(race.code, leftPad + 55 * s, y + fontSize * 0.1);
-
-    // Race name
-    ctx.font = "400 " + smallFont + "px 'Inter', sans-serif";
-    ctx.fillStyle = "rgba(255,255,255,0.5)";
-    ctx.fillText(race.name, leftPad + 55 * s + ctx.measureText(race.code).width + 12 * s, y + fontSize * 0.1);
-
-    // Date
-    ctx.font = "500 " + smallFont + "px 'Inter', sans-serif";
-    ctx.fillStyle = "#E10600";
-    ctx.textAlign = "right";
-    ctx.fillText(race.date, W - rightPad, y + fontSize * 0.1);
-
-    // New / Returns badges
-    if(race.isNew){
-      const badgeTxt = "NEW";
-      ctx.font = "700 " + Math.round(smallFont * 0.7) + "px 'Inter', sans-serif";
-      const tw = ctx.measureText(badgeTxt).width;
-      const bx = W - rightPad - ctx.measureText(race.date).width - tw - 24 * s;
-      const by = y - smallFont * 0.35;
-      ctx.fillStyle = "#E10600";
-      roundRect(ctx, bx - 4 * s, by - 2 * s, tw + 8 * s, smallFont * 0.75 + 4 * s, 3 * s);
-      ctx.fill();
-      ctx.fillStyle = "#fff";
-      ctx.textAlign = "left";
-      ctx.fillText(badgeTxt, bx, y + fontSize * 0.1);
-    }
-    if(race.returns){
-      const badgeTxt = "RETURNS";
-      ctx.font = "700 " + Math.round(smallFont * 0.7) + "px 'Inter', sans-serif";
-      const tw = ctx.measureText(badgeTxt).width;
-      const bx = W - rightPad - ctx.measureText(race.date).width - tw - 24 * s;
-      const by = y - smallFont * 0.35;
-      ctx.fillStyle = "#C8A94A";
-      roundRect(ctx, bx - 4 * s, by - 2 * s, tw + 8 * s, smallFont * 0.75 + 4 * s, 3 * s);
-      ctx.fill();
-      ctx.fillStyle = "#0B1E3D";
-      ctx.textAlign = "left";
-      ctx.fillText(badgeTxt, bx, y + fontSize * 0.1);
-    }
-  });
-
-  // Sprint legend
-  const legendY = startY + RACES.length * rowH + 20 * s;
-  ctx.beginPath();
-  ctx.arc(W / 2 - 80 * s, legendY, 5 * s, 0, Math.PI * 2);
-  ctx.fillStyle = "#C8A94A";
-  ctx.fill();
-  ctx.font = "400 " + smallFont + "px 'Inter', sans-serif";
-  ctx.fillStyle = "rgba(255,255,255,0.45)";
-  ctx.textAlign = "left";
-  ctx.fillText("Sprint Weekend", W / 2 - 68 * s, legendY + smallFont * 0.35);
-
-  // Bottom red accent
-  ctx.fillStyle = "#E10600";
-  ctx.fillRect(0, H - barH, W, barH);
-
-  // Bottom branding
-  ctx.font = "600 " + Math.round(18 * s) + "px 'EB Garamond', serif";
-  ctx.fillStyle = "rgba(200,169,74,0.4)";
-  ctx.textAlign = "center";
-  ctx.fillText("thewallchartcompany.com", W / 2, H - barH - 20 * s);
-}
+/* ========= UTILITY DRAWING HELPERS ========= */
 
 function roundRect(c, x, y, w, h, r){
   c.beginPath();
@@ -420,14 +267,742 @@ function roundRect(c, x, y, w, h, r){
   c.closePath();
 }
 
-// Font loading then initial render
+function drawBadge(c, text, x, y, w, h, bgCol, fgCol, s){
+  c.fillStyle = bgCol;
+  roundRect(c, x, y, w, h, 3 * s);
+  c.fill();
+  c.fillStyle = fgCol;
+  c.textAlign = "center";
+  c.fillText(text, x + w / 2, y + h / 2 + 1 * s);
+}
+
+function drawTWCBadge(c, cx, cy, size, pal, s){
+  c.save();
+  c.beginPath();
+  c.arc(cx, cy, size * 0.65, 0, Math.PI * 2);
+  c.fillStyle = pal.secondary;
+  c.fill();
+  c.restore();
+  c.font = "bold " + Math.round(28 * s) + "px 'EB Garamond', serif";
+  c.fillStyle = pal.bg;
+  c.textAlign = "center";
+  c.textBaseline = "middle";
+  c.fillText("TWC", cx, cy + 1 * s);
+}
+
+function drawBottomBranding(c, W, H, barH, pal, s){
+  c.fillStyle = pal.primary;
+  c.fillRect(0, H - barH, W, barH);
+  c.font = "600 " + Math.round(18 * s) + "px 'EB Garamond', serif";
+  c.fillStyle = pal.textDim;
+  c.textAlign = "center";
+  c.textBaseline = "alphabetic";
+  c.fillText("thewallchartcompany.com", W / 2, H - barH - 20 * s);
+}
+
+function drawSprintLegend(c, x, y, pal, s, fontSize){
+  c.beginPath();
+  c.arc(x, y, 5 * s, 0, Math.PI * 2);
+  c.fillStyle = pal.secondary;
+  c.fill();
+  c.font = "400 " + fontSize + "px 'Inter', sans-serif";
+  c.fillStyle = pal.textDim;
+  c.textAlign = "left";
+  c.textBaseline = "middle";
+  c.fillText("Sprint Weekend", x + 12 * s, y);
+}
+
+function racesOnly(){
+  return RACES.filter(function(r){ return r.rnd !== -1; });
+}
+
+/* ========= DESIGN: CLASSIC ========= */
+
+function renderClassic(W, H, s, pal){
+  ctx.fillStyle = pal.bg;
+  ctx.fillRect(0, 0, W, H);
+
+  /* speed lines */
+  ctx.save();
+  ctx.globalAlpha = 0.08;
+  for(var i = -H; i < W + H; i += 60 * s){
+    ctx.strokeStyle = pal.primary;
+    ctx.lineWidth = 2 * s;
+    ctx.beginPath();
+    ctx.moveTo(i, 0);
+    ctx.lineTo(i + H * 0.4, H);
+    ctx.stroke();
+  }
+  ctx.globalAlpha = 0.04;
+  for(var j = -H; j < W + H; j += 120 * s){
+    ctx.strokeStyle = pal.primary;
+    ctx.lineWidth = 6 * s;
+    ctx.beginPath();
+    ctx.moveTo(j + 30 * s, 0);
+    ctx.lineTo(j + 30 * s + H * 0.4, H);
+    ctx.stroke();
+  }
+  ctx.restore();
+
+  var barH = 8 * s;
+  ctx.fillStyle = pal.primary;
+  ctx.fillRect(0, 0, W, barH);
+
+  /* TWC badge */
+  var badgeY = barH + 40 * s;
+  var badgeSize = 56 * s;
+  drawTWCBadge(ctx, W / 2, badgeY + badgeSize / 2, badgeSize, pal, s);
+
+  /* Title */
+  var titleY = badgeY + badgeSize + 50 * s;
+  ctx.font = "700 " + Math.round(52 * s) + "px 'Inter', sans-serif";
+  ctx.fillStyle = pal.text;
+  ctx.textAlign = "center";
+  ctx.textBaseline = "alphabetic";
+  ctx.fillText("2027", W / 2, titleY);
+
+  ctx.font = "700 " + Math.round(36 * s) + "px 'Inter', sans-serif";
+  ctx.fillStyle = pal.primary;
+  ctx.fillText("F1 CALENDAR", W / 2, titleY + 48 * s);
+
+  var lineY = titleY + 80 * s;
+  var lineW = 200 * s;
+  ctx.strokeStyle = pal.primary;
+  ctx.lineWidth = 2 * s;
+  ctx.beginPath();
+  ctx.moveTo(W / 2 - lineW / 2, lineY);
+  ctx.lineTo(W / 2 + lineW / 2, lineY);
+  ctx.stroke();
+
+  /* Race list */
+  var startY = lineY + 40 * s;
+  var raceH = (H - startY - 160 * s) / RACES.length;
+  var maxRaceH = 90 * s;
+  var rowH = Math.min(raceH, maxRaceH);
+  var leftPad = 80 * s;
+  var rightPad = 80 * s;
+  var contentW = W - leftPad - rightPad;
+  var fontSize = Math.min(Math.round(24 * s), Math.round(rowH * 0.55));
+  var smallFont = Math.round(fontSize * 0.7);
+
+  RACES.forEach(function(race, i){
+    var y = startY + i * rowH + rowH / 2;
+
+    if(race.rnd === -1){
+      ctx.save();
+      ctx.strokeStyle = pal.textFaint;
+      ctx.lineWidth = 1 * s;
+      ctx.setLineDash([6 * s, 4 * s]);
+      ctx.beginPath();
+      ctx.moveTo(leftPad, y);
+      ctx.lineTo(W - rightPad, y);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.font = "600 " + smallFont + "px 'Inter', sans-serif";
+      ctx.fillStyle = pal.secondary;
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText("--- SUMMER BREAK ---", W / 2, y);
+      ctx.restore();
+      return;
+    }
+
+    if(i % 2 === 0){
+      ctx.fillStyle = (pal.bg === "#FFFFFF") ? "rgba(0,0,0,0.03)" : "rgba(255,255,255,0.015)";
+      ctx.fillRect(leftPad - 10 * s, y - rowH / 2, contentW + 20 * s, rowH);
+    }
+
+    if(race.sprint){
+      ctx.beginPath();
+      ctx.arc(leftPad - 20 * s, y, 5 * s, 0, Math.PI * 2);
+      ctx.fillStyle = pal.secondary;
+      ctx.fill();
+    }
+
+    ctx.font = "700 " + smallFont + "px 'Inter', sans-serif";
+    ctx.fillStyle = pal.textFaint;
+    ctx.textAlign = "right";
+    ctx.textBaseline = "middle";
+    var rndStr = race.rnd < 10 ? "0" + race.rnd : "" + race.rnd;
+    ctx.fillText("R" + rndStr, leftPad + 40 * s, y);
+
+    ctx.font = "700 " + fontSize + "px 'Inter', sans-serif";
+    ctx.fillStyle = pal.text;
+    ctx.textAlign = "left";
+    ctx.fillText(race.code, leftPad + 55 * s, y);
+
+    var codeW = ctx.measureText(race.code).width;
+    ctx.font = "400 " + smallFont + "px 'Inter', sans-serif";
+    ctx.fillStyle = pal.textDim;
+    ctx.fillText(race.name, leftPad + 55 * s + codeW + 12 * s, y);
+
+    ctx.font = "500 " + smallFont + "px 'Inter', sans-serif";
+    ctx.fillStyle = pal.primary;
+    ctx.textAlign = "right";
+    ctx.fillText(race.date, W - rightPad, y);
+
+    if(race.isNew){
+      var badgeTxt = "NEW";
+      ctx.font = "700 " + Math.round(smallFont * 0.7) + "px 'Inter', sans-serif";
+      var tw = ctx.measureText(badgeTxt).width;
+      var dateW = ctx.measureText(race.date).width;
+      var bx = W - rightPad - dateW - tw - 24 * s;
+      var by = y - smallFont * 0.45;
+      ctx.fillStyle = pal.primary;
+      roundRect(ctx, bx - 4 * s, by, tw + 8 * s, smallFont * 0.85, 3 * s);
+      ctx.fill();
+      ctx.fillStyle = "#fff";
+      ctx.textAlign = "center";
+      ctx.fillText(badgeTxt, bx - 4 * s + (tw + 8 * s) / 2, y);
+    }
+    if(race.returns){
+      var badgeTxt2 = "RETURNS";
+      ctx.font = "700 " + Math.round(smallFont * 0.7) + "px 'Inter', sans-serif";
+      var tw2 = ctx.measureText(badgeTxt2).width;
+      var dateW2 = ctx.measureText(race.date).width;
+      var bx2 = W - rightPad - dateW2 - tw2 - 24 * s;
+      var by2 = y - smallFont * 0.45;
+      ctx.fillStyle = pal.secondary;
+      roundRect(ctx, bx2 - 4 * s, by2, tw2 + 8 * s, smallFont * 0.85, 3 * s);
+      ctx.fill();
+      ctx.fillStyle = pal.bg;
+      ctx.textAlign = "center";
+      ctx.fillText(badgeTxt2, bx2 - 4 * s + (tw2 + 8 * s) / 2, y);
+    }
+  });
+
+  var legendY = startY + RACES.length * rowH + 20 * s;
+  drawSprintLegend(ctx, W / 2 - 80 * s, legendY, pal, s, smallFont);
+  drawBottomBranding(ctx, W, H, barH, pal, s);
+}
+
+/* ========= DESIGN: MINIMAL ========= */
+
+function renderMinimal(W, H, s, pal){
+  ctx.fillStyle = pal.bg;
+  ctx.fillRect(0, 0, W, H);
+
+  var barH = 4 * s;
+  ctx.fillStyle = pal.primary;
+  ctx.fillRect(0, 0, W, barH);
+
+  /* Large F1 2027 */
+  var heroY = barH + 120 * s;
+  ctx.font = "300 " + Math.round(80 * s) + "px 'Inter', sans-serif";
+  ctx.fillStyle = pal.text;
+  ctx.textAlign = "center";
+  ctx.textBaseline = "alphabetic";
+  ctx.fillText("F1 2027", W / 2, heroY);
+
+  /* Thin line */
+  ctx.strokeStyle = pal.primary;
+  ctx.lineWidth = 1 * s;
+  ctx.beginPath();
+  ctx.moveTo(W * 0.3, heroY + 30 * s);
+  ctx.lineTo(W * 0.7, heroY + 30 * s);
+  ctx.stroke();
+
+  /* Simple list */
+  var startY = heroY + 80 * s;
+  var rList = RACES;
+  var rowH = (H - startY - 140 * s) / rList.length;
+  var maxRow = 80 * s;
+  rowH = Math.min(rowH, maxRow);
+  var fontSize = Math.min(Math.round(22 * s), Math.round(rowH * 0.55));
+  var smallFont = Math.round(fontSize * 0.75);
+  var leftPad = 100 * s;
+  var rightPad = 100 * s;
+
+  rList.forEach(function(race, i){
+    var y = startY + i * rowH + rowH / 2;
+
+    if(race.rnd === -1){
+      ctx.font = "300 " + smallFont + "px 'Inter', sans-serif";
+      ctx.fillStyle = pal.textFaint;
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText("SUMMER BREAK", W / 2, y);
+      return;
+    }
+
+    ctx.font = "400 " + fontSize + "px 'Inter', sans-serif";
+    ctx.fillStyle = pal.text;
+    ctx.textAlign = "left";
+    ctx.textBaseline = "middle";
+    var label = race.name;
+    if(race.sprint) label = race.name + "  *";
+    ctx.fillText(label, leftPad, y);
+
+    /* Badges */
+    if(race.isNew){
+      ctx.font = "600 " + Math.round(smallFont * 0.7) + "px 'Inter', sans-serif";
+      var nw = ctx.measureText("NEW").width;
+      var nx = leftPad + ctx.measureText(label).width + 12 * s;
+      ctx.fillStyle = pal.primary;
+      roundRect(ctx, nx, y - smallFont * 0.35, nw + 8 * s, smallFont * 0.7, 2 * s);
+      ctx.fill();
+      ctx.fillStyle = "#fff";
+      ctx.textAlign = "center";
+      ctx.fillText("NEW", nx + (nw + 8 * s) / 2, y);
+    }
+    if(race.returns){
+      ctx.font = "600 " + Math.round(smallFont * 0.7) + "px 'Inter', sans-serif";
+      var rw = ctx.measureText("RETURNS").width;
+      var rx = leftPad + ctx.measureText(label).width + 12 * s;
+      ctx.fillStyle = pal.secondary;
+      roundRect(ctx, rx, y - smallFont * 0.35, rw + 8 * s, smallFont * 0.7, 2 * s);
+      ctx.fill();
+      ctx.fillStyle = pal.bg;
+      ctx.textAlign = "center";
+      ctx.fillText("RETURNS", rx + (rw + 8 * s) / 2, y);
+    }
+
+    ctx.font = "300 " + smallFont + "px 'Inter', sans-serif";
+    ctx.fillStyle = pal.primary;
+    ctx.textAlign = "right";
+    ctx.fillText(race.date, W - rightPad, y);
+  });
+
+  /* Sprint footnote */
+  var footY = startY + rList.length * rowH + 16 * s;
+  ctx.font = "300 " + Math.round(smallFont * 0.85) + "px 'Inter', sans-serif";
+  ctx.fillStyle = pal.textFaint;
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillText("* Sprint Weekend", W / 2, footY);
+
+  /* TWC small bottom */
+  ctx.font = "600 " + Math.round(16 * s) + "px 'EB Garamond', serif";
+  ctx.fillStyle = pal.textFaint;
+  ctx.textAlign = "center";
+  ctx.fillText("TWC", W / 2, H - barH - 40 * s);
+
+  drawBottomBranding(ctx, W, H, barH, pal, s);
+}
+
+/* ========= DESIGN: BOLD GRID ========= */
+
+function renderBoldGrid(W, H, s, pal){
+  ctx.fillStyle = pal.bg;
+  ctx.fillRect(0, 0, W, H);
+
+  var barH = 8 * s;
+  ctx.fillStyle = pal.primary;
+  ctx.fillRect(0, 0, W, barH);
+
+  /* Title area */
+  var titleY = barH + 60 * s;
+  drawTWCBadge(ctx, W / 2, titleY, 44 * s, pal, s);
+
+  ctx.font = "700 " + Math.round(38 * s) + "px 'Inter', sans-serif";
+  ctx.fillStyle = pal.text;
+  ctx.textAlign = "center";
+  ctx.textBaseline = "alphabetic";
+  ctx.fillText("F1 2027", W / 2, titleY + 70 * s);
+
+  /* Grid of 24 race cards (+ break indicator) */
+  var gridTop = titleY + 100 * s;
+  var gridBot = H - 100 * s;
+  var cols = (W > H) ? 6 : 4; /* landscape vs portrait */
+  var raceList = racesOnly();
+  var rows = Math.ceil(raceList.length / cols);
+  var margin = 12 * s;
+  var leftPad = 50 * s;
+  var rightPad = 50 * s;
+  var availW = W - leftPad - rightPad;
+  var availH = gridBot - gridTop;
+  var cellW = (availW - (cols - 1) * margin) / cols;
+  var cellH = (availH - (rows - 1) * margin) / rows;
+
+  var fontSize = Math.min(Math.round(18 * s), Math.round(cellH * 0.22));
+  var smallFont = Math.round(fontSize * 0.7);
+
+  raceList.forEach(function(race, i){
+    var col = i % cols;
+    var row = Math.floor(i / cols);
+    var x = leftPad + col * (cellW + margin);
+    var y = gridTop + row * (cellH + margin);
+
+    /* Card background */
+    var cardBg = race.sprint ? pal.secondary : pal.badgeBg;
+    var cardAlpha = race.sprint ? 0.15 : 1;
+    if(race.sprint){
+      ctx.fillStyle = pal.badgeBg;
+      roundRect(ctx, x, y, cellW, cellH, 6 * s);
+      ctx.fill();
+      ctx.save();
+      ctx.globalAlpha = 0.15;
+      ctx.fillStyle = pal.secondary;
+      roundRect(ctx, x, y, cellW, cellH, 6 * s);
+      ctx.fill();
+      ctx.restore();
+      /* Sprint border */
+      ctx.strokeStyle = pal.secondary;
+      ctx.lineWidth = 2 * s;
+      roundRect(ctx, x, y, cellW, cellH, 6 * s);
+      ctx.stroke();
+    } else {
+      ctx.fillStyle = pal.badgeBg;
+      roundRect(ctx, x, y, cellW, cellH, 6 * s);
+      ctx.fill();
+    }
+
+    /* Round number */
+    ctx.font = "700 " + Math.round(fontSize * 1.6) + "px 'Inter', sans-serif";
+    ctx.fillStyle = pal.textFaint;
+    ctx.textAlign = "right";
+    ctx.textBaseline = "top";
+    ctx.fillText("" + race.rnd, x + cellW - 8 * s, y + 6 * s);
+
+    /* Code */
+    ctx.font = "700 " + fontSize + "px 'Inter', sans-serif";
+    ctx.fillStyle = pal.text;
+    ctx.textAlign = "left";
+    ctx.textBaseline = "top";
+    ctx.fillText(race.code, x + 10 * s, y + 10 * s);
+
+    /* Name */
+    ctx.font = "400 " + smallFont + "px 'Inter', sans-serif";
+    ctx.fillStyle = pal.textDim;
+    ctx.fillText(race.name, x + 10 * s, y + 10 * s + fontSize + 4 * s);
+
+    /* Date */
+    ctx.font = "500 " + smallFont + "px 'Inter', sans-serif";
+    ctx.fillStyle = pal.primary;
+    ctx.textBaseline = "bottom";
+    ctx.fillText(race.date, x + 10 * s, y + cellH - 8 * s);
+
+    /* NEW / RETURNS badge */
+    if(race.isNew || race.returns){
+      var bTxt = race.isNew ? "NEW" : "RETURNS";
+      var bCol = race.isNew ? pal.primary : pal.secondary;
+      var bFg = race.isNew ? "#fff" : pal.bg;
+      ctx.font = "700 " + Math.round(smallFont * 0.7) + "px 'Inter', sans-serif";
+      var bw = ctx.measureText(bTxt).width + 8 * s;
+      var bh = smallFont * 0.85;
+      var bx = x + cellW - bw - 6 * s;
+      var byy = y + cellH - bh - 8 * s;
+      ctx.fillStyle = bCol;
+      roundRect(ctx, bx, byy, bw, bh, 2 * s);
+      ctx.fill();
+      ctx.fillStyle = bFg;
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText(bTxt, bx + bw / 2, byy + bh / 2);
+    }
+
+    /* Sprint marker text */
+    if(race.sprint){
+      ctx.font = "600 " + Math.round(smallFont * 0.65) + "px 'Inter', sans-serif";
+      ctx.fillStyle = pal.secondary;
+      ctx.textAlign = "right";
+      ctx.textBaseline = "bottom";
+      ctx.fillText("SPRINT", x + cellW - 8 * s, y + cellH - 8 * s);
+    }
+  });
+
+  drawBottomBranding(ctx, W, H, barH, pal, s);
+}
+
+/* ========= DESIGN: TIMELINE ========= */
+
+function renderTimeline(W, H, s, pal){
+  ctx.fillStyle = pal.bg;
+  ctx.fillRect(0, 0, W, H);
+
+  var barH = 6 * s;
+  ctx.fillStyle = pal.primary;
+  ctx.fillRect(0, 0, W, barH);
+
+  /* Title */
+  var titleY = barH + 50 * s;
+  drawTWCBadge(ctx, W / 2, titleY, 40 * s, pal, s);
+
+  ctx.font = "700 " + Math.round(34 * s) + "px 'Inter', sans-serif";
+  ctx.fillStyle = pal.text;
+  ctx.textAlign = "center";
+  ctx.textBaseline = "alphabetic";
+  ctx.fillText("2027 F1 CALENDAR", W / 2, titleY + 65 * s);
+
+  /* Vertical timeline */
+  var lineX = W * 0.18;
+  var startY = titleY + 100 * s;
+  var endY = H - 100 * s;
+  var totalRaces = RACES.length;
+  var rowH = (endY - startY) / totalRaces;
+  rowH = Math.min(rowH, 80 * s);
+
+  /* Main line */
+  ctx.strokeStyle = pal.textFaint;
+  ctx.lineWidth = 2 * s;
+  ctx.beginPath();
+  ctx.moveTo(lineX, startY);
+  ctx.lineTo(lineX, startY + totalRaces * rowH);
+  ctx.stroke();
+
+  var fontSize = Math.min(Math.round(22 * s), Math.round(rowH * 0.5));
+  var smallFont = Math.round(fontSize * 0.72);
+
+  RACES.forEach(function(race, i){
+    var y = startY + i * rowH + rowH / 2;
+
+    if(race.rnd === -1){
+      /* Break marker */
+      ctx.save();
+      ctx.setLineDash([4 * s, 4 * s]);
+      ctx.strokeStyle = pal.secondary;
+      ctx.lineWidth = 1 * s;
+      ctx.beginPath();
+      ctx.moveTo(lineX - 30 * s, y);
+      ctx.lineTo(lineX + 30 * s, y);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.restore();
+      ctx.font = "500 " + smallFont + "px 'Inter', sans-serif";
+      ctx.fillStyle = pal.secondary;
+      ctx.textAlign = "left";
+      ctx.textBaseline = "middle";
+      ctx.fillText("SUMMER BREAK", lineX + 40 * s, y);
+      return;
+    }
+
+    /* Node */
+    var nodeR = race.sprint ? 8 * s : 5 * s;
+    ctx.beginPath();
+    ctx.arc(lineX, y, nodeR, 0, Math.PI * 2);
+    if(race.sprint){
+      ctx.fillStyle = pal.secondary;
+      ctx.fill();
+      ctx.strokeStyle = pal.secondary;
+      ctx.lineWidth = 2 * s;
+      ctx.stroke();
+    } else {
+      ctx.fillStyle = pal.primary;
+      ctx.fill();
+    }
+
+    /* Date on left */
+    ctx.font = "500 " + smallFont + "px 'Inter', sans-serif";
+    ctx.fillStyle = pal.textDim;
+    ctx.textAlign = "right";
+    ctx.textBaseline = "middle";
+    ctx.fillText(race.date, lineX - 18 * s, y);
+
+    /* Race info on right */
+    ctx.font = "700 " + fontSize + "px 'Inter', sans-serif";
+    ctx.fillStyle = pal.text;
+    ctx.textAlign = "left";
+    ctx.fillText(race.code, lineX + 20 * s, y - fontSize * 0.15);
+
+    var codeW = ctx.measureText(race.code).width;
+    ctx.font = "400 " + smallFont + "px 'Inter', sans-serif";
+    ctx.fillStyle = pal.textDim;
+    ctx.fillText(race.name, lineX + 20 * s + codeW + 10 * s, y - fontSize * 0.15);
+
+    /* Sprint label */
+    if(race.sprint){
+      ctx.font = "600 " + Math.round(smallFont * 0.65) + "px 'Inter', sans-serif";
+      ctx.fillStyle = pal.secondary;
+      ctx.textAlign = "left";
+      ctx.fillText("SPRINT", lineX + 20 * s, y + fontSize * 0.65);
+    }
+
+    /* NEW / RETURNS badges */
+    if(race.isNew || race.returns){
+      var bTxt = race.isNew ? "NEW" : "RETURNS";
+      var bCol = race.isNew ? pal.primary : pal.secondary;
+      var bFg = race.isNew ? "#fff" : pal.bg;
+      ctx.font = "700 " + Math.round(smallFont * 0.65) + "px 'Inter', sans-serif";
+      var bw = ctx.measureText(bTxt).width + 8 * s;
+      var bh = smallFont * 0.75;
+      var nameW = ctx.measureText(race.name).width;
+      var bx = lineX + 20 * s + codeW + 10 * s + nameW + 10 * s;
+      ctx.fillStyle = bCol;
+      roundRect(ctx, bx, y - bh / 2 - fontSize * 0.15, bw, bh, 2 * s);
+      ctx.fill();
+      ctx.fillStyle = bFg;
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText(bTxt, bx + bw / 2, y - fontSize * 0.15);
+    }
+  });
+
+  drawSprintLegend(ctx, W / 2 - 80 * s, startY + totalRaces * rowH + 25 * s, pal, s, smallFont);
+  drawBottomBranding(ctx, W, H, barH, pal, s);
+}
+
+/* ========= DESIGN: MAGAZINE ========= */
+
+function renderMagazine(W, H, s, pal){
+  ctx.fillStyle = pal.bg;
+  ctx.fillRect(0, 0, W, H);
+
+  /* Subtle texture lines */
+  ctx.save();
+  ctx.globalAlpha = 0.03;
+  for(var i = 0; i < H; i += 4 * s){
+    ctx.strokeStyle = pal.text;
+    ctx.lineWidth = 0.5 * s;
+    ctx.beginPath();
+    ctx.moveTo(0, i);
+    ctx.lineTo(W, i);
+    ctx.stroke();
+  }
+  ctx.restore();
+
+  var barH = 6 * s;
+  ctx.fillStyle = pal.primary;
+  ctx.fillRect(0, 0, W, barH);
+
+  /* Hero text */
+  var heroY = barH + 80 * s;
+  ctx.font = "700 " + Math.round(18 * s) + "px 'Inter', sans-serif";
+  ctx.fillStyle = pal.primary;
+  ctx.textAlign = "center";
+  ctx.textBaseline = "alphabetic";
+  ctx.letterSpacing = 12 * s + "px";
+  ctx.fillText("FORMULA 1", W / 2, heroY);
+  ctx.letterSpacing = "0px";
+
+  ctx.font = "700 " + Math.round(72 * s) + "px 'EB Garamond', serif";
+  ctx.fillStyle = pal.text;
+  ctx.fillText("2027", W / 2, heroY + 80 * s);
+
+  ctx.font = "400 " + Math.round(14 * s) + "px 'Inter', sans-serif";
+  ctx.fillStyle = pal.textDim;
+  ctx.fillText("WORLD CHAMPIONSHIP CALENDAR", W / 2, heroY + 105 * s);
+
+  /* Decorative line */
+  var decoY = heroY + 125 * s;
+  ctx.strokeStyle = pal.primary;
+  ctx.lineWidth = 1.5 * s;
+  ctx.beginPath();
+  ctx.moveTo(W * 0.15, decoY);
+  ctx.lineTo(W * 0.85, decoY);
+  ctx.stroke();
+
+  /* TWC badge small */
+  drawTWCBadge(ctx, W / 2, decoY + 35 * s, 30 * s, pal, s * 0.7);
+
+  /* Two columns */
+  var colStart = decoY + 70 * s;
+  var rList = RACES;
+  var midIdx = Math.ceil(rList.length / 2);
+  var col1 = rList.slice(0, midIdx);
+  var col2 = rList.slice(midIdx);
+
+  var leftCol = W * 0.1;
+  var rightCol = W * 0.55;
+  var colWidth = W * 0.35;
+  var availH = H - colStart - 120 * s;
+  var rowH = availH / Math.max(col1.length, col2.length);
+  rowH = Math.min(rowH, 70 * s);
+
+  var fontSize = Math.min(Math.round(20 * s), Math.round(rowH * 0.5));
+  var smallFont = Math.round(fontSize * 0.72);
+
+  function drawMagColumn(list, startX, colW){
+    list.forEach(function(race, i){
+      var y = colStart + i * rowH + rowH / 2;
+
+      if(race.rnd === -1){
+        ctx.font = "italic 400 " + smallFont + "px 'EB Garamond', serif";
+        ctx.fillStyle = pal.secondary;
+        ctx.textAlign = "left";
+        ctx.textBaseline = "middle";
+        ctx.fillText("Summer Break", startX, y);
+        return;
+      }
+
+      /* Round dot */
+      ctx.beginPath();
+      ctx.arc(startX, y, 3 * s, 0, Math.PI * 2);
+      ctx.fillStyle = race.sprint ? pal.secondary : pal.primary;
+      ctx.fill();
+
+      /* Name */
+      ctx.font = "600 " + fontSize + "px 'EB Garamond', serif";
+      ctx.fillStyle = pal.text;
+      ctx.textAlign = "left";
+      ctx.textBaseline = "middle";
+      ctx.fillText(race.name, startX + 14 * s, y);
+
+      /* Date */
+      ctx.font = "400 " + smallFont + "px 'Inter', sans-serif";
+      ctx.fillStyle = pal.primary;
+      ctx.textAlign = "right";
+      ctx.fillText(race.date, startX + colW, y);
+
+      /* Badges */
+      if(race.isNew || race.returns){
+        var bTxt = race.isNew ? "NEW" : "RETURNS";
+        var bCol = race.isNew ? pal.primary : pal.secondary;
+        var bFg = race.isNew ? "#fff" : pal.bg;
+        ctx.font = "700 " + Math.round(smallFont * 0.6) + "px 'Inter', sans-serif";
+        var bw = ctx.measureText(bTxt).width + 6 * s;
+        var bh = smallFont * 0.7;
+        var nameW2 = ctx.measureText(race.name).width;
+        var bx = startX + 14 * s + nameW2 + 8 * s;
+        ctx.fillStyle = bCol;
+        roundRect(ctx, bx, y - bh / 2, bw, bh, 2 * s);
+        ctx.fill();
+        ctx.fillStyle = bFg;
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(bTxt, bx + bw / 2, y);
+      }
+
+      if(race.sprint){
+        ctx.font = "italic 400 " + Math.round(smallFont * 0.7) + "px 'EB Garamond', serif";
+        ctx.fillStyle = pal.secondary;
+        ctx.textAlign = "left";
+        ctx.textBaseline = "top";
+        ctx.fillText("Sprint", startX + 14 * s, y + fontSize * 0.4);
+      }
+    });
+  }
+
+  drawMagColumn(col1, leftCol, colWidth);
+  drawMagColumn(col2, rightCol, colWidth);
+
+  /* Column divider */
+  ctx.strokeStyle = pal.textFaint;
+  ctx.lineWidth = 0.5 * s;
+  ctx.beginPath();
+  ctx.moveTo(W * 0.5, colStart);
+  ctx.lineTo(W * 0.5, colStart + Math.max(col1.length, col2.length) * rowH);
+  ctx.stroke();
+
+  drawBottomBranding(ctx, W, H, barH, pal, s);
+}
+
+/* ========= MAIN RENDER ========= */
+
+function render(){
+  var dev = DEVICES[currentCat][currentIdx];
+  var W = dev.w;
+  var H = dev.h;
+  cv.width = W;
+  cv.height = H;
+
+  var s = Math.min(W, H) / 1300;
+  var pal = COLOURS[currentColour];
+
+  if(currentDesign === "classic") renderClassic(W, H, s, pal);
+  else if(currentDesign === "minimal") renderMinimal(W, H, s, pal);
+  else if(currentDesign === "boldgrid") renderBoldGrid(W, H, s, pal);
+  else if(currentDesign === "timeline") renderTimeline(W, H, s, pal);
+  else if(currentDesign === "magazine") renderMagazine(W, H, s, pal);
+}
+
+/* Font loading then initial render */
 if(document.fonts && document.fonts.ready){
-  document.fonts.ready.then(() => {
+  document.fonts.ready.then(function(){
     populateSelect();
     render();
   });
 } else {
-  setTimeout(() => { populateSelect(); render(); }, 500);
+  setTimeout(function(){ populateSelect(); render(); }, 500);
 }
 
 })();

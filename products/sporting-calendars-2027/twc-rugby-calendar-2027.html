@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2027 Rugby Calendar | The Wall Chart Co</title>
+<meta name="description" content="Premium 2027 Rugby Calendar poster — Six Nations, Rugby World Cup Australia, Champions Cup &amp; Premiership. A3 landscape digital download from The Wall Chart Co.">
+<meta property="og:title" content="2027 Rugby Calendar | The Wall Chart Co">
+<meta property="og:description" content="The complete 2027 rugby season on one stunning A3 poster. Six Nations, Rugby World Cup Australia, Champions Cup &amp; Premiership.">
+<meta property="og:type" content="product">
+<meta property="og:image" content="https://thewallchartcompany.com/images/twc-rugby-calendar-2027-og.jpg">
+<meta property="og:url" content="https://thewallchartcompany.com/products/sporting-calendars-2027/twc-rugby-calendar-2027.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0B1E3D;
+    --red: #C8502A;
+    --gold: #C8A94A;
+    --cream: #F5F3EB;
+    --white: #fff;
+    --rugby-green: #004D40;
+    --teal: #00796B;
+    --poster-width: 1190px;
+    --poster-ratio: 1.4142;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #1a1a1a;
+    color: var(--navy);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Screen toolbar ── */
+  .screen-toolbar {
+    position: sticky; top: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 24px;
+    background: var(--navy);
+    border-bottom: 3px solid var(--gold);
+  }
+  .toolbar-left { display: flex; align-items: center; gap: 14px; }
+  .twc-badge-small {
+    width: 38px; height: 38px;
+    background: var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'EB Garamond', serif;
+    font-weight: 700; font-size: 11px;
+    color: var(--navy); letter-spacing: 0.5px;
+  }
+  .toolbar-title {
+    font-family: 'EB Garamond', serif;
+    font-size: 18px; color: var(--white);
+    font-weight: 600;
+  }
+  .btn-print {
+    padding: 8px 22px;
+    background: var(--gold);
+    color: var(--navy);
+    border: none; cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600; font-size: 13px;
+    letter-spacing: 0.5px;
+    transition: opacity .2s;
+  }
+  .btn-print:hover { opacity: .85; }
+
+  /* ── Poster wrapper ── */
+  .poster-wrapper {
+    display: flex; justify-content: center;
+    padding: 30px 10px 60px;
+  }
+  .poster {
+    width: var(--poster-width);
+    background: var(--white);
+    box-shadow: 0 8px 40px rgba(0,0,0,.45);
+    transform-origin: top center;
+  }
+
+  /* ── Header stripe ── */
+  .header-stripe {
+    height: 8px;
+    background: linear-gradient(90deg, var(--red) 33%, #fff 33%, #fff 66%, var(--navy) 66%);
+  }
+  .poster-header {
+    padding: 22px 32px 16px;
+    text-align: center;
+    border-bottom: 2px solid var(--cream);
+  }
+  .poster-header h1 {
+    font-family: 'EB Garamond', serif;
+    font-size: 34px; font-weight: 700;
+    color: var(--navy);
+    letter-spacing: 3px;
+    margin-bottom: 4px;
+  }
+  .poster-header h1 .accent { color: var(--rugby-green); }
+  .poster-header .subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px; font-weight: 500;
+    color: var(--red);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  /* ── Month grid ── */
+  .month-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+    padding: 12px 16px;
+  }
+  .month-card {
+    background: var(--cream);
+    border-radius: 4px;
+    overflow: hidden;
+    min-height: 110px;
+  }
+  .month-name {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'EB Garamond', serif;
+    font-size: 13px; font-weight: 600;
+    padding: 4px 8px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  .month-events {
+    padding: 5px 5px 6px;
+    display: flex; flex-direction: column; gap: 3px;
+  }
+
+  /* ── Event pills ── */
+  .pill {
+    display: block;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 9px;
+    font-weight: 500;
+    color: var(--white);
+    line-height: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .pill-sixnations { background: var(--rugby-green); }
+  .pill-rwc {
+    background: linear-gradient(135deg, var(--gold), #b8952e);
+    color: var(--navy);
+    font-weight: 700;
+    border: 1px solid rgba(200,169,74,.5);
+  }
+  .pill-champions { background: var(--red); }
+  .pill-premiership { background: var(--navy); }
+  .pill-tours { background: var(--teal); }
+  .pill-empty {
+    background: transparent;
+    color: #999;
+    font-style: italic;
+  }
+
+  /* ── RWC pools section ── */
+  .rwc-section {
+    margin: 10px 16px 8px;
+    border: 2px solid var(--gold);
+    border-radius: 6px;
+    background: linear-gradient(180deg, #fdfbf3, var(--white));
+    overflow: hidden;
+  }
+  .rwc-header {
+    background: var(--navy);
+    padding: 10px 20px;
+    text-align: center;
+  }
+  .rwc-header h2 {
+    font-family: 'EB Garamond', serif;
+    font-size: 22px; font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 2px;
+  }
+  .rwc-header .rwc-sub {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px; color: rgba(255,255,255,.8);
+    letter-spacing: 2px; text-transform: uppercase;
+    margin-top: 2px;
+  }
+  .rwc-body {
+    display: flex;
+    padding: 12px 14px;
+    gap: 10px;
+  }
+  .rwc-pools {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+  }
+  .pool-card {
+    background: var(--cream);
+    border: 1px solid var(--gold);
+    border-radius: 4px;
+    padding: 6px 8px;
+    text-align: center;
+  }
+  .pool-label {
+    font-family: 'EB Garamond', serif;
+    font-size: 14px; font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 4px;
+    letter-spacing: 1px;
+  }
+  .pool-team {
+    font-size: 9.5px;
+    font-weight: 500;
+    color: var(--navy);
+    line-height: 1.6;
+  }
+  .rwc-dates {
+    width: 200px;
+    flex-shrink: 0;
+  }
+  .rwc-dates h3 {
+    font-family: 'EB Garamond', serif;
+    font-size: 14px; font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 6px;
+    text-align: center;
+    letter-spacing: 1px;
+  }
+  .rwc-date-item {
+    display: flex; justify-content: space-between;
+    padding: 3px 0;
+    border-bottom: 1px solid rgba(11,30,61,.1);
+    font-size: 9.5px;
+    font-weight: 500;
+    color: var(--navy);
+  }
+  .rwc-date-item:last-child { border-bottom: none; }
+  .rwc-date-label { font-weight: 400; }
+  .rwc-date-value { font-weight: 600; }
+
+  /* ── Legend + footer ── */
+  .legend-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 8px 16px;
+    border-top: 1px solid var(--cream);
+    flex-wrap: wrap;
+  }
+  .legend-item {
+    display: flex; align-items: center; gap: 5px;
+    font-size: 9px; font-weight: 500; color: var(--navy);
+  }
+  .legend-swatch {
+    width: 14px; height: 10px;
+    border-radius: 2px;
+  }
+  .sw-sixnations { background: var(--rugby-green); }
+  .sw-rwc { background: var(--gold); }
+  .sw-champions { background: var(--red); }
+  .sw-premiership { background: var(--navy); }
+  .sw-tours { background: var(--teal); }
+
+  .poster-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 32px;
+    border-top: 2px solid var(--cream);
+  }
+  .footer-left {
+    display: flex; align-items: center; gap: 10px;
+  }
+  .twc-badge {
+    width: 32px; height: 32px;
+    background: var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'EB Garamond', serif;
+    font-weight: 700; font-size: 9px;
+    color: var(--navy); letter-spacing: 0.5px;
+  }
+  .footer-brand {
+    font-family: 'EB Garamond', serif;
+    font-size: 13px; font-weight: 600;
+    color: var(--navy);
+  }
+  .footer-brand span {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 8px; font-weight: 400;
+    color: #888; letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .footer-right {
+    font-family: 'Inter', sans-serif;
+    font-size: 8px; color: #aaa;
+    text-align: right;
+    letter-spacing: 0.5px;
+  }
+  .header-stripe-bottom {
+    height: 5px;
+    background: linear-gradient(90deg, var(--red) 33%, #fff 33%, #fff 66%, var(--navy) 66%);
+  }
+
+  /* ── Print styles ── */
+  @media print {
+    @page {
+      size: 420mm 297mm landscape;
+      margin: 0;
+    }
+    body { background: #fff; }
+    .screen-toolbar { display: none !important; }
+    .poster-wrapper { padding: 0; }
+    .poster {
+      width: 420mm;
+      box-shadow: none;
+      transform: none !important;
+    }
+  }
+
+  @media screen and (max-width: 1220px) {
+    .poster-wrapper { padding: 20px 5px 40px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Screen toolbar -->
+<div class="screen-toolbar">
+  <div class="toolbar-left">
+    <div class="twc-badge-small">TWC</div>
+    <span class="toolbar-title">2027 Rugby Calendar</span>
+  </div>
+  <button class="btn-print" onclick="window.print()">PRINT POSTER</button>
+</div>
+
+<!-- Poster -->
+<div class="poster-wrapper">
+  <div class="poster" id="poster">
+
+    <!-- Header stripe -->
+    <div class="header-stripe"></div>
+
+    <!-- Title -->
+    <div class="poster-header">
+      <h1>2027 <span class="accent">RUGBY</span> CALENDAR</h1>
+      <div class="subtitle">Six Nations &middot; Rugby World Cup Australia &middot; Champions Cup &middot; Premiership</div>
+    </div>
+
+    <!-- 12-month grid: 2 rows x 6 cols -->
+    <div class="month-grid">
+
+      <!-- JANUARY -->
+      <div class="month-card">
+        <div class="month-name">January</div>
+        <div class="month-events">
+          <span class="pill pill-champions">Champions Cup Pool Stage</span>
+          <span class="pill pill-premiership">Premiership Rounds</span>
+        </div>
+      </div>
+
+      <!-- FEBRUARY -->
+      <div class="month-card">
+        <div class="month-name">February</div>
+        <div class="month-events">
+          <span class="pill pill-sixnations">6N R1 &mdash; 5-6 Feb</span>
+          <span class="pill pill-sixnations">6N R2 &mdash; 13-14 Feb</span>
+          <span class="pill pill-sixnations">6N R3 &mdash; 20-21 Feb</span>
+          <span class="pill pill-premiership">Premiership Rounds</span>
+        </div>
+      </div>
+
+      <!-- MARCH -->
+      <div class="month-card">
+        <div class="month-name">March</div>
+        <div class="month-events">
+          <span class="pill pill-sixnations">6N R4 &mdash; 5-6 Mar</span>
+          <span class="pill pill-sixnations">6N R5 Super Saturday 13 Mar</span>
+          <span class="pill pill-premiership">Premiership Rounds</span>
+        </div>
+      </div>
+
+      <!-- APRIL -->
+      <div class="month-card">
+        <div class="month-name">April</div>
+        <div class="month-events">
+          <span class="pill pill-champions">Champ Cup R16 2-4 Apr</span>
+          <span class="pill pill-champions">Champ Cup QFs 9-11 Apr</span>
+          <span class="pill pill-premiership">Premiership Rounds</span>
+        </div>
+      </div>
+
+      <!-- MAY -->
+      <div class="month-card">
+        <div class="month-name">May</div>
+        <div class="month-events">
+          <span class="pill pill-champions">Champ Cup SFs 30 Apr-2 May</span>
+          <span class="pill pill-champions">Champ Cup Final 22 May Lyon</span>
+          <span class="pill pill-premiership">Premiership Rounds</span>
+        </div>
+      </div>
+
+      <!-- JUNE -->
+      <div class="month-card">
+        <div class="month-name">June</div>
+        <div class="month-events">
+          <span class="pill pill-premiership">Premiership Final Twickenham</span>
+          <span class="pill pill-tours">Summer Tours (TBC)</span>
+        </div>
+      </div>
+
+      <!-- JULY -->
+      <div class="month-card">
+        <div class="month-name">July</div>
+        <div class="month-events">
+          <span class="pill pill-tours">Tours likely shortened / RWC prep</span>
+        </div>
+      </div>
+
+      <!-- AUGUST -->
+      <div class="month-card">
+        <div class="month-name">August</div>
+        <div class="month-events">
+          <span class="pill pill-rwc">RWC warm-up internationals</span>
+          <span class="pill pill-premiership">Pre-season friendlies</span>
+        </div>
+      </div>
+
+      <!-- SEPTEMBER -->
+      <div class="month-card">
+        <div class="month-name">September</div>
+        <div class="month-events">
+          <span class="pill pill-rwc">RWC squads announced</span>
+          <span class="pill pill-premiership">Premiership 27/28 kicks off</span>
+        </div>
+      </div>
+
+      <!-- OCTOBER -->
+      <div class="month-card">
+        <div class="month-name">October</div>
+        <div class="month-events">
+          <span class="pill pill-rwc">&#127942; RWC Opens 1 Oct</span>
+          <span class="pill pill-rwc">RWC Pool Stage 1-31 Oct</span>
+          <span class="pill pill-champions">Champions Cup Pool begins</span>
+        </div>
+      </div>
+
+      <!-- NOVEMBER -->
+      <div class="month-card">
+        <div class="month-name">November</div>
+        <div class="month-events">
+          <span class="pill pill-rwc">RWC QFs early Nov</span>
+          <span class="pill pill-rwc">RWC SFs mid Nov</span>
+          <span class="pill pill-rwc">&#127942; RWC FINAL 13 Nov Sydney</span>
+        </div>
+      </div>
+
+      <!-- DECEMBER -->
+      <div class="month-card">
+        <div class="month-name">December</div>
+        <div class="month-events">
+          <span class="pill pill-champions">Champions Cup Pool Rounds</span>
+          <span class="pill pill-premiership">Premiership Rounds</span>
+        </div>
+      </div>
+
+    </div><!-- /month-grid -->
+
+    <!-- ── RWC 2027 Section ── -->
+    <div class="rwc-section">
+      <div class="rwc-header">
+        <h2>&#127944; RUGBY WORLD CUP 2027 &#8212; AUSTRALIA</h2>
+        <div class="rwc-sub">1 October &ndash; 13 November 2027 &middot; 6 Pools &middot; 48 Matches</div>
+      </div>
+      <div class="rwc-body">
+        <div class="rwc-pools">
+
+          <!-- Pool A -->
+          <div class="pool-card">
+            <div class="pool-label">Pool A</div>
+            <div class="pool-team">&#127475;&#127487; New Zealand</div>
+            <div class="pool-team">&#127462;&#127482; Australia</div>
+            <div class="pool-team">&#127464;&#127473; Chile</div>
+            <div class="pool-team">&#127469;&#127472; HK China</div>
+          </div>
+
+          <!-- Pool B -->
+          <div class="pool-card">
+            <div class="pool-label">Pool B</div>
+            <div class="pool-team">&#127487;&#127462; South Africa</div>
+            <div class="pool-team">&#127470;&#127481; Italy</div>
+            <div class="pool-team">&#127468;&#127466; Georgia</div>
+            <div class="pool-team">&#127479;&#127476; Romania</div>
+          </div>
+
+          <!-- Pool C -->
+          <div class="pool-card">
+            <div class="pool-label">Pool C</div>
+            <div class="pool-team">&#127462;&#127479; Argentina</div>
+            <div class="pool-team">&#127467;&#127471; Fiji</div>
+            <div class="pool-team">&#127466;&#127480; Spain</div>
+            <div class="pool-team">&#127464;&#127462; Canada</div>
+          </div>
+
+          <!-- Pool D -->
+          <div class="pool-card">
+            <div class="pool-label">Pool D</div>
+            <div class="pool-team">&#127470;&#127466; Ireland</div>
+            <div class="pool-team">&#127468;&#127463; Scotland</div>
+            <div class="pool-team">&#127477;&#127481; Portugal</div>
+            <div class="pool-team">&#127482;&#127486; Uruguay</div>
+          </div>
+
+          <!-- Pool E -->
+          <div class="pool-card">
+            <div class="pool-label">Pool E</div>
+            <div class="pool-team">&#127467;&#127479; France</div>
+            <div class="pool-team">&#127484;&#127480; Samoa</div>
+            <div class="pool-team">&#127471;&#127477; Japan</div>
+            <div class="pool-team">&#127481;&#127476; Tonga</div>
+          </div>
+
+          <!-- Pool F -->
+          <div class="pool-card">
+            <div class="pool-label">Pool F</div>
+            <div class="pool-team">&#127468;&#127463; England</div>
+            <div class="pool-team">&#127468;&#127463; Wales</div>
+            <div class="pool-team">&#127482;&#127480; USA</div>
+            <div class="pool-team">&#127467;&#127471; Fiji</div>
+          </div>
+
+        </div><!-- /rwc-pools -->
+
+        <div class="rwc-dates">
+          <h3>Key Dates</h3>
+          <div class="rwc-date-item">
+            <span class="rwc-date-label">Opening Match</span>
+            <span class="rwc-date-value">1 Oct</span>
+          </div>
+          <div class="rwc-date-item">
+            <span class="rwc-date-label">Pool Stage ends</span>
+            <span class="rwc-date-value">31 Oct</span>
+          </div>
+          <div class="rwc-date-item">
+            <span class="rwc-date-label">Quarter-Finals</span>
+            <span class="rwc-date-value">5-7 Nov</span>
+          </div>
+          <div class="rwc-date-item">
+            <span class="rwc-date-label">Semi-Finals</span>
+            <span class="rwc-date-value">8-9 Nov</span>
+          </div>
+          <div class="rwc-date-item">
+            <span class="rwc-date-label">Bronze Final</span>
+            <span class="rwc-date-value">12 Nov</span>
+          </div>
+          <div class="rwc-date-item">
+            <span class="rwc-date-label">&#127942; FINAL &mdash; Sydney</span>
+            <span class="rwc-date-value">13 Nov</span>
+          </div>
+        </div>
+      </div>
+    </div><!-- /rwc-section -->
+
+    <!-- Legend -->
+    <div class="legend-bar">
+      <div class="legend-item"><span class="legend-swatch sw-sixnations"></span>Six Nations</div>
+      <div class="legend-item"><span class="legend-swatch sw-rwc"></span>Rugby World Cup</div>
+      <div class="legend-item"><span class="legend-swatch sw-champions"></span>Champions Cup</div>
+      <div class="legend-item"><span class="legend-swatch sw-premiership"></span>Premiership</div>
+      <div class="legend-item"><span class="legend-swatch sw-tours"></span>Summer Tours</div>
+    </div>
+
+    <!-- Footer -->
+    <div class="poster-footer">
+      <div class="footer-left">
+        <div class="twc-badge">TWC</div>
+        <div class="footer-brand">
+          The Wall Chart Co
+          <span>Premium Digital Downloads</span>
+        </div>
+      </div>
+      <div class="footer-right">
+        &copy; 2027 The Wall Chart Co. Unofficial fan product. Not affiliated with World Rugby or any union.<br>
+        Dates subject to change by World Rugby / tournament organisers. For personal use only.
+      </div>
+    </div>
+
+    <div class="header-stripe-bottom"></div>
+
+  </div><!-- /poster -->
+</div><!-- /poster-wrapper -->
+
+<script>
+(function(){
+  /* Responsive scaler: fit poster to viewport width */
+  var poster = document.getElementById('poster');
+  function scalePoster(){
+    if(window.matchMedia && window.matchMedia('print').matches) return;
+    var vw = window.innerWidth;
+    var pw = 1190;
+    if(vw < pw + 40){
+      var s = (vw - 20) / pw;
+      poster.style.transform = 'scale(' + s + ')';
+      poster.style.marginBottom = (-(1 - s) * poster.offsetHeight) + 'px';
+    } else {
+      poster.style.transform = 'none';
+      poster.style.marginBottom = '0';
+    }
+  }
+  window.addEventListener('resize', scalePoster);
+  window.addEventListener('load', scalePoster);
+  scalePoster();
+}());
+<\/script>
+
+</body>
+</html>

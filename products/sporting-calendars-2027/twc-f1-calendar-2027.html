@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2027 Formula 1 Calendar | The Wall Chart Co</title>
+<meta name="description" content="Premium 2027 Formula 1 Calendar poster. All 24 Grands Prix, 6 Sprint Weekends, race dates, circuits and 12-month mini calendar. A3 landscape digital download.">
+<meta property="og:title" content="2027 Formula 1 Calendar | The Wall Chart Co">
+<meta property="og:description" content="Premium A3 landscape poster featuring the complete 2027 F1 season. 24 races, 6 sprints, new era regulations. Digital download.">
+<meta property="og:type" content="product">
+<meta property="og:image" content="https://thewallchartcompany.com/products/sporting-calendars-2027/twc-f1-calendar-2027-og.jpg">
+<meta property="og:url" content="https://thewallchartcompany.com/products/sporting-calendars-2027/twc-f1-calendar-2027.html">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0B1E3D;
+    --red: #C8502A;
+    --gold: #C8A94A;
+    --cream: #F5F3EB;
+    --white: #fff;
+    --f1-red: #E10600;
+    --card-bg: rgba(255,255,255,0.06);
+    --card-border: rgba(255,255,255,0.1);
+    --sprint-glow: rgba(200,169,74,0.25);
+  }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #111; font-family: 'Inter', sans-serif; color: var(--white); }
+
+  /* --- Screen toolbar --- */
+  .screen-toolbar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 24px; background: #0a0a0a; border-bottom: 1px solid #222;
+  }
+  .twc-monogram {
+    width: 38px; height: 38px; background: var(--gold); display: flex;
+    align-items: center; justify-content: center; border-radius: 4px;
+    font-family: 'EB Garamond', serif; font-weight: 800; font-size: 13px;
+    color: var(--navy); letter-spacing: 1px;
+  }
+  .toolbar-title { font-size: 13px; color: #888; letter-spacing: 2px; text-transform: uppercase; }
+  .btn-print {
+    background: var(--f1-red); color: #fff; border: none; padding: 8px 20px;
+    font-family: 'Inter', sans-serif; font-weight: 600; font-size: 13px;
+    border-radius: 4px; cursor: pointer; letter-spacing: 1px; text-transform: uppercase;
+    transition: background .2s;
+  }
+  .btn-print:hover { background: #c00500; }
+
+  /* --- Poster wrapper --- */
+  .poster-wrapper {
+    display: flex; justify-content: center; padding: 30px 10px 60px;
+    background: #111;
+  }
+  .poster {
+    width: 1190px; min-height: 842px; background: var(--navy);
+    border-radius: 6px; overflow: hidden; position: relative;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+  }
+
+  /* --- Header stripe --- */
+  .header-stripe {
+    height: 6px;
+    background: linear-gradient(90deg, var(--red) 33%, #fff 33%, #fff 66%, var(--navy) 66%);
+  }
+  .header {
+    padding: 22px 36px 18px; text-align: center;
+    background: linear-gradient(180deg, rgba(225,6,0,0.08) 0%, transparent 100%);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .header h1 {
+    font-family: 'EB Garamond', serif; font-weight: 800; font-size: 34px;
+    letter-spacing: 6px; text-transform: uppercase; color: var(--white);
+    margin-bottom: 6px;
+  }
+  .header h1 span { color: var(--f1-red); }
+  .header .subtitle {
+    font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500;
+    letter-spacing: 4px; text-transform: uppercase; color: var(--gold);
+  }
+
+  /* --- Main content --- */
+  .main-content {
+    display: flex; padding: 20px 28px 16px; gap: 24px;
+  }
+
+  /* --- LEFT: Race grid --- */
+  .race-grid-area { flex: 0 0 70%; }
+  .race-grid-area h2 {
+    font-family: 'EB Garamond', serif; font-size: 15px; font-weight: 600;
+    letter-spacing: 3px; text-transform: uppercase; color: var(--gold);
+    margin-bottom: 12px; padding-left: 4px;
+  }
+  .race-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+  .race-card {
+    background: var(--card-bg); border: 1px solid var(--card-border);
+    border-radius: 8px; padding: 9px 10px 8px; position: relative;
+    transition: transform .15s; overflow: hidden;
+  }
+  .race-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: var(--f1-red);
+  }
+  .race-card.sprint { border-color: rgba(200,169,74,0.35); box-shadow: 0 0 12px var(--sprint-glow); }
+  .race-card.sprint::before { background: var(--gold); }
+  .race-card.new-race { border-color: rgba(225,6,0,0.3); }
+  .race-card .round-num {
+    position: absolute; top: 8px; right: 8px; width: 22px; height: 22px;
+    background: var(--gold); color: var(--navy); border-radius: 50%;
+    font-size: 10px; font-weight: 700; display: flex; align-items: center;
+    justify-content: center; line-height: 1;
+  }
+  .race-card .flag { font-size: 18px; line-height: 1; margin-bottom: 3px; }
+  .race-card .gp-name {
+    font-family: 'Inter', sans-serif; font-size: 10.5px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.5px; color: var(--white);
+    line-height: 1.2; margin-bottom: 2px; padding-right: 26px;
+  }
+  .race-card .circuit {
+    font-size: 9px; color: rgba(255,255,255,0.5); margin-bottom: 4px;
+    font-weight: 400;
+  }
+  .race-card .date-row {
+    display: flex; align-items: center; gap: 5px;
+  }
+  .race-card .date {
+    font-size: 10px; font-weight: 600; color: var(--f1-red);
+  }
+  .race-card.sprint .date { color: var(--gold); }
+  .race-card .badge-sprint {
+    font-size: 8px; font-weight: 700; text-transform: uppercase;
+    background: var(--gold); color: var(--navy); padding: 1px 5px;
+    border-radius: 3px; letter-spacing: 0.5px;
+  }
+  .race-card .badge-new {
+    font-size: 8px; font-weight: 700; text-transform: uppercase;
+    background: var(--f1-red); color: #fff; padding: 1px 5px;
+    border-radius: 3px; letter-spacing: 0.5px;
+  }
+  .race-card .badge-finale {
+    font-size: 8px; font-weight: 700; text-transform: uppercase;
+    background: var(--white); color: var(--navy); padding: 1px 5px;
+    border-radius: 3px; letter-spacing: 0.5px;
+  }
+
+  /* Summer break card */
+  .summer-break {
+    background: repeating-linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.03) 4px, transparent 4px, transparent 8px);
+    border: 1px dashed rgba(255,255,255,0.15); border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 2px; padding: 9px 10px;
+  }
+  .summer-break .label {
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 2px; color: rgba(255,255,255,0.35);
+  }
+  .summer-break .dates {
+    font-size: 9px; color: rgba(255,255,255,0.2);
+  }
+
+  /* --- RIGHT: Mini calendars --- */
+  .mini-cal-area { flex: 0 0 calc(30% - 24px); }
+  .mini-cal-area h2 {
+    font-family: 'EB Garamond', serif; font-size: 15px; font-weight: 600;
+    letter-spacing: 3px; text-transform: uppercase; color: var(--gold);
+    margin-bottom: 10px;
+  }
+  .mini-cals {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;
+  }
+  .mini-month {
+    background: var(--card-bg); border: 1px solid var(--card-border);
+    border-radius: 6px; padding: 6px 7px 5px;
+  }
+  .mini-month .month-name {
+    font-size: 9.5px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1.5px; color: var(--f1-red); margin-bottom: 4px;
+    text-align: center;
+  }
+  .mini-month .day-headers,
+  .mini-month .day-grid {
+    display: grid; grid-template-columns: repeat(7, 1fr); text-align: center;
+  }
+  .mini-month .day-headers span {
+    font-size: 7px; font-weight: 600; color: rgba(255,255,255,0.3);
+    padding-bottom: 2px;
+  }
+  .mini-month .day-grid span {
+    font-size: 7.5px; color: rgba(255,255,255,0.5); padding: 1.2px 0;
+    border-radius: 3px; line-height: 1.5;
+  }
+  .mini-month .day-grid span.race { background: var(--f1-red); color: #fff; font-weight: 700; }
+  .mini-month .day-grid span.sprint { background: var(--gold); color: var(--navy); font-weight: 700; }
+  .mini-month .day-grid span.break { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.3); }
+  .mini-month .day-grid span.test { background: rgba(225,6,0,0.2); color: var(--f1-red); font-weight: 600; }
+
+  /* --- Legend --- */
+  .legend {
+    display: flex; gap: 14px; margin-top: 10px; padding: 6px 8px;
+    background: var(--card-bg); border-radius: 6px; justify-content: center;
+    flex-wrap: wrap;
+  }
+  .legend-item {
+    display: flex; align-items: center; gap: 4px; font-size: 8px;
+    color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .legend-dot {
+    width: 8px; height: 8px; border-radius: 50%; display: inline-block;
+  }
+  .legend-dot.red { background: var(--f1-red); }
+  .legend-dot.gold { background: var(--gold); }
+  .legend-dot.grey { background: rgba(255,255,255,0.15); }
+  .legend-dot.test-dot { background: rgba(225,6,0,0.3); border: 1px solid var(--f1-red); }
+
+  /* --- Stats strip --- */
+  .stats-strip {
+    display: flex; justify-content: center; gap: 40px; padding: 14px 36px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    background: linear-gradient(180deg, transparent 0%, rgba(225,6,0,0.04) 100%);
+  }
+  .stat-item { text-align: center; }
+  .stat-item .num {
+    font-family: 'EB Garamond', serif; font-size: 26px; font-weight: 800;
+    color: var(--f1-red); line-height: 1;
+  }
+  .stat-item .label {
+    font-size: 8px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 2px; color: rgba(255,255,255,0.4); margin-top: 2px;
+  }
+
+  /* --- Footer --- */
+  .poster-footer {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 36px 14px; border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .footer-left {
+    display: flex; align-items: center; gap: 10px;
+  }
+  .footer-monogram {
+    width: 28px; height: 28px; background: var(--gold); display: flex;
+    align-items: center; justify-content: center; border-radius: 3px;
+    font-family: 'EB Garamond', serif; font-weight: 800; font-size: 10px;
+    color: var(--navy); letter-spacing: 0.5px;
+  }
+  .footer-brand {
+    font-family: 'EB Garamond', serif; font-size: 12px; font-weight: 600;
+    color: rgba(255,255,255,0.4); letter-spacing: 2px; text-transform: uppercase;
+  }
+  .footer-right {
+    font-size: 8px; color: rgba(255,255,255,0.2); letter-spacing: 1px;
+  }
+
+  /* --- Pre-season testing note --- */
+  .testing-note {
+    text-align: center; padding: 0 36px 6px;
+    font-size: 9px; color: rgba(255,255,255,0.3); letter-spacing: 1px;
+  }
+
+  /* --- Print styles --- */
+  @media print {
+    @page { size: 420mm 297mm landscape; margin: 0; }
+    body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .screen-toolbar { display: none !important; }
+    .poster-wrapper { padding: 0; background: none; }
+    .poster { box-shadow: none; border-radius: 0; width: 420mm; min-height: 297mm; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Screen toolbar -->
+<div class="screen-toolbar">
+  <div style="display:flex;align-items:center;gap:14px;">
+    <div class="twc-monogram">TWC</div>
+    <span class="toolbar-title">The Wall Chart Co</span>
+  </div>
+  <button class="btn-print" onclick="window.print()">Print / Save PDF</button>
+</div>
+
+<!-- Poster -->
+<div class="poster-wrapper">
+  <div class="poster" id="poster">
+
+    <!-- Header stripe -->
+    <div class="header-stripe"></div>
+
+    <!-- Header -->
+    <div class="header">
+      <h1>2027 <span>Formula 1</span> Calendar</h1>
+      <div class="subtitle">24 Grands Prix &middot; 6 Sprint Weekends &middot; New Era Regulations</div>
+    </div>
+
+    <!-- Main content -->
+    <div class="main-content">
+
+      <!-- LEFT: Race grid -->
+      <div class="race-grid-area">
+        <h2>Race Schedule</h2>
+        <div class="race-grid" id="raceGrid"></div>
+        <div class="testing-note">Pre-season testing: 23-25 Feb 2027 &middot; Bahrain International Circuit, Sakhir</div>
+      </div>
+
+      <!-- RIGHT: Mini calendars -->
+      <div class="mini-cal-area">
+        <h2>2027 Calendar</h2>
+        <div class="mini-cals" id="miniCals"></div>
+        <div class="legend">
+          <div class="legend-item"><span class="legend-dot red"></span> Race Weekend</div>
+          <div class="legend-item"><span class="legend-dot gold"></span> Sprint Weekend</div>
+          <div class="legend-item"><span class="legend-dot grey"></span> Summer Break</div>
+          <div class="legend-item"><span class="legend-dot test-dot"></span> Pre-season Test</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats strip -->
+    <div class="stats-strip">
+      <div class="stat-item"><div class="num">24</div><div class="label">Races</div></div>
+      <div class="stat-item"><div class="num">6</div><div class="label">Sprints</div></div>
+      <div class="stat-item"><div class="num">~11</div><div class="label">Teams</div></div>
+      <div class="stat-item"><div class="num">22</div><div class="label">Drivers</div></div>
+      <div class="stat-item"><div class="num">22</div><div class="label">Circuits</div></div>
+      <div class="stat-item"><div class="num">5</div><div class="label">Continents</div></div>
+    </div>
+
+    <!-- Footer -->
+    <div class="poster-footer">
+      <div class="footer-left">
+        <div class="footer-monogram">TWC</div>
+        <span class="footer-brand">The Wall Chart Co</span>
+      </div>
+      <div class="footer-right">&copy; 2027 The Wall Chart Co. Unofficial fan product. Not affiliated with FIA or Formula 1. For personal use only.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  /* ---- Race data ---- */
+  var races = [
+    {r:1,flag:"\uD83C\uDDE7\uD83C\uDDED",gp:"Bahrain GP",circuit:"Sakhir",date:"7 Mar",sprint:false},
+    {r:2,flag:"\uD83C\uDDF8\uD83C\uDDE6",gp:"Saudi Arabian GP",circuit:"Jeddah",date:"14 Mar",sprint:false},
+    {r:3,flag:"\uD83C\uDDE6\uD83C\uDDFA",gp:"Australian GP",circuit:"Melbourne",date:"28 Mar",sprint:false},
+    {r:4,flag:"\uD83C\uDDEF\uD83C\uDDF5",gp:"Japanese GP",circuit:"Suzuka",date:"4 Apr",sprint:false},
+    {r:5,flag:"\uD83C\uDDE8\uD83C\uDDF3",gp:"Chinese GP",circuit:"Shanghai",date:"18 Apr",sprint:false},
+    {r:6,flag:"\uD83C\uDDFA\uD83C\uDDF8",gp:"Miami GP",circuit:"Miami Gardens",date:"3 May",sprint:true},
+    {r:7,flag:"\uD83C\uDDEE\uD83C\uDDF9",gp:"Emilia Romagna GP",circuit:"Imola",date:"17 May",sprint:false},
+    {r:8,flag:"\uD83C\uDDF2\uD83C\uDDE8",gp:"Monaco GP",circuit:"Monte Carlo",date:"1 Jun",sprint:false},
+    {r:9,flag:"\uD83C\uDDE8\uD83C\uDDE6",gp:"Canadian GP",circuit:"Montreal",date:"15 Jun",sprint:false},
+    {r:10,flag:"\uD83C\uDDEA\uD83C\uDDF8",gp:"Spanish GP",circuit:"Madrid",date:"29 Jun",sprint:false},
+    {r:11,flag:"\uD83C\uDDF5\uD83C\uDDF9",gp:"Portuguese GP",circuit:"Portim\u00E3o",date:"6 Jul",sprint:false,isNew:true},
+    {r:12,flag:"\uD83C\uDDEC\uD83C\uDDE7",gp:"British GP",circuit:"Silverstone",date:"13 Jul",sprint:false},
+    {r:13,flag:"\uD83C\uDDE7\uD83C\uDDEA",gp:"Belgian GP",circuit:"Spa-Francorchamps",date:"20 Jul",sprint:false,returns:true},
+    {r:14,flag:"\uD83C\uDDED\uD83C\uDDFA",gp:"Hungarian GP",circuit:"Budapest",date:"27 Jul",sprint:false},
+    "BREAK",
+    {r:15,flag:"\uD83C\uDDEE\uD83C\uDDF9",gp:"Italian GP",circuit:"Monza",date:"29 Aug",sprint:false},
+    {r:16,flag:"\uD83C\uDDE6\uD83C\uDDFF",gp:"Azerbaijan GP",circuit:"Baku",date:"7 Sep",sprint:false},
+    {r:17,flag:"\uD83C\uDDFF\uD83C\uDDE6",gp:"South African GP",circuit:"Kyalami",date:"14 Sep",sprint:false,isNew:true},
+    {r:18,flag:"\uD83C\uDDF8\uD83C\uDDEC",gp:"Singapore GP",circuit:"Marina Bay",date:"26 Sep",sprint:true},
+    {r:19,flag:"\uD83C\uDDFA\uD83C\uDDF8",gp:"United States GP",circuit:"Austin COTA",date:"3 Oct",sprint:true},
+    {r:20,flag:"\uD83C\uDDF2\uD83C\uDDFD",gp:"Mexican GP",circuit:"Mexico City",date:"17 Oct",sprint:false},
+    {r:21,flag:"\uD83C\uDDE7\uD83C\uDDF7",gp:"Brazilian GP",circuit:"Interlagos",date:"31 Oct",sprint:true},
+    {r:22,flag:"\uD83C\uDDFA\uD83C\uDDF8",gp:"Las Vegas GP",circuit:"Las Vegas Strip",date:"8 Nov",sprint:true},
+    {r:23,flag:"\uD83C\uDDF6\uD83C\uDDE6",gp:"Qatar GP",circuit:"Lusail",date:"21 Nov",sprint:true},
+    {r:24,flag:"\uD83C\uDDE6\uD83C\uDDEA",gp:"Abu Dhabi GP",circuit:"Yas Marina",date:"5 Dec",sprint:false,finale:true}
+  ];
+
+  /* ---- Build race grid ---- */
+  var grid = document.getElementById("raceGrid");
+  races.forEach(function(item){
+    if(item === "BREAK"){
+      var brk = document.createElement("div");
+      brk.className = "summer-break";
+      brk.innerHTML = '<div class="label">Summer Break<\/div><div class="dates">2 Aug \u2013 22 Aug<\/div>';
+      grid.appendChild(brk);
+      return;
+    }
+    var card = document.createElement("div");
+    var cls = "race-card";
+    if(item.sprint) cls += " sprint";
+    if(item.isNew) cls += " new-race";
+    card.className = cls;
+
+    var badges = "";
+    if(item.sprint) badges += ' <span class="badge-sprint">Sprint<\/span>';
+    if(item.isNew) badges += ' <span class="badge-new">New<\/span>';
+    if(item.returns) badges += ' <span class="badge-new">Returns<\/span>';
+    if(item.finale) badges += ' <span class="badge-finale">Finale<\/span>';
+
+    card.innerHTML =
+      '<div class="round-num">' + item.r + '<\/div>' +
+      '<div class="flag">' + item.flag + '<\/div>' +
+      '<div class="gp-name">' + item.gp + '<\/div>' +
+      '<div class="circuit">' + item.circuit + '<\/div>' +
+      '<div class="date-row"><span class="date">' + item.date + '<\/span>' + badges + '<\/div>';
+    grid.appendChild(card);
+  });
+
+  /* ---- Mini calendars ---- */
+  /* Race weekends (Fri-Sun around race day): highlight Sat+Sun of race week */
+  /* We store the Sunday date of each race and mark Sat+Sun */
+  var raceWeekends = {
+    2: {7:{t:"race"},8:{t:"race"}},          /* Mar: R1 7 Mar */
+    /* Build month-keyed highlight map */
+  };
+
+  /* More precise approach: store [month, raceDay, type] for each race */
+  var highlights = [
+    /* Pre-season testing */
+    [1,23,"test"],[1,24,"test"],[1,25,"test"],  /* Feb = month index 1 */
+    /* R1 Bahrain 7 Mar */  [2,6,"race"],[2,7,"race"],
+    /* R2 Saudi 14 Mar */   [2,13,"race"],[2,14,"race"],
+    /* R3 Aus 28 Mar */     [2,27,"race"],[2,28,"race"],
+    /* R4 Japan 4 Apr */    [3,3,"race"],[3,4,"race"],
+    /* R5 China 18 Apr */   [3,17,"race"],[3,18,"race"],
+    /* R6 Miami 3 May SP */ [4,2,"sprint"],[4,3,"sprint"],
+    /* R7 Imola 17 May */   [4,16,"race"],[4,17,"race"],
+    /* R8 Monaco 1 Jun */   [5,31,"race"],[4,1,"race"],  /* fix: Jun 1 */
+    /* R9 Canada 15 Jun */  [5,14,"race"],[5,15,"race"],
+    /* R10 Spain 29 Jun */  [5,28,"race"],[5,29,"race"],
+    /* R11 Portugal 6 Jul */[6,5,"race"],[6,6,"race"],
+    /* R12 British 13 Jul */[6,12,"race"],[6,13,"race"],
+    /* R13 Belgian 20 Jul */[6,19,"race"],[6,20,"race"],
+    /* R14 Hungary 27 Jul */[6,26,"race"],[6,27,"race"],
+    /* Summer break: Aug 2-22 */
+    /* R15 Italy 29 Aug */  [7,28,"race"],[7,29,"race"],
+    /* R16 Azer 7 Sep */    [8,6,"race"],[8,7,"race"],
+    /* R17 SA 14 Sep */     [8,13,"race"],[8,14,"race"],
+    /* R18 Sing 26 Sep SP */[8,25,"sprint"],[8,26,"sprint"],
+    /* R18 US 3 Oct SP */   [9,2,"sprint"],[9,3,"sprint"],
+    /* R19 Mex 17 Oct */    [9,16,"race"],[9,17,"race"],
+    /* R20 Brazil 31 Oct SP */[9,30,"sprint"],[9,31,"sprint"],
+    /* R21 Vegas 8 Nov SP */[10,7,"sprint"],[10,8,"sprint"],
+    /* R22 Qatar 21 Nov SP */[10,20,"sprint"],[10,21,"sprint"],
+    /* R23 AbuDhabi 5 Dec */[11,4,"race"],[11,5,"race"]
+  ];
+
+  /* Summer break days */
+  var breakDays = [];
+  for(var bd = 2; bd <= 22; bd++) breakDays.push(bd);
+
+  /* Fix Monaco: Jun 1 is month index 5 */
+  /* Remove the bad entry and fix */
+  highlights = highlights.filter(function(h){ return !(h[0]===4 && h[1]===1); });
+  highlights.push([5,1,"race"]); /* Jun 1 Monaco race day — already have May 31 as Sat */
+  /* May 31 should be month 4 day 31 */
+  highlights = highlights.filter(function(h){ return !(h[0]===5 && h[1]===31); });
+  highlights.push([4,31,"race"]); /* May 31 = Sat of Monaco */
+
+  /* Build lookup: hlMap[monthIdx][day] = type */
+  var hlMap = {};
+  highlights.forEach(function(h){
+    if(!hlMap[h[0]]) hlMap[h[0]] = {};
+    /* sprint overwrites race */
+    if(!hlMap[h[0]][h[1]] || h[2]==="sprint") hlMap[h[0]][h[1]] = h[2];
+  });
+
+  var monthNames = ["January","February","March","April","May","June",
+                    "July","August","September","October","November","December"];
+  var dayLabels = ["M","T","W","T","F","S","S"];
+
+  var calsEl = document.getElementById("miniCals");
+
+  for(var m = 0; m < 12; m++){
+    var firstDay = new Date(2027, m, 1).getDay();
+    var offset = (firstDay === 0) ? 6 : firstDay - 1; /* Mon=0 */
+    var daysInMonth = new Date(2027, m+1, 0).getDate();
+
+    var html = '<div class="month-name">' + monthNames[m] + '<\/div>';
+    html += '<div class="day-headers">';
+    dayLabels.forEach(function(d){ html += '<span>' + d + '<\/span>'; });
+    html += '<\/div><div class="day-grid">';
+
+    for(var e = 0; e < offset; e++) html += '<span><\/span>';
+
+    for(var d = 1; d <= daysInMonth; d++){
+      var cls = "";
+      if(hlMap[m] && hlMap[m][d]){
+        cls = hlMap[m][d];
+      }
+      /* Summer break */
+      if(m === 7 && breakDays.indexOf(d) !== -1 && !cls){
+        cls = "break";
+      }
+      html += '<span' + (cls ? ' class="'+cls+'"' : '') + '>' + d + '<\/span>';
+    }
+    html += '<\/div>';
+
+    var div = document.createElement("div");
+    div.className = "mini-month";
+    div.innerHTML = html;
+    calsEl.appendChild(div);
+  }
+
+  /* ---- Responsive scaler ---- */
+  function scalePosters(){
+    var poster = document.getElementById("poster");
+    var wrapper = poster.parentElement;
+    var available = wrapper.clientWidth - 20;
+    var natural = 1190;
+    if(available < natural){
+      var s = available / natural;
+      poster.style.transform = "scale(" + s + ")";
+      poster.style.transformOrigin = "top center";
+      wrapper.style.height = (poster.offsetHeight * s + 60) + "px";
+    } else {
+      poster.style.transform = "none";
+      wrapper.style.height = "auto";
+    }
+  }
+  window.addEventListener("resize", scalePosters);
+  window.addEventListener("load", scalePosters);
+  scalePosters();
+})();
+</script>
+</body>
+</html>

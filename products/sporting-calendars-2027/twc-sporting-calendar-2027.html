@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2027 Sporting Calendar - Football, Rugby, Cricket &amp; F1 | The Wall Chart Co</title>
+<meta name="description" content="Premium 2027 Sporting Calendar combining Football, Rugby, Cricket and Formula 1. A3 landscape wall poster — track every major event across four sports. Digital download from The Wall Chart Co.">
+<meta property="og:title" content="2027 Sporting Calendar — Football · Rugby · Cricket · F1">
+<meta property="og:description" content="The ultimate 2027 sporting year at a glance. Every major event across Football, Rugby, Cricket and Formula 1 on one premium A3 wall poster.">
+<meta property="og:type" content="product">
+<meta property="og:site_name" content="The Wall Chart Co">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ===== CSS VARIABLES ===== */
+:root {
+  --navy: #0B1E3D;
+  --red: #C8502A;
+  --gold: #C8A94A;
+  --cream: #F5F3EB;
+  --white: #fff;
+  --football: #1B5E20;
+  --rugby: #004D40;
+  --cricket: #2E7D32;
+  --f1: #E10600;
+  --major: #C8A94A;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.08);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.12);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,0.16);
+}
+
+/* ===== RESET ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', sans-serif; background: #1a1a1a; color: var(--navy); }
+
+/* ===== SCREEN TOOLBAR ===== */
+.screen-toolbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 20px; background: #111; color: #ccc; font-size: 13px;
+  position: sticky; top: 0; z-index: 1000;
+}
+.screen-toolbar .brand-badge {
+  display: flex; align-items: center; gap: 10px;
+}
+.screen-toolbar .twc-mono {
+  width: 32px; height: 32px; background: var(--gold); color: var(--navy);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'EB Garamond', serif; font-weight: 700; font-size: 11px;
+  letter-spacing: 1px; border-radius: 3px;
+}
+.screen-toolbar .brand-label {
+  font-family: 'EB Garamond', serif; font-size: 15px; color: var(--gold);
+  letter-spacing: 2px; text-transform: uppercase;
+}
+.screen-toolbar .toolbar-actions { display: flex; gap: 8px; align-items: center; }
+.btn-print {
+  background: var(--gold); color: var(--navy); border: none; padding: 6px 16px;
+  font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600;
+  border-radius: 4px; cursor: pointer; display: flex; align-items: center; gap: 6px;
+  text-transform: uppercase; letter-spacing: 0.5px; transition: opacity 0.2s;
+}
+.btn-print:hover { opacity: 0.85; }
+.btn-print svg { width: 14px; height: 14px; }
+
+/* ===== POSTER WRAPPER ===== */
+.poster-wrapper {
+  max-width: 1190px; margin: 20px auto; background: var(--cream);
+  box-shadow: var(--shadow-lg); position: relative;
+}
+.poster {
+  width: 1190px; padding: 0; position: relative;
+  transform-origin: top left;
+}
+
+/* ===== HEADER STRIPE ===== */
+.tri-stripe {
+  height: 6px; width: 100%;
+  background: linear-gradient(90deg, var(--red) 33%, #fff 33%, #fff 66%, var(--navy) 66%);
+}
+
+/* ===== POSTER HEADER ===== */
+.poster-header {
+  background: var(--navy); padding: 18px 28px 14px; display: flex;
+  align-items: center; justify-content: space-between;
+}
+.poster-header .twc-badge {
+  width: 44px; height: 44px; background: var(--gold); display: flex;
+  align-items: center; justify-content: center; border-radius: 3px; flex-shrink: 0;
+}
+.poster-header .twc-badge span {
+  font-family: 'EB Garamond', serif; font-weight: 700; font-size: 14px;
+  color: var(--navy); letter-spacing: 1.5px;
+}
+.poster-title {
+  text-align: center; flex: 1; padding: 0 20px;
+}
+.poster-title h1 {
+  font-family: 'EB Garamond', serif; font-size: 28px; font-weight: 700;
+  color: var(--gold); letter-spacing: 6px; text-transform: uppercase; margin: 0;
+  line-height: 1.1;
+}
+.poster-title .subtitle {
+  font-family: 'Inter', sans-serif; font-size: 9px; font-weight: 500;
+  color: rgba(255,255,255,0.6); letter-spacing: 4px; text-transform: uppercase;
+  margin-top: 4px;
+}
+.poster-header .year-mark {
+  font-family: 'EB Garamond', serif; font-size: 36px; font-weight: 700;
+  color: var(--gold); opacity: 0.25; flex-shrink: 0; letter-spacing: 2px;
+}
+
+/* ===== SPORT LEGEND (inline under header) ===== */
+.sport-legend-bar {
+  display: flex; justify-content: center; gap: 24px; padding: 6px 0;
+  background: rgba(11,30,61,0.92); border-bottom: 1px solid rgba(200,169,74,0.2);
+}
+.sport-legend-bar .leg-item {
+  display: flex; align-items: center; gap: 5px; font-size: 8.5px;
+  font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+  color: rgba(255,255,255,0.75);
+}
+.sport-legend-bar .leg-dot {
+  width: 8px; height: 8px; border-radius: 2px; display: inline-block;
+}
+
+/* ===== CALENDAR GRID ===== */
+.calendar-grid {
+  display: grid; grid-template-columns: repeat(12, 1fr);
+  gap: 0; padding: 0; background: var(--cream);
+}
+.month-col {
+  border-right: 1px solid rgba(11,30,61,0.1);
+  min-height: 420px; display: flex; flex-direction: column;
+}
+.month-col:last-child { border-right: none; }
+.month-header {
+  background: var(--navy); padding: 5px 0; text-align: center;
+  position: sticky; top: 0;
+}
+.month-header span {
+  font-family: 'EB Garamond', serif; font-size: 11px; font-weight: 600;
+  color: var(--gold); text-transform: uppercase; letter-spacing: 2px;
+}
+.month-body { padding: 3px 2px; flex: 1; display: flex; flex-direction: column; gap: 1px; }
+
+/* Sport lane labels */
+.sport-lane {
+  margin-bottom: 1px;
+}
+.sport-lane-label {
+  font-size: 6px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.5px; color: rgba(11,30,61,0.35); padding: 1px 3px 0;
+  line-height: 1;
+}
+.sport-lane .events { display: flex; flex-direction: column; gap: 1px; padding: 0 1px; }
+
+/* Event pills */
+.pill {
+  display: block; padding: 1.5px 4px; border-radius: 3px;
+  font-size: 7px; font-weight: 500; line-height: 1.3;
+  color: var(--white); white-space: nowrap; overflow: hidden;
+  text-overflow: ellipsis; letter-spacing: 0.1px;
+}
+.pill.football { background: var(--football); }
+.pill.rugby { background: var(--rugby); }
+.pill.cricket { background: var(--cricket); }
+.pill.f1 { background: var(--f1); }
+.pill.major {
+  background: var(--gold); color: var(--navy); font-weight: 700;
+  border: 1px solid rgba(11,30,61,0.2);
+}
+.pill.multi {
+  background: linear-gradient(135deg, var(--gold) 0%, #d4b652 100%);
+  color: var(--navy); font-weight: 700; font-size: 7.5px;
+  border: 1px solid rgba(11,30,61,0.15); padding: 2px 4px;
+}
+
+/* Lane divider */
+.lane-divider {
+  height: 1px; background: rgba(11,30,61,0.06); margin: 1px 2px;
+}
+
+/* ===== BIG EVENTS CALLOUT ===== */
+.big-events {
+  background: var(--navy); padding: 12px 16px;
+  border-top: 2px solid var(--gold);
+}
+.big-events-title {
+  text-align: center; font-family: 'EB Garamond', serif;
+  font-size: 11px; font-weight: 600; color: var(--gold);
+  text-transform: uppercase; letter-spacing: 4px; margin-bottom: 8px;
+}
+.big-events-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+.big-event-card {
+  border: 1px solid var(--gold); border-radius: 4px;
+  padding: 7px 8px; text-align: center; position: relative;
+  background: rgba(200,169,74,0.06);
+}
+.big-event-card .event-sport {
+  font-size: 6px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 1px; margin-bottom: 2px; opacity: 0.7;
+}
+.big-event-card .event-sport.ft { color: #4CAF50; }
+.big-event-card .event-sport.rg { color: #26A69A; }
+.big-event-card .event-sport.ck { color: #66BB6A; }
+.big-event-card .event-sport.f1c { color: #FF5252; }
+.big-event-card .event-name {
+  font-family: 'EB Garamond', serif; font-size: 12px; font-weight: 700;
+  color: var(--gold); line-height: 1.15; margin-bottom: 2px;
+}
+.big-event-card .event-date {
+  font-size: 7.5px; font-weight: 500; color: rgba(255,255,255,0.55);
+  letter-spacing: 0.3px;
+}
+
+/* ===== FOOTER ===== */
+.poster-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 8px 20px; background: var(--cream);
+  border-top: 1px solid rgba(11,30,61,0.1);
+}
+.footer-legend {
+  display: flex; gap: 12px; align-items: center;
+}
+.footer-legend .fl-item {
+  display: flex; align-items: center; gap: 4px; font-size: 7px;
+  color: rgba(11,30,61,0.55); font-weight: 500;
+}
+.footer-legend .fl-dot {
+  width: 7px; height: 7px; border-radius: 2px; display: inline-block;
+}
+.footer-right {
+  display: flex; align-items: center; gap: 8px;
+}
+.footer-right .twc-foot-badge {
+  width: 20px; height: 20px; background: var(--gold); display: flex;
+  align-items: center; justify-content: center; border-radius: 2px;
+}
+.footer-right .twc-foot-badge span {
+  font-family: 'EB Garamond', serif; font-size: 7px; font-weight: 700;
+  color: var(--navy); letter-spacing: 0.5px;
+}
+.footer-right .footer-text {
+  font-size: 6.5px; color: rgba(11,30,61,0.4); line-height: 1.35;
+}
+.footer-right .footer-text strong {
+  color: rgba(11,30,61,0.6); font-weight: 600;
+}
+
+/* ===== DECORATIVE ELEMENTS ===== */
+.corner-ornament {
+  position: absolute; width: 16px; height: 16px; opacity: 0.15;
+}
+.corner-ornament.tl { top: 62px; left: 6px; border-top: 2px solid var(--gold); border-left: 2px solid var(--gold); }
+.corner-ornament.tr { top: 62px; right: 6px; border-top: 2px solid var(--gold); border-right: 2px solid var(--gold); }
+.corner-ornament.bl { bottom: 36px; left: 6px; border-bottom: 2px solid var(--gold); border-left: 2px solid var(--gold); }
+.corner-ornament.br { bottom: 36px; right: 6px; border-bottom: 2px solid var(--gold); border-right: 2px solid var(--gold); }
+
+/* ===== PRINT STYLES ===== */
+@media print {
+  *, *::before, *::after {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  @page {
+    size: 420mm 297mm landscape;
+    margin: 0;
+  }
+  body { background: none !important; }
+  .screen-toolbar { display: none !important; }
+  .poster-wrapper {
+    margin: 0; box-shadow: none; max-width: none;
+    width: 420mm; height: 297mm;
+  }
+  .poster {
+    width: 420mm !important; transform: none !important;
+  }
+}
+
+/* ===== RESPONSIVE SCREEN ===== */
+@media screen and (max-width: 1230px) {
+  .poster-wrapper { margin: 10px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ========== SCREEN TOOLBAR ========== -->
+<div class="screen-toolbar" role="toolbar" aria-label="Page actions">
+  <div class="brand-badge">
+    <div class="twc-mono" aria-hidden="true">TWC</div>
+    <span class="brand-label">The Wall Chart Co</span>
+  </div>
+  <div class="toolbar-actions">
+    <button class="btn-print" onclick="window.print()" aria-label="Print or save as PDF">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+      Print / Save PDF
+    </button>
+  </div>
+</div>
+
+<!-- ========== POSTER ========== -->
+<div class="poster-wrapper">
+<div class="poster" id="poster">
+
+  <!-- Corner ornaments -->
+  <div class="corner-ornament tl" aria-hidden="true"></div>
+  <div class="corner-ornament tr" aria-hidden="true"></div>
+  <div class="corner-ornament bl" aria-hidden="true"></div>
+  <div class="corner-ornament br" aria-hidden="true"></div>
+
+  <!-- Header stripe -->
+  <div class="tri-stripe" aria-hidden="true"></div>
+
+  <!-- Poster header -->
+  <header class="poster-header" role="banner">
+    <div class="twc-badge" aria-hidden="true"><span>TWC</span></div>
+    <div class="poster-title">
+      <h1>2027 Sporting Calendar</h1>
+      <div class="subtitle">Football &middot; Rugby &middot; Cricket &middot; Formula 1 &mdash; The Wall Chart Co</div>
+    </div>
+    <div class="year-mark" aria-hidden="true">2027</div>
+  </header>
+
+  <!-- Sport legend bar -->
+  <div class="sport-legend-bar" aria-label="Sport colour key">
+    <div class="leg-item"><span class="leg-dot" style="background:var(--football)"></span> Football</div>
+    <div class="leg-item"><span class="leg-dot" style="background:var(--rugby)"></span> Rugby</div>
+    <div class="leg-item"><span class="leg-dot" style="background:var(--cricket)"></span> Cricket</div>
+    <div class="leg-item"><span class="leg-dot" style="background:var(--f1)"></span> Formula 1</div>
+    <div class="leg-item"><span class="leg-dot" style="background:var(--gold); border:1px solid rgba(11,30,61,0.2)"></span> Major Event</div>
+  </div>
+
+  <!-- ========== 12-MONTH CALENDAR GRID ========== -->
+  <div class="calendar-grid" role="table" aria-label="2027 Sporting Calendar">
+
+    <!-- JANUARY -->
+    <div class="month-col">
+      <div class="month-header"><span>January</span></div>
+      <div class="month-body">
+        <div class="sport-lane">
+          <div class="sport-lane-label">Football</div>
+          <div class="events">
+            <span class="pill football">PL Matchweek 20-22</span>
+            <span class="pill football">FA Cup 3rd Round</span>
+            <span class="pill football">Transfer Window Open</span>
+            <span class="pill football">Carabao Cup SF 1st Leg</span>
+            <span class="pill football">EFL Trophy Area Finals</span>
+          </div>
+        </div>
+        <div class="lane-divider"></div>
+        <div class="sport-lane">
+          <div class="sport-lane-label">Rugby</div>
+          <div class="events">
+            <span class="pill rugby">Premiership Rnd 10-12</span>
+            <span class="pill rugby">Champions Cup R3-R4</span>
+          </div>
+        </div>
+        <div class="lane-divider"></div>
+        <div class="sport-lane">
+          <div class="sport-lane-label">Cricket</div>
+          <div class="events">
+            <span class="pill cricket">IPL Auction/Prep</span>
+            <span class="pill cricket">SA20 League</span>
+            <span class="pill cricket">ILT20 (UAE)</span>
+          </div>
+        </div>
+        <div class="lane-divider"></div>
+        <div class="sport-lane">
+          <div class="sport-lane-label">F1</div>
+          <div class="events">
+            <span class="pill f1">Car Launches Begin</span>
+            <span class="pill f1">Pre-Season Build-Up</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FEBRUARY -->
+    <div class="month-col">
+      <div class="month-header"><span>February</span></div>
+      <div class="month-body">
+        <div class="sport-lane">
+          <div class="sport-lane-label">Football</div>
+          <div class="events">
+            <span class="pill football">PL Matchweek 23-26</span>
+            <span class="pill football">FA Cup 4th Round</span>
+            <span class="pill football">Transfer Deadline 1 Feb</span>
+            <span class="pill major">Carabao Cup Final</span>
+          </div>
+        </div>
+        <div class="lane-divider"></div>
+        <div class="sport-lane">
+          <div class="sport-lane-label">Rugby</div>
+          <div class="events">
+            <span class="pill multi">Six Nations R1 (6 Feb)</span>
+            <span class="pill rugby">Six Nations R2 (13 Feb)</span>
+            <span class="pill rugby">Six Nations R3 (27 Feb)</span>
+          </div>
+        </div>
+        <div class="lane-divider"></div>
+        <div class="sport-lane">
+          <div class="sport-lane-label">Cricket</div>
+          <div class="events">
+            <span class="pill cricket">PSL (Pakistan)</span>
+          </div>
+        </div>
+        <div class="lane-divider"></div>
+        <div class="sport-lane">
+          <div class="sport-lane-label">F1</div>
+          <div class="events">
+            <span class="pill f1">Pre-Season Testing</span>
+            <span class="pill f1">Bahrain Test 23-25 Feb</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MARCH -->
+    <div class="month-col">
+      <div class="month-header"><span>March</span></div>
+      <div class="month-body">
+        <div class="sport-lane">
+          <div class="sport-lane-label">Football</div>
+          <div class="events">
+            <span class="pill football">PL Matchweek 27-30</span>
+            <span class="pill football">FA Cup 5th Round</span>
+            <span class="pill football">UCL R16 2nd Legs</span>
+          </div>
+        </div>
+        <div class="lane-divider"></div>
+        <div class="sport-lane">
+          <div class="sport-lane-label">Rugby</div>
+          <div class="events">
+            <span class="pill rugby">Six Nations R4 (6 Mar)</span>
+            <span class="pill multi">Super Saturday R5 (13 Mar)</span>
+          </div>
+        </div>
+        <div class="lane-divider"></div>
+        <div class="sport-lane">
+          <div class="sport-lane-label">Cricket</div>
+          <div class="events">
+            <span class="pill cricket">IPL Starts 14 Mar</span>
+            <span class="pill cricket">County Pre-Season</span>
+          </div>
+        </div>
+        <div class="lane-divider"></div>
+        <div class="sport-lane">
+          <div class="sport-lane-label">F1</div>
+          <div class="events">
+            <span class="pill f1">Bahrain GP (7 Mar)</span>
+            <span class="pill f1">Saudi GP (14 Mar)</span>
+            <span class="pill f1">Australia GP (28 Mar)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- APRIL -->
+    <div class="month-col">
+      <div class="month-header"><span>April</span></div>
+      <div class="month-body">
+        <div class="sport-lane">
+          <div class="sport-lane-label">Football</div>
+          <div class="events">
+            <span class="pill football">FA Cup QFs</span>
+            <span class="pill football">FA Cup Semi-Finals</span>
+            <span class="pill football">UCL Quarter-Finals</span>
+            <span class="pill football">PL Matchweek 31-34</span>
+          </div>
+        </div>
+        <div class="lane-divider"></div>
+        <div class="sport-lane">
+          <div class="sport-lane-label">Rugby</div>
+          <div class="events">
+            <span class="pill rugby">Champ Cup R16</span>
+            <span class="pill rugby">Champ Cup QFs</span>
+            <span class="pill rugby">Premiership Rnd 17-19</span>
+          </div>
+        </div>
+        <div class="lane-divider"></div>
+        <div class="sport-lane">
+          <div class="sport-lane-label">Cricket</div>
+          <div class="events">
+            <span class="pill cricket">IPL Group Stage</span>
+            <span class="pill cricket">County Champ Rnd 1-3</span>
+          </div>
+        </div>
+        <div class="lane-divider"></div>
+        <div class="sport-lane">
+          <div class="sport-lane-label">F1</div>
+          <div class="events">
+            <span class="pill f1">Japan GP (11 Apr)</span>
+            <span class="pill f1">China GP (25 Apr)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAY -->
+    <div class="month-col">
+      <div class="month-header"><span>May</span></div>
+      <div class="month-body">
+        <div class="sport-lane">
+          <div class="sport-lane-label">Football</div>
+          <div class="events">
+            <span class="pill multi">FA Cup Final (15 May)</span>
+            <span class="pill football">UCL Semi-Finals</span>
+            <span class="pill football">PL Matchweek 35-38</span>
+            <span class="pill major">PL Final Day (30 May)</span>
+          </div>
+        </div>
+        <div class="lane-divider"></div>
+        <div class="sport-lane">
+          <div class="sport-lane-label">Rugby</div>
+          <div class="events">
+            <span class="pill rugby">Champ Cup SFs</span>
+            <span class="pill multi">Champ Cup Final (22 May)</span>
+            <span class="pill rugby">Premiership Rnd 22-24</span>
+          </div>
+        </div>
+        <div class="lane-divider"></div>
+        <div class="sport-lane">
+          <div class="sport-lane-label">Cricket</div>
+          <div class="events">
+            <span class="pill cricket">IPL Playoffs</span>
+            <span class="pill major">IPL Final (30 May)</span>
+            <span class="pill cricket">County Champ Rnd 5-7</span>
+          </div>
+        </div>
+        <div class="lane-divider"></div>
+        <div class="sport-lane">
+          <div class="sport-lane-label">F1</div>
+          <div class="events">
+            <span class="pill f1">Miami GP (4 May)</span>
+            <span class="pill f1">Imola GP (18 May)</span>
+            <span class="pill f1">Monaco GP (25 May)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JUNE -->
+    <div class="month-col">
+      <div class="month-header"><span>June</span></div>
+      <div class="month-body">
+        <div class="sport-lane">
+          <div class="sport-lane-label">Football</div>
+          <div class="events">
+            <span class="pill multi">UCL Final (5 Jun)</span>
+            <span class="pill major">Nations Lge Finals 9-13</span>
+            <span class="pill football">Euro 2028 Qualifiers</span>
+            <span class="pill football">Transfer Window Opens</span>
+          </div>
+        </div>
+        <div class="lane-divider"></div>
+        <div class="sport-lane">
+          <div class="sport-lane-label">Rugby</div>
+          <div class="events">
+            <span class="pill rugby">Premiership Final</span>
+            <span class="pill rugby">Summer Internationals</span>
+          </div>
+        </div>
+        <div class="lane-divider"></div>
+        <div class="sport-lane">
+          <div class="sport-lane-label">Cricket</div>
+          <div class="events">
+            <span class="pill major">WTC Final Lord's</span>
+            <span class="pill multi">Ashes 1st Test</span>
+            <span class="pill multi">Women's WC (24 Jun)</span>
+          </div>
+        </div>
+        <div class="lane-divider"></div>
+        <div class="sport-lane">
+          <div class="sport-lane-label">F1</div>
+          <div class="events">
+            <span class="pill f1">Canada GP (13 Jun)</span>
+            <span class="pill f1">Spain GP (27 Jun)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JULY -->
+    <div class="month-col">
+      <div class="month-header"><span>July</span></div>
+      <div class="month-body">
+        <div class="sport-lane">
+          <div class="sport-lane-label">Football</div>
+          <div class="events">
+            <span class="pill football">Pre-Season Tours</span>
+            <span class="pill football">Transfer Window</span>
+          </div>
+        </div>
+        <div class="lane-divider"></div>
+        <div class="sport-lane">
+          <div class="sport-lane-label">Rugby</div>
+          <div class="events">
+            <span class="pill rugby">Summer Tours</span>
+            <span class="pill rugby">RWC Build-Up</span>
+          </div>
+        </div>
+        <div class="lane-divider"></div>
+        <div class="sport-lane">
+          <div class="sport-lane-label">Cricket</div>
+          <div class="events">
+            <span class="pill cricket">Ashes 2nd-4th Tests</span>
+            <span class="pill multi">Women's WC Final (25 Jul)</span>
+            <span class="pill cricket">The Hundred Starts</span>
+          </div>
+        </div>
+        <div class="lane-divider"></div>
+        <div class="sport-lane">
+          <div class="sport-lane-label">F1</div>
+          <div class="events">
+            <span class="pill f1">Portugal GP (NEW)</span>
+            <span class="pill f1">British GP (18 Jul)</span>
+            <span class="pill f1">Belgium GP (25 Jul)</span>
+            <span class="pill f1">Hungary GP (1 Aug)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AUGUST -->
+    <div class="month-col">
+      <div class="month-header"><span>August</span></div>
+      <div class="month-body">
+        <div class="sport-lane">
+          <div class="sport-lane-label">Football</div>
+          <div class="events">
+            <span class="pill football">Community Shield</span>
+            <span class="pill football">EFL Season Starts</span>
+            <span class="pill football">Transfer Deadline</span>
+          </div>
+        </div>
+        <div class="lane-divider"></div>
+        <div class="sport-lane">
+          <div class="sport-lane-label">Rugby</div>
+          <div class="events">
+            <span class="pill rugby">RWC Warm-Ups</span>
+            <span class="pill rugby">Premiership Pre-Season</span>
+          </div>
+        </div>
+        <div class="lane-divider"></div>
+        <div class="sport-lane">
+          <div class="sport-lane-label">Cricket</div>
+          <div class="events">
+            <span class="pill major">Ashes 5th Test</span>
+            <span class="pill cricket">The Hundred Finals</span>
+            <span class="pill cricket">County Champ Resumes</span>
+          </div>
+        </div>
+        <div class="lane-divider"></div>
+        <div class="sport-lane">
+          <div class="sport-lane-label">F1</div>
+          <div class="events">
+            <span class="pill f1" style="opacity:0.6">Summer Break</span>
+            <span class="pill f1">Monza GP (29 Aug)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEPTEMBER -->
+    <div class="month-col">
+      <div class="month-header"><span>September</span></div>
+      <div class="month-body">
+        <div class="sport-lane">
+          <div class="sport-lane-label">Football</div>
+          <div class="events">
+            <span class="pill major">PL 27/28 Season Starts</span>
+            <span class="pill football">UCL Group Stage</span>
+            <span class="pill football">Euro 2028 Qualifiers</span>
+            <span class="pill football">Carabao Cup R3</span>
+          </div>
+        </div>
+        <div class="lane-divider"></div>
+        <div class="sport-lane">
+          <div class="sport-lane-label">Rugby</div>
+          <div class="events">
+            <span class="pill rugby">Premiership Rnd 1-3</span>
+            <span class="pill rugby">RWC Squad Announce</span>
+          </div>
+        </div>
+        <div class="lane-divider"></div>
+        <div class="sport-lane">
+          <div class="sport-lane-label">Cricket</div>
+          <div class="events">
+            <span class="pill cricket">County Champ Finals</span>
+            <span class="pill cricket">T20 Blast Finals</span>
+          </div>
+        </div>
+        <div class="lane-divider"></div>
+        <div class="sport-lane">
+          <div class="sport-lane-label">F1</div>
+          <div class="events">
+            <span class="pill f1">Baku GP (12 Sep)</span>
+            <span class="pill f1">Singapore GP (26 Sep)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- OCTOBER -->
+    <div class="month-col">
+      <div class="month-header"><span>October</span></div>
+      <div class="month-body">
+        <div class="sport-lane">
+          <div class="sport-lane-label">Football</div>
+          <div class="events">
+            <span class="pill football">PL Matchweek 7-10</span>
+            <span class="pill football">Euro 2028 Qualifiers</span>
+            <span class="pill football">Carabao Cup R4</span>
+          </div>
+        </div>
+        <div class="lane-divider"></div>
+        <div class="sport-lane">
+          <div class="sport-lane-label">Rugby</div>
+          <div class="events">
+            <span class="pill multi">RWC Opens 1 Oct Perth</span>
+            <span class="pill rugby">RWC Pool Stage</span>
+          </div>
+        </div>
+        <div class="lane-divider"></div>
+        <div class="sport-lane">
+          <div class="sport-lane-label">Cricket</div>
+          <div class="events">
+            <span class="pill multi">ICC CWC Starts</span>
+            <span class="pill cricket">CWC Group Stage</span>
+          </div>
+        </div>
+        <div class="lane-divider"></div>
+        <div class="sport-lane">
+          <div class="sport-lane-label">F1</div>
+          <div class="events">
+            <span class="pill f1">USA GP (10 Oct)</span>
+            <span class="pill f1">Mexico GP (24 Oct)</span>
+            <span class="pill f1">Brazil GP (31 Oct)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NOVEMBER -->
+    <div class="month-col">
+      <div class="month-header"><span>November</span></div>
+      <div class="month-body">
+        <div class="sport-lane">
+          <div class="sport-lane-label">Football</div>
+          <div class="events">
+            <span class="pill football">PL Matchweek 11-14</span>
+            <span class="pill football">Euro 2028 Qualifiers</span>
+          </div>
+        </div>
+        <div class="lane-divider"></div>
+        <div class="sport-lane">
+          <div class="sport-lane-label">Rugby</div>
+          <div class="events">
+            <span class="pill rugby">RWC Knockouts</span>
+            <span class="pill multi">RWC Final 13 Nov Sydney</span>
+          </div>
+        </div>
+        <div class="lane-divider"></div>
+        <div class="sport-lane">
+          <div class="sport-lane-label">Cricket</div>
+          <div class="events">
+            <span class="pill cricket">ICC CWC Knockouts</span>
+            <span class="pill major">ICC CWC Final</span>
+          </div>
+        </div>
+        <div class="lane-divider"></div>
+        <div class="sport-lane">
+          <div class="sport-lane-label">F1</div>
+          <div class="events">
+            <span class="pill f1">Las Vegas GP (14 Nov)</span>
+            <span class="pill f1">Qatar GP (21 Nov)</span>
+            <span class="pill multi">Abu Dhabi Finale</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DECEMBER -->
+    <div class="month-col">
+      <div class="month-header"><span>December</span></div>
+      <div class="month-body">
+        <div class="sport-lane">
+          <div class="sport-lane-label">Football</div>
+          <div class="events">
+            <span class="pill football">PL Matchweek 15-19</span>
+            <span class="pill major">Christmas PL Fixtures</span>
+            <span class="pill football">Euro 2028 Qual Draw</span>
+            <span class="pill football">FIFA Club World Cup</span>
+          </div>
+        </div>
+        <div class="lane-divider"></div>
+        <div class="sport-lane">
+          <div class="sport-lane-label">Rugby</div>
+          <div class="events">
+            <span class="pill rugby">Premiership Rnd 7-9</span>
+            <span class="pill rugby">Champions Cup R1-R2</span>
+          </div>
+        </div>
+        <div class="lane-divider"></div>
+        <div class="sport-lane">
+          <div class="sport-lane-label">Cricket</div>
+          <div class="events">
+            <span class="pill cricket">BBL (Australia)</span>
+            <span class="pill cricket">SA20 Starts</span>
+          </div>
+        </div>
+        <div class="lane-divider"></div>
+        <div class="sport-lane">
+          <div class="sport-lane-label">F1</div>
+          <div class="events">
+            <span class="pill f1" style="opacity:0.6">Off-Season</span>
+            <span class="pill f1">FIA Prize Giving</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /calendar-grid -->
+
+  <!-- ========== BIG EVENTS CALLOUT ========== -->
+  <div class="big-events">
+    <div class="big-events-title">The 8 Biggest Events of 2027</div>
+    <div class="big-events-grid">
+
+      <div class="big-event-card">
+        <div class="event-sport rg">Rugby</div>
+        <div class="event-name">Six Nations</div>
+        <div class="event-date">6 February &ndash; 13 March</div>
+      </div>
+
+      <div class="big-event-card">
+        <div class="event-sport ft">Football</div>
+        <div class="event-name">FA Cup Final</div>
+        <div class="event-date">15 May &middot; Wembley Stadium</div>
+      </div>
+
+      <div class="big-event-card">
+        <div class="event-sport ft">Football</div>
+        <div class="event-name">Champions League Final</div>
+        <div class="event-date">5 June &middot; Madrid</div>
+      </div>
+
+      <div class="big-event-card">
+        <div class="event-sport ck">Cricket</div>
+        <div class="event-name">The Ashes</div>
+        <div class="event-date">June &ndash; August &middot; 5 Tests</div>
+      </div>
+
+      <div class="big-event-card">
+        <div class="event-sport ft">Football</div>
+        <div class="event-name">Women&rsquo;s World Cup</div>
+        <div class="event-date">24 June &ndash; 25 July</div>
+      </div>
+
+      <div class="big-event-card">
+        <div class="event-sport rg">Rugby</div>
+        <div class="event-name">Rugby World Cup</div>
+        <div class="event-date">1 Oct &ndash; 13 Nov &middot; Australia</div>
+      </div>
+
+      <div class="big-event-card">
+        <div class="event-sport ck">Cricket</div>
+        <div class="event-name">ICC Cricket World Cup</div>
+        <div class="event-date">October &ndash; November</div>
+      </div>
+
+      <div class="big-event-card">
+        <div class="event-sport f1c">Formula 1</div>
+        <div class="event-name">Abu Dhabi Finale</div>
+        <div class="event-date">Late November &middot; Yas Marina</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="poster-footer">
+    <div class="footer-legend">
+      <div class="fl-item"><span class="fl-dot" style="background:var(--football)"></span> Football</div>
+      <div class="fl-item"><span class="fl-dot" style="background:var(--rugby)"></span> Rugby</div>
+      <div class="fl-item"><span class="fl-dot" style="background:var(--cricket)"></span> Cricket</div>
+      <div class="fl-item"><span class="fl-dot" style="background:var(--f1)"></span> Formula 1</div>
+      <div class="fl-item"><span class="fl-dot" style="background:var(--gold); border:1px solid rgba(11,30,61,0.2)"></span> Major Events</div>
+    </div>
+    <div class="footer-right">
+      <div class="twc-foot-badge" aria-hidden="true"><span>TWC</span></div>
+      <div class="footer-text">
+        <strong>The Wall Chart Co</strong> &middot; Premium Digital Downloads<br>
+        Unofficial fan product. Not affiliated with any governing body. Dates subject to change. &copy; 2027 The Wall Chart Co. For personal use only.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bottom stripe -->
+  <div class="tri-stripe" aria-hidden="true"></div>
+
+</div><!-- /poster -->
+</div><!-- /poster-wrapper -->
+
+<!-- ========== RESPONSIVE SCALER ========== -->
+<script>
+(function() {
+  'use strict';
+
+  var POSTER_WIDTH = 1190;
+
+  function scalePoster() {
+    var wrapper = document.querySelector('.poster-wrapper');
+    var poster = document.getElementById('poster');
+    if (!wrapper || !poster) return;
+
+    var available = wrapper.parentElement.clientWidth;
+    if (available < 40) return;
+
+    var maxW = Math.min(available - 40, POSTER_WIDTH);
+    wrapper.style.maxWidth = POSTER_WIDTH + 'px';
+
+    if (available < POSTER_WIDTH + 40) {
+      var scale = maxW / POSTER_WIDTH;
+      poster.style.transform = 'scale(' + scale + ')';
+      poster.style.width = POSTER_WIDTH + 'px';
+      wrapper.style.height = (poster.offsetHeight * scale) + 'px';
+      wrapper.style.overflow = 'hidden';
+    } else {
+      poster.style.transform = 'none';
+      poster.style.width = POSTER_WIDTH + 'px';
+      wrapper.style.height = 'auto';
+      wrapper.style.overflow = 'visible';
+    }
+  }
+
+  function debounce(fn, ms) {
+    var timer;
+    return function() {
+      clearTimeout(timer);
+      timer = setTimeout(fn, ms);
+    };
+  }
+
+  window.addEventListener('resize', debounce(scalePoster, 120));
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', scalePoster);
+  } else {
+    scalePoster();
+  }
+
+  /* Re-scale after fonts load */
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(function() {
+      scalePoster();
+    });
+  }
+})();
+<\/script>
+</body>
+</html>

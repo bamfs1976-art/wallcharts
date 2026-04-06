@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2027 Cricket Calendar — The Ashes &amp; ICC World Cup | The Wall Chart Co.</title>
+<meta name="description" content="Premium 2027 Cricket Calendar poster featuring The Ashes in England, ICC Cricket World Cup, IPL Season 20, The Hundred, and WTC Final. A3 landscape digital download.">
+<meta property="og:title" content="2027 Cricket Calendar — The Ashes &amp; ICC World Cup">
+<meta property="og:description" content="Premium A3 landscape poster with every major cricket event in 2027. The Ashes, ICC World Cup, IPL, The Hundred, WTC Final and more.">
+<meta property="og:type" content="product">
+<meta property="og:image" content="https://thewallchartco.com/images/twc-cricket-calendar-2027-og.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0B1E3D;
+    --red: #C8502A;
+    --gold: #C8A94A;
+    --cream: #F5F3EB;
+    --white: #fff;
+    --cricket-green: #2E7D32;
+    --purple: #7B1FA2;
+    --orange: #E65100;
+    --dark-red: #8B1A1A;
+    --light-grey: #9E9E9E;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #1a1a1a;
+    color: var(--navy);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+  /* Screen toolbar */
+  .screen-toolbar {
+    width: 100%;
+    background: var(--navy);
+    padding: 10px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .toolbar-left { display: flex; align-items: center; gap: 14px; }
+
+  .twc-monogram {
+    width: 38px; height: 38px;
+    background: var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'EB Garamond', serif;
+    font-weight: 700; font-size: 14px;
+    color: var(--navy); letter-spacing: 0.5px;
+  }
+
+  .toolbar-title {
+    font-family: 'EB Garamond', serif;
+    color: var(--cream); font-size: 16px; font-weight: 600;
+  }
+
+  .btn-print {
+    background: var(--gold); color: var(--navy);
+    border: none; padding: 8px 20px;
+    font-family: 'Inter', sans-serif; font-weight: 600; font-size: 13px;
+    cursor: pointer; letter-spacing: 0.5px; text-transform: uppercase;
+  }
+  .btn-print:hover { opacity: 0.85; }
+
+  /* Poster wrapper */
+  .poster-wrapper {
+    padding: 24px;
+    display: flex; justify-content: center;
+  }
+
+  .poster {
+    width: 1190px;
+    background: var(--white);
+    box-shadow: 0 4px 40px rgba(0,0,0,0.4);
+  }
+
+  /* Header stripe */
+  .header-stripe {
+    height: 8px;
+    background: linear-gradient(90deg, var(--red) 33%, #fff 33%, #fff 66%, var(--navy) 66%);
+  }
+
+  .header {
+    background: var(--navy);
+    padding: 20px 32px 16px;
+    text-align: center;
+    position: relative;
+  }
+
+  .header-badge {
+    position: absolute; left: 28px; top: 50%; transform: translateY(-50%);
+    width: 44px; height: 44px; background: var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'EB Garamond', serif; font-weight: 700;
+    font-size: 15px; color: var(--navy);
+  }
+
+  .header h1 {
+    font-family: 'EB Garamond', serif;
+    font-size: 32px; font-weight: 700;
+    color: var(--white); letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  .header .subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px; font-weight: 500;
+    color: var(--gold); letter-spacing: 2.5px;
+    margin-top: 4px; text-transform: uppercase;
+  }
+
+  /* Month grid */
+  .month-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    padding: 12px 16px;
+  }
+
+  .month-card {
+    background: var(--cream);
+    border: 1px solid #e0ddd4;
+    overflow: hidden;
+  }
+
+  .month-header {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'EB Garamond', serif;
+    font-size: 13px; font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 5px 8px;
+    text-align: center;
+  }
+
+  .month-events {
+    padding: 5px 6px;
+    display: flex; flex-direction: column; gap: 3px;
+    min-height: 62px;
+  }
+
+  .event-pill {
+    height: 14px; line-height: 14px;
+    font-size: 8.5px; font-weight: 600;
+    color: var(--white);
+    padding: 0 6px;
+    border-radius: 7px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    letter-spacing: 0.2px;
+  }
+
+  .pill-ashes    { background: var(--gold); color: var(--navy); font-weight: 700; }
+  .pill-wc       { background: var(--cricket-green); }
+  .pill-wtc      { background: var(--dark-red); }
+  .pill-ipl      { background: var(--purple); }
+  .pill-hundred  { background: var(--orange); }
+  .pill-county   { background: var(--light-grey); }
+  .pill-england  { background: var(--navy); }
+  .pill-women    { background: #AD1457; }
+
+  /* Ashes special section */
+  .ashes-section {
+    margin: 4px 16px 8px;
+    border: 2.5px solid var(--gold);
+    background: linear-gradient(135deg, #fffdf5 0%, #f9f4e3 100%);
+    padding: 14px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ashes-section::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--gold), #e6c34d, var(--gold));
+  }
+
+  .ashes-title-row {
+    display: flex; align-items: center; justify-content: center;
+    gap: 14px; margin-bottom: 10px;
+  }
+
+  .ashes-urn { font-size: 28px; }
+
+  .ashes-title {
+    font-family: 'EB Garamond', serif;
+    font-size: 22px; font-weight: 700;
+    color: var(--navy); text-transform: uppercase;
+    letter-spacing: 3px;
+  }
+
+  .ashes-matchup {
+    text-align: center;
+    font-family: 'EB Garamond', serif;
+    font-size: 15px; font-weight: 700;
+    color: var(--red);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .ashes-venues {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .venue-card {
+    background: var(--navy);
+    color: var(--white);
+    padding: 8px 14px;
+    text-align: center;
+    min-width: 170px;
+    flex: 1;
+    max-width: 210px;
+    border-bottom: 3px solid var(--gold);
+  }
+
+  .venue-test {
+    font-family: 'Inter', sans-serif;
+    font-size: 9px; font-weight: 700;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 3px;
+  }
+
+  .venue-name {
+    font-family: 'EB Garamond', serif;
+    font-size: 13px; font-weight: 600;
+    color: var(--white);
+    margin-bottom: 2px;
+  }
+
+  .venue-dates {
+    font-family: 'Inter', sans-serif;
+    font-size: 8.5px; font-weight: 500;
+    color: var(--gold);
+    opacity: 0.85;
+  }
+
+  /* Legend + Footer */
+  .legend-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 8px 16px;
+    background: var(--cream);
+    border-top: 1px solid #e0ddd4;
+    flex-wrap: wrap;
+  }
+
+  .legend-item {
+    display: flex; align-items: center; gap: 5px;
+    font-size: 8.5px; font-weight: 600;
+    color: var(--navy);
+  }
+
+  .legend-dot {
+    width: 10px; height: 10px; border-radius: 5px;
+  }
+
+  .footer {
+    background: var(--navy);
+    padding: 10px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .footer-left {
+    display: flex; align-items: center; gap: 10px;
+  }
+
+  .footer-badge {
+    width: 28px; height: 28px; background: var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'EB Garamond', serif; font-weight: 700;
+    font-size: 10px; color: var(--navy);
+  }
+
+  .footer-text {
+    font-family: 'EB Garamond', serif;
+    font-size: 12px; color: var(--cream);
+    letter-spacing: 1px;
+  }
+
+  .footer-right {
+    font-family: 'Inter', sans-serif;
+    font-size: 8px; color: rgba(255,255,255,0.45);
+  }
+
+  /* Print styles */
+  @media print {
+    @page {
+      size: 420mm 297mm landscape;
+      margin: 0;
+    }
+    body { background: white; }
+    .screen-toolbar { display: none !important; }
+    .poster-wrapper { padding: 0; }
+    .poster {
+      width: 420mm;
+      box-shadow: none;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- Screen Toolbar -->
+<div class="screen-toolbar">
+  <div class="toolbar-left">
+    <div class="twc-monogram">TWC</div>
+    <span class="toolbar-title">The Wall Chart Co. &mdash; 2027 Cricket Calendar</span>
+  </div>
+  <button class="btn-print" onclick="window.print()">Print / Save PDF</button>
+</div>
+
+<!-- Poster -->
+<div class="poster-wrapper">
+  <div class="poster" id="poster">
+
+    <!-- Header stripe -->
+    <div class="header-stripe"></div>
+
+    <!-- Header -->
+    <div class="header">
+      <div class="header-badge">TWC</div>
+      <h1>2027 Cricket Calendar</h1>
+      <div class="subtitle">The Ashes &middot; ICC World Cup &middot; The Hundred &middot; IPL &middot; WTC Final</div>
+    </div>
+
+    <!-- Month grid -->
+    <div class="month-grid">
+
+      <!-- JANUARY -->
+      <div class="month-card">
+        <div class="month-header">January</div>
+        <div class="month-events">
+          <div class="event-pill pill-women">Women's International TBC</div>
+          <div class="event-pill pill-england" style="background:#1565C0">SA v ENG ODI Series (TBC)</div>
+        </div>
+      </div>
+
+      <!-- FEBRUARY -->
+      <div class="month-card">
+        <div class="month-header">February</div>
+        <div class="month-events">
+          <div class="event-pill pill-england" style="background:#1565C0">ENG Tour Wrap-Up (TBC)</div>
+          <div class="event-pill pill-women">Women's T20 Internationals TBC</div>
+        </div>
+      </div>
+
+      <!-- MARCH -->
+      <div class="month-card">
+        <div class="month-header">March</div>
+        <div class="month-events">
+          <div class="event-pill pill-ipl">IPL Season 20 Begins &mdash; 14 Mar</div>
+          <div class="event-pill pill-women">Women's International TBC</div>
+        </div>
+      </div>
+
+      <!-- APRIL -->
+      <div class="month-card">
+        <div class="month-header">April</div>
+        <div class="month-events">
+          <div class="event-pill pill-ipl">IPL Season 20 (84 Matches)</div>
+          <div class="event-pill pill-county">County Championship Begins Mid-Apr</div>
+        </div>
+      </div>
+
+      <!-- MAY -->
+      <div class="month-card">
+        <div class="month-header">May</div>
+        <div class="month-events">
+          <div class="event-pill pill-ipl">IPL Season 20 Finals &mdash; 30 May</div>
+          <div class="event-pill pill-county">County Championship</div>
+          <div class="event-pill pill-england">England Home Tests vs TBC (1 of 2)</div>
+        </div>
+      </div>
+
+      <!-- JUNE -->
+      <div class="month-card">
+        <div class="month-header">June</div>
+        <div class="month-events">
+          <div class="event-pill pill-england">England Home Tests vs TBC (2 of 2)</div>
+          <div class="event-pill pill-wtc">ICC WTC Final &mdash; Lord's Mid-Jun</div>
+          <div class="event-pill pill-ashes">&#x1F3FA; Ashes 1st Test &mdash; Edgbaston</div>
+          <div class="event-pill pill-county">County Championship</div>
+        </div>
+      </div>
+
+      <!-- JULY -->
+      <div class="month-card">
+        <div class="month-header">July</div>
+        <div class="month-events">
+          <div class="event-pill pill-ashes">&#x1F3FA; Ashes 2nd Test &mdash; Lord's</div>
+          <div class="event-pill pill-ashes">&#x1F3FA; Ashes 3rd Test &mdash; Trent Bridge</div>
+          <div class="event-pill pill-ashes">&#x1F3FA; Ashes 4th Test &mdash; Utilita Bowl</div>
+          <div class="event-pill pill-ashes">&#x1F3FA; Ashes 5th Test &mdash; The Oval</div>
+          <div class="event-pill pill-hundred">The Hundred Begins Late Jul</div>
+          <div class="event-pill pill-county">County Championship</div>
+        </div>
+      </div>
+
+      <!-- AUGUST -->
+      <div class="month-card">
+        <div class="month-header">August</div>
+        <div class="month-events">
+          <div class="event-pill pill-hundred">The Hundred (Men's &amp; Women's)</div>
+          <div class="event-pill pill-county">County Championship</div>
+          <div class="event-pill pill-women">Women's The Hundred Finals</div>
+        </div>
+      </div>
+
+      <!-- SEPTEMBER -->
+      <div class="month-card">
+        <div class="month-header">September</div>
+        <div class="month-events">
+          <div class="event-pill pill-county">County Championship Ends Late Sep</div>
+          <div class="event-pill pill-england">England ODI / T20I Home (TBC)</div>
+        </div>
+      </div>
+
+      <!-- OCTOBER -->
+      <div class="month-card">
+        <div class="month-header">October</div>
+        <div class="month-events">
+          <div class="event-pill pill-wc">ICC Cricket World Cup Begins</div>
+          <div class="event-pill pill-wc">SA / ZIM / NAM &mdash; 14 Teams</div>
+        </div>
+      </div>
+
+      <!-- NOVEMBER -->
+      <div class="month-card">
+        <div class="month-header">November</div>
+        <div class="month-events">
+          <div class="event-pill pill-wc">ICC World Cup &mdash; 54 Matches</div>
+          <div class="event-pill pill-wc">World Cup Final Late Nov</div>
+        </div>
+      </div>
+
+      <!-- DECEMBER -->
+      <div class="month-card">
+        <div class="month-header">December</div>
+        <div class="month-events">
+          <div class="event-pill pill-england" style="background:#1565C0">England Winter Tour (TBC)</div>
+          <div class="event-pill pill-women">Women's International TBC</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Ashes Special Feature -->
+    <div class="ashes-section">
+      <div class="ashes-title-row">
+        <span class="ashes-urn">&#x1F3FA;</span>
+        <span class="ashes-title">The Ashes 2027</span>
+        <span class="ashes-urn">&#x1F3FA;</span>
+      </div>
+      <div class="ashes-matchup">England v Australia &mdash; 5-Test Series &mdash; June &amp; July 2027</div>
+      <div class="ashes-venues">
+        <div class="venue-card">
+          <div class="venue-test">1st Test</div>
+          <div class="venue-name">Edgbaston, Birmingham</div>
+          <div class="venue-dates">Mid June 2027</div>
+        </div>
+        <div class="venue-card">
+          <div class="venue-test">2nd Test</div>
+          <div class="venue-name">Lord's, London</div>
+          <div class="venue-dates">Late June 2027</div>
+        </div>
+        <div class="venue-card">
+          <div class="venue-test">3rd Test</div>
+          <div class="venue-name">Trent Bridge, Nottingham</div>
+          <div class="venue-dates">Early July 2027</div>
+        </div>
+        <div class="venue-card">
+          <div class="venue-test">4th Test</div>
+          <div class="venue-name">Utilita Bowl, Southampton</div>
+          <div class="venue-dates">Mid July 2027</div>
+        </div>
+        <div class="venue-card">
+          <div class="venue-test">5th Test</div>
+          <div class="venue-name">The Oval, London</div>
+          <div class="venue-dates">Late July 2027</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Legend -->
+    <div class="legend-bar">
+      <div class="legend-item"><div class="legend-dot" style="background:var(--gold)"></div>The Ashes</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--cricket-green)"></div>ICC World Cup</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--dark-red)"></div>ICC WTC Final</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--purple)"></div>IPL</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--orange)"></div>The Hundred</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--light-grey)"></div>County Championship</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--navy)"></div>England Home Tests</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#AD1457"></div>Women's Cricket</div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <div class="footer-left">
+        <div class="footer-badge">TWC</div>
+        <span class="footer-text">The Wall Chart Co.</span>
+      </div>
+      <div class="footer-right">&copy; 2027 The Wall Chart Co. Unofficial fan product. Not affiliated with ICC, ECB or BCCI. Dates subject to confirmation. For personal use only.</div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function () {
+  /* Responsive scaler: fit poster to viewport width */
+  var poster = document.getElementById('poster');
+  var BASE_W = 1190;
+
+  function scalePoster() {
+    var vw = window.innerWidth;
+    if (vw < BASE_W + 48) {
+      var s = (vw - 32) / BASE_W;
+      if (s < 0.25) s = 0.25;
+      poster.style.transform = 'scale(' + s + ')';
+      poster.style.transformOrigin = 'top center';
+      poster.parentElement.style.height = (poster.offsetHeight * s) + 'px';
+    } else {
+      poster.style.transform = 'none';
+      poster.parentElement.style.height = 'auto';
+    }
+  }
+
+  window.addEventListener('resize', scalePoster);
+  window.addEventListener('load', scalePoster);
+  scalePoster();
+}());
+</script>
+</body>
+</html>

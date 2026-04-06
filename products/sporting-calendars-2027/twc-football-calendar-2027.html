@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2027 Football Calendar | The Wall Chart Co</title>
+<meta name="description" content="Premium 2027 Football Calendar wall chart poster featuring Premier League, Champions League, FA Cup, Women's World Cup and more. A3 landscape digital download.">
+<meta property="og:title" content="2027 Football Calendar | The Wall Chart Co">
+<meta property="og:description" content="Complete 2027 football season calendar — Premier League, Champions League, FA Cup, Women's World Cup. Premium A3 landscape poster, digital download.">
+<meta property="og:type" content="product">
+<meta property="og:image" content="twc-football-calendar-2027-preview.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0B1E3D;
+    --red: #C8502A;
+    --gold: #C8A94A;
+    --cream: #F5F3EB;
+    --white: #fff;
+    --football-green: #1B5E20;
+    --teal: #00796B;
+    --purple: #6A1B9A;
+    --orange: #E65100;
+    --grey: #78909C;
+    --pill-height: 14px;
+    --poster-width: 1190px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #1a1a1a;
+    font-family: 'Inter', sans-serif;
+    color: var(--navy);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+  /* Screen toolbar */
+  .toolbar {
+    width: 100%;
+    background: var(--navy);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 10px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .toolbar .twc-badge-sm {
+    width: 34px; height: 34px;
+    background: var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'EB Garamond', serif;
+    font-weight: 700; font-size: 11px; color: var(--navy);
+    letter-spacing: 0.5px;
+    border-radius: 3px;
+  }
+  .toolbar span {
+    color: var(--cream);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+  .toolbar button {
+    background: var(--gold);
+    color: var(--navy);
+    border: none;
+    padding: 7px 18px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    border-radius: 3px;
+    text-transform: uppercase;
+    transition: opacity 0.2s;
+  }
+  .toolbar button:hover { opacity: 0.85; }
+
+  /* Poster wrapper */
+  .poster-wrap {
+    padding: 32px 16px 48px;
+    display: flex;
+    justify-content: center;
+  }
+  .poster {
+    width: var(--poster-width);
+    background: var(--white);
+    box-shadow: 0 4px 40px rgba(0,0,0,0.45);
+  }
+
+  /* Header stripe */
+  .header-stripe {
+    height: 6px;
+    background: linear-gradient(90deg, var(--red) 33%, #fff 33%, #fff 66%, var(--navy) 66%);
+  }
+
+  /* Title bar */
+  .title-bar {
+    background: var(--navy);
+    padding: 18px 28px 14px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  .twc-badge {
+    width: 48px; height: 48px;
+    background: var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'EB Garamond', serif;
+    font-weight: 700; font-size: 15px; color: var(--navy);
+    letter-spacing: 1px;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+  .title-text { flex: 1; }
+  .title-text h1 {
+    font-family: 'EB Garamond', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 3px;
+    line-height: 1.1;
+  }
+  .title-text .subtitle {
+    font-size: 9px;
+    font-weight: 500;
+    color: var(--gold);
+    letter-spacing: 2.5px;
+    margin-top: 4px;
+    text-transform: uppercase;
+  }
+  .title-accent {
+    width: 6px; height: 48px;
+    background: var(--football-green);
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+
+  /* Month grid */
+  .month-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+    padding: 12px 14px;
+    background: var(--cream);
+  }
+  .month-card {
+    background: var(--white);
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid #e8e4d8;
+  }
+  .month-header {
+    background: var(--navy);
+    padding: 5px 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .month-header h3 {
+    font-family: 'EB Garamond', serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--white);
+    letter-spacing: 1px;
+  }
+  .month-header .year-label {
+    font-size: 9px;
+    color: var(--gold);
+    font-weight: 600;
+  }
+  .month-body {
+    padding: 5px 6px 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-height: 100px;
+  }
+
+  /* Event pills */
+  .pill {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    height: var(--pill-height);
+    border-radius: 7px;
+    padding: 0 6px;
+    font-size: 8px;
+    font-weight: 600;
+    color: var(--white);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: var(--pill-height);
+  }
+  .pill .dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.55);
+    flex-shrink: 0;
+  }
+  .pill-pl { background: var(--navy); }
+  .pill-fa { background: var(--red); }
+  .pill-cl { background: var(--gold); color: var(--navy); }
+  .pill-cl .dot { background: rgba(0,0,0,0.25); }
+  .pill-cc { background: var(--teal); }
+  .pill-wwc { background: var(--purple); }
+  .pill-euro { background: var(--football-green); }
+  .pill-nl { background: var(--orange); }
+  .pill-transfer {
+    background: transparent;
+    border: 1px dashed var(--grey);
+    color: var(--grey);
+  }
+  .pill-transfer .dot { background: var(--grey); }
+  .pill-break {
+    background: repeating-linear-gradient(
+      -45deg,
+      #ccc, #ccc 2px, #e8e8e8 2px, #e8e8e8 4px
+    );
+    color: #555;
+  }
+  .pill-break .dot { background: #888; }
+  .pill-cs { background: var(--football-green); }
+
+  /* Legend */
+  .legend-bar {
+    background: var(--navy);
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 8.5px;
+    font-weight: 500;
+    color: var(--cream);
+    letter-spacing: 0.3px;
+  }
+  .legend-swatch {
+    width: 18px; height: 10px;
+    border-radius: 5px;
+    flex-shrink: 0;
+  }
+  .legend-swatch.dashed {
+    background: transparent;
+    border: 1px dashed var(--grey);
+  }
+  .legend-swatch.striped {
+    background: repeating-linear-gradient(
+      -45deg,
+      #ccc, #ccc 2px, #e8e8e8 2px, #e8e8e8 4px
+    );
+  }
+
+  /* Mini calendar strip */
+  .mini-strip {
+    background: var(--cream);
+    padding: 8px 20px;
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+  }
+  .mini-month {
+    text-align: center;
+    width: 80px;
+  }
+  .mini-month .mm-label {
+    font-size: 8px;
+    font-weight: 700;
+    color: var(--navy);
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+  }
+  .mini-month .mm-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0;
+  }
+  .mini-month .mm-days span {
+    font-size: 6px;
+    color: #999;
+    line-height: 9px;
+    text-align: center;
+  }
+  .mini-month .mm-days span.match {
+    background: var(--football-green);
+    color: var(--white);
+    border-radius: 2px;
+    font-weight: 700;
+  }
+
+  /* Footer */
+  .footer {
+    background: var(--navy);
+    padding: 10px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .footer-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .footer-badge {
+    width: 26px; height: 26px;
+    background: var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'EB Garamond', serif;
+    font-weight: 700; font-size: 8px; color: var(--navy);
+    letter-spacing: 0.5px;
+    border-radius: 3px;
+  }
+  .footer-brand {
+    font-family: 'EB Garamond', serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 1.5px;
+  }
+  .footer-disclaimer {
+    font-size: 7.5px;
+    color: #8899aa;
+    font-weight: 400;
+    max-width: 460px;
+    text-align: right;
+    line-height: 1.3;
+  }
+  .footer-stripe {
+    height: 4px;
+    background: linear-gradient(90deg, var(--red) 33%, #fff 33%, #fff 66%, var(--navy) 66%);
+  }
+
+  /* Print */
+  @media print {
+    @page {
+      size: A3 landscape;
+      margin: 8mm;
+    }
+    body { background: #fff; }
+    .toolbar { display: none !important; }
+    .poster-wrap { padding: 0; }
+    .poster {
+      width: 100%;
+      box-shadow: none;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- Screen toolbar -->
+<div class="toolbar">
+  <div class="twc-badge-sm">TWC</div>
+  <span>2027 Football Calendar</span>
+  <button onclick="window.print()">Print / Save PDF</button>
+</div>
+
+<div class="poster-wrap" id="posterWrap">
+<div class="poster" id="poster">
+
+  <!-- Header stripe -->
+  <div class="header-stripe"></div>
+
+  <!-- Title bar -->
+  <div class="title-bar">
+    <div class="twc-badge">TWC</div>
+    <div class="title-accent"></div>
+    <div class="title-text">
+      <h1>2027 FOOTBALL CALENDAR</h1>
+      <div class="subtitle">THE WALL CHART CO &middot; PREMIER LEAGUE &middot; CHAMPIONS LEAGUE &middot; FA CUP &middot; WOMEN&rsquo;S WORLD CUP</div>
+    </div>
+  </div>
+
+  <!-- Month grid -->
+  <div class="month-grid" id="monthGrid"></div>
+
+  <!-- Legend bar -->
+  <div class="legend-bar">
+    <div class="legend-item"><div class="legend-swatch" style="background:var(--navy)"></div>Premier League</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:var(--red)"></div>FA Cup</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:var(--gold)"></div>Champions League</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:var(--teal)"></div>Carabao Cup</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:var(--purple)"></div>Women's World Cup</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:var(--football-green)"></div>Euro 2028 Qualifiers</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:var(--orange)"></div>Nations League</div>
+    <div class="legend-item"><div class="legend-swatch dashed"></div>Transfer Window</div>
+    <div class="legend-item"><div class="legend-swatch striped"></div>International Break</div>
+  </div>
+
+  <!-- Mini calendar strip -->
+  <div class="mini-strip" id="miniStrip"></div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-left">
+      <div class="footer-badge">TWC</div>
+      <div class="footer-brand">THE WALL CHART CO</div>
+    </div>
+    <div class="footer-disclaimer">
+      Unofficial fan product. Not associated with or endorsed by the Premier League, UEFA, FIFA or any club.
+      All competition names and dates are for reference only. &copy; 2027 The Wall Chart Co.
+    </div>
+  </div>
+  <div class="footer-stripe"></div>
+
+</div><!-- .poster -->
+</div><!-- .poster-wrap -->
+
+<script>
+(function() {
+  "use strict";
+
+  /* ── Event data ── */
+  var events = {
+    1: [ // January
+      { cls: "pill-pl", text: "1\u201331 Jan \u2022 PL Matchdays" },
+      { cls: "pill-transfer", text: "1\u201331 Jan \u2022 Winter Transfer Window" },
+      { cls: "pill-cl", text: "21\u201329 Jan \u2022 UCL League Phase 7\u20138" },
+      { cls: "pill-fa", text: "9\u201312 Jan \u2022 FA Cup R3" }
+    ],
+    2: [ // February
+      { cls: "pill-pl", text: "1\u201328 Feb \u2022 PL Matchdays" },
+      { cls: "pill-fa", text: "6\u20139 Feb \u2022 FA Cup R4" },
+      { cls: "pill-cl", text: "11\u201312 Feb \u2022 UCL KO Playoffs" },
+      { cls: "pill-cc", text: "23 Feb \u2022 Carabao Cup Final" }
+    ],
+    3: [ // March
+      { cls: "pill-pl", text: "1\u201315 Mar \u2022 PL Matchdays" },
+      { cls: "pill-fa", text: "1\u20134 Mar \u2022 FA Cup R5" },
+      { cls: "pill-cl", text: "11\u201312 Mar \u2022 UCL R16 1st Leg" },
+      { cls: "pill-euro", text: "25\u201329 Mar \u2022 Euro 2028 Qualifiers" },
+      { cls: "pill-break", text: "22\u201330 Mar \u2022 International Break" }
+    ],
+    4: [ // April
+      { cls: "pill-pl", text: "3\u201330 Apr \u2022 PL Matchdays" },
+      { cls: "pill-fa", text: "3\u20134 Apr \u2022 FA Cup QF" },
+      { cls: "pill-cl", text: "8\u201316 Apr \u2022 UCL Quarter-Finals" },
+      { cls: "pill-fa", text: "26\u201327 Apr \u2022 FA Cup Semi-Finals" }
+    ],
+    5: [ // May
+      { cls: "pill-pl", text: "1\u201330 May \u2022 PL Final Day 30th" },
+      { cls: "pill-cl", text: "6\u201314 May \u2022 UCL Semi-Finals" },
+      { cls: "pill-fa", text: "15 May \u2022 FA Cup Final" }
+    ],
+    6: [ // June
+      { cls: "pill-transfer", text: "1\u201330 Jun \u2022 Summer Window Opens" },
+      { cls: "pill-cl", text: "5 Jun \u2022 UCL Final \u2014 Madrid" },
+      { cls: "pill-nl", text: "9\u201313 Jun \u2022 Nations League Finals" },
+      { cls: "pill-euro", text: "14\u201318 Jun \u2022 Euro 2028 Qualifiers" },
+      { cls: "pill-wwc", text: "24 Jun \u2022 Women\u2019s WC Kicks Off" }
+    ],
+    7: [ // July
+      { cls: "pill-wwc", text: "1\u201325 Jul \u2022 Women\u2019s World Cup" },
+      { cls: "pill-transfer", text: "1\u201331 Jul \u2022 Summer Transfer Window" }
+    ],
+    8: [ // August
+      { cls: "pill-transfer", text: "1\u201331 Aug \u2022 Summer Window Closes" },
+      { cls: "pill-pl", text: "14 Aug \u2022 PL Season 27/28 Opens" }
+    ],
+    9: [ // September
+      { cls: "pill-pl", text: "1\u201320 Sep \u2022 PL Matchdays" },
+      { cls: "pill-euro", text: "4\u20139 Sep \u2022 Euro 2028 Qualifiers" },
+      { cls: "pill-break", text: "1\u20139 Sep \u2022 International Break" },
+      { cls: "pill-cl", text: "16\u201317 Sep \u2022 UCL Matchday 1" }
+    ],
+    10: [ // October
+      { cls: "pill-pl", text: "1\u201331 Oct \u2022 PL Matchdays" },
+      { cls: "pill-cl", text: "1\u201322 Oct \u2022 UCL Matchdays 2\u20133" },
+      { cls: "pill-euro", text: "9\u201314 Oct \u2022 Euro 2028 Qualifiers" },
+      { cls: "pill-cc", text: "28\u201329 Oct \u2022 Carabao Cup R3" }
+    ],
+    11: [ // November
+      { cls: "pill-pl", text: "1\u201330 Nov \u2022 PL Matchdays" },
+      { cls: "pill-cl", text: "4\u201326 Nov \u2022 UCL Matchdays 4\u20135" },
+      { cls: "pill-euro", text: "13\u201318 Nov \u2022 Euro 2028 Qualifiers" },
+      { cls: "pill-break", text: "10\u201318 Nov \u2022 International Break" }
+    ],
+    12: [ // December
+      { cls: "pill-pl", text: "1\u201331 Dec \u2022 PL Festive Fixtures" },
+      { cls: "pill-cl", text: "9\u201310 Dec \u2022 UCL Matchday 6" },
+      { cls: "pill-cc", text: "17\u201318 Dec \u2022 Carabao Cup QF" }
+    ]
+  };
+
+  var monthNames = [
+    "JANUARY","FEBRUARY","MARCH","APRIL","MAY","JUNE",
+    "JULY","AUGUST","SEPTEMBER","OCTOBER","NOVEMBER","DECEMBER"
+  ];
+
+  /* ── Build month cards ── */
+  var grid = document.getElementById("monthGrid");
+  for (var m = 1; m <= 12; m++) {
+    var card = document.createElement("div");
+    card.className = "month-card";
+
+    var hdr = document.createElement("div");
+    hdr.className = "month-header";
+    hdr.innerHTML = "<h3>" + monthNames[m - 1] + "<\/h3><span class='year-label'>2027<\/span>";
+    card.appendChild(hdr);
+
+    var body = document.createElement("div");
+    body.className = "month-body";
+
+    var evts = events[m] || [];
+    for (var i = 0; i < evts.length; i++) {
+      var pill = document.createElement("div");
+      pill.className = "pill " + evts[i].cls;
+      pill.innerHTML = "<span class='dot'><\/span>" + evts[i].text;
+      body.appendChild(pill);
+    }
+    card.appendChild(body);
+    grid.appendChild(card);
+  }
+
+  /* ── Mini calendar strip ── */
+  var strip = document.getElementById("miniStrip");
+  /* Match-day weekends (Saturdays) for PL — approximate typical schedule */
+  var matchWeekends = {
+    1: [2,3,16,17,30,31],
+    2: [6,7,13,14,20,21,27,28],
+    3: [1,6,7,13,14],
+    4: [3,4,10,11,17,18,24,25],
+    5: [1,2,8,9,15,16,22,23,30],
+    6: [5,9,10,11,12,13,24,25,26,27,28,29,30],
+    7: [1,2,3,4,10,11,17,18,24,25],
+    8: [14,15,21,22,28,29],
+    9: [4,5,11,12,18,19,25,26],
+    10: [2,3,9,10,23,24,30,31],
+    11: [1,6,7,22,23,27,28,29,30],
+    12: [4,5,13,14,20,21,26,27,28]
+  };
+
+  for (var mo = 1; mo <= 12; mo++) {
+    var mm = document.createElement("div");
+    mm.className = "mini-month";
+
+    var label = document.createElement("div");
+    label.className = "mm-label";
+    label.textContent = monthNames[mo - 1].substring(0, 3);
+    mm.appendChild(label);
+
+    var daysDiv = document.createElement("div");
+    daysDiv.className = "mm-days";
+
+    /* Day-of-week for 1st of month (2027) */
+    var firstDay = new Date(2027, mo - 1, 1).getDay();
+    /* Adjust so Monday = 0 */
+    var startOffset = (firstDay === 0) ? 6 : firstDay - 1;
+    var daysInMonth = new Date(2027, mo, 0).getDate();
+    var matchDays = matchWeekends[mo] || [];
+
+    for (var pad = 0; pad < startOffset; pad++) {
+      var blank = document.createElement("span");
+      daysDiv.appendChild(blank);
+    }
+    for (var d = 1; d <= daysInMonth; d++) {
+      var sp = document.createElement("span");
+      sp.textContent = d;
+      if (matchDays.indexOf(d) !== -1) sp.className = "match";
+      daysDiv.appendChild(sp);
+    }
+    mm.appendChild(daysDiv);
+    strip.appendChild(mm);
+  }
+
+  /* ── Responsive scaler ── */
+  function scalePoster() {
+    var wrap = document.getElementById("posterWrap");
+    var poster = document.getElementById("poster");
+    if (!wrap || !poster) return;
+    var available = wrap.clientWidth - 32;
+    var posterW = 1190;
+    if (available < posterW) {
+      var scale = available / posterW;
+      poster.style.transform = "scale(" + scale + ")";
+      poster.style.transformOrigin = "top center";
+      wrap.style.height = (poster.offsetHeight * scale + 64) + "px";
+    } else {
+      poster.style.transform = "none";
+      wrap.style.height = "auto";
+    }
+  }
+
+  window.addEventListener("resize", scalePoster);
+  window.addEventListener("load", scalePoster);
+  scalePoster();
+})();
+</script>
+</body>
+</html>

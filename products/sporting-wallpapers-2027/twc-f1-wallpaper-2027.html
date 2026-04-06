@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2027 F1 Calendar Wallpaper Generator | TWC</title>
+<meta name="description" content="Download the 2027 Formula 1 race calendar as a device wallpaper for iPhone, Android, and iPad.">
+<meta property="og:title" content="2027 F1 Calendar Wallpaper Generator | TWC">
+<meta property="og:description" content="Free downloadable 2027 F1 season calendar wallpapers for every device.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--navy:#0B1E3D;--red:#C8502A;--gold:#C8A94A;--f1red:#E10600;--bg:#0a0a14;--card:#111122;--border:#1a1a2e}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:#e0e0e0;min-height:100vh}
+  .header-stripe{background:linear-gradient(135deg,var(--navy) 0%,#0d2a52 100%);border-bottom:3px solid var(--f1red);padding:1rem 2rem;display:flex;align-items:center;gap:1.2rem}
+  .twc-monogram{width:48px;height:48px;background:var(--gold);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'EB Garamond',serif;font-weight:700;font-size:1.3rem;color:var(--navy);letter-spacing:-0.5px;flex-shrink:0}
+  .header-stripe h1{font-family:'EB Garamond',serif;font-size:1.6rem;color:#fff;font-weight:600}
+  .header-stripe h1 span{color:var(--f1red);font-weight:700}
+  .container{max-width:960px;margin:0 auto;padding:2rem 1.5rem}
+  .tabs{display:flex;gap:0.5rem;margin-bottom:1rem;flex-wrap:wrap}
+  .tab{padding:0.5rem 1.2rem;background:var(--card);border:1px solid var(--border);border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;color:#999;transition:all .2s}
+  .tab:hover{color:#ccc;border-color:#333}
+  .tab.active{background:var(--f1red);color:#fff;border-color:var(--f1red)}
+  .controls{display:flex;gap:1rem;align-items:center;margin-bottom:1.5rem;flex-wrap:wrap}
+  select{background:var(--card);color:#e0e0e0;border:1px solid var(--border);padding:0.6rem 1rem;border-radius:6px;font-size:0.9rem;font-family:'Inter',sans-serif;cursor:pointer;min-width:220px}
+  select:focus{outline:none;border-color:var(--f1red)}
+  .preview-wrap{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;text-align:center;margin-bottom:1.5rem}
+  .preview-wrap canvas{max-height:600px;width:auto;max-width:100%;border-radius:8px;box-shadow:0 8px 32px rgba(0,0,0,.5)}
+  .btn-download{display:inline-flex;align-items:center;gap:0.6rem;background:linear-gradient(135deg,var(--f1red),#b00500);color:#fff;border:none;padding:0.8rem 2rem;border-radius:8px;font-size:1rem;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:transform .15s,box-shadow .15s}
+  .btn-download:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(225,6,0,.4)}
+  .btn-download svg{width:20px;height:20px}
+  .info-section{margin-top:2rem;padding:1.5rem;background:var(--card);border:1px solid var(--border);border-radius:10px}
+  .info-section h3{font-family:'EB Garamond',serif;color:var(--gold);margin-bottom:0.75rem;font-size:1.2rem}
+  .info-section p,.info-section li{font-size:0.88rem;color:#aaa;line-height:1.7}
+  .info-section ul{padding-left:1.2rem}
+  .footer{text-align:center;padding:2rem 1rem;color:#555;font-size:0.78rem;border-top:1px solid var(--border);margin-top:3rem}
+  .footer a{color:var(--gold);text-decoration:none}
+  .dim{font-size:0.78rem;color:#666;margin-bottom:1rem}
+</style>
+</head>
+<body>
+
+<div class="header-stripe">
+  <div class="twc-monogram">TWC</div>
+  <h1><span>F1</span> 2027 Calendar Wallpaper</h1>
+</div>
+
+<div class="container">
+  <p style="color:#888;margin-bottom:1.5rem;font-size:0.92rem;">Generate a sleek 2027 Formula 1 race calendar wallpaper sized perfectly for your device.</p>
+
+  <div class="tabs" id="tabs">
+    <div class="tab active" data-cat="iphone">iPhone</div>
+    <div class="tab" data-cat="android">Android</div>
+    <div class="tab" data-cat="ipad">iPad</div>
+  </div>
+
+  <div class="controls">
+    <select id="deviceSelect"></select>
+  </div>
+  <p class="dim" id="dimLabel"></p>
+
+  <div class="preview-wrap">
+    <canvas id="cv"></canvas>
+  </div>
+
+  <div style="text-align:center;margin-bottom:1rem">
+    <button class="btn-download" id="dlBtn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Download Wallpaper
+    </button>
+  </div>
+
+  <div class="info-section">
+    <h3>How to Set as Wallpaper</h3>
+    <ul>
+      <li><strong>iPhone / iPad:</strong> Download, open in Photos, tap Share > Use as Wallpaper.</li>
+      <li><strong>Android:</strong> Download, open in Gallery, tap Menu > Set as wallpaper.</li>
+      <li>For best results choose "Still" (not perspective) and avoid zooming.</li>
+    </ul>
+  </div>
+
+  <div class="info-section" style="margin-top:1rem">
+    <h3>2027 Season Highlights</h3>
+    <p>24 races across 5 continents. The Portuguese Grand Prix joins the calendar as a new addition, while the Belgian Grand Prix returns to the schedule. Six Sprint weekends add extra on-track action.</p>
+  </div>
+</div>
+
+<div class="footer">
+  &copy; 2027 The Wall Chart Co. Unofficial fan product. Not affiliated with FIA or Formula 1. Dates subject to change. For personal use only.
+</div>
+
+<script>
+(function(){
+"use strict";
+
+const DEVICES = {
+  iphone: [
+    {name:"iPhone 16 Pro Max",w:1320,h:2868},
+    {name:"iPhone 15 Pro Max",w:1290,h:2796},
+    {name:"iPhone 14 Pro Max",w:1290,h:2796},
+    {name:"iPhone 13 Pro Max",w:1284,h:2778},
+    {name:"iPhone 16",w:1179,h:2556},
+    {name:"iPhone 15",w:1179,h:2556},
+    {name:"iPhone 14",w:1170,h:2532},
+    {name:"iPhone 13",w:1170,h:2532}
+  ],
+  android: [
+    {name:"Galaxy S25 Ultra",w:1440,h:3120},
+    {name:"Galaxy S24 Ultra",w:1440,h:3120},
+    {name:"Galaxy S23 Ultra",w:1440,h:3088},
+    {name:"Galaxy S22 Ultra",w:1440,h:3088},
+    {name:"Pixel 9 Pro",w:1280,h:2856},
+    {name:"Pixel 8 Pro",w:1344,h:2992}
+  ],
+  ipad: [
+    {name:"iPad Pro 13\" M4",w:2064,h:2752},
+    {name:"iPad Pro 12.9\" M2",w:2048,h:2732},
+    {name:"iPad Air 13\" M2",w:2064,h:2752},
+    {name:"iPad 10th gen",w:2160,h:2360},
+    {name:"iPad mini 7th gen",w:1488,h:2266}
+  ]
+};
+
+const RACES = [
+  {rnd:1,  code:"BHR",flag:"Bahrain",        name:"Bahrain GP",          date:"Mar 16"},
+  {rnd:2,  code:"SAU",flag:"Saudi Arabia",    name:"Saudi Arabian GP",    date:"Mar 23"},
+  {rnd:3,  code:"AUS",flag:"Australia",       name:"Australian GP",       date:"Apr 6"},
+  {rnd:4,  code:"JPN",flag:"Japan",           name:"Japanese GP",         date:"Apr 13"},
+  {rnd:5,  code:"CHN",flag:"China",           name:"Chinese GP",          date:"Apr 27"},
+  {rnd:6,  code:"MIA",flag:"USA",             name:"Miami GP",            date:"May 4",  sprint:true},
+  {rnd:7,  code:"ESP",flag:"Spain",           name:"Spanish GP",          date:"May 18"},
+  {rnd:8,  code:"MON",flag:"Monaco",          name:"Monaco GP",           date:"May 25"},
+  {rnd:9,  code:"POR",flag:"Portugal",        name:"Portuguese GP",       date:"Jun 8",  isNew:true},
+  {rnd:10, code:"CAN",flag:"Canada",          name:"Canadian GP",         date:"Jun 15"},
+  {rnd:11, code:"AUT",flag:"Austria",         name:"Austrian GP",         date:"Jun 29"},
+  {rnd:12, code:"GBR",flag:"Great Britain",   name:"British GP",          date:"Jul 6"},
+  {rnd:13, code:"BEL",flag:"Belgium",         name:"Belgian GP",          date:"Jul 20", returns:true},
+  {rnd:14, code:"HUN",flag:"Hungary",         name:"Hungarian GP",        date:"Jul 27"},
+  {rnd:-1, code:"",   flag:"",                name:"SUMMER BREAK",        date:"Aug"},
+  {rnd:15, code:"NED",flag:"Netherlands",     name:"Dutch GP",            date:"Aug 24"},
+  {rnd:16, code:"ITA",flag:"Italy",           name:"Italian GP",          date:"Aug 31"},
+  {rnd:17, code:"AZE",flag:"Azerbaijan",      name:"Azerbaijan GP",       date:"Sep 14"},
+  {rnd:18, code:"SGP",flag:"Singapore",       name:"Singapore GP",        date:"Sep 21", sprint:true},
+  {rnd:19, code:"USA",flag:"USA",             name:"US GP",               date:"Oct 5",  sprint:true},
+  {rnd:20, code:"MEX",flag:"Mexico",          name:"Mexico City GP",      date:"Oct 19"},
+  {rnd:21, code:"BRA",flag:"Brazil",          name:"Brazilian GP",        date:"Oct 26", sprint:true},
+  {rnd:22, code:"LVG",flag:"USA",             name:"Las Vegas GP",        date:"Nov 8",  sprint:true},
+  {rnd:23, code:"QAT",flag:"Qatar",           name:"Qatar GP",            date:"Nov 23", sprint:true},
+  {rnd:24, code:"ABU",flag:"UAE",             name:"Abu Dhabi GP",        date:"Nov 30"}
+];
+
+let currentCat = "iphone";
+let currentIdx = 0;
+
+const tabs = document.querySelectorAll(".tab");
+const sel = document.getElementById("deviceSelect");
+const cv = document.getElementById("cv");
+const ctx = cv.getContext("2d");
+const dimLabel = document.getElementById("dimLabel");
+
+function populateSelect(){
+  sel.innerHTML = "";
+  DEVICES[currentCat].forEach((d,i) => {
+    const o = document.createElement("option");
+    o.value = i;
+    o.textContent = d.name + " (" + d.w + "\u00d7" + d.h + ")";
+    sel.appendChild(o);
+  });
+  sel.value = currentIdx;
+  updateDim();
+}
+
+function updateDim(){
+  const d = DEVICES[currentCat][currentIdx];
+  dimLabel.textContent = d.w + " \u00d7 " + d.h + " px";
+}
+
+tabs.forEach(t => {
+  t.addEventListener("click", () => {
+    tabs.forEach(x => x.classList.remove("active"));
+    t.classList.add("active");
+    currentCat = t.dataset.cat;
+    currentIdx = 0;
+    populateSelect();
+    render();
+  });
+});
+
+sel.addEventListener("change", () => {
+  currentIdx = parseInt(sel.value);
+  updateDim();
+  render();
+});
+
+document.getElementById("dlBtn").addEventListener("click", () => {
+  const d = DEVICES[currentCat][currentIdx];
+  const a = document.createElement("a");
+  a.download = "TWC-F1-2027-" + d.name.replace(/[^a-zA-Z0-9]/g,"-") + ".png";
+  a.href = cv.toDataURL("image/png");
+  a.click();
+});
+
+function render(){
+  const dev = DEVICES[currentCat][currentIdx];
+  const W = dev.w;
+  const H = dev.h;
+  cv.width = W;
+  cv.height = H;
+
+  const s = Math.min(W, H) / 1300;
+
+  // --- Background ---
+  ctx.fillStyle = "#06101e";
+  ctx.fillRect(0, 0, W, H);
+
+  // Diagonal speed lines
+  ctx.save();
+  ctx.globalAlpha = 0.08;
+  for(let i = -H; i < W + H; i += 60 * s){
+    ctx.strokeStyle = "#E10600";
+    ctx.lineWidth = 2 * s;
+    ctx.beginPath();
+    ctx.moveTo(i, 0);
+    ctx.lineTo(i + H * 0.4, H);
+    ctx.stroke();
+  }
+  ctx.globalAlpha = 0.04;
+  for(let i = -H; i < W + H; i += 120 * s){
+    ctx.strokeStyle = "#E10600";
+    ctx.lineWidth = 6 * s;
+    ctx.beginPath();
+    ctx.moveTo(i + 30 * s, 0);
+    ctx.lineTo(i + 30 * s + H * 0.4, H);
+    ctx.stroke();
+  }
+  ctx.restore();
+
+  // Top red accent bar
+  const barH = 8 * s;
+  ctx.fillStyle = "#E10600";
+  ctx.fillRect(0, 0, W, barH);
+
+  // TWC badge area
+  const badgeY = barH + 40 * s;
+  const badgeSize = 56 * s;
+  const badgeX = W / 2 - badgeSize / 2;
+
+  // Gold circle behind badge
+  ctx.save();
+  ctx.beginPath();
+  ctx.arc(W / 2, badgeY + badgeSize / 2, badgeSize * 0.65, 0, Math.PI * 2);
+  ctx.fillStyle = "#C8A94A";
+  ctx.fill();
+  ctx.restore();
+
+  ctx.font = "bold " + Math.round(28 * s) + "px 'EB Garamond', serif";
+  ctx.fillStyle = "#0B1E3D";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillText("TWC", W / 2, badgeY + badgeSize / 2 + 1 * s);
+
+  // Title
+  const titleY = badgeY + badgeSize + 50 * s;
+  ctx.font = "700 " + Math.round(52 * s) + "px 'Inter', sans-serif";
+  ctx.fillStyle = "#ffffff";
+  ctx.textAlign = "center";
+  ctx.fillText("2027", W / 2, titleY);
+
+  ctx.font = "700 " + Math.round(36 * s) + "px 'Inter', sans-serif";
+  ctx.fillStyle = "#E10600";
+  ctx.fillText("F1 CALENDAR", W / 2, titleY + 48 * s);
+
+  // Decorative line under title
+  const lineY = titleY + 80 * s;
+  const lineW = 200 * s;
+  ctx.strokeStyle = "#E10600";
+  ctx.lineWidth = 2 * s;
+  ctx.beginPath();
+  ctx.moveTo(W / 2 - lineW / 2, lineY);
+  ctx.lineTo(W / 2 + lineW / 2, lineY);
+  ctx.stroke();
+
+  // Race list
+  const startY = lineY + 40 * s;
+  const raceH = (H - startY - 160 * s) / RACES.length;
+  const maxRaceH = 90 * s;
+  const rowH = Math.min(raceH, maxRaceH);
+  const leftPad = 80 * s;
+  const rightPad = 80 * s;
+  const contentW = W - leftPad - rightPad;
+
+  const fontSize = Math.min(Math.round(24 * s), Math.round(rowH * 0.55));
+  const smallFont = Math.round(fontSize * 0.7);
+
+  RACES.forEach((race, i) => {
+    const y = startY + i * rowH + rowH / 2;
+
+    if(race.rnd === -1){
+      // Summer break
+      ctx.save();
+      ctx.strokeStyle = "rgba(200,169,74,0.3)";
+      ctx.lineWidth = 1 * s;
+      ctx.setLineDash([6 * s, 4 * s]);
+      ctx.beginPath();
+      ctx.moveTo(leftPad, y);
+      ctx.lineTo(W - rightPad, y);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.font = "600 " + smallFont + "px 'Inter', sans-serif";
+      ctx.fillStyle = "#C8A94A";
+      ctx.textAlign = "center";
+      ctx.fillText("--- SUMMER BREAK ---", W / 2, y + smallFont * 0.35);
+      ctx.restore();
+      return;
+    }
+
+    // Row background on hover-like alternation
+    if(i % 2 === 0){
+      ctx.fillStyle = "rgba(255,255,255,0.015)";
+      ctx.fillRect(leftPad - 10 * s, y - rowH / 2, contentW + 20 * s, rowH);
+    }
+
+    // Sprint dot
+    if(race.sprint){
+      ctx.beginPath();
+      ctx.arc(leftPad - 20 * s, y, 5 * s, 0, Math.PI * 2);
+      ctx.fillStyle = "#C8A94A";
+      ctx.fill();
+    }
+
+    // Round number
+    ctx.font = "700 " + smallFont + "px 'Inter', sans-serif";
+    ctx.fillStyle = "rgba(255,255,255,0.3)";
+    ctx.textAlign = "right";
+    const rndStr = race.rnd < 10 ? "0" + race.rnd : "" + race.rnd;
+    ctx.fillText("R" + rndStr, leftPad + 40 * s, y + fontSize * 0.1);
+
+    // Country code
+    ctx.font = "700 " + fontSize + "px 'Inter', sans-serif";
+    ctx.fillStyle = "#ffffff";
+    ctx.textAlign = "left";
+    ctx.fillText(race.code, leftPad + 55 * s, y + fontSize * 0.1);
+
+    // Race name
+    ctx.font = "400 " + smallFont + "px 'Inter', sans-serif";
+    ctx.fillStyle = "rgba(255,255,255,0.5)";
+    ctx.fillText(race.name, leftPad + 55 * s + ctx.measureText(race.code).width + 12 * s, y + fontSize * 0.1);
+
+    // Date
+    ctx.font = "500 " + smallFont + "px 'Inter', sans-serif";
+    ctx.fillStyle = "#E10600";
+    ctx.textAlign = "right";
+    ctx.fillText(race.date, W - rightPad, y + fontSize * 0.1);
+
+    // New / Returns badges
+    if(race.isNew){
+      const badgeTxt = "NEW";
+      ctx.font = "700 " + Math.round(smallFont * 0.7) + "px 'Inter', sans-serif";
+      const tw = ctx.measureText(badgeTxt).width;
+      const bx = W - rightPad - ctx.measureText(race.date).width - tw - 24 * s;
+      const by = y - smallFont * 0.35;
+      ctx.fillStyle = "#E10600";
+      roundRect(ctx, bx - 4 * s, by - 2 * s, tw + 8 * s, smallFont * 0.75 + 4 * s, 3 * s);
+      ctx.fill();
+      ctx.fillStyle = "#fff";
+      ctx.textAlign = "left";
+      ctx.fillText(badgeTxt, bx, y + fontSize * 0.1);
+    }
+    if(race.returns){
+      const badgeTxt = "RETURNS";
+      ctx.font = "700 " + Math.round(smallFont * 0.7) + "px 'Inter', sans-serif";
+      const tw = ctx.measureText(badgeTxt).width;
+      const bx = W - rightPad - ctx.measureText(race.date).width - tw - 24 * s;
+      const by = y - smallFont * 0.35;
+      ctx.fillStyle = "#C8A94A";
+      roundRect(ctx, bx - 4 * s, by - 2 * s, tw + 8 * s, smallFont * 0.75 + 4 * s, 3 * s);
+      ctx.fill();
+      ctx.fillStyle = "#0B1E3D";
+      ctx.textAlign = "left";
+      ctx.fillText(badgeTxt, bx, y + fontSize * 0.1);
+    }
+  });
+
+  // Sprint legend
+  const legendY = startY + RACES.length * rowH + 20 * s;
+  ctx.beginPath();
+  ctx.arc(W / 2 - 80 * s, legendY, 5 * s, 0, Math.PI * 2);
+  ctx.fillStyle = "#C8A94A";
+  ctx.fill();
+  ctx.font = "400 " + smallFont + "px 'Inter', sans-serif";
+  ctx.fillStyle = "rgba(255,255,255,0.45)";
+  ctx.textAlign = "left";
+  ctx.fillText("Sprint Weekend", W / 2 - 68 * s, legendY + smallFont * 0.35);
+
+  // Bottom red accent
+  ctx.fillStyle = "#E10600";
+  ctx.fillRect(0, H - barH, W, barH);
+
+  // Bottom branding
+  ctx.font = "600 " + Math.round(18 * s) + "px 'EB Garamond', serif";
+  ctx.fillStyle = "rgba(200,169,74,0.4)";
+  ctx.textAlign = "center";
+  ctx.fillText("thewallchartcompany.com", W / 2, H - barH - 20 * s);
+}
+
+function roundRect(c, x, y, w, h, r){
+  c.beginPath();
+  c.moveTo(x + r, y);
+  c.lineTo(x + w - r, y);
+  c.quadraticCurveTo(x + w, y, x + w, y + r);
+  c.lineTo(x + w, y + h - r);
+  c.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  c.lineTo(x + r, y + h);
+  c.quadraticCurveTo(x, y + h, x, y + h - r);
+  c.lineTo(x, y + r);
+  c.quadraticCurveTo(x, y, x + r, y);
+  c.closePath();
+}
+
+// Font loading then initial render
+if(document.fonts && document.fonts.ready){
+  document.fonts.ready.then(() => {
+    populateSelect();
+    render();
+  });
+} else {
+  setTimeout(() => { populateSelect(); render(); }, 500);
+}
+
+})();
+<\/script>
+</body>
+</html>

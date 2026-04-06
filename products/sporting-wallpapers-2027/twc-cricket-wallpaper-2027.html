@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2027 Cricket Calendar Wallpaper | TWC</title>
+<meta name="description" content="Download the 2027 Cricket Calendar wallpaper for iPhone, Android and iPad. Featuring Ashes, IPL, WTC Final and ICC Cricket World Cup.">
+<meta property="og:title" content="2027 Cricket Calendar Wallpaper | TWC">
+<meta property="og:description" content="Device wallpapers for the 2027 cricket season. Ashes, IPL, County Championship, ICC World Cup and more.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --navy:#0B1E3D;--red:#C8502A;--gold:#C8A94A;
+    --cricket-green:#2E7D32;--dark-bg:#060E1A;--card-bg:#0F1F35;
+  }
+  body{font-family:'Inter',sans-serif;background:var(--dark-bg);color:#E8E8E8;min-height:100vh}
+  .header{background:var(--navy);border-bottom:3px solid var(--red);padding:14px 24px;display:flex;align-items:center;gap:16px}
+  .monogram{width:42px;height:42px;border:2px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'EB Garamond',serif;font-size:18px;font-weight:700;color:var(--gold);letter-spacing:1px}
+  .header h1{font-family:'EB Garamond',serif;font-size:22px;font-weight:600;color:#fff;letter-spacing:.5px}
+  .header h1 span{color:var(--cricket-green)}
+  main{max-width:900px;margin:0 auto;padding:28px 20px}
+  .tabs{display:flex;gap:6px;margin-bottom:18px;flex-wrap:wrap}
+  .tab{padding:8px 16px;border-radius:6px;background:var(--card-bg);border:1px solid rgba(255,255,255,.08);color:#aaa;cursor:pointer;font-size:13px;font-weight:500;transition:.2s}
+  .tab:hover{border-color:var(--cricket-green);color:#ddd}
+  .tab.active{background:var(--cricket-green);color:#fff;border-color:var(--cricket-green)}
+  .controls{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:18px}
+  .controls select{background:var(--card-bg);color:#ddd;border:1px solid rgba(255,255,255,.12);padding:9px 14px;border-radius:6px;font-size:13px;font-family:'Inter',sans-serif;cursor:pointer;min-width:200px}
+  .controls select:focus{outline:none;border-color:var(--cricket-green)}
+  .res-label{font-size:12px;color:#888;margin-left:4px}
+  .preview-wrap{background:var(--card-bg);border-radius:10px;padding:20px;display:flex;justify-content:center;align-items:center;min-height:400px;margin-bottom:18px;border:1px solid rgba(255,255,255,.06)}
+  #preview{max-width:100%;max-height:70vh;border-radius:6px;box-shadow:0 4px 24px rgba(0,0,0,.5)}
+  .btn{display:inline-flex;align-items:center;gap:8px;background:var(--cricket-green);color:#fff;border:none;padding:12px 28px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:.2s}
+  .btn:hover{filter:brightness(1.15)}
+  .btn svg{width:18px;height:18px}
+  .actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:24px}
+  .instructions{background:var(--card-bg);border-radius:10px;padding:20px 24px;margin-bottom:28px;border:1px solid rgba(255,255,255,.06)}
+  .instructions h3{font-family:'EB Garamond',serif;font-size:18px;color:var(--gold);margin-bottom:10px}
+  .instructions ol{padding-left:20px;font-size:13px;line-height:1.8;color:#bbb}
+  .footer{text-align:center;padding:24px;border-top:1px solid rgba(255,255,255,.06);font-size:11px;color:#555}
+  .footer a{color:var(--gold);text-decoration:none}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="monogram">TWC</div>
+  <h1>2027 <span>Cricket</span> Calendar Wallpaper</h1>
+</div>
+
+<main>
+  <div class="tabs" id="deviceTabs">
+    <div class="tab active" data-cat="iphone">iPhone</div>
+    <div class="tab" data-cat="android">Android</div>
+    <div class="tab" data-cat="ipad">iPad</div>
+  </div>
+
+  <div class="controls">
+    <select id="deviceSelect"></select>
+    <span class="res-label" id="resLabel"></span>
+  </div>
+
+  <div class="preview-wrap">
+    <canvas id="preview"></canvas>
+  </div>
+
+  <div class="actions">
+    <button class="btn" id="downloadBtn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/><\/svg>
+      Download PNG
+    </button>
+    <span class="res-label" id="dlSize"></span>
+  </div>
+
+  <div class="instructions">
+    <h3>How to Set Your Wallpaper</h3>
+    <ol>
+      <li>Select your device from the dropdown above.</li>
+      <li>Click <strong>Download PNG</strong> to save the image.</li>
+      <li><strong>iPhone / iPad:</strong> Settings &rarr; Wallpaper &rarr; Add New &rarr; choose the downloaded image.</li>
+      <li><strong>Android:</strong> Long-press home screen &rarr; Wallpaper &rarr; choose the downloaded image.</li>
+      <li>Set as Lock Screen for best results.</li>
+    </ol>
+  </div>
+</main>
+
+<div class="footer">
+  &copy; 2027 The Wall Chart Co. Unofficial fan product. Not affiliated with ICC, ECB or BCCI. Dates subject to change. For personal use only.
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ── Device catalogue ── */
+  const devices = {
+    iphone: [
+      {name:"iPhone 16 Pro Max",w:1320,h:2868},
+      {name:"iPhone 15 Pro Max",w:1290,h:2796},
+      {name:"iPhone 14 Pro Max",w:1290,h:2796},
+      {name:"iPhone 13 Pro Max",w:1284,h:2778},
+      {name:"iPhone 16",w:1179,h:2556},
+      {name:"iPhone 15",w:1179,h:2556},
+      {name:"iPhone 14",w:1170,h:2532},
+      {name:"iPhone 13",w:1170,h:2532}
+    ],
+    android: [
+      {name:"Galaxy S25 Ultra",w:1440,h:3120},
+      {name:"Galaxy S24 Ultra",w:1440,h:3120},
+      {name:"Galaxy S23 Ultra",w:1440,h:3088},
+      {name:"Galaxy S22 Ultra",w:1440,h:3088},
+      {name:"Pixel 9 Pro",w:1280,h:2856},
+      {name:"Pixel 8 Pro",w:1344,h:2992}
+    ],
+    ipad: [
+      {name:"iPad Pro 13\" M4",w:2064,h:2752},
+      {name:"iPad Pro 12.9\" M2",w:2048,h:2732},
+      {name:"iPad Air 13\" M2",w:2064,h:2752},
+      {name:"iPad 10th gen",w:2160,h:2360},
+      {name:"iPad mini 7th gen",w:1488,h:2266}
+    ]
+  };
+
+  /* ── Cricket events ── */
+  const months = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
+  const events = {
+    0:[],
+    1:[],
+    2:[{t:"IPL Season 20",c:"#F57C00"}],
+    3:[{t:"IPL / County Ch.",c:"#F57C00"},{t:"Eng. Home Tests",c:"#42A5F5"}],
+    4:[{t:"IPL ends",c:"#F57C00"},{t:"Eng. Home Tests",c:"#42A5F5"}],
+    5:[{t:"WTC Final",c:"#CE93D8"},{t:"ASHES START",c:"#C8A94A",gold:true}],
+    6:[{t:"Ashes cont.",c:"#C8A94A",gold:true},{t:"The Hundred",c:"#26C6DA"}],
+    7:[{t:"The Hundred",c:"#26C6DA"},{t:"Ashes ends",c:"#C8A94A",gold:true}],
+    8:[{t:"County Ch.",c:"#66BB6A"}],
+    9:[{t:"ICC WORLD CUP",c:"#2E7D32",green:true}],
+    10:[{t:"ICC WORLD CUP",c:"#2E7D32",green:true}],
+    11:[]
+  };
+
+  /* ── State ── */
+  let activeCat = "iphone";
+  let activeIdx = 0;
+  const canvas = document.getElementById("preview");
+  const ctx = canvas.getContext("2d");
+  const sel = document.getElementById("deviceSelect");
+  const resLabel = document.getElementById("resLabel");
+  const dlSize = document.getElementById("dlSize");
+
+  /* ── Populate dropdown ── */
+  function populateSelect(){
+    sel.innerHTML = "";
+    devices[activeCat].forEach(function(d,i){
+      const o = document.createElement("option");
+      o.value = i;
+      o.textContent = d.name + "  (" + d.w + " \u00d7 " + d.h + ")";
+      sel.appendChild(o);
+    });
+    sel.value = activeIdx;
+    updateLabel();
+  }
+
+  function updateLabel(){
+    const d = devices[activeCat][activeIdx];
+    resLabel.textContent = d.w + " \u00d7 " + d.h + " px";
+    dlSize.textContent = "Output: " + d.w + " \u00d7 " + d.h + " PNG";
+  }
+
+  /* ── Tab handling ── */
+  document.getElementById("deviceTabs").addEventListener("click",function(e){
+    if(!e.target.classList.contains("tab")) return;
+    document.querySelectorAll(".tab").forEach(function(t){t.classList.remove("active")});
+    e.target.classList.add("active");
+    activeCat = e.target.dataset.cat;
+    activeIdx = 0;
+    populateSelect();
+    render();
+  });
+
+  sel.addEventListener("change",function(){
+    activeIdx = parseInt(sel.value,10);
+    updateLabel();
+    render();
+  });
+
+  document.getElementById("downloadBtn").addEventListener("click",function(){
+    const d = devices[activeCat][activeIdx];
+    const link = document.createElement("a");
+    link.download = "twc-cricket-2027-" + d.name.toLowerCase().replace(/[^a-z0-9]+/g,"-") + ".png";
+    link.href = canvas.toDataURL("image/png");
+    link.click();
+  });
+
+  /* ── Drawing helpers ── */
+  function s(v){ return v * scaleFactor; }
+  var scaleFactor = 1;
+
+  function roundRect(x,y,w,h,r){
+    ctx.beginPath();
+    ctx.moveTo(x+r,y);
+    ctx.lineTo(x+w-r,y);
+    ctx.quadraticCurveTo(x+w,y,x+w,y+r);
+    ctx.lineTo(x+w,y+h-r);
+    ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
+    ctx.lineTo(x+r,y+h);
+    ctx.quadraticCurveTo(x,y+h,x,y+h-r);
+    ctx.lineTo(x,y+r);
+    ctx.quadraticCurveTo(x,y,x+r,y);
+    ctx.closePath();
+  }
+
+  /* ── Main render ── */
+  function render(){
+    const d = devices[activeCat][activeIdx];
+    const W = d.w;
+    const H = d.h;
+    canvas.width = W;
+    canvas.height = H;
+    scaleFactor = W / 1300;
+
+    /* Background gradient */
+    var bg = ctx.createLinearGradient(0,0,0,H);
+    bg.addColorStop(0,"#060E1A");
+    bg.addColorStop(0.3,"#0B1E3D");
+    bg.addColorStop(0.7,"#0B1E3D");
+    bg.addColorStop(1,"#060E1A");
+    ctx.fillStyle = bg;
+    ctx.fillRect(0,0,W,H);
+
+    /* Green accent glow */
+    var glow = ctx.createRadialGradient(W*0.5,H*0.45,0,W*0.5,H*0.45,W*0.7);
+    glow.addColorStop(0,"rgba(46,125,50,0.08)");
+    glow.addColorStop(1,"rgba(46,125,50,0)");
+    ctx.fillStyle = glow;
+    ctx.fillRect(0,0,W,H);
+
+    /* Top stripe */
+    ctx.fillStyle = "#C8502A";
+    ctx.fillRect(0,0,W,s(6));
+
+    /* Cricket ball subtle pattern - top corner */
+    ctx.save();
+    ctx.globalAlpha = 0.04;
+    ctx.strokeStyle = "#fff";
+    ctx.lineWidth = s(3);
+    ctx.beginPath();
+    ctx.arc(W*0.85, H*0.06, s(80), 0, Math.PI*2);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(W*0.85, H*0.06, s(80), -0.3, 0.3);
+    ctx.stroke();
+    ctx.restore();
+
+    var yPos = s(50);
+
+    /* TWC Monogram */
+    ctx.save();
+    var mx = W/2, my = yPos + s(30);
+    ctx.strokeStyle = "#C8A94A";
+    ctx.lineWidth = s(2.5);
+    ctx.beginPath();
+    ctx.arc(mx, my, s(32), 0, Math.PI*2);
+    ctx.stroke();
+    ctx.font = "700 " + s(24) + "px 'EB Garamond', serif";
+    ctx.fillStyle = "#C8A94A";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText("TWC", mx, my + s(1));
+    ctx.restore();
+
+    yPos += s(80);
+
+    /* Title */
+    ctx.textAlign = "center";
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "700 " + s(48) + "px 'EB Garamond', serif";
+    ctx.fillText("2027", W/2, yPos);
+    yPos += s(52);
+    ctx.font = "600 " + s(34) + "px 'EB Garamond', serif";
+    ctx.fillStyle = "#2E7D32";
+    ctx.fillText("CRICKET CALENDAR", W/2, yPos);
+    yPos += s(20);
+
+    /* Divider */
+    ctx.strokeStyle = "rgba(200,169,74,0.3)";
+    ctx.lineWidth = s(1);
+    ctx.beginPath();
+    ctx.moveTo(W*0.2, yPos);
+    ctx.lineTo(W*0.8, yPos);
+    ctx.stroke();
+    yPos += s(30);
+
+    /* ── ASHES BANNER ── */
+    var bannerH = s(52);
+    var bannerW = W * 0.82;
+    var bannerX = (W - bannerW) / 2;
+    var bannerY = yPos;
+
+    /* Gold border box */
+    ctx.save();
+    roundRect(bannerX, bannerY, bannerW, bannerH, s(6));
+    ctx.strokeStyle = "#C8A94A";
+    ctx.lineWidth = s(2);
+    ctx.stroke();
+    ctx.fillStyle = "rgba(200,169,74,0.08)";
+    ctx.fill();
+
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.font = "700 " + s(20) + "px 'EB Garamond', serif";
+    ctx.fillStyle = "#C8A94A";
+    ctx.fillText("ASHES 2027  \u00b7  ENGLAND v AUSTRALIA", W/2, bannerY + bannerH/2);
+    ctx.restore();
+
+    yPos += bannerH + s(30);
+
+    /* ── 12-MONTH GRID ── */
+    var gridCols = 3;
+    var gridRows = 4;
+    var gridPadX = W * 0.06;
+    var gridPadBetween = s(10);
+    var cellW = (W - gridPadX*2 - gridPadBetween*(gridCols-1)) / gridCols;
+    var cellH = s(120);
+    var gridStartY = yPos;
+
+    for(var row=0; row<gridRows; row++){
+      for(var col=0; col<gridCols; col++){
+        var mIdx = row * gridCols + col;
+        var cx = gridPadX + col * (cellW + gridPadBetween);
+        var cy = gridStartY + row * (cellH + gridPadBetween);
+
+        /* Cell background */
+        roundRect(cx, cy, cellW, cellH, s(6));
+        ctx.fillStyle = "rgba(255,255,255,0.03)";
+        ctx.fill();
+        ctx.strokeStyle = "rgba(255,255,255,0.06)";
+        ctx.lineWidth = s(1);
+        ctx.stroke();
+
+        /* Month header */
+        ctx.fillStyle = "rgba(11,30,61,0.8)";
+        roundRect(cx, cy, cellW, s(28), s(6));
+        ctx.fill();
+        /* Cover bottom corners of header */
+        ctx.fillRect(cx, cy + s(20), cellW, s(8));
+
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.font = "700 " + s(14) + "px 'Inter', sans-serif";
+        ctx.fillStyle = "#ffffff";
+        ctx.fillText(months[mIdx], cx + cellW/2, cy + s(15));
+
+        /* Events */
+        var evts = events[mIdx];
+        if(evts && evts.length > 0){
+          var evtY = cy + s(38);
+          for(var e=0; e<evts.length; e++){
+            var ev = evts[e];
+            ctx.font = "600 " + s(10) + "px 'Inter', sans-serif";
+            ctx.fillStyle = ev.c;
+            ctx.textAlign = "center";
+            ctx.fillText(ev.t, cx + cellW/2, evtY);
+
+            /* Highlight bar for special events */
+            if(ev.gold || ev.green){
+              var tw = ctx.measureText(ev.t).width;
+              ctx.fillStyle = ev.gold ? "rgba(200,169,74,0.15)" : "rgba(46,125,50,0.15)";
+              roundRect(cx + cellW/2 - tw/2 - s(6), evtY - s(8), tw + s(12), s(16), s(3));
+              ctx.fill();
+              /* Redraw text on top */
+              ctx.fillStyle = ev.c;
+              ctx.fillText(ev.t, cx + cellW/2, evtY);
+            }
+            evtY += s(20);
+          }
+        } else {
+          ctx.font = "400 " + s(9) + "px 'Inter', sans-serif";
+          ctx.fillStyle = "rgba(255,255,255,0.2)";
+          ctx.textAlign = "center";
+          ctx.fillText("\u2014", cx + cellW/2, cy + s(55));
+        }
+      }
+    }
+
+    yPos = gridStartY + gridRows * (cellH + gridPadBetween) + s(20);
+
+    /* ── KEY HIGHLIGHTS ── */
+    ctx.textAlign = "center";
+    ctx.font = "600 " + s(16) + "px 'EB Garamond', serif";
+    ctx.fillStyle = "rgba(255,255,255,0.5)";
+    ctx.fillText("KEY TOURNAMENTS", W/2, yPos);
+    yPos += s(24);
+
+    var highlights = [
+      {label:"IPL Season 20", period:"Mar \u2013 May", color:"#F57C00"},
+      {label:"County Championship", period:"Apr \u2013 Sep", color:"#66BB6A"},
+      {label:"WTC Final \u2013 Lord\u2019s", period:"June", color:"#CE93D8"},
+      {label:"Ashes \u2013 Eng v Aus", period:"Jun \u2013 Aug", color:"#C8A94A"},
+      {label:"The Hundred", period:"Jul \u2013 Aug", color:"#26C6DA"},
+      {label:"ICC Cricket World Cup", period:"Oct \u2013 Nov", color:"#2E7D32"}
+    ];
+
+    var hlCols = W > 1800 ? 3 : 2;
+    var hlW = (W - gridPadX*2 - s(10)*(hlCols-1)) / hlCols;
+    var hlH = s(32);
+
+    for(var h=0; h<highlights.length; h++){
+      var hCol = h % hlCols;
+      var hRow = Math.floor(h / hlCols);
+      var hx = gridPadX + hCol * (hlW + s(10));
+      var hy = yPos + hRow * (hlH + s(6));
+
+      roundRect(hx, hy, hlW, hlH, s(4));
+      ctx.fillStyle = "rgba(255,255,255,0.03)";
+      ctx.fill();
+
+      /* Color dot */
+      ctx.beginPath();
+      ctx.arc(hx + s(14), hy + hlH/2, s(5), 0, Math.PI*2);
+      ctx.fillStyle = highlights[h].color;
+      ctx.fill();
+
+      ctx.textAlign = "left";
+      ctx.font = "600 " + s(10) + "px 'Inter', sans-serif";
+      ctx.fillStyle = "#ddd";
+      ctx.fillText(highlights[h].label, hx + s(26), hy + hlH/2 - s(1));
+
+      ctx.textAlign = "right";
+      ctx.font = "400 " + s(9) + "px 'Inter', sans-serif";
+      ctx.fillStyle = "rgba(255,255,255,0.4)";
+      ctx.fillText(highlights[h].period, hx + hlW - s(10), hy + hlH/2 - s(1));
+    }
+
+    var hlTotalRows = Math.ceil(highlights.length / hlCols);
+    yPos += hlTotalRows * (hlH + s(6)) + s(20);
+
+    /* ── Stumps decoration ── */
+    ctx.save();
+    ctx.globalAlpha = 0.06;
+    ctx.strokeStyle = "#C8A94A";
+    ctx.lineWidth = s(3);
+    for(var st=0; st<3; st++){
+      var sx = W/2 - s(20) + st*s(20);
+      ctx.beginPath();
+      ctx.moveTo(sx, yPos);
+      ctx.lineTo(sx, yPos + s(40));
+      ctx.stroke();
+    }
+    /* Bails */
+    ctx.beginPath();
+    ctx.moveTo(W/2 - s(22), yPos);
+    ctx.lineTo(W/2 - s(8), yPos - s(4));
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(W/2 + s(8), yPos - s(4));
+    ctx.lineTo(W/2 + s(22), yPos);
+    ctx.stroke();
+    ctx.restore();
+
+    yPos += s(60);
+
+    /* ── Bottom branding ── */
+    /* Divider */
+    ctx.strokeStyle = "rgba(200,169,74,0.2)";
+    ctx.lineWidth = s(1);
+    ctx.beginPath();
+    ctx.moveTo(W*0.25, yPos);
+    ctx.lineTo(W*0.75, yPos);
+    ctx.stroke();
+    yPos += s(20);
+
+    /* TWC small monogram */
+    ctx.strokeStyle = "rgba(200,169,74,0.4)";
+    ctx.lineWidth = s(1.5);
+    ctx.beginPath();
+    ctx.arc(W/2, yPos + s(14), s(16), 0, Math.PI*2);
+    ctx.stroke();
+    ctx.font = "700 " + s(12) + "px 'EB Garamond', serif";
+    ctx.fillStyle = "rgba(200,169,74,0.5)";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText("TWC", W/2, yPos + s(15));
+
+    yPos += s(42);
+    ctx.font = "500 " + s(10) + "px 'Inter', sans-serif";
+    ctx.fillStyle = "rgba(255,255,255,0.25)";
+    ctx.fillText("thewallchartcompany.com", W/2, yPos);
+
+    yPos += s(16);
+    ctx.font = "400 " + s(8) + "px 'Inter', sans-serif";
+    ctx.fillStyle = "rgba(255,255,255,0.15)";
+    ctx.fillText("Fixtures subject to change. Updated Apr 2027.", W/2, yPos);
+  }
+
+  /* ── Font load then init ── */
+  function init(){
+    populateSelect();
+    render();
+  }
+
+  if(document.fonts && document.fonts.ready){
+    document.fonts.ready.then(init);
+  } else {
+    window.addEventListener("load", init);
+  }
+})();
+<\/script>
+</body>
+</html>

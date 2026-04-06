@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TWC 2027 Sporting Calendar Wallpaper Generator</title>
+<meta name="description" content="Download free 2027 Sporting Calendar wallpapers for iPhone, Android and iPad. All 4 sports — Football, Rugby, Cricket and F1 — in one flagship wallpaper.">
+<meta property="og:title" content="TWC 2027 Sporting Calendar Wallpaper Generator">
+<meta property="og:description" content="The ultimate 2027 sporting calendar wallpaper. Football, Rugby, Cricket and F1 key dates on your device.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #0B1E3D;
+    --red: #C8502A;
+    --gold: #C8A94A;
+    --football: #1B5E20;
+    --rugby: #004D40;
+    --cricket: #2E7D32;
+    --f1: #E10600;
+    --bg: #060E1A;
+    --surface: #0F1D33;
+    --border: #1A2E4D;
+    --text: #E8E6E1;
+    --text-dim: #8A9AB5;
+  }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, var(--navy) 0%, #122A50 100%);
+    border-bottom: 3px solid var(--gold);
+    padding: 1.25rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+  .monogram {
+    width: 52px; height: 52px;
+    background: linear-gradient(135deg, var(--gold), #D4B85C);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'EB Garamond', serif;
+    font-weight: 800; font-size: 22px;
+    color: var(--navy);
+    letter-spacing: -0.5px;
+    flex-shrink: 0;
+    box-shadow: 0 2px 12px rgba(200,169,74,0.25);
+  }
+  .header-text h1 {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.6rem; font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
+  }
+  .header-text p {
+    font-size: 0.82rem;
+    color: var(--gold);
+    font-weight: 500;
+    margin-top: 2px;
+  }
+  /* Flagship badge */
+  .flagship-badge {
+    margin-left: auto;
+    background: linear-gradient(135deg, var(--gold), #D4B85C);
+    color: var(--navy);
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 6px 16px;
+    border-radius: 20px;
+  }
+  /* Sport colour bar */
+  .sport-bar {
+    display: flex; height: 4px;
+  }
+  .sport-bar span { flex: 1; }
+  /* Main */
+  .main { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem 3rem; }
+  /* Tabs */
+  .tab-row {
+    display: flex; gap: 6px; margin-bottom: 1.25rem;
+  }
+  .tab-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem; font-weight: 600;
+    padding: 10px 22px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface);
+    color: var(--text-dim);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .tab-btn:hover { border-color: var(--gold); color: var(--text); }
+  .tab-btn.active {
+    background: linear-gradient(135deg, var(--navy), #132B52);
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+  /* Dropdown */
+  .select-wrap {
+    position: relative; margin-bottom: 1.5rem;
+  }
+  .select-wrap select {
+    width: 100%;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    padding: 12px 16px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface);
+    color: var(--text);
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+  .select-wrap::after {
+    content: '\25BC';
+    position: absolute;
+    right: 16px; top: 50%;
+    transform: translateY(-50%);
+    color: var(--gold);
+    pointer-events: none;
+    font-size: 0.75rem;
+  }
+  .select-wrap select:focus { outline: none; border-color: var(--gold); }
+  /* Preview area */
+  .preview-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+  }
+  .canvas-frame {
+    background: var(--surface);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+    overflow: hidden;
+  }
+  .canvas-frame canvas {
+    max-height: 520px;
+    width: auto;
+    border-radius: 6px;
+  }
+  .res-label {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    text-align: center;
+    font-weight: 500;
+  }
+  /* Download button */
+  .dl-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem; font-weight: 700;
+    padding: 14px 40px;
+    border: none; border-radius: 10px;
+    background: linear-gradient(135deg, var(--gold), #D4B85C);
+    color: var(--navy);
+    cursor: pointer;
+    transition: all 0.25s;
+    letter-spacing: 0.3px;
+    box-shadow: 0 4px 20px rgba(200,169,74,0.3);
+  }
+  .dl-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 28px rgba(200,169,74,0.45);
+  }
+  .dl-btn svg { width: 20px; height: 20px; }
+  /* Instructions */
+  .instructions {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+  }
+  .instructions h3 {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.15rem; font-weight: 600;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+  }
+  .instructions ol {
+    padding-left: 1.25rem;
+    font-size: 0.88rem;
+    color: var(--text-dim);
+  }
+  .instructions ol li { margin-bottom: 0.4rem; }
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 2rem 1.5rem;
+    border-top: 1px solid var(--border);
+    margin-top: 2rem;
+  }
+  .footer p {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .footer .brand {
+    font-family: 'EB Garamond', serif;
+    color: var(--gold);
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+  }
+  @media (max-width: 600px) {
+    .header { padding: 1rem; gap: 0.75rem; }
+    .header-text h1 { font-size: 1.2rem; }
+    .flagship-badge { display: none; }
+    .tab-btn { padding: 8px 14px; font-size: 0.8rem; }
+    .main { padding: 1.25rem 1rem 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="monogram">TWC</div>
+  <div class="header-text">
+    <h1>2027 Sporting Calendar Wallpaper</h1>
+    <p>Football &bull; Rugby &bull; Cricket &bull; F1</p>
+  </div>
+  <span class="flagship-badge">Flagship</span>
+</header>
+
+<div class="sport-bar">
+  <span style="background:#1B5E20"></span>
+  <span style="background:#004D40"></span>
+  <span style="background:#2E7D32"></span>
+  <span style="background:#E10600"></span>
+</div>
+
+<main class="main">
+  <!-- Device tabs -->
+  <div class="tab-row">
+    <button class="tab-btn active" data-tab="iphone">iPhone</button>
+    <button class="tab-btn" data-tab="android">Android</button>
+    <button class="tab-btn" data-tab="ipad">iPad</button>
+  </div>
+
+  <!-- Device selector -->
+  <div class="select-wrap">
+    <select id="deviceSelect"></select>
+  </div>
+
+  <!-- Preview -->
+  <div class="preview-section">
+    <div class="canvas-frame">
+      <canvas id="wallpaperCanvas"></canvas>
+    </div>
+    <p class="res-label" id="resLabel"></p>
+    <button class="dl-btn" id="downloadBtn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Download Wallpaper
+    </button>
+  </div>
+
+  <!-- Instructions -->
+  <div class="instructions">
+    <h3>How to Set Your Wallpaper</h3>
+    <ol>
+      <li>Select your device from the dropdown above.</li>
+      <li>Click <strong>Download Wallpaper</strong> to save the PNG.</li>
+      <li><strong>iPhone / iPad:</strong> Open the image in Photos, tap the share icon, then <em>Use as Wallpaper</em>.</li>
+      <li><strong>Android:</strong> Open the image in Gallery, tap the three-dot menu, then <em>Set as wallpaper</em>.</li>
+      <li>Choose <em>Lock Screen</em>, <em>Home Screen</em>, or both.</li>
+    </ol>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p class="brand">The Wall Chart Co</p>
+    <p>Unofficial fan product. Not affiliated with any governing body. Dates subject to change. &copy; 2027 The Wall Chart Co. For personal use only.</p>
+  </footer>
+</main>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ── Device data ── */
+  const DEVICES = {
+    iphone: [
+      { name: "iPhone 16 Pro Max",  w: 1320, h: 2868, slug: "iphone16promax" },
+      { name: "iPhone 15 Pro Max",  w: 1290, h: 2796, slug: "iphone15promax" },
+      { name: "iPhone 14 Pro Max",  w: 1290, h: 2796, slug: "iphone14promax" },
+      { name: "iPhone 13 Pro Max",  w: 1284, h: 2778, slug: "iphone13promax" },
+      { name: "iPhone 16",          w: 1179, h: 2556, slug: "iphone16" },
+      { name: "iPhone 15",          w: 1179, h: 2556, slug: "iphone15" },
+      { name: "iPhone 14",          w: 1170, h: 2532, slug: "iphone14" },
+      { name: "iPhone 13",          w: 1170, h: 2532, slug: "iphone13" }
+    ],
+    android: [
+      { name: "Galaxy S25 Ultra",   w: 1440, h: 3120, slug: "galaxys25ultra" },
+      { name: "Galaxy S24 Ultra",   w: 1440, h: 3120, slug: "galaxys24ultra" },
+      { name: "Galaxy S23 Ultra",   w: 1440, h: 3088, slug: "galaxys23ultra" },
+      { name: "Galaxy S22 Ultra",   w: 1440, h: 3088, slug: "galaxys22ultra" },
+      { name: "Pixel 9 Pro",        w: 1280, h: 2856, slug: "pixel9pro" },
+      { name: "Pixel 8 Pro",        w: 1344, h: 2992, slug: "pixel8pro" }
+    ],
+    ipad: [
+      { name: "iPad Pro 13\" M4",    w: 2064, h: 2752, slug: "ipadpro13m4" },
+      { name: "iPad Pro 12.9\" M2",  w: 2048, h: 2732, slug: "ipadpro129m2" },
+      { name: "iPad Air 13\" M2",    w: 2064, h: 2752, slug: "ipadair13m2" },
+      { name: "iPad 10th gen",       w: 2160, h: 2360, slug: "ipad10" },
+      { name: "iPad mini 7th gen",   w: 1488, h: 2266, slug: "ipadmini7" }
+    ]
+  };
+
+  /* ── Sport data ── */
+  const SPORTS = [
+    {
+      name: "FOOTBALL",
+      colour: "#1B5E20",
+      colourLight: "#4CAF50",
+      dates: [
+        "FA Cup Final  -  15 May",
+        "PL Final Day  -  30 May",
+        "UCL Final  -  5 Jun",
+        "Women\u2019s World Cup  -  Jun\u2013Jul"
+      ]
+    },
+    {
+      name: "RUGBY",
+      colour: "#004D40",
+      colourLight: "#26A69A",
+      dates: [
+        "Six Nations  -  Feb\u2013Mar",
+        "Rugby World Cup  -  Oct\u2013Nov",
+        "Host Nation: Australia"
+      ]
+    },
+    {
+      name: "CRICKET",
+      colour: "#2E7D32",
+      colourLight: "#66BB6A",
+      dates: [
+        "The Ashes  -  Jun\u2013Jul",
+        "ICC Champions Trophy  -  Feb\u2013Mar",
+        "ICC World Cup  -  Oct\u2013Nov"
+      ]
+    },
+    {
+      name: "FORMULA 1",
+      colour: "#E10600",
+      colourLight: "#FF5252",
+      dates: [
+        "24 Races  -  Mar\u2013Dec",
+        "Bahrain  \u2022  Monaco  \u2022  Silverstone",
+        "Monza  \u2022  Singapore  \u2022  Abu Dhabi"
+      ]
+    }
+  ];
+
+  const BIG8 = [
+    "FA Cup Final", "PL Final Day", "UCL Final",
+    "Six Nations Grand Slam", "Rugby World Cup Final",
+    "Ashes 1st Test", "Monaco GP", "Abu Dhabi Finale"
+  ];
+
+  /* ── State ── */
+  let activeTab = "iphone";
+  let activeIndex = 0;
+
+  const canvas   = document.getElementById("wallpaperCanvas");
+  const ctx      = canvas.getContext("2d");
+  const select   = document.getElementById("deviceSelect");
+  const resLabel = document.getElementById("resLabel");
+  const dlBtn    = document.getElementById("downloadBtn");
+  const tabs     = document.querySelectorAll(".tab-btn");
+
+  /* ── Font loading ── */
+  function fontsReady() {
+    return document.fonts.ready;
+  }
+
+  /* ── Populate dropdown ── */
+  function populateSelect() {
+    select.innerHTML = "";
+    DEVICES[activeTab].forEach(function (d, i) {
+      var opt = document.createElement("option");
+      opt.value = i;
+      opt.textContent = d.name + "  (" + d.w + " \u00d7 " + d.h + ")";
+      select.appendChild(opt);
+    });
+    select.value = activeIndex;
+  }
+
+  /* ── Helpers ── */
+  function s(base, W) {
+    return Math.round(base * (W / 1440));
+  }
+
+  function roundRect(cx, x, y, w, h, r) {
+    cx.beginPath();
+    cx.moveTo(x + r, y);
+    cx.lineTo(x + w - r, y);
+    cx.quadraticCurveTo(x + w, y, x + w, y + r);
+    cx.lineTo(x + w, y + h - r);
+    cx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+    cx.lineTo(x + r, y + h);
+    cx.quadraticCurveTo(x, y + h, x, y + h - r);
+    cx.lineTo(x, y + r);
+    cx.quadraticCurveTo(x, y, x + r, y);
+    cx.closePath();
+  }
+
+  function drawMultiColourStripe(cx, x, y, w, h) {
+    var colours = ["#1B5E20", "#004D40", "#2E7D32", "#E10600"];
+    var segW = w / colours.length;
+    colours.forEach(function (c, i) {
+      cx.fillStyle = c;
+      cx.fillRect(x + i * segW, y, segW + 1, h);
+    });
+  }
+
+  /* ── Main render ── */
+  function render() {
+    var device = DEVICES[activeTab][activeIndex];
+    var W = device.w;
+    var H = device.h;
+    canvas.width = W;
+    canvas.height = H;
+
+    /* Background */
+    var bgGrad = ctx.createLinearGradient(0, 0, 0, H);
+    bgGrad.addColorStop(0, "#06101F");
+    bgGrad.addColorStop(0.3, "#0B1E3D");
+    bgGrad.addColorStop(0.7, "#0A1A35");
+    bgGrad.addColorStop(1, "#050D19");
+    ctx.fillStyle = bgGrad;
+    ctx.fillRect(0, 0, W, H);
+
+    /* Subtle radial glow at top */
+    var radGlow = ctx.createRadialGradient(W / 2, H * 0.15, 0, W / 2, H * 0.15, W * 0.7);
+    radGlow.addColorStop(0, "rgba(200,169,74,0.06)");
+    radGlow.addColorStop(1, "rgba(200,169,74,0)");
+    ctx.fillStyle = radGlow;
+    ctx.fillRect(0, 0, W, H);
+
+    var pad = s(80, W);
+    var cW = W - pad * 2;
+
+    /* ── Multi-colour accent strip at top ── */
+    var stripY = s(100, W);
+    var stripH = s(8, W);
+    drawMultiColourStripe(ctx, pad, stripY, cW, stripH);
+
+    /* ── TWC Monogram ── */
+    var monoSize = s(70, W);
+    var monoY = stripY + stripH + s(40, W);
+    var monoX = W / 2;
+    roundRect(ctx, monoX - monoSize / 2, monoY, monoSize, monoSize, s(12, W));
+    var monoGrad = ctx.createLinearGradient(monoX - monoSize / 2, monoY, monoX + monoSize / 2, monoY + monoSize);
+    monoGrad.addColorStop(0, "#C8A94A");
+    monoGrad.addColorStop(1, "#D4B85C");
+    ctx.fillStyle = monoGrad;
+    ctx.fill();
+    ctx.font = "800 " + s(32, W) + "px 'EB Garamond', serif";
+    ctx.fillStyle = "#0B1E3D";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText("TWC", monoX, monoY + monoSize / 2 + s(2, W));
+
+    /* ── Title ── */
+    var titleY = monoY + monoSize + s(50, W);
+    ctx.font = "700 " + s(62, W) + "px 'EB Garamond', serif";
+    ctx.fillStyle = "#FFFFFF";
+    ctx.textAlign = "center";
+    ctx.fillText("2027", W / 2, titleY);
+
+    titleY += s(70, W);
+    ctx.font = "600 " + s(38, W) + "px 'Inter', sans-serif";
+    ctx.fillStyle = "#C8A94A";
+    ctx.letterSpacing = s(8, W) + "px";
+    ctx.fillText("SPORTING CALENDAR", W / 2, titleY);
+    ctx.letterSpacing = "0px";
+
+    /* ── Thin separator ── */
+    titleY += s(36, W);
+    drawMultiColourStripe(ctx, pad + cW * 0.15, titleY, cW * 0.7, s(4, W));
+
+    /* ── Sport sections ── */
+    var secStartY = titleY + s(60, W);
+    var secGap = s(20, W);
+    var isTablet = (W / H) > 0.7;
+    var secFontTitle = s(34, W);
+    var secFontDate = s(26, W);
+    var secPadV = s(28, W);
+    var secPadH = s(30, W);
+
+    /* Calculate available height for sports + big 8 */
+    var big8Height = s(340, W);
+    var bottomReserve = s(160, W);
+    var availH = H - secStartY - big8Height - bottomReserve;
+    var secHeight = (availH - secGap * 3) / 4;
+
+    SPORTS.forEach(function (sport, idx) {
+      var sy = secStartY + idx * (secHeight + secGap);
+
+      /* Card background */
+      roundRect(ctx, pad, sy, cW, secHeight, s(16, W));
+      var cardGrad = ctx.createLinearGradient(pad, sy, pad + cW, sy);
+      cardGrad.addColorStop(0, sport.colour + "30");
+      cardGrad.addColorStop(1, "rgba(11,30,61,0.6)");
+      ctx.fillStyle = cardGrad;
+      ctx.fill();
+
+      /* Left accent bar */
+      roundRect(ctx, pad, sy, s(8, W), secHeight, s(4, W));
+      ctx.fillStyle = sport.colour;
+      ctx.fill();
+
+      /* Sport title */
+      var textX = pad + secPadH + s(10, W);
+      var textY = sy + secPadV + secFontTitle * 0.35;
+      ctx.font = "700 " + secFontTitle + "px 'Inter', sans-serif";
+      ctx.fillStyle = sport.colourLight;
+      ctx.textAlign = "left";
+      ctx.fillText(sport.name, textX, textY + secFontTitle * 0.35);
+
+      /* Colour dot */
+      ctx.beginPath();
+      ctx.arc(textX - s(16, W), textY + secFontTitle * 0.35, s(6, W), 0, Math.PI * 2);
+      ctx.fillStyle = sport.colourLight;
+      ctx.fill();
+
+      /* Dates */
+      var dateStartY = textY + secFontTitle + s(14, W);
+      ctx.font = "400 " + secFontDate + "px 'Inter', sans-serif";
+      ctx.fillStyle = "rgba(232,230,225,0.85)";
+      sport.dates.forEach(function (d, di) {
+        var dy = dateStartY + di * (secFontDate + s(10, W));
+        if (dy < sy + secHeight - secPadV) {
+          ctx.fillText(d, textX, dy);
+        }
+      });
+
+      /* Subtle glow on right */
+      var glowGrad = ctx.createRadialGradient(
+        pad + cW - s(80, W), sy + secHeight / 2, 0,
+        pad + cW - s(80, W), sy + secHeight / 2, s(180, W)
+      );
+      glowGrad.addColorStop(0, sport.colour + "18");
+      glowGrad.addColorStop(1, sport.colour + "00");
+      ctx.fillStyle = glowGrad;
+      roundRect(ctx, pad, sy, cW, secHeight, s(16, W));
+      ctx.fill();
+    });
+
+    /* ── BIG 8 EVENTS section ── */
+    var big8Y = secStartY + 4 * (secHeight + secGap) + s(10, W);
+    var big8W = cW;
+    var big8H = big8Height;
+
+    /* Box */
+    roundRect(ctx, pad, big8Y, big8W, big8H, s(16, W));
+    var big8Grad = ctx.createLinearGradient(pad, big8Y, pad + big8W, big8Y + big8H);
+    big8Grad.addColorStop(0, "rgba(200,169,74,0.12)");
+    big8Grad.addColorStop(1, "rgba(11,30,61,0.8)");
+    ctx.fillStyle = big8Grad;
+    ctx.fill();
+
+    /* Gold border */
+    roundRect(ctx, pad, big8Y, big8W, big8H, s(16, W));
+    ctx.strokeStyle = "rgba(200,169,74,0.35)";
+    ctx.lineWidth = s(3, W);
+    ctx.stroke();
+
+    /* Title */
+    var big8TitleY = big8Y + s(46, W);
+    ctx.font = "700 " + s(30, W) + "px 'Inter', sans-serif";
+    ctx.fillStyle = "#C8A94A";
+    ctx.textAlign = "center";
+    ctx.letterSpacing = s(6, W) + "px";
+    ctx.fillText("BIG 8 EVENTS", W / 2, big8TitleY);
+    ctx.letterSpacing = "0px";
+
+    /* Star decorations */
+    var starSize = s(10, W);
+    ctx.fillStyle = "#C8A94A";
+    ctx.font = s(22, W) + "px serif";
+    ctx.fillText("\u2605", W / 2 - s(140, W), big8TitleY);
+    ctx.fillText("\u2605", W / 2 + s(140, W), big8TitleY);
+
+    /* Gold line under title */
+    ctx.fillStyle = "rgba(200,169,74,0.4)";
+    ctx.fillRect(pad + cW * 0.2, big8TitleY + s(14, W), cW * 0.6, s(2, W));
+
+    /* Event items — 2 columns */
+    var colW = (big8W - s(60, W)) / 2;
+    var evFontSize = s(24, W);
+    var evStartY = big8TitleY + s(50, W);
+    var evLineH = s(34, W);
+    ctx.font = "500 " + evFontSize + "px 'Inter', sans-serif";
+
+    BIG8.forEach(function (ev, i) {
+      var col = i < 4 ? 0 : 1;
+      var row = i < 4 ? i : i - 4;
+      var ex = pad + s(36, W) + col * (colW + s(20, W));
+      var ey = evStartY + row * evLineH;
+
+      /* Bullet colour based on sport association */
+      var bulletColour = "#C8A94A";
+      if (ev.includes("FA Cup") || ev.includes("PL ") || ev.includes("UCL")) bulletColour = "#4CAF50";
+      else if (ev.includes("Six Nations") || ev.includes("Rugby")) bulletColour = "#26A69A";
+      else if (ev.includes("Ashes")) bulletColour = "#66BB6A";
+      else if (ev.includes("Monaco") || ev.includes("Abu Dhabi")) bulletColour = "#FF5252";
+
+      /* Diamond bullet */
+      ctx.save();
+      ctx.translate(ex, ey);
+      ctx.rotate(Math.PI / 4);
+      ctx.fillStyle = bulletColour;
+      ctx.fillRect(-s(5, W), -s(5, W), s(10, W), s(10, W));
+      ctx.restore();
+
+      ctx.fillStyle = "rgba(232,230,225,0.92)";
+      ctx.textAlign = "left";
+      ctx.fillText(ev, ex + s(18, W), ey + evFontSize * 0.12);
+    });
+
+    /* ── Bottom branding ── */
+    var brandY = H - s(80, W);
+
+    /* Thin multi-colour line */
+    drawMultiColourStripe(ctx, pad + cW * 0.25, brandY - s(30, W), cW * 0.5, s(3, W));
+
+    ctx.font = "600 " + s(24, W) + "px 'EB Garamond', serif";
+    ctx.fillStyle = "rgba(200,169,74,0.6)";
+    ctx.textAlign = "center";
+    ctx.fillText("THE WALLCHART COMPANY", W / 2, brandY);
+
+    ctx.font = "400 " + s(18, W) + "px 'Inter', sans-serif";
+    ctx.fillStyle = "rgba(138,154,181,0.5)";
+    ctx.fillText("thewallchartcompany.com", W / 2, brandY + s(28, W));
+
+    /* Update label */
+    resLabel.textContent = device.name + "  \u2014  " + W + " \u00d7 " + H + " px";
+  }
+
+  /* ── Tab switching ── */
+  tabs.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      tabs.forEach(function (b) { b.classList.remove("active"); });
+      btn.classList.add("active");
+      activeTab = btn.getAttribute("data-tab");
+      activeIndex = 0;
+      populateSelect();
+      render();
+    });
+  });
+
+  /* ── Select change ── */
+  select.addEventListener("change", function () {
+    activeIndex = parseInt(select.value, 10);
+    render();
+  });
+
+  /* ── Download ── */
+  dlBtn.addEventListener("click", function () {
+    var device = DEVICES[activeTab][activeIndex];
+    var link = document.createElement("a");
+    link.download = "twc-sporting-2027-" + device.slug + ".png";
+    link.href = canvas.toDataURL("image/png");
+    link.click();
+  });
+
+  /* ── Init ── */
+  fontsReady().then(function () {
+    populateSelect();
+    render();
+  });
+})();
+<\/script>
+</body>
+</html>

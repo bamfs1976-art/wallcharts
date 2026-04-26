@@ -159,17 +159,36 @@ main{padding:20px;}
 .filter-btn:hover,.filter-btn.active{background:var(--accent);color:var(--twc-navy);border-color:var(--accent);}
 .filter-btn:focus{outline:3px solid var(--accent);outline-offset:2px;}
 .fixture-day{margin-bottom:20px;}
-.fixture-day-head{font-size:11px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--border);}
-.fixture-row{display:grid;grid-template-columns:100px 1fr auto 1fr 80px;align-items:center;gap:8px;padding:10px 14px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;margin-bottom:6px;font-size:13px;}
-.fixture-time{color:var(--accent);font-weight:700;font-size:12px;white-space:nowrap;}
-.fixture-home{text-align:right;color:var(--text);}
-.fixture-score{display:flex;gap:4px;align-items:center;justify-content:center;}
-.fixture-score-in{width:28px;height:28px;background:var(--bg3);border:1px solid var(--border);border-radius:4px;text-align:center;font-size:12px;font-weight:700;color:var(--text);}
-.fixture-score-in:focus{outline:none;border-color:var(--accent);}
-.fixture-score-sep{color:var(--text2);font-weight:700;}
-.fixture-away{color:var(--text);}
+.fixture-day-head{font-size:13px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border);}
+.fixture-row{display:grid;grid-template-columns:90px 1fr auto 1fr 80px;align-items:center;gap:10px;padding:14px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;margin-bottom:8px;font-size:14px;transition:border-color 0.18s,background 0.18s;}
+.fixture-row.has-score{border-color:rgba(200,169,74,0.5);background:linear-gradient(180deg,var(--bg2),rgba(200,169,74,0.05));}
+.fixture-row:focus-within{border-color:var(--accent);}
+.fixture-time{color:var(--accent);font-weight:700;font-size:13px;white-space:nowrap;}
+.fixture-home{text-align:right;color:var(--text);font-weight:600;}
+.fixture-score{display:flex;gap:6px;align-items:center;justify-content:center;}
+.fixture-score-in{
+  width:48px;height:48px;
+  background:var(--bg3);
+  border:2px solid var(--border);
+  border-radius:8px;
+  text-align:center;
+  font-size:20px;font-weight:800;
+  color:var(--text);
+  -webkit-appearance:none;-moz-appearance:textfield;appearance:none;
+  transition:border-color 0.15s,background 0.15s,transform 0.1s;
+  caret-color:var(--accent);
+}
+.fixture-score-in::-webkit-outer-spin-button,
+.fixture-score-in::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
+.fixture-score-in:hover{border-color:var(--text2);}
+.fixture-score-in:focus{outline:none;border-color:var(--accent);background:var(--bg);box-shadow:0 0 0 3px rgba(200,169,74,0.18);}
+.fixture-score-in.has-value{border-color:var(--accent);background:rgba(200,169,74,0.12);color:var(--accent);}
+.fixture-score-in.just-entered{animation:scorePulse 0.4s ease;}
+@keyframes scorePulse{0%{transform:scale(1);}50%{transform:scale(1.15);}100%{transform:scale(1);}}
+.fixture-score-sep{color:var(--text2);font-weight:700;font-size:18px;}
+.fixture-away{color:var(--text);font-weight:600;}
 .fixture-venue{font-size:10px;color:var(--text2);text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.fixture-group-tag{font-size:9px;background:rgba(200,169,74,0.12);color:var(--accent);padding:2px 7px;border-radius:10px;letter-spacing:0.08em;white-space:nowrap;}
+.fixture-group-tag{font-size:10px;background:rgba(200,169,74,0.12);color:var(--accent);padding:3px 8px;border-radius:10px;letter-spacing:0.08em;white-space:nowrap;font-weight:600;}
 
 /* FOOTER */
 .site-footer{background:var(--bg2);border-top:1px solid var(--border);padding:20px;text-align:center;margin-top:40px;}
@@ -185,8 +204,11 @@ main{padding:20px;}
   .header-inner{padding:10px 14px;}
   .logo-name{font-size:14px;}
   main{padding:12px;}
-  .fixture-row{grid-template-columns:80px 1fr auto 1fr 60px;gap:4px;padding:8px 10px;}
+  .fixture-row{grid-template-columns:64px 1fr auto 1fr;gap:6px;padding:10px 10px;font-size:13px;}
   .fixture-venue{display:none;}
+  .fixture-score-in{width:44px;height:44px;font-size:18px;}
+  .fixture-time{font-size:12px;}
+  .fixture-home,.fixture-away{font-size:13px;}
 }
 </style>
 </head>
@@ -239,15 +261,30 @@ main{padding:20px;}
 <div class="progress-label" id="progress-label" aria-live="polite">0 of 104 matches entered</div>
 
 <nav class="nav-tabs" role="tablist" aria-label="Wall chart sections">
-  <button class="nav-tab active" role="tab" aria-selected="true" aria-controls="tab-groups" id="btn-groups" onclick="showTab('groups',this)">Groups</button>
+  <button class="nav-tab active" role="tab" aria-selected="true" aria-controls="tab-fixtures" id="btn-fixtures" onclick="showTab('fixtures',this)">Fixtures</button>
+  <button class="nav-tab" role="tab" aria-selected="false" aria-controls="tab-groups" id="btn-groups" onclick="showTab('groups',this)">Groups</button>
   <button class="nav-tab" role="tab" aria-selected="false" aria-controls="tab-knockout" id="btn-knockout" onclick="showTab('knockout',this)">Knockout</button>
-  <button class="nav-tab" role="tab" aria-selected="false" aria-controls="tab-fixtures" id="btn-fixtures" onclick="showTab('fixtures',this)">All fixtures</button>
 </nav>
 
 <main id="main-content">
 
+<!-- FIXTURES TAB (default) -->
+<section class="tab-panel active" id="tab-fixtures" role="tabpanel" aria-labelledby="btn-fixtures">
+  <div class="section-head">
+    <h2>All fixtures</h2>
+    <span class="section-badge">104 matches · UK kick-off times (BST)</span>
+  </div>
+  <div class="fixtures-filters" role="group" aria-label="Filter fixtures">
+    <button class="filter-btn active" onclick="filterFixtures('all',this)">All matches</button>
+    <button class="filter-btn" onclick="filterFixtures('group',this)">Group stage</button>
+    <button class="filter-btn" onclick="filterFixtures('knockout',this)">Knockout</button>
+    <button class="filter-btn" onclick="filterFixtures('unplayed',this)">Not entered</button>
+  </div>
+  <div id="fixtures-list"></div>
+</section>
+
 <!-- GROUPS TAB -->
-<section class="tab-panel active" id="tab-groups" role="tabpanel" aria-labelledby="btn-groups">
+<section class="tab-panel" id="tab-groups" role="tabpanel" aria-labelledby="btn-groups">
   <div class="section-head">
     <h2>Group stage</h2>
     <span class="section-badge">48 teams · 12 groups</span>
@@ -270,21 +307,6 @@ main{padding:20px;}
   <div class="knockout-wrap">
     <div class="knockout" id="knockout-grid"></div>
   </div>
-</section>
-
-<!-- FIXTURES TAB -->
-<section class="tab-panel" id="tab-fixtures" role="tabpanel" aria-labelledby="btn-fixtures">
-  <div class="section-head">
-    <h2>All fixtures</h2>
-    <span class="section-badge">104 matches · UK kick-off times (BST)</span>
-  </div>
-  <div class="fixtures-filters" role="group" aria-label="Filter fixtures">
-    <button class="filter-btn active" onclick="filterFixtures('all',this)">All matches</button>
-    <button class="filter-btn" onclick="filterFixtures('group',this)">Group stage</button>
-    <button class="filter-btn" onclick="filterFixtures('knockout',this)">Knockout</button>
-    <button class="filter-btn" onclick="filterFixtures('unplayed',this)">Not entered</button>
-  </div>
-  <div id="fixtures-list"></div>
 </section>
 
 </main>
@@ -457,6 +479,36 @@ document.querySelectorAll('.theme-dot').forEach(d=>{
   d.addEventListener('click',()=>applyTheme(d.dataset.theme));
   d.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();applyTheme(d.dataset.theme);}});
 });
+
+function onScoreInput(input, id, side){
+  // Clamp to 0-99 and strip non-digits
+  let raw = (input.value||'').replace(/[^0-9]/g,'').slice(0,2);
+  if(raw !== input.value) input.value = raw;
+
+  // Update state
+  setScore(id, side, raw);
+
+  // Visual feedback on the row + input
+  const row = input.closest('.fixture-row');
+  if(raw !== ''){
+    input.classList.add('has-value');
+    input.classList.add('just-entered');
+    setTimeout(()=>input.classList.remove('just-entered'), 400);
+  } else {
+    input.classList.remove('has-value');
+  }
+  if(row){
+    const both = row.querySelectorAll('.fixture-score-in');
+    const filled = (both[0].value!=='' && both[1].value!=='');
+    row.classList.toggle('has-score', filled);
+  }
+
+  // Auto-advance: when home box has a value and is the focused element, jump to away box
+  if(side === 'home' && raw !== '' && document.activeElement === input){
+    const next = input.parentElement.querySelectorAll('.fixture-score-in')[1];
+    if(next && next.value === '') next.focus();
+  }
+}
 
 function setScore(id,side,val){
   if(!state.scores[id]) state.scores[id]={};
@@ -704,20 +756,27 @@ function renderFixtures(filter='all'){
     byDate[date].forEach(f=>{
       const s = state.scores[f.id] || {};
       const row = document.createElement('div');
-      row.className = 'fixture-row';
+      row.className = 'fixture-row' + ((s.home!=null && s.home!=='' && s.away!=null && s.away!=='') ? ' has-score' : '');
       row.setAttribute('role','row');
+      row.setAttribute('data-fixture-id', f.id);
       const groupTag = f.group ? `<span class="fixture-group-tag">Group ${f.group}</span>` : `<span class="fixture-group-tag">${f.round||''}</span>`;
+      const homeFilled = (s.home!=null && s.home!=='') ? ' has-value' : '';
+      const awayFilled = (s.away!=null && s.away!=='') ? ' has-value' : '';
       row.innerHTML = `
         <div class="fixture-time" aria-label="Kick-off ${f.time} BST">${f.time}<br><span style="font-size:10px;color:var(--text2)">BST</span></div>
         <div class="fixture-home" aria-label="${f.home}">${f.home}</div>
         <div class="fixture-score" role="group" aria-label="Score">
-          <input class="fixture-score-in" type="number" min="0" max="99"
-            value="${s.home??''}" aria-label="${f.home} goals"
-            onchange="setScore('${f.id}','home',this.value)">
+          <input class="fixture-score-in${homeFilled}" type="number" min="0" max="99"
+            inputmode="numeric" pattern="[0-9]*" enterkeyhint="next"
+            value="${s.home??''}" aria-label="${f.home} goals" placeholder="0"
+            oninput="onScoreInput(this,'${f.id}','home')"
+            onfocus="this.select()">
           <span class="fixture-score-sep" aria-hidden="true">–</span>
-          <input class="fixture-score-in" type="number" min="0" max="99"
-            value="${s.away??''}" aria-label="${f.away} goals"
-            onchange="setScore('${f.id}','away',this.value)">
+          <input class="fixture-score-in${awayFilled}" type="number" min="0" max="99"
+            inputmode="numeric" pattern="[0-9]*" enterkeyhint="done"
+            value="${s.away??''}" aria-label="${f.away} goals" placeholder="0"
+            oninput="onScoreInput(this,'${f.id}','away')"
+            onfocus="this.select()">
         </div>
         <div class="fixture-away" aria-label="${f.away}">${f.away}</div>
         <div class="fixture-venue" title="${f.venue}" aria-label="${f.venue}">${groupTag}</div>`;
